@@ -1,8 +1,8 @@
-[WebLink] (https://openweathermap.org/api/forecast30#data)
+[WebLink] (https://openweathermap.org/forecast5)
 
 # Weather API
 
-## [APICall] (https://pro.openweathermap.org/data/2.5/forecast/climate?lat={lat}&lon={lon}&appid={API key})
+## [APICall] (api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key})
 
 ## Params
 
