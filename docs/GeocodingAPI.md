@@ -9,7 +9,7 @@
 #### Required:
 
 1. q - City name, state code (only for the US) and country code divided by comma. Please use ISO 3166 country codes.
-2. appid - API key - **1654c28d41c1a36f7849a6714417335e**
+2. appid - API key
 
 #### Optional:
 

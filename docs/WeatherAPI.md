@@ -9,7 +9,7 @@
 #### Required:
 
 1. lat, lon - Geographical coordinates (latitude, longitude)
-2. appid - API key - **1654c28d41c1a36f7849a6714417335e**
+2. appid - API key
 
 #### Optional:
 
