@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "types": ["vite-plugin-svgr/client"],
-    "strictNullChecks": true,
     "baseUrl": "src",
     "paths": {
       "assets/*": ["assets/*"],
