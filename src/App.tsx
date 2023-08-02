@@ -4,9 +4,7 @@ function App() {
   return (
     <>
       <p>link</p>
-      <a href='./assets'>
-        link
-      </a>
+      <a href='./assets'>link</a>
     </>
   );
 }

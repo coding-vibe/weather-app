@@ -9,6 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/stylistic-type-checked',
     'airbnb',
     'airbnb/hooks',
+    'prettier'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -18,7 +19,7 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', 'prettier'],
   rules: {
     'jsx-quotes': ['error', 'prefer-single'],
     // 'import/extensions': ['error', 'ignorePackages', {
@@ -32,6 +33,7 @@ module.exports = {
     ],
     'no-console': 'off',
     'no-trailing-spaces': 'error',
+    'prettier/prettier': 2,
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
