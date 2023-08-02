@@ -21,15 +21,14 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'jsx-quotes': ['error', 'prefer-single'],
-    'import/extensions': ['error', 'ignorePackages', {
-      js: 'never',
-      jsx: 'never',
-      ts: 'never',
-      tsx: 'never',
-    }],
+    // 'import/extensions': ['error', 'ignorePackages', {
+    //   js: 'never',
+    //   jsx: 'never',
+    //   ts: 'never',
+    //   tsx: 'never',
+    // }],
     'import/prefer-default-export': [
       ('off'),
-      { target: 'single' },
     ],
     'no-console': 'off',
     'no-trailing-spaces': 'error',
@@ -37,9 +36,9 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    // 'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'react/react-in-jsx-scope': 0,
-    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx', '.ts'] }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
     'react/no-array-index-key': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     "@typescript-eslint/no-non-null-assertion": 'off',
