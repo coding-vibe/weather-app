@@ -1,10 +1,13 @@
 {
-	"tabWidth": 4,
-	"useTabs": true,
-	"singleQuote": true,
-	"jsxSingleQuote": true,
-	"trailingComma": "none",
-	"bracketSpacing": false,
-	"bracketSameLine": true,
-	"singleAttributePerLine": true
+	"files": [".ts", ".tsx", ".js", ".jsx"],
+	"options": {
+		"tabWidth": 4,
+		"useTabs": true,
+		"singleQuote": true,
+		"jsxSingleQuote": true,
+		"trailingComma": "none",
+		"bracketSpacing": false,
+		"bracketSameLine": true,
+		"singleAttributePerLine": true
+	}
 }
