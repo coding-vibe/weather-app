@@ -10,13 +10,4 @@ export default defineConfig({
       components: '/src/components',
     },
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://api.openweathermap.org',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
 });
