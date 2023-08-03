@@ -22,6 +22,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier'],
   rules: {
     'jsx-quotes': ['error', 'prefer-single'],
+    'eol-last': ['error', 'always'],
     // 'import/extensions': ['error', 'ignorePackages', {
     //   js: 'never',
     //   jsx: 'never',
@@ -38,6 +39,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     // 'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': ['error', { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
