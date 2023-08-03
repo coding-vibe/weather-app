@@ -23,8 +23,6 @@ module.exports = {
   rules: {
     'no-console': 0,
     'no-trailing-spaces': 2,
-    'eslint eol-last': [2, 'always'],
-    'jsx-quotes': [2, 'prefer-single'],
     'import/prefer-default-export': [
       (0),
     ],
