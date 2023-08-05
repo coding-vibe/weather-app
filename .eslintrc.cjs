@@ -24,9 +24,7 @@ module.exports = {
     'no-restricted-exports': 0,
     'no-console': 0,
     'no-trailing-spaces': 2,
-    'import/prefer-default-export': [
-      (0),
-    ],
+    'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
     'import/extensions': [
       2,
@@ -47,7 +45,6 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
     'react/no-array-index-key': 0,
-    'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     'prettier/prettier': 2,

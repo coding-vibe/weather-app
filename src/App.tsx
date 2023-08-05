@@ -1,4 +1,3 @@
-import './App.css';
 import Autocomplete from 'components/Autocomplete/Autocomlete';
 
 function App() {
