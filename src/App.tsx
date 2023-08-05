@@ -1,5 +1,5 @@
 import './App.css';
-import FetchWeatherData from 'components/FetchWeatherData';
+import FetchWeatherData from 'components/FetchWeatherData/FetchWeatherData';
 
 function App() {
   return <FetchWeatherData />;
