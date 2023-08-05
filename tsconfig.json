@@ -8,7 +8,7 @@
     "types": ["vite-plugin-svgr/client"],
     "baseUrl": "src",
     "paths": {
-      "src/*": ["src/*"],
+      "api/*": ["api/*"],
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
     },

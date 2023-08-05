@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {axiosDefaultConfig} from 'axiosDefaultConfig';
+import {axiosDefaultConfig} from 'api/axiosDefaultConfig';
 import {LONDON_GEO} from './londonGeo';
 
 // TODO: Describe the type of data in interface below

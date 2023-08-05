@@ -59,7 +59,7 @@ module.exports = {
       },
       alias: {
         map: [
-          ['src', './src'],
+          ['api', './src/api'],
           ['assets', './src/assets'],
           ['components', './src/components'],
         ],
