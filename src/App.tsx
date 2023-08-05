@@ -1,11 +1,8 @@
-import './App.css'
-import FetchWeatherData from 'components/FetchWeatherData'
+import './App.css';
+import FetchWeatherData from 'components/FetchWeatherData';
 
 function App() {
-
-  return (
-      <FetchWeatherData />
-  )
+  return <FetchWeatherData />;
 }
 
 export default App;

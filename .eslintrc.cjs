@@ -3,6 +3,7 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
+    'plugin:import/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended-type-checked',
@@ -18,7 +19,7 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh', 'prettier'],
+  plugins: ['react-refresh', 'prettier', 'react', 'import'],
   rules: {
     'no-console': 0,
     'no-trailing-spaces': 2,
@@ -29,7 +30,14 @@ module.exports = {
       1,
       { allowConstantExport: true },
     ],
-    'import/no-extraneous-dependencies': [2, {'devDependencies': true}],
+    'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
+    'import/extensions': [2, 'ignorePackages', {
+      js: 'never',
+      jsx: 'never',
+      ts: 'never',
+      tsx: 'never',
+    }],
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
     'react/no-array-index-key': 0,
@@ -41,6 +49,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [
+          ['src', './src'],
           ['assets', './src/assets'],
           ['components', './src/components'],
         ],
