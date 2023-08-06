@@ -3,7 +3,7 @@ export const CITIES = [
   'Sydney',
   'Paris',
   'Cairo',
-  'Moscow',
+  'Kyiv',
   'Rio de Janeiro',
   'London',
   'New York City',
