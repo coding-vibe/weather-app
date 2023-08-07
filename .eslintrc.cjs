@@ -58,6 +58,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
+    'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
   },
   settings: {

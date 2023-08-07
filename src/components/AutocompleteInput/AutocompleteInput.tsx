@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
+import { SyntheticEvent, useState, useCallback } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import debounce from 'lodash';
+import debounce from 'lodash/debounce';
 import { useSnackbar } from 'notistack';
 import { CITIES } from './citiesList';
 import * as styles from './styles';
 
+const TIMEOUT_DELAY = 1000;
 const DEBOUNCE_DELAY = 400;
 const MIN_INPUT_LEN = 2;
 
@@ -23,30 +24,38 @@ export default function AutocompleteInput() {
     );
   };
 
-  const onChange = debounce((_, value: string | null, reason: string) => {
-    if (reason === 'selectOption' && value) {
-      setCurrentValue(value);
-    }
-  }, DEBOUNCE_DELAY);
-
-  const onInputChange = (e, value: string) => {
+  const onInputChange = (_: SyntheticEvent, value: string) => {
     const trimmedValue = value.trim();
     if (trimmedValue === '' || trimmedValue.length <= MIN_INPUT_LEN) {
       setInputValue('');
       setOptions([]);
       inputNotify();
     } else {
-      setInputValue(trimmedValue);
-      setOptions(
-        CITIES.filter((city) =>
-          city.toLowerCase().includes(trimmedValue.toLowerCase()),
-        ),
-      );
+      setTimeout(() => {
+        setInputValue(trimmedValue);
+        setOptions(
+          CITIES.filter((city) =>
+            city.toLowerCase().includes(trimmedValue.toLowerCase()),
+          ),
+        );
+      }, TIMEOUT_DELAY);
     }
   };
 
+  const onChange = useCallback(
+    debounce(
+      (_: SyntheticEvent, value: string | null, reason: string | undefined) => {
+        if (reason === 'selectOption' && value !== null) {
+          setCurrentValue(value);
+        }
+      },
+      DEBOUNCE_DELAY,
+    ),
+    [setCurrentValue],
+  );
+
   console.log(inputValue);
-  console.log(currentValue);
+  // console.log(currentValue);
 
   return (
     <Autocomplete
