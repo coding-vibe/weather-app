@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), svgr(), eslint()],
   resolve: {
     alias: {
-      api: '/api',
+      api: '/src/api',
       assets: '/src/assets',
       components: '/src/components',
     },

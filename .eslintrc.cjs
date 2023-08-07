@@ -22,6 +22,17 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'react', 'import'],
   rules: {
     'no-restricted-exports': 0,
+    'no-restricted-imports': [
+      2,
+      {
+        paths: [
+          {
+            name: 'react',
+            importNames: ['default'],
+          },
+        ],
+      },
+    ],
     'no-console': 0,
     'no-trailing-spaces': 2,
     'import/prefer-default-export': 0,

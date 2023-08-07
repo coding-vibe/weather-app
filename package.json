@@ -17,13 +17,13 @@
     "@mui/material": "^5.14.2",
     "@mui/styled-engine": "^5.13.2",
     "axios": "^1.4.0",
-    "lodash.debounce": "^4.0.8",
+    "lodash": "^4.17.21",
     "notistack": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/lodash.debounce": "^4.0.7",
+    "@types/lodash": "^4.14.196",
     "@types/node": "^20.4.6",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
