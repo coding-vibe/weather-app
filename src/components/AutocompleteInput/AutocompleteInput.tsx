@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { CircularProgress } from '@mui/material';
 import { debounce } from 'lodash';
 import { useSnackbar } from 'notistack';
+import FetchGeoData from 'components/FetchGeoData';
 import { CITIES } from './citiesList';
 import * as styles from './styles';
 
@@ -21,6 +22,7 @@ export default function AutocompleteInput() {
   const [inputValue, setInputValue] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
   const [loadingStatus, setLoadingStatus] = useState(false);
+
   const { enqueueSnackbar } = useSnackbar();
   const inputNotify = () => {
     enqueueSnackbar(FAILED_FETCH_MESSAGE, { variant: 'error' });
@@ -68,35 +70,35 @@ export default function AutocompleteInput() {
     [],
   );
 
-  // console.log(inputValue);
-  console.log(currentValue);
-
   return (
-    <Autocomplete
-      disablePortal
-      id='cities-select'
-      options={options}
-      noOptionsText={isFirstInput ? null : NO_OPTIONS_TEXT}
-      sx={{ width: 300 }}
-      value={currentValue}
-      onChange={debouncedOnChange}
-      onInputChange={onInputChange}
-      renderInput={(params) => (
-        <TextField
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...params}
-          label='City'
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <>
-                {loadingStatus ? <CircularProgress size={25} /> : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
-          }}
-        />
-      )}
-    />
+    <>
+      <Autocomplete
+        disablePortal
+        id='cities-select'
+        options={options}
+        noOptionsText={isFirstInput ? null : NO_OPTIONS_TEXT}
+        sx={{ width: 300 }}
+        value={currentValue}
+        onChange={debouncedOnChange}
+        onInputChange={onInputChange}
+        renderInput={(params) => (
+          <TextField
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...params}
+            label='City'
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <>
+                  {loadingStatus ? <CircularProgress size={25} /> : null}
+                  {params.InputProps.endAdornment}
+                </>
+              ),
+            }}
+          />
+        )}
+      />
+      <FetchGeoData valueForSearch={currentValue} />
+    </>
   );
 }
