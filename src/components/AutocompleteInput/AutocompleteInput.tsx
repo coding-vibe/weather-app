@@ -7,7 +7,7 @@ import { CircularProgress } from '@mui/material';
 import { debounce } from 'lodash';
 import { useSnackbar } from 'notistack';
 import { CITIES } from './citiesList';
-import * as styles from './styles';
+import * as classes from './styles';
 
 const TIMEOUT_DELAY = 1000;
 const DEBOUNCE_DELAY = 400;
@@ -77,7 +77,7 @@ export default function AutocompleteInput() {
       id='cities-select'
       options={options}
       noOptionsText={isFirstInput ? null : NO_OPTIONS_TEXT}
-      sx={{ width: 300 }}
+      css={classes.autocompleteStyles}
       value={currentValue}
       onChange={debouncedOnChange}
       onInputChange={onInputChange}
