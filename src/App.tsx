@@ -3,13 +3,13 @@ import AutocompleteInput from 'components/AutocompleteInput';
 import FetchWeatherData from 'components/FetchWeatherData';
 
 function App() {
-  const [selectedCity, setSelectedCity] = useState<string>('');
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
 
   return (
     <>
       <AutocompleteInput
-        currentValue={selectedCity}
-        setCurrentValue={setSelectedCity}
+        currentValue={selectedLocation}
+        setCurrentValue={setSelectedLocation}
       />
       <FetchWeatherData />
     </>

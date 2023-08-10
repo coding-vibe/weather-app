@@ -20,8 +20,6 @@ export const CITIES = [
   'Kyiv',
   'Lima',
   'Lisbon',
-  'Lima',
-  'Lisbon',
   'London',
   'Los Angeles',
   'Madrid',
