@@ -25,12 +25,10 @@ export default function AutocompleteInput({
   setCurrentValue,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [options, setOptions] = useState<Location[]>([]);
-  const [isFirstInput, setIsFirstInput] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
-  const [loadingStatus, setLoadingStatus] = useState(false);
-
-  console.log(currentValue);
+  const [options, setOptions] = useState<Location[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const errorNotify = () => {
@@ -40,9 +38,10 @@ export default function AutocompleteInput({
     const fetchGeoData = debounce(async () => {
       if (inputValue === '' || inputValue.length <= MIN_INPUT_LEN) {
         setOptions([]);
-        setLoadingStatus(false);
+        setIsLoading(false);
       } else {
         try {
+          setIsLoading(true);
           const response = await axiosDefaultConfig.get<Location[]>(
             '/geo/1.0/direct',
             {
@@ -65,20 +64,19 @@ export default function AutocompleteInput({
     }, DEBOUNCE_DELAY);
 
     if (inputValue && inputValue !== '') {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       fetchGeoData();
+      setIsLoading(false);
     }
   }, [enqueueSnackbar, inputValue]);
+
+  const onOpen = () => setIsOpen(true);
+
+  const onClose = () => setIsOpen(false);
 
   const onInputChange = (_: SyntheticEvent, value: string) => {
     const trimmedValue = value.trim();
     setInputValue(trimmedValue);
-
-    if (isFirstInput) {
-      setIsFirstInput(false);
-    }
   };
 
   const onChange = (
@@ -98,6 +96,7 @@ export default function AutocompleteInput({
 
   const renderOption = (props: object, option: Location) => (
     <li
+      key={option.lat}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}>
       {option.name} - {option.state && `${option.state} -`}{' '}
@@ -108,11 +107,13 @@ export default function AutocompleteInput({
   return (
     <Autocomplete
       disablePortal
-      open
       id='cities-select'
-      options={options}
-      noOptionsText={isFirstInput ? null : ERROR_MESSAGE}
       css={classes.autocompleteStyles}
+      open={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      options={options}
+      noOptionsText={isOpen && !isLoading ? ERROR_MESSAGE : null}
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={currentValue}
@@ -128,7 +129,7 @@ export default function AutocompleteInput({
             ...params.InputProps,
             endAdornment: (
               <>
-                {loadingStatus ? <CircularProgress size={25} /> : null}
+                {isLoading ? <CircularProgress size={25} /> : null}
                 {params.InputProps.endAdornment}
               </>
             ),
