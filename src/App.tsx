@@ -1,8 +1,13 @@
-import './App.css';
-import FetchWeatherData from 'components/FetchWeatherData/FetchWeatherData';
+import AutocompleteInput from 'components/AutocompleteInput';
+import FetchWeatherData from 'components/FetchWeatherData';
 
 function App() {
-  return <FetchWeatherData />;
+  return (
+    <>
+      <AutocompleteInput />
+      <FetchWeatherData />
+    </>
+  );
 }
 
 export default App;

@@ -1,12 +1,14 @@
-import {useState, useEffect} from 'react';
-import {axiosDefaultConfig} from 'api/axiosDefaultConfig';
-import {LONDON_GEO} from './londonGeo';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react';
+import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
+import { LONDON_GEO } from './londonGeo';
 
 // TODO: Describe the type of data in interface below
 interface FetchedWeatherData {}
 
 export default function FetchWeatherData() {
-  const {lat, lon} = LONDON_GEO;
+  const { lat, lon } = LONDON_GEO;
   const [weatherData, setWeatherData] = useState<FetchedWeatherData | null>(
     null,
   );
@@ -30,8 +32,6 @@ export default function FetchWeatherData() {
     };
     fetchWeatherData().catch((error) => console.error(error));
   }, [lat, lon]);
-
-  console.log(weatherData);
 
   return null;
 }

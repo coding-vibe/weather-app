@@ -22,11 +22,20 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'react', 'import'],
   rules: {
     'no-restricted-exports': 0,
+    'no-restricted-imports': [
+      2,
+      {
+        paths: [
+          {
+            name: 'react',
+            importNames: ['default'],
+          },
+        ],
+      },
+    ],
     'no-console': 0,
     'no-trailing-spaces': 2,
-    'import/prefer-default-export': [
-      (0),
-    ],
+    'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
     'import/extensions': [
       2,
@@ -48,7 +57,8 @@ module.exports = {
     'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
     'react/no-array-index-key': 0,
     '@typescript-eslint/no-empty-function': 0,
-    "@typescript-eslint/no-non-null-assertion": 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
+    'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
   },
   settings: {
