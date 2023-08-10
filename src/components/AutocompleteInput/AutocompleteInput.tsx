@@ -39,12 +39,10 @@ export default function AutocompleteInput({
   const [loadingStatus, setLoadingStatus] = useState(false);
   const [geoData, setGeoData] = useState<Location[] | null>(null);
 
-  console.log(geoData);
   useEffect(() => {
     const errorNotify = () => {
       enqueueSnackbar(ERROR_MESSAGE, { variant: 'error' });
     };
-
     const fetchGeoData = async () => {
       try {
         const response = await axiosDefaultConfig.get<Location[]>(
@@ -56,7 +54,6 @@ export default function AutocompleteInput({
             },
           },
         );
-
         const cityData = response.data.map((city: Location) => ({
           name: city.name,
           state: city.state,
@@ -64,7 +61,6 @@ export default function AutocompleteInput({
           lat: city.lat,
           lon: city.lon,
         }));
-
         setGeoData(cityData);
       } catch (error) {
         console.log(error);
@@ -86,7 +82,6 @@ export default function AutocompleteInput({
     if (isFirstInput) {
       setIsFirstInput(false);
     }
-
     if (trimmedValue === '' || trimmedValue.length <= MIN_INPUT_LEN) {
       setOptions([]);
       setLoadingStatus(false);
