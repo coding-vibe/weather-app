@@ -67,17 +67,17 @@ export default function AutocompleteInput({
 
   const onInputChange = (_: SyntheticEvent, value: string) => {
     const trimmedValue = value.trim();
+    setInputValue(trimmedValue);
+
     if (isFirstInput) {
       setIsFirstInput(false);
     }
 
     if (trimmedValue === '' || trimmedValue.length <= MIN_INPUT_LEN) {
-      setInputValue('');
       setOptions([]);
       setLoadingStatus(false);
     } else {
       setLoadingStatus(true);
-      setInputValue(trimmedValue);
       const filteredCities = CITIES.filter((city) =>
         city.toLowerCase().includes(trimmedValue.toLowerCase()),
       );
@@ -110,9 +110,10 @@ export default function AutocompleteInput({
       options={options}
       noOptionsText={isFirstInput ? null : NO_OPTIONS_TEXT}
       css={classes.autocompleteStyles}
+      inputValue={inputValue}
+      onInputChange={onInputChange}
       value={currentValue}
       onChange={debouncedOnChange}
-      onInputChange={onInputChange}
       renderInput={(params) => (
         <TextField
           // eslint-disable-next-line react/jsx-props-no-spreading
