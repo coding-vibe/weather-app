@@ -1,4 +1,4 @@
-export const ALFA2_COUNTRY_CODES = [
+export const COUNTRY_CODES = [
   { code: 'AD', name: 'Andorra' },
   { code: 'AE', name: 'United Arab Emirates' },
   { code: 'AF', name: 'Afghanistan' },

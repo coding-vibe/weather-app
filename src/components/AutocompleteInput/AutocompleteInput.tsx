@@ -1,12 +1,12 @@
-import { SyntheticEvent, useState, useMemo, useEffect } from 'react';
+import { SyntheticEvent, useState, useEffect, useMemo } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { CircularProgress } from '@mui/material';
-import { debounce } from 'lodash';
+import { debounce, pick } from 'lodash';
 import { useSnackbar } from 'notistack';
 import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
 import { CITIES } from './citiesList';
-import { ALFA2_COUNTRY_CODES } from './alfa2CountryCodes';
+import { countrySearch } from './countrySearch';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
@@ -43,35 +43,40 @@ export default function AutocompleteInput({
     const errorNotify = () => {
       enqueueSnackbar(ERROR_MESSAGE, { variant: 'error' });
     };
-    const fetchGeoData = async () => {
-      try {
-        const response = await axiosDefaultConfig.get<Location[]>(
-          '/geo/1.0/direct',
-          {
-            params: {
-              q: currentValue,
-              limit: LIMIT_PARAM_VALUE,
-            },
-          },
-        );
-        const cityData = response.data.map((city: Location) => ({
-          name: city.name,
-          state: city.state,
-          country: city.country,
-          lat: city.lat,
-          lon: city.lon,
-        }));
-        setGeoData(cityData);
-      } catch (error) {
-        console.log(error);
-        errorNotify();
-      }
-    };
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const fetchGeoData = useMemo(
+      () =>
+        debounce(async () => {
+          try {
+            const response = await axiosDefaultConfig.get<Location[]>(
+              '/geo/1.0/direct',
+              {
+                params: {
+                  q: currentValue,
+                  limit: LIMIT_PARAM_VALUE,
+                },
+              },
+            );
+            const locationData = pick(response.data, [
+              'name',
+              'state',
+              'country',
+              'lat',
+              'lon',
+            ]);
+            setGeoData(locationData as Location[]);
+          } catch (error) {
+            console.log(error);
+            errorNotify();
+          }
+        }, DEBOUNCE_DELAY),
+      [],
+    );
     if (currentValue && currentValue !== '') {
-      fetchGeoData().catch((error) => {
-        console.log(error);
-        errorNotify();
-      });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      fetchGeoData();
     }
   }, [currentValue, enqueueSnackbar]);
 
@@ -87,30 +92,23 @@ export default function AutocompleteInput({
       setLoadingStatus(false);
     } else {
       setLoadingStatus(true);
-      const filteredCities = CITIES.filter((city) =>
-        city.toLowerCase().includes(trimmedValue.toLowerCase()),
+      const filteredCities = CITIES.filter((location) =>
+        location.toLowerCase().includes(trimmedValue.toLowerCase()),
       );
       setOptions(filteredCities);
       setLoadingStatus(false);
     }
   };
 
-  const debouncedOnChange = useMemo(
-    () =>
-      debounce(
-        (
-          _: SyntheticEvent,
-          value: string | null,
-          reason: string | undefined,
-        ) => {
-          if (reason === 'selectOption' && value && value !== '') {
-            setCurrentValue(value);
-          }
-        },
-        DEBOUNCE_DELAY,
-      ),
-    [setCurrentValue],
-  );
+  const onChange = (
+    _: SyntheticEvent,
+    value: string | null,
+    reason: string | undefined,
+  ) => {
+    if (reason === 'selectOption' && value && value !== '') {
+      setCurrentValue(value);
+    }
+  };
 
   return (
     <>
@@ -123,12 +121,12 @@ export default function AutocompleteInput({
         inputValue={inputValue}
         onInputChange={onInputChange}
         value={currentValue}
-        onChange={debouncedOnChange}
+        onChange={onChange}
         renderInput={(params) => (
           <TextField
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...params}
-            label='City'
+            label='location'
             InputProps={{
               ...params.InputProps,
               endAdornment: (
@@ -143,14 +141,10 @@ export default function AutocompleteInput({
       />
       <div>
         {geoData &&
-          geoData.map((city, index) => (
+          geoData.map((location, index) => (
             <p key={index}>
-              {city.name} - {city.state && `${city.state} -`}{' '}
-              {
-                ALFA2_COUNTRY_CODES.find(
-                  (country) => country.code === city.country,
-                )?.name
-              }
+              {location.name} - {location.state && `${location.state} -`}{' '}
+              {countrySearch(location.country)}
             </p>
           ))}
       </div>

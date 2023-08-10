@@ -7,12 +7,11 @@ import { SnackbarProvider } from 'notistack';
 import { globalStyles } from './globalStyles';
 import App from './App';
 
-/* eslint-disable react/jsx-props-no-spreading */
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <StyledEngineProvider injectFirst>
       <CssBaseline />
-      <GlobalStyles {...globalStyles} />
+      <GlobalStyles styles={globalStyles} />
       <SnackbarProvider>
         <App />
       </SnackbarProvider>
