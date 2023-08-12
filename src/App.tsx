@@ -14,7 +14,7 @@ function App() {
         currentValue={selectedLocation}
         setCurrentValue={setSelectedLocation}
       />
-      <FetchWeatherData />
+      <FetchWeatherData selectedLocation={selectedLocation} />
     </>
   );
 }

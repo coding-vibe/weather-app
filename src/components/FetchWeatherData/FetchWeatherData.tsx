@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
-import { LONDON_GEO } from './londonGeo';
+import Location from 'components/AutocompleteInput/locationInterface';
 
 // TODO: Describe the type of data in interface below
 interface FetchedWeatherData {}
 
-export default function FetchWeatherData() {
-  const { lat, lon } = LONDON_GEO;
+interface Props {
+  selectedLocation: Location | null;
+}
+
+export default function FetchWeatherData({ selectedLocation }: Props) {
   const [, setWeatherData] = useState<FetchedWeatherData | null>(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
+        if (!selectedLocation) {
+          return;
+        }
+        const { name, lat, lon, country, state } = selectedLocation;
         const response = await axiosDefaultConfig.get<FetchedWeatherData>(
           '/data/2.5/forecast',
           {
@@ -27,7 +34,7 @@ export default function FetchWeatherData() {
       }
     };
     fetchWeatherData().catch((error) => console.error(error));
-  }, [lat, lon]);
+  }, [selectedLocation]);
 
   return null;
 }
