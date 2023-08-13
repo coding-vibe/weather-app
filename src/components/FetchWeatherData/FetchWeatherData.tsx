@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import pick from 'lodash/pick';
-import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
-import Location from 'components/LocationSelector/location';
+import apiClient from 'api';
+import Location from 'components/LocationAutocomplete/location';
 
 interface Weather {
   description: string;
@@ -41,11 +41,7 @@ export default function FetchWeatherData({ selectedLocation }: Props) {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        if (!selectedLocation) {
-          return;
-        }
-        const { lat, lon } = selectedLocation;
-        const response = await axiosDefaultConfig.get<FetchedWeatherData>(
+        const response = await apiClient.get<FetchedWeatherData>(
           '/data/2.5/forecast',
           {
             params: {
@@ -73,14 +69,12 @@ export default function FetchWeatherData({ selectedLocation }: Props) {
 
   return locationData && locationWeatherData ? (
     <table>
-      <thead>{`Weather 5 days' forecast for ${locationData.country}, ${locationData.name}`}</thead>
-      <table>
-        {locationWeatherData.map((date, index) => (
-          <tr key={index}>
-            <td>{pick(date, ['data_txt'])}</td>
-          </tr>
-        ))}
-      </table>
+      {/* <thead>{`Weather 5 days' forecast for ${locationData.country}, ${locationData.name}`}</thead>
+      {locationWeatherData.map((date, index) => (
+        <tr key={index}>
+          <td>{pick(date, ['data_txt'])}</td>
+        </tr>
+      ))} */}
     </table>
   ) : null;
 }
