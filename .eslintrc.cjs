@@ -74,6 +74,7 @@ module.exports = {
           ['api', './src/api'],
           ['assets', './src/assets'],
           ['components', './src/components'],
+          ['types', './src/types'],
         ],
         extentions: ['.ts', '.tsx', '.js', '.jsx', '.json']
       }

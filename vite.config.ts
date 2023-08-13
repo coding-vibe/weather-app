@@ -10,6 +10,7 @@ export default defineConfig({
       api: '/src/api',
       assets: '/src/assets',
       components: '/src/components',
+      types: '/src/types',
     },
   },
 });

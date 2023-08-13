@@ -8,7 +8,7 @@ import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
-import Location from 'components/LocationAutocomplete/location';
+import Location from 'types/location';
 import { COUNTRY_CODES } from './countryCodes';
 import * as classes from './styles';
 

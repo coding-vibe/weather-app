@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LocationAutocomplete from 'components/LocationAutocomplete';
-import FetchWeatherData from 'components/FetchWeatherData';
-import Location from 'components/LocationAutocomplete/location';
+import WeatherWidget from 'components/WeatherWidget';
+import Location from 'types/location';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
@@ -14,7 +14,7 @@ function App() {
         onSelectLocation={onSelectLocation}
         id={id}
       />
-      <FetchWeatherData selectedLocation={selectedLocation} />
+      <WeatherWidget selectedLocation={selectedLocation} />
     </>
   );
 }
