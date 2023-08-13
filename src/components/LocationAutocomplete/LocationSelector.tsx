@@ -7,26 +7,26 @@ import CircularProgress from '@mui/material/CircularProgress';
 import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
-import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
-import Location from 'components/LocationSelector/location';
+import apiClient from 'api';
+import Location from 'components/LocationAutocomplete/location';
 import { COUNTRY_CODES } from './countryCodes';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
 const MIN_INPUT_LEN = 2;
-const LIMIT_PARAM_VALUE = 5;
-const ERROR_MESSAGE =
-  'Sorry, we could not find any results that match your search.';
+const MAX_LOCATIONS = 5;
 const SPINNER_SIZE = 25;
 
 interface Props {
   selectedLocation: Location | null;
-  onSelectedLocation: (value: Location) => void;
+  onSelectLocation: (value: Location) => void;
+  id: string;
 }
 
 export default function LocationSelector({
   selectedLocation,
-  onSelectedLocation,
+  onSelectLocation,
+  id,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
@@ -36,19 +36,20 @@ export default function LocationSelector({
 
   const fetchGeoData = useMemo(
     () =>
-      debounce(async () => {
-        if (inputValue === '' || inputValue.length <= MIN_INPUT_LEN) {
+      debounce(async (value: string) => {
+        if (value === '' || value.length <= MIN_INPUT_LEN) {
           onSuggestions([]);
           onIsLoading(false);
         } else {
           try {
+            const trimmedValue = value.trim();
             onIsLoading(true);
-            const response = await axiosDefaultConfig.get<Location[]>(
+            const response = await apiClient.get<Location[]>(
               '/geo/1.0/direct',
               {
                 params: {
-                  q: inputValue,
-                  limit: LIMIT_PARAM_VALUE,
+                  q: trimmedValue,
+                  limit: MAX_LOCATIONS,
                 },
               },
             );
@@ -58,20 +59,22 @@ export default function LocationSelector({
 
             onSuggestions(locationData);
           } catch (error) {
-            console.log(error);
-            enqueueSnackbar(ERROR_MESSAGE, { variant: 'error' });
+            enqueueSnackbar(
+              'Sorry, we could not find any results that match your search.',
+              { variant: 'error' },
+            );
           } finally {
             onIsLoading(false);
           }
         }
       }, DEBOUNCE_DELAY),
-    [enqueueSnackbar, inputValue],
+    [enqueueSnackbar],
   );
 
   useEffect(() => {
     if (inputValue) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      fetchGeoData();
+      fetchGeoData(inputValue);
     }
   }, [fetchGeoData, inputValue]);
 
@@ -80,8 +83,7 @@ export default function LocationSelector({
   const onClose = () => onIsOpen(false);
 
   const onInputChange = (_: SyntheticEvent, value: string) => {
-    const trimmedValue = value.trim();
-    onInputValue(trimmedValue);
+    onInputValue(value);
   };
 
   const onChange = (
@@ -90,29 +92,33 @@ export default function LocationSelector({
     reason: AutocompleteChangeReason,
   ) => {
     if (reason === 'selectOption' && value) {
-      onSelectedLocation(value);
+      onSelectLocation(value);
     }
   };
 
-  const countrySearch = (countryCode: string) =>
-    COUNTRY_CODES.find((country) => country.code === countryCode)?.name;
+  const handleCountrySearch = (code: string) =>
+    COUNTRY_CODES.find((country) => country.code === code)?.name;
 
   const getOptionLabel = (option: Location) => {
     const state = option.state ? `${option.state} - ` : '';
-    const country = countrySearch(option.country);
+    const country = handleCountrySearch(option.country);
     return `${option.name} - ${state}${country}`;
   };
 
   return (
     <Autocomplete
       disablePortal
-      id='cities-select'
-      css={classes.autocompleteStyles}
+      id={id}
+      css={classes.autocomplete}
       open={isOpen}
       onOpen={onOpen}
       onClose={onClose}
       options={suggestions}
-      noOptionsText={isOpen && !isLoading ? ERROR_MESSAGE : null}
+      noOptionsText={
+        isOpen && !isLoading
+          ? 'Please enter more than 2 characters to search'
+          : null
+      }
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={selectedLocation}

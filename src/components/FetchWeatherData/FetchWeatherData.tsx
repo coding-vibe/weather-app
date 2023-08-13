@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
+import apiClient from 'api';
 import { LONDON_GEO } from './londonGeo';
 
 // TODO: Describe the type of data in interface below
@@ -12,7 +12,7 @@ export default function FetchWeatherData() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await axiosDefaultConfig.get<FetchedWeatherData>(
+        const response = await apiClient.get<FetchedWeatherData>(
           '/data/2.5/forecast',
           {
             params: {
