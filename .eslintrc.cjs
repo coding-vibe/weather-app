@@ -60,6 +60,8 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
   },
   settings: {
     'import/resolver': {

@@ -21,7 +21,6 @@ const SPINNER_SIZE = 25;
 
 interface Props {
   selectedLocation: Location | null;
-  // eslint-disable-next-line no-unused-vars
   onSelectedLocation: (value: Location) => void;
 }
 
