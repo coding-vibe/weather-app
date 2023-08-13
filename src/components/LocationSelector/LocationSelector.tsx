@@ -54,7 +54,7 @@ export default function LocationSelector({
               },
             );
             const locationData = response.data.map((location) =>
-              pick(location, ['name', 'state', 'country', 'lat', 'lon']),
+              pick(location, ['name', 'lat', 'lon', 'country', 'state']),
             );
 
             onSuggestions(locationData);
