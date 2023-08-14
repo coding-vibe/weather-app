@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
-import { axiosDefaultConfig } from 'api/axiosDefaultConfig';
+import apiClient from 'api';
 import { LONDON_GEO } from './londonGeo';
 
 // TODO: Describe the type of data in interface below
@@ -9,14 +7,12 @@ interface FetchedWeatherData {}
 
 export default function FetchWeatherData() {
   const { lat, lon } = LONDON_GEO;
-  const [weatherData, setWeatherData] = useState<FetchedWeatherData | null>(
-    null,
-  );
+  const [, setWeatherData] = useState<FetchedWeatherData | null>(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const response = await axiosDefaultConfig.get<FetchedWeatherData>(
+        const response = await apiClient.get<FetchedWeatherData>(
           '/data/2.5/forecast',
           {
             params: {
