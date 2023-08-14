@@ -17,7 +17,7 @@ interface Forecast {
       icon: string;
       main: string;
     };
-  };
+  }[];
 }
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
 
 export default function WeatherWidget({ selectedLocation }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [forecast, setForecast] = useState<Forecast | null>(null);
+  const [forecast, setForecast] = useState<Forecast['list'] | null>(null);
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -39,14 +39,11 @@ export default function WeatherWidget({ selectedLocation }: Props) {
               lon,
             },
           });
-          const { dt, main, weather } = response.data.list;
-          const forecastData = {
-            dt,
-            main,
-            weather,
-          };
-          console.log(forecastData);
-          setForecast({ list: forecastData });
+          const { list } = response.data;
+          const forecastData = list.map((data) =>
+            pick(data, ['dt', 'main', 'weather']),
+          );
+          setForecast(forecastData);
         }
       } catch (error) {
         enqueueSnackbar(
@@ -58,6 +55,7 @@ export default function WeatherWidget({ selectedLocation }: Props) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
   }, [selectedLocation, enqueueSnackbar]);
+  console.log(forecast);
 
   return forecast ? (
     <table>
