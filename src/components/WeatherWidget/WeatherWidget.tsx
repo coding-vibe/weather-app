@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import pick from 'lodash/pick';
 import groupBy from 'lodash/groupBy';
@@ -20,7 +18,7 @@ interface Forecast {
       description: string;
       icon: string;
       main: string;
-    };
+    }[];
   }[];
 }
 
@@ -70,8 +68,6 @@ export default function WeatherWidget({ selectedLocation }: Props) {
   const forecastByDate = groupBy(forecast, getDate);
   const formattedForecast = Object.entries(forecastByDate);
 
-  console.log(formattedForecast);
-
   return forecast ? (
     <table>
       <thead>
@@ -83,11 +79,34 @@ export default function WeatherWidget({ selectedLocation }: Props) {
         </tr>
       </thead>
       <tbody>
-        {formattedForecast.map((data, index) => {
-          const date = data[0];
+        {formattedForecast.map((element, index) => {
+          const date = element[0];
+          const weather = element[1].map((el) => {
+            const { icon } = el.weather[0];
+            const imageUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+            const weatherIcon = (
+              <img
+                src={imageUrl}
+                alt='Weather icon'
+              />
+            );
+            const { temp, humidity } = el.main;
+            const weatherData = `Temperature: ${Math.floor(
+              temp / 10,
+            )}°C Humidity: ${humidity}%`;
+            return (
+              <>
+                {weatherIcon}
+                {weatherData}
+              </>
+            );
+          });
           return (
             <tr key={index}>
               <td>{date}</td>
+              {weather.map((data, idx) => (
+                <td key={idx}>{data}</td>
+              ))}
             </tr>
           );
         })}
