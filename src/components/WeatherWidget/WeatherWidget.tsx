@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Tooltip from '@mui/material/Tooltip';
 import pick from 'lodash/pick';
 import groupBy from 'lodash/groupBy';
 import { useSnackbar } from 'notistack';
@@ -63,7 +64,7 @@ export default function WeatherWidget({ selectedLocation }: Props) {
     const date = dateObject.getDate();
     const month = dateObject.getMonth();
     const formattedMonth = month <= 9 ? `0${month + 1}` : `${month + 1}`;
-    return `${date}.${formattedMonth}`;
+    return `${date}-${formattedMonth}`;
   };
   const forecastByDate = groupBy(forecast, getDate);
   const formattedForecast = Object.entries(forecastByDate);
@@ -82,13 +83,15 @@ export default function WeatherWidget({ selectedLocation }: Props) {
         {formattedForecast.map((element, index) => {
           const date = element[0];
           const weather = element[1].map((el) => {
-            const { icon } = el.weather[0];
+            const { icon, description } = el.weather[0];
             const imageUrl = `https://openweathermap.org/img/wn/${icon}.png`;
             const weatherIcon = (
-              <img
-                src={imageUrl}
-                alt='Weather icon'
-              />
+              <Tooltip title={description}>
+                <img
+                  src={imageUrl}
+                  alt='Weather icon'
+                />
+              </Tooltip>
             );
             const { temp, humidity } = el.main;
             const weatherData = `Temperature: ${Math.floor(
