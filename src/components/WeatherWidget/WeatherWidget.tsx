@@ -1,13 +1,17 @@
+/* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import pick from 'lodash/pick';
+import groupBy from 'lodash/groupBy';
 import { useSnackbar } from 'notistack';
+import { fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
+import { HOURS } from './hours';
 
 interface Forecast {
   list: {
-    dt: string;
+    dt: number;
     main: {
       humidity: number;
       temp: number;
@@ -55,16 +59,39 @@ export default function WeatherWidget({ selectedLocation }: Props) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
   }, [selectedLocation, enqueueSnackbar]);
-  console.log(forecast);
+
+  const getDate = (element: Forecast['list'][0]) => {
+    const dateObject = fromUnixTime(element.dt);
+    const date = dateObject.getDate();
+    const month = dateObject.getMonth();
+    const formattedMonth = month <= 9 ? `0${month + 1}` : `${month + 1}`;
+    return `${date}.${formattedMonth}`;
+  };
+  const forecastByDate = groupBy(forecast, getDate);
+  const formattedForecast = Object.entries(forecastByDate);
+
+  console.log(formattedForecast);
 
   return forecast ? (
     <table>
-      {/* <thead>{`Weather 5 days' forecast for ${locationData.country}, ${locationData.name}`}</thead>
-      {locationWeatherData.map((date, index) => (
-        <tr key={index}>
-          <td>{pick(date, ['data_txt'])}</td>
+      <thead>
+        <tr>
+          <th>Date/Hours</th>
+          {HOURS.map((hour, index) => (
+            <th key={index}>{hour}</th>
+          ))}
         </tr>
-      ))} */}
+      </thead>
+      <tbody>
+        {formattedForecast.map((data, index) => {
+          const date = data[0];
+          return (
+            <tr key={index}>
+              <td>{date}</td>
+            </tr>
+          );
+        })}
+      </tbody>
     </table>
   ) : null;
 }

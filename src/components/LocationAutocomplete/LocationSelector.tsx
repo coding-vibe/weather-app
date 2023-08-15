@@ -109,15 +109,11 @@ export default function LocationSelector({
       disablePortal
       id={id}
       css={classes.autocomplete}
-      open={isOpen}
+      open={inputValue.length > MIN_INPUT_LEN && isOpen}
       onOpen={onOpen}
       onClose={onClose}
       options={suggestions}
-      noOptionsText={
-        isOpen && !isLoading
-          ? 'Please enter more than 2 characters to search'
-          : null
-      }
+      noOptionsText={isLoading ? null : 'No options found'}
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={selectedLocation}
