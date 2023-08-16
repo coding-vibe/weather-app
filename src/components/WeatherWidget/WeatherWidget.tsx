@@ -89,18 +89,21 @@ export default function WeatherWidget({ location }: Props) {
         <thead>
           <tr>
             <th>Date/Hours</th>
-            {HOURS.map((hour, index) => (
+            {HOURS.map((hour) => (
               <th key={hour}>{hour}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {formattedForecast.map((element, idx) => {
+          {formattedForecast.map((element) => {
             const [date, weather] = element;
             return (
               <tr key={date}>
                 <td>{date}</td>
                 {weather.map((el) => {
+                  // const dateObject = fromUnixTime(el.dt);
+                  // const currentHour = dateObject.getHours();
+                  // const currentHourIndex = currentHour / 3;
                   const { icon, description } = el.weather[0];
                   const { temp, humidity } = el.main;
                   return (
