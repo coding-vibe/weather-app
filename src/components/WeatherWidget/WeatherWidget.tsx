@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import pick from 'lodash/pick';
 import groupBy from 'lodash/groupBy';
@@ -6,7 +7,12 @@ import { useSnackbar } from 'notistack';
 import { fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
-import { HOURS } from './hours';
+import HOURS from './hours';
+
+interface WeatherData {
+  description: string;
+  icon: string;
+}
 
 interface Forecast {
   list: {
@@ -15,27 +21,27 @@ interface Forecast {
       humidity: number;
       temp: number;
     };
-    weather: {
-      description: string;
-      icon: string;
-      main: string;
-    }[];
+    weather: WeatherData[];
+    // weather: [string, string][];
   }[];
 }
 
 interface Props {
-  selectedLocation: Location | null;
+  location: Location | null;
 }
 
-export default function WeatherWidget({ selectedLocation }: Props) {
+export default function WeatherWidget({ location }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast['list'] | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const SPINNER_SIZE = 25;
 
   useEffect(() => {
     const fetchForecast = async () => {
       try {
-        if (selectedLocation) {
-          const { lat, lon } = selectedLocation;
+        if (location) {
+          setIsLoading(true);
+          const { lat, lon } = location;
           const response = await apiClient.get<Forecast>('/data/2.5/forecast', {
             params: {
               lat,
@@ -49,71 +55,69 @@ export default function WeatherWidget({ selectedLocation }: Props) {
           setForecast(forecastData);
         }
       } catch (error) {
-        enqueueSnackbar(
-          'Sorry, we could not find any results that match your search.',
-          { variant: 'error' },
-        );
+        enqueueSnackbar('No weather data found for this location', {
+          variant: 'error',
+        });
+      } finally {
+        setIsLoading(false);
       }
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [selectedLocation, enqueueSnackbar]);
+  }, [location, enqueueSnackbar]);
 
-  const getDate = (element: Forecast['list'][0]) => {
+  const forecastByDate = groupBy(forecast, (element) => {
     const dateObject = fromUnixTime(element.dt);
     const date = dateObject.getDate();
     const month = dateObject.getMonth();
     const formattedMonth = month <= 9 ? `0${month + 1}` : `${month + 1}`;
     return `${date}-${formattedMonth}`;
-  };
-  const forecastByDate = groupBy(forecast, getDate);
+  });
   const formattedForecast = Object.entries(forecastByDate);
+  console.log(formattedForecast);
 
-  return forecast ? (
-    <table>
-      <thead>
-        <tr>
-          <th>Date/Hours</th>
-          {HOURS.map((hour, index) => (
-            <th key={index}>{hour}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {formattedForecast.map((element, index) => {
-          const date = element[0];
-          const weather = element[1].map((el) => {
-            const { icon, description } = el.weather[0];
-            const imageUrl = `https://openweathermap.org/img/wn/${icon}.png`;
-            const weatherIcon = (
-              <Tooltip title={description}>
-                <img
-                  src={imageUrl}
-                  alt='Weather icon'
-                />
-              </Tooltip>
-            );
-            const { temp, humidity } = el.main;
-            const weatherData = `Temperature: ${Math.floor(
-              temp / 10,
-            )}°C Humidity: ${humidity}%`;
+  return (
+    <>
+      {isLoading && <CircularProgress size={SPINNER_SIZE} />}
+      <table>
+        <thead>
+          <tr>
+            <th>Date/Hours</th>
+            {HOURS.map((hour) => (
+              <th key={hour}>{hour}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {formattedForecast.map((element) => {
+            const [date, weather] = element;
             return (
-              <>
-                {weatherIcon}
-                {weatherData}
-              </>
+              <tr key={date}>
+                <td>{date}</td>
+                {weather.map((el) => {
+                  const { icon, description } = el.weather[0];
+                  const { temp, humidity } = el.main;
+                  return (
+                    <td key={`${temp}-${humidity}-${icon}-${description}`}>
+                      <Tooltip title={description}>
+                        <img
+                          src={`${
+                            import.meta.env.VITE_BASE_URL
+                          }img/wn/${icon}.png`}
+                          alt='Weather condition'
+                        />
+                      </Tooltip>
+                      {`Temperature: ${Math.floor(
+                        temp / 10,
+                      )}°C Humidity: ${humidity}%`}
+                    </td>
+                  );
+                })}
+              </tr>
             );
-          });
-          return (
-            <tr key={index}>
-              <td>{date}</td>
-              {weather.map((data, idx) => (
-                <td key={idx}>{data}</td>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  ) : null;
+          })}
+        </tbody>
+      </table>
+    </>
+  );
 }

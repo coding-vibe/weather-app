@@ -9,7 +9,7 @@ import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
 import Location from 'types/location';
-import { COUNTRY_CODES } from './countryCodes';
+import COUNTRY_CODES from './countryCodes';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
@@ -18,16 +18,12 @@ const MAX_LOCATIONS = 5;
 const SPINNER_SIZE = 25;
 
 interface Props {
-  selectedLocation: Location | null;
-  onSelectLocation: (value: Location) => void;
+  location: Location | null;
+  setLocation: (value: Location) => void;
   id: string;
 }
 
-export default function LocationSelector({
-  selectedLocation,
-  onSelectLocation,
-  id,
-}: Props) {
+export default function LocationSelector({ location, setLocation, id }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
   const [suggestions, onSuggestions] = useState<Location[]>([]);
@@ -53,8 +49,8 @@ export default function LocationSelector({
                 },
               },
             );
-            const locationData = response.data.map((location) =>
-              pick(location, ['name', 'lat', 'lon', 'country', 'state']),
+            const locationData = response.data.map((element) =>
+              pick(element, ['name', 'lat', 'lon', 'country', 'state']),
             );
             onSuggestions(locationData);
           } catch (error) {
@@ -91,7 +87,7 @@ export default function LocationSelector({
     reason: AutocompleteChangeReason,
   ) => {
     if (reason === 'selectOption' && value) {
-      onSelectLocation(value);
+      setLocation(value);
     }
   };
 
@@ -116,7 +112,7 @@ export default function LocationSelector({
       noOptionsText={isLoading ? null : 'No options found'}
       inputValue={inputValue}
       onInputChange={onInputChange}
-      value={selectedLocation}
+      value={location}
       onChange={onChange}
       getOptionLabel={getOptionLabel}
       renderInput={(params) => (
