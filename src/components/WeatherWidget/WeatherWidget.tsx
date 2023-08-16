@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 import { fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
+import COUNTRY_CODES from 'components/LocationAutocomplete/countryCodes';
 import HOURS from './hours';
 
 interface WeatherData {
@@ -74,22 +75,27 @@ export default function WeatherWidget({ location }: Props) {
     return `${date}-${formattedMonth}`;
   });
   const formattedForecast = Object.entries(forecastByDate);
-  console.log(formattedForecast);
 
   return (
     <>
       {isLoading && <CircularProgress size={SPINNER_SIZE} />}
       <table>
+        <caption>
+          {location &&
+            `${COUNTRY_CODES.find(
+              (country) => country.code === location.country,
+            )?.name}, ${location.name}`}
+        </caption>
         <thead>
           <tr>
             <th>Date/Hours</th>
-            {HOURS.map((hour) => (
+            {HOURS.map((hour, index) => (
               <th key={hour}>{hour}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {formattedForecast.map((element) => {
+          {formattedForecast.map((element, idx) => {
             const [date, weather] = element;
             return (
               <tr key={date}>

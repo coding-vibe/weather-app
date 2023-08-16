@@ -109,7 +109,7 @@ export default function LocationSelector({ location, setLocation, id }: Props) {
       onOpen={onOpen}
       onClose={onClose}
       options={suggestions}
-      noOptionsText={isLoading ? null : 'No options found'}
+      noOptionsText={!isLoading && 'No options found'}
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={location}
@@ -124,7 +124,7 @@ export default function LocationSelector({ location, setLocation, id }: Props) {
             ...params.InputProps,
             endAdornment: (
               <>
-                {isLoading ? <CircularProgress size={SPINNER_SIZE} /> : null}
+                {isLoading && <CircularProgress size={SPINNER_SIZE} />}
                 {params.InputProps.endAdornment}
               </>
             ),
