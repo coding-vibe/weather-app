@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import pick from 'lodash/pick';
 import groupBy from 'lodash/groupBy';
 import { useSnackbar } from 'notistack';
-import { fromUnixTime } from 'date-fns';
+import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
 import COUNTRY_CODES from 'components/LocationAutocomplete/countryCodes';
@@ -69,10 +69,8 @@ export default function WeatherWidget({ location }: Props) {
 
   const forecastByDate = groupBy(forecast, (element) => {
     const dateObject = fromUnixTime(element.dt);
-    const date = dateObject.getDate();
-    const month = dateObject.getMonth();
-    const formattedMonth = month <= 9 ? `0${month + 1}` : `${month + 1}`;
-    return `${date}-${formattedMonth}`;
+    const formattedDate = format(dateObject, `dd-MM`);
+    return formattedDate;
   });
   const formattedForecast = Object.entries(forecastByDate);
 

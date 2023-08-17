@@ -3,7 +3,7 @@ import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
 import Location from 'types/location';
 
-const id = 'LOCATION_AUTOCOMPLETE';
+const LOCATION_AUTOCOMPLETE = 'location-select';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
@@ -13,7 +13,7 @@ function App() {
       <LocationAutocomplete
         location={selectedLocation}
         setLocation={onSelectLocation}
-        id={id}
+        id={LOCATION_AUTOCOMPLETE}
       />
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </>
