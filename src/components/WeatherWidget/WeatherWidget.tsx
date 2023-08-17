@@ -40,6 +40,7 @@ export default function WeatherWidget({ location }: Props) {
   const [forecast, setForecast] = useState<FormattedForecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const SPINNER_SIZE = 25;
+  const TIME_PERIODS_AMOUNT = 8;
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -101,17 +102,20 @@ export default function WeatherWidget({ location }: Props) {
           </tr>
         </thead>
         <tbody>
-          {forecast?.map((element) => {
+          {forecast?.map((element, index) => {
             const [date, weather] = element;
+            const emptyCells = TIME_PERIODS_AMOUNT - weather.length;
             return (
               <tr key={date}>
                 <td>{date}</td>
+                {index === 0 &&
+                  Array.from({ length: emptyCells }).map((_, idx) => (
+                    <td key={idx}>Data is no longer available</td>
+                  ))}
                 {weather.map((el) => {
-                  // const dateObject = fromUnixTime(el.dt);
-                  // const currentHour = dateObject.getHours();
-                  // const currentHourIndex = currentHour / 3;
                   const { icon, description } = el.weather[0];
                   const { temp, humidity } = el.main;
+
                   return (
                     <td key={`${temp}-${humidity}-${icon}-${description}`}>
                       <Tooltip title={description}>
