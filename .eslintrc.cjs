@@ -75,6 +75,7 @@ module.exports = {
           ['assets', './src/assets'],
           ['components', './src/components'],
           ['types', './src/types'],
+          ['utils', './src/utils'],
         ],
         extentions: ['.ts', '.tsx', '.js', '.jsx', '.json']
       }

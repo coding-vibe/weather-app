@@ -12,6 +12,7 @@
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "types/*": ["types/*"],
+      "utils/*": ["utils/*"],
     },
 
     /* Bundler mode */

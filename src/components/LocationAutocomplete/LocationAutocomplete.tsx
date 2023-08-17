@@ -9,7 +9,7 @@ import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
 import Location from 'types/location';
-import COUNTRY_CODES from './countryCodes';
+import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
@@ -23,7 +23,11 @@ interface Props {
   id: string;
 }
 
-export default function LocationSelector({ location, setLocation, id }: Props) {
+export default function LocationAutocomplete({
+  location,
+  setLocation,
+  id,
+}: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
   const [suggestions, onSuggestions] = useState<Location[]>([]);
@@ -91,12 +95,9 @@ export default function LocationSelector({ location, setLocation, id }: Props) {
     }
   };
 
-  const handleCountrySearch = (code: string) =>
-    COUNTRY_CODES.find((country) => country.code === code)?.name;
-
   const getOptionLabel = (option: Location) => {
     const state = option.state ? `${option.state} - ` : '';
-    const country = handleCountrySearch(option.country);
+    const country = findCountryNameByCode(option.country);
     return `${option.name} - ${state}${country}`;
   };
 
