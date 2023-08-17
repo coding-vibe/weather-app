@@ -10,22 +10,26 @@ import Location from 'types/location';
 import COUNTRY_CODES from 'components/LocationAutocomplete/countryCodes';
 import HOURS from './hours';
 
-interface WeatherData {
-  description: string;
-  icon: string;
+interface ForecastBody {
+  dt: number;
+  main: {
+    humidity: number;
+    temp: number;
+  };
+  weather: [
+    {
+      description: string;
+      icon: string;
+    },
+  ];
 }
 
 interface Forecast {
-  list: {
-    dt: number;
-    main: {
-      humidity: number;
-      temp: number;
-    };
-    weather: WeatherData[];
-    // weather: [string, string][];
-  }[];
+  list: ForecastBody[];
 }
+
+interface FormattedForecast
+  extends Array<[string, Pick<ForecastBody, 'dt' | 'main' | 'weather'>[]]> {}
 
 interface Props {
   location: Location | null;
@@ -33,7 +37,7 @@ interface Props {
 
 export default function WeatherWidget({ location }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [forecast, setForecast] = useState<Forecast['list'] | null>(null);
+  const [forecast, setForecast] = useState<FormattedForecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const SPINNER_SIZE = 25;
 
@@ -53,7 +57,13 @@ export default function WeatherWidget({ location }: Props) {
           const forecastData = list.map((data) =>
             pick(data, ['dt', 'main', 'weather']),
           );
-          setForecast(forecastData);
+          const forecastByDate = groupBy(forecastData, (element) => {
+            const dateObject = fromUnixTime(element.dt);
+            const formattedDate = format(dateObject, `dd-MM`);
+            return formattedDate;
+          });
+          const formattedForecast = Object.entries(forecastByDate);
+          setForecast(formattedForecast);
         }
       } catch (error) {
         enqueueSnackbar('No weather data found for this location', {
@@ -67,12 +77,10 @@ export default function WeatherWidget({ location }: Props) {
     fetchForecast();
   }, [location, enqueueSnackbar]);
 
-  const forecastByDate = groupBy(forecast, (element) => {
-    const dateObject = fromUnixTime(element.dt);
-    const formattedDate = format(dateObject, `dd-MM`);
-    return formattedDate;
-  });
-  const formattedForecast = Object.entries(forecastByDate);
+  const roundTemperature = (temp: number) => {
+    const roundedTemperature = Math.floor(temp / 10);
+    return roundedTemperature;
+  };
 
   return (
     <>
@@ -93,7 +101,7 @@ export default function WeatherWidget({ location }: Props) {
           </tr>
         </thead>
         <tbody>
-          {formattedForecast.map((element) => {
+          {forecast?.map((element) => {
             const [date, weather] = element;
             return (
               <tr key={date}>
@@ -114,8 +122,8 @@ export default function WeatherWidget({ location }: Props) {
                           alt='Weather condition'
                         />
                       </Tooltip>
-                      {`Temperature: ${Math.floor(
-                        temp / 10,
+                      {`Temperature: ${roundTemperature(
+                        temp,
                       )}°C Humidity: ${humidity}%`}
                     </td>
                   );
