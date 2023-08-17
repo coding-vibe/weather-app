@@ -1,4 +1,4 @@
-export const COUNTRY_CODES = [
+const COUNTRY_CODES = [
   { code: 'AD', name: 'Andorra' },
   { code: 'AE', name: 'United Arab Emirates' },
   { code: 'AF', name: 'Afghanistan' },
@@ -249,3 +249,5 @@ export const COUNTRY_CODES = [
   { code: 'ZM', name: 'Zambia' },
   { code: 'ZW', name: 'Zimbabwe' },
 ];
+
+export default COUNTRY_CODES;

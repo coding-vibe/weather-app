@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import LocationAutocomplete from 'components/LocationAutocomplete';
-import FetchWeatherData from 'components/FetchWeatherData';
-import Location from 'components/LocationAutocomplete/location';
+import WeatherWidget from 'components/WeatherWidget';
+import Location from 'types/location';
+
+const LOCATION_AUTOCOMPLETE = 'location-select';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const id = 'location-select';
 
   return (
     <>
       <LocationAutocomplete
-        selectedLocation={selectedLocation}
-        onSelectLocation={onSelectLocation}
-        id={id}
+        location={selectedLocation}
+        setLocation={onSelectLocation}
+        id={LOCATION_AUTOCOMPLETE}
       />
-      <FetchWeatherData />
+      {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </>
   );
 }

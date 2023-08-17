@@ -8,8 +8,8 @@ import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
-import Location from 'components/LocationAutocomplete/location';
-import { COUNTRY_CODES } from './countryCodes';
+import Location from 'types/location';
+import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
@@ -18,14 +18,14 @@ const MAX_LOCATIONS = 5;
 const SPINNER_SIZE = 25;
 
 interface Props {
-  selectedLocation: Location | null;
-  onSelectLocation: (value: Location) => void;
+  location: Location | null;
+  setLocation: (value: Location) => void;
   id: string;
 }
 
-export default function LocationSelector({
-  selectedLocation,
-  onSelectLocation,
+export default function LocationAutocomplete({
+  location,
+  setLocation,
   id,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
@@ -53,10 +53,9 @@ export default function LocationSelector({
                 },
               },
             );
-            const locationData = response.data.map((location) =>
-              pick(location, ['name', 'state', 'country', 'lat', 'lon']),
+            const locationData = response.data.map((element) =>
+              pick(element, ['name', 'lat', 'lon', 'country', 'state']),
             );
-
             onSuggestions(locationData);
           } catch (error) {
             enqueueSnackbar(
@@ -92,16 +91,13 @@ export default function LocationSelector({
     reason: AutocompleteChangeReason,
   ) => {
     if (reason === 'selectOption' && value) {
-      onSelectLocation(value);
+      setLocation(value);
     }
   };
 
-  const handleCountrySearch = (code: string) =>
-    COUNTRY_CODES.find((country) => country.code === code)?.name;
-
   const getOptionLabel = (option: Location) => {
     const state = option.state ? `${option.state} - ` : '';
-    const country = handleCountrySearch(option.country);
+    const country = findCountryNameByCode(option.country);
     return `${option.name} - ${state}${country}`;
   };
 
@@ -110,18 +106,14 @@ export default function LocationSelector({
       disablePortal
       id={id}
       css={classes.autocomplete}
-      open={isOpen}
+      open={inputValue.length > MIN_INPUT_LEN && isOpen}
       onOpen={onOpen}
       onClose={onClose}
       options={suggestions}
-      noOptionsText={
-        isOpen && !isLoading
-          ? 'Please enter more than 2 characters to search'
-          : null
-      }
+      noOptionsText={!isLoading && 'No options found'}
       inputValue={inputValue}
       onInputChange={onInputChange}
-      value={selectedLocation}
+      value={location}
       onChange={onChange}
       getOptionLabel={getOptionLabel}
       renderInput={(params) => (
@@ -133,7 +125,7 @@ export default function LocationSelector({
             ...params.InputProps,
             endAdornment: (
               <>
-                {isLoading ? <CircularProgress size={SPINNER_SIZE} /> : null}
+                {isLoading && <CircularProgress size={SPINNER_SIZE} />}
                 {params.InputProps.endAdornment}
               </>
             ),
