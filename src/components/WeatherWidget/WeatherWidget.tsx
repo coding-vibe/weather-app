@@ -32,12 +32,13 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
+  unit: string;
 }
 
 const SPINNER_SIZE = 25;
 const TIME_PERIODS_AMOUNT = 8;
 
-export default function WeatherWidget({ location }: Props) {
+export default function WeatherWidget({ location, unit }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +54,7 @@ export default function WeatherWidget({ location }: Props) {
             params: {
               lat,
               lon,
+              units: unit,
             },
           },
         );
@@ -77,9 +79,9 @@ export default function WeatherWidget({ location }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, enqueueSnackbar]);
+  }, [location, unit, enqueueSnackbar]);
 
-  const roundTemperature = (temp: number) => Math.floor(temp / 10);
+  const roundTemperature = (temp: number) => Math.floor(temp);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -124,9 +126,16 @@ export default function WeatherWidget({ location }: Props) {
                         alt='Weather condition'
                       />
                     </Tooltip>
-                    {`Temperature: ${roundTemperature(
-                      temp,
-                    )}°C Humidity: ${humidity}%`}
+                    {`Temperature: ${roundTemperature(temp)}${(() => {
+                      switch (unit) {
+                        case 'metric':
+                          return '\u2103';
+                        case 'imperial':
+                          return '\u00B0F';
+                        default:
+                          return '\u00B0K';
+                      }
+                    })()} Humidity: ${humidity}%`}
                   </td>
                 );
               })}
