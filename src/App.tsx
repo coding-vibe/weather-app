@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
-import MeasurementSelect from 'components/MeasurementSelect';
+import TemperatureUnitsSelect from 'components/TemperatureUnitsSelect';
 import Location from 'types/location';
+import Unit from 'types/unit';
 
 const LOCATION_AUTOCOMPLETE = 'location-select';
-const MEASUREMENT_SELECT = 'unit-select';
+const TEMPERATURE_UNITS_SELECT = 'unit-select';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const [selectedUnit, onSelectUnit] = useState('metric');
+  const [selectedUnit, onSelectUnit] = useState<Unit>('metric');
 
   return (
     <>
@@ -18,10 +19,10 @@ function App() {
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}
       />
-      <MeasurementSelect
+      <TemperatureUnitsSelect
         unit={selectedUnit}
         setUnit={onSelectUnit}
-        id={MEASUREMENT_SELECT}
+        id={TEMPERATURE_UNITS_SELECT}
       />
       {selectedLocation && (
         <WeatherWidget

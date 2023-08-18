@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
+import Unit from 'types/unit';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
 
@@ -32,7 +33,7 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
-  unit: string;
+  unit: Unit;
 }
 
 const SPINNER_SIZE = 25;
@@ -82,6 +83,16 @@ export default function WeatherWidget({ location, unit }: Props) {
   }, [location, unit, enqueueSnackbar]);
 
   const roundTemperature = (temp: number) => Math.floor(temp);
+  const combineUnitWithSymbol = (tempUnit: Unit) => {
+    switch (tempUnit) {
+      case 'metric':
+        return '\u2103';
+      case 'imperial':
+        return '\u00B0F';
+      default:
+        return '\u00B0K';
+    }
+  };
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -126,16 +137,10 @@ export default function WeatherWidget({ location, unit }: Props) {
                         alt='Weather condition'
                       />
                     </Tooltip>
-                    {`Temperature: ${roundTemperature(temp)}${(() => {
-                      switch (unit) {
-                        case 'metric':
-                          return '\u2103';
-                        case 'imperial':
-                          return '\u00B0F';
-                        default:
-                          return '\u00B0K';
-                      }
-                    })()} Humidity: ${humidity}%`}
+                    {`Temperature: ${roundTemperature(
+                      temp,
+                    )}${combineUnitWithSymbol(unit)}
+                    Humidity: ${humidity}%`}
                   </td>
                 );
               })}
