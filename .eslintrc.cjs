@@ -64,7 +64,6 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": 2,
     "no-shadow": 0,
     "@typescript-eslint/no-shadow": 2,
-    "react/require-default-props": 1,
   },
   settings: {
     'import/resolver': {

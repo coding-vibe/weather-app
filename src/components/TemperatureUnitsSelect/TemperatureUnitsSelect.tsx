@@ -42,3 +42,7 @@ export default function TemperatureUnitsSelect({
     </FormControl>
   );
 }
+
+TemperatureUnitsSelect.defaultProps = {
+  className: null,
+};
