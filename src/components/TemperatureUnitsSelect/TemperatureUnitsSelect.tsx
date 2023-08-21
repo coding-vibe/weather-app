@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TemperatureUnits from 'constants/temperatureUnits';
+import TEMPERATURE_UNITS_OPTIONS from './temperatureUnitsOptions';
 
 interface Props {
   temperatureUnit: TemperatureUnits;
@@ -10,12 +11,6 @@ interface Props {
   id: string;
   className?: string;
 }
-
-const temperatureUnitsOptions = [
-  { name: 'Kelvin, \u00B0K', value: TemperatureUnits.KELVIN },
-  { name: 'Celsius, \u2103', value: TemperatureUnits.CELSIUS },
-  { name: 'Fahrenheit, \u00B0F', value: TemperatureUnits.FAHRENHEIT },
-];
 
 export default function TemperatureUnitsSelect({
   temperatureUnit,
@@ -29,14 +24,14 @@ export default function TemperatureUnitsSelect({
 
   return (
     <FormControl className={className}>
-      <InputLabel id='helper-label'>Temperature unit</InputLabel>
+      <InputLabel id='temperature-units-label'>Temperature unit</InputLabel>
       <Select
-        labelId='helper-label'
+        labelId='temperature-units-label'
         id={id}
         value={temperatureUnit}
         label='Temperature unit'
         onChange={handleChange}>
-        {temperatureUnitsOptions.map((option) => (
+        {TEMPERATURE_UNITS_OPTIONS.map((option) => (
           <MenuItem
             key={option.name}
             value={option.value}>
@@ -47,7 +42,3 @@ export default function TemperatureUnitsSelect({
     </FormControl>
   );
 }
-
-TemperatureUnitsSelect.defaultProps = {
-  className: null,
-};

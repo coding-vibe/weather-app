@@ -83,20 +83,19 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
   }, [location, temperatureUnit, enqueueSnackbar]);
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
-    const { KELVIN, CELSIUS, FAHRENHEIT } = TemperatureUnits;
     switch (tempUnit) {
-      case KELVIN:
+      case TemperatureUnits.KELVIN:
         return '\u00B0K';
-      case CELSIUS:
+      case TemperatureUnits.CELSIUS:
         return '\u2103';
-      case FAHRENHEIT:
+      case TemperatureUnits.FAHRENHEIT:
         return '\u00B0F';
       default:
         throw new Error('New temperature unit found');
     }
   };
-  const formatTemperatureData = (temp: number, symbol: string) =>
-    `${Math.floor(temp)}${symbol}`;
+  const formatTemperatureData = (temp: number, tempUnit: TemperatureUnits) =>
+    `${Math.floor(temp)}${formatTemperatureUnits(tempUnit)}`;
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -143,7 +142,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
                     </Tooltip>
                     {`Temperature: ${formatTemperatureData(
                       temp,
-                      formatTemperatureUnits(temperatureUnit),
+                      temperatureUnit,
                     )}
                     Humidity: ${humidity}%`}
                   </td>
