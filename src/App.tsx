@@ -2,15 +2,18 @@ import { useState } from 'react';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
 import TemperatureUnitsSelect from 'components/TemperatureUnitsSelect';
+import TemperatureUnits from 'constants/temperatureUnits';
 import Location from 'types/location';
-import Unit from 'types/unit';
+import * as classes from './styles';
 
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_SELECT = 'unit-select';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const [selectedUnit, onSelectUnit] = useState<Unit>('metric');
+  const [selectedUnit, onSelectUnit] = useState<TemperatureUnits>(
+    TemperatureUnits.CELSIUS,
+  );
 
   return (
     <>
@@ -20,6 +23,7 @@ function App() {
         id={LOCATION_AUTOCOMPLETE}
       />
       <TemperatureUnitsSelect
+        css={classes.temperatureUnitsSelect}
         unit={selectedUnit}
         setUnit={onSelectUnit}
         id={TEMPERATURE_UNITS_SELECT}

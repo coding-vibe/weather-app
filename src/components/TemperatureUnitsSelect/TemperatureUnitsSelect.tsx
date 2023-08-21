@@ -2,24 +2,33 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Unit from 'types/unit';
-import UNITS from 'utils/units';
-import * as classes from './styles';
+import TemperatureUnits from 'constants/temperatureUnits';
 
 interface Props {
-  unit: Unit;
-  setUnit: (value: Unit) => void;
+  unit: TemperatureUnits;
+  setUnit: (value: TemperatureUnits) => void;
   id: string;
+  className?: string;
 }
 
-export default function TemperatureUnitsSelect({ unit, setUnit, id }: Props) {
-  const [standard, metric, imperial] = UNITS;
-  const handleChange = (event: SelectChangeEvent) => {
-    setUnit(event.target.value);
+const temperatureUnitsOptions = [
+  { name: 'Kelvin, &deg;&#8490;', value: TemperatureUnits.KELVIN },
+  { name: 'Celsius, &#8451;', value: TemperatureUnits.KELVIN },
+  { name: 'Fahrenheit, &#8457;', value: TemperatureUnits.KELVIN },
+];
+
+export default function TemperatureUnitsSelect({
+  unit,
+  setUnit,
+  id,
+  className,
+}: Props) {
+  const handleChange = (event: SelectChangeEvent<TemperatureUnits>) => {
+    setUnit(event.target.value as TemperatureUnits);
   };
 
   return (
-    <FormControl css={classes.select}>
+    <FormControl className={className}>
       <InputLabel id='helper-label'>Temperature unit</InputLabel>
       <Select
         labelId='helper-label'
@@ -27,10 +36,18 @@ export default function TemperatureUnitsSelect({ unit, setUnit, id }: Props) {
         value={unit}
         label='Temperature unit'
         onChange={handleChange}>
-        <MenuItem value={standard}>Kelvin, &deg;&#8490;</MenuItem>
-        <MenuItem value={metric}>Celsius, &#8451;</MenuItem>
-        <MenuItem value={imperial}>Fahrenheit, &#8457;</MenuItem>
+        {temperatureUnitsOptions.map((option) => (
+          <MenuItem
+            key={option.name}
+            value={option.value}>
+            {option.name}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
 }
+
+TemperatureUnitsSelect.defaultProps = {
+  className: null,
+};

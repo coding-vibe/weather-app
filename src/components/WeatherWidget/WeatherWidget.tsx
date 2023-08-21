@@ -7,7 +7,7 @@ import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import Location from 'types/location';
-import Unit from 'types/unit';
+import TemperatureUnits from 'constants/temperatureUnits';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
 
@@ -33,7 +33,7 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
-  unit: Unit;
+  unit: TemperatureUnits;
 }
 
 const SPINNER_SIZE = 25;
@@ -83,7 +83,7 @@ export default function WeatherWidget({ location, unit }: Props) {
   }, [location, unit, enqueueSnackbar]);
 
   const roundTemperature = (temp: number) => Math.floor(temp);
-  const combineUnitWithSymbol = (tempUnit: Unit) => {
+  const combineUnitWithSymbol = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {
       case 'metric':
         return '\u2103';
