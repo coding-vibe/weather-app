@@ -5,26 +5,26 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import TemperatureUnits from 'constants/temperatureUnits';
 
 interface Props {
-  unit: TemperatureUnits;
-  setUnit: (value: TemperatureUnits) => void;
+  temperatureUnit: TemperatureUnits;
+  setTemperatureUnit: (value: TemperatureUnits) => void;
   id: string;
   className?: string;
 }
 
 const temperatureUnitsOptions = [
-  { name: 'Kelvin, &deg;&#8490;', value: TemperatureUnits.KELVIN },
-  { name: 'Celsius, &#8451;', value: TemperatureUnits.KELVIN },
-  { name: 'Fahrenheit, &#8457;', value: TemperatureUnits.KELVIN },
+  { name: 'Kelvin, \u00B0K', value: TemperatureUnits.KELVIN },
+  { name: 'Celsius, \u2103', value: TemperatureUnits.CELSIUS },
+  { name: 'Fahrenheit, \u00B0F', value: TemperatureUnits.FAHRENHEIT },
 ];
 
 export default function TemperatureUnitsSelect({
-  unit,
-  setUnit,
+  temperatureUnit,
+  setTemperatureUnit,
   id,
   className,
 }: Props) {
   const handleChange = (event: SelectChangeEvent<TemperatureUnits>) => {
-    setUnit(event.target.value as TemperatureUnits);
+    setTemperatureUnit(event.target.value as TemperatureUnits);
   };
 
   return (
@@ -33,7 +33,7 @@ export default function TemperatureUnitsSelect({
       <Select
         labelId='helper-label'
         id={id}
-        value={unit}
+        value={temperatureUnit}
         label='Temperature unit'
         onChange={handleChange}>
         {temperatureUnitsOptions.map((option) => (

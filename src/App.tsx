@@ -11,9 +11,8 @@ const TEMPERATURE_UNITS_SELECT = 'unit-select';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const [selectedUnit, onSelectUnit] = useState<TemperatureUnits>(
-    TemperatureUnits.CELSIUS,
-  );
+  const [selectedTemperatureUnit, onSelectTemperatureUnit] =
+    useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
 
   return (
     <>
@@ -24,14 +23,14 @@ function App() {
       />
       <TemperatureUnitsSelect
         css={classes.temperatureUnitsSelect}
-        unit={selectedUnit}
-        setUnit={onSelectUnit}
+        temperatureUnit={selectedTemperatureUnit}
+        setTemperatureUnit={onSelectTemperatureUnit}
         id={TEMPERATURE_UNITS_SELECT}
       />
       {selectedLocation && (
         <WeatherWidget
           location={selectedLocation}
-          unit={selectedUnit}
+          temperatureUnit={selectedTemperatureUnit}
         />
       )}
     </>

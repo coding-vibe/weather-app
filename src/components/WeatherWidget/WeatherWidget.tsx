@@ -6,8 +6,8 @@ import groupBy from 'lodash/groupBy';
 import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
-import Location from 'types/location';
 import TemperatureUnits from 'constants/temperatureUnits';
+import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
 
@@ -33,13 +33,13 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
-  unit: TemperatureUnits;
+  temperatureUnit: TemperatureUnits;
 }
 
 const SPINNER_SIZE = 25;
 const TIME_PERIODS_AMOUNT = 8;
 
-export default function WeatherWidget({ location, unit }: Props) {
+export default function WeatherWidget({ location, temperatureUnit }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,7 @@ export default function WeatherWidget({ location, unit }: Props) {
             params: {
               lat,
               lon,
-              units: unit,
+              units: temperatureUnit,
             },
           },
         );
@@ -80,19 +80,23 @@ export default function WeatherWidget({ location, unit }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, unit, enqueueSnackbar]);
+  }, [location, temperatureUnit, enqueueSnackbar]);
 
-  const roundTemperature = (temp: number) => Math.floor(temp);
-  const combineUnitWithSymbol = (tempUnit: TemperatureUnits) => {
+  const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
+    const { KELVIN, CELSIUS, FAHRENHEIT } = TemperatureUnits;
     switch (tempUnit) {
-      case 'metric':
+      case KELVIN:
+        return '\u00B0K';
+      case CELSIUS:
         return '\u2103';
-      case 'imperial':
+      case FAHRENHEIT:
         return '\u00B0F';
       default:
-        return '\u00B0K';
+        throw new Error('New temperature unit found');
     }
   };
+  const formatTemperatureData = (temp: number, symbol: string) =>
+    `${Math.floor(temp)}${symbol}`;
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -137,9 +141,10 @@ export default function WeatherWidget({ location, unit }: Props) {
                         alt='Weather condition'
                       />
                     </Tooltip>
-                    {`Temperature: ${roundTemperature(
+                    {`Temperature: ${formatTemperatureData(
                       temp,
-                    )}${combineUnitWithSymbol(unit)}
+                      formatTemperatureUnits(temperatureUnit),
+                    )}
                     Humidity: ${humidity}%`}
                   </td>
                 );
