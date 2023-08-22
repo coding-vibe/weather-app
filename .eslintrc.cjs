@@ -60,8 +60,10 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "no-unused-vars": 0,
+    "@typescript-eslint/no-unused-vars": 2,
+    "no-shadow": 0,
+    "@typescript-eslint/no-shadow": 2,
   },
   settings: {
     'import/resolver': {
@@ -74,6 +76,7 @@ module.exports = {
           ['api', './src/api'],
           ['assets', './src/assets'],
           ['components', './src/components'],
+          ['constants', './src/constants'],
           ['types', './src/types'],
           ['utils', './src/utils'],
         ],

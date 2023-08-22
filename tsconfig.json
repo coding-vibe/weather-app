@@ -11,6 +11,7 @@
       "api/*": ["api/*"],
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
       "types/*": ["types/*"],
       "utils/*": ["utils/*"],
     },

@@ -6,6 +6,7 @@ import groupBy from 'lodash/groupBy';
 import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
+import TemperatureUnits from 'constants/temperatureUnits';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
@@ -32,12 +33,13 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
+  temperatureUnit: TemperatureUnits;
 }
 
 const SPINNER_SIZE = 25;
 const TIME_PERIODS_AMOUNT = 8;
 
-export default function WeatherWidget({ location }: Props) {
+export default function WeatherWidget({ location, temperatureUnit }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +55,7 @@ export default function WeatherWidget({ location }: Props) {
             params: {
               lat,
               lon,
+              units: temperatureUnit,
             },
           },
         );
@@ -77,9 +80,22 @@ export default function WeatherWidget({ location }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, enqueueSnackbar]);
+  }, [location, temperatureUnit, enqueueSnackbar]);
 
-  const roundTemperature = (temp: number) => Math.floor(temp / 10);
+  const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
+    switch (tempUnit) {
+      case TemperatureUnits.KELVIN:
+        return '\u00B0K';
+      case TemperatureUnits.CELSIUS:
+        return '\u2103';
+      case TemperatureUnits.FAHRENHEIT:
+        return '\u00B0F';
+      default:
+        throw new Error('New temperature unit found');
+    }
+  };
+  const formatTemperatureData = (temp: number, tempUnit: TemperatureUnits) =>
+    `${Math.floor(temp)}${formatTemperatureUnits(tempUnit)}`;
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -124,9 +140,11 @@ export default function WeatherWidget({ location }: Props) {
                         alt='Weather condition'
                       />
                     </Tooltip>
-                    {`Temperature: ${roundTemperature(
+                    {`Temperature: ${formatTemperatureData(
                       temp,
-                    )}°C Humidity: ${humidity}%`}
+                      temperatureUnit,
+                    )}
+                    Humidity: ${humidity}%`}
                   </td>
                 );
               })}

@@ -120,7 +120,7 @@ export default function LocationAutocomplete({
         <TextField
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...params}
-          label='Location for search'
+          label='Location'
           InputProps={{
             ...params.InputProps,
             endAdornment: (
