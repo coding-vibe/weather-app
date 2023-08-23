@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import pick from 'lodash/pick';
@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import TemperatureUnits from 'constants/temperatureUnits';
+import LanguageContext from 'contexts/LanguageContext';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
@@ -43,6 +44,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const language = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -56,6 +58,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
               lat,
               lon,
               units: temperatureUnit,
+              lang: language,
             },
           },
         );
@@ -80,7 +83,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, temperatureUnit, enqueueSnackbar]);
+  }, [location, temperatureUnit, language, enqueueSnackbar]);
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {

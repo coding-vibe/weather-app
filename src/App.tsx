@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react';
+import AdaptiveSelect from 'components/AdaptiveSelect';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
-import TemperatureUnitsSelect from 'components/TemperatureUnitsSelect';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import Location from 'types/location';
@@ -10,7 +10,12 @@ import LanguageContext from 'contexts/LanguageContext';
 import * as classes from './styles';
 
 const LOCATION_AUTOCOMPLETE = 'location-select';
+const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_SELECT = 'unit-select';
+const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
+const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
+const LANGUAGE_SELECT = 'language-select';
+const LANGUAGE_CHOICE_LABEL = 'Language choice';
 
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
@@ -22,16 +27,26 @@ function App() {
 
   return (
     <LanguageContext.Provider value={selectedLanguage}>
+      <AdaptiveSelect
+        css={classes.languageSelect}
+        value={selectedLanguage}
+        setValue={onSelectLanguage}
+        labelId={LANGUAGE_CHOICE_LABEL_ID}
+        id={LANGUAGE_SELECT}
+        label={LANGUAGE_CHOICE_LABEL}
+      />
       <LocationAutocomplete
         location={selectedLocation}
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}
       />
-      <TemperatureUnitsSelect
+      <AdaptiveSelect
         css={classes.temperatureUnitsSelect}
-        temperatureUnit={selectedTemperatureUnit}
-        setTemperatureUnit={onSelectTemperatureUnit}
+        value={selectedTemperatureUnit}
+        setValue={onSelectTemperatureUnit}
+        labelId={TEMPERATURE_UNITS_LABEL_ID}
         id={TEMPERATURE_UNITS_SELECT}
+        label={TEMPERATURE_UNITS_LABEL}
       />
       {selectedLocation && (
         <WeatherWidget
