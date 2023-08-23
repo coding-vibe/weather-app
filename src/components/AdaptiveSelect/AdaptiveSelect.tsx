@@ -7,23 +7,30 @@ import TemperatureUnits from 'constants/temperatureUnits';
 import LANGUAGE_OPTIONS from './languageOptions';
 import TEMPERATURE_UNITS_OPTIONS from './temperatureUnitsOptions';
 
-interface Props {
-  value: Languages | TemperatureUnits;
-  setValue: (value) => void;
+interface OptionBase {
+  label: string;
+  value: string;
+}
+
+interface Props<Option extends OptionBase> {
+  value: Option['value'];
+  setValue: (value: Option['value']) => void;
   labelId: string;
   id: string;
   label: string;
   className?: string;
+  // TODO: I should accept array of options
+  options: Option[];
 }
 
-export default function AdaptiveSelect({
+export default function AdaptiveSelect<Option extends OptionBase>({
   value,
   setValue,
   labelId,
   id,
   label,
   className,
-}: Props) {
+}: Props<Option>) {
   const handleChange = (
     event: SelectChangeEvent<Languages | TemperatureUnits>,
   ) => {
@@ -48,16 +55,16 @@ export default function AdaptiveSelect({
         {Object.values(Languages).includes(value)
           ? LANGUAGE_OPTIONS.map((option) => (
               <MenuItem
-                key={option.name}
+                key={option.label}
                 value={option.value}>
-                {option.name}
+                {option.label}
               </MenuItem>
             ))
           : TEMPERATURE_UNITS_OPTIONS.map((option) => (
               <MenuItem
-                key={option.name}
+                key={option.label}
                 value={option.value}>
-                {option.name}
+                {option.label}
               </MenuItem>
             ))}
       </Select>

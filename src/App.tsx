@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AdaptiveSelect from 'components/AdaptiveSelect';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
+import LANGUAGE_OPTIONS from 'components/AdaptiveSelect/languageOptions';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import Location from 'types/location';
@@ -16,6 +17,11 @@ const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
 const LANGUAGE_SELECT = 'language-select';
 const LANGUAGE_CHOICE_LABEL = 'Language choice';
 
+interface LanguageOption {
+  value: Languages;
+  label: string;
+}
+
 function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   const [selectedTemperatureUnit, onSelectTemperatureUnit] =
@@ -26,13 +32,15 @@ function App() {
 
   return (
     <LanguageContext.Provider value={selectedLanguage}>
-      <AdaptiveSelect
+      {/* TODO: correct type */}
+      <AdaptiveSelect<LanguageOption>
         css={classes.languageSelect}
         value={selectedLanguage}
         setValue={onSelectLanguage}
         labelId={LANGUAGE_CHOICE_LABEL_ID}
         id={LANGUAGE_SELECT}
         label={LANGUAGE_CHOICE_LABEL}
+        options={LANGUAGE_OPTIONS}
       />
       <LocationAutocomplete
         location={selectedLocation}

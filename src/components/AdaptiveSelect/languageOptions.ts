@@ -1,9 +1,9 @@
 import Languages from 'constants/languages';
 
 const LANGUAGE_OPTIONS = [
-  { name: 'English', value: Languages.ENGLISH },
-  { name: 'French', value: Languages.FRENCH },
-  { name: 'Ukrainian', value: Languages.UKRAINIAN },
+  { label: 'English', value: Languages.ENGLISH },
+  { label: 'French', value: Languages.FRENCH },
+  { label: 'Ukrainian', value: Languages.UKRAINIAN },
 ];
 
 export default LANGUAGE_OPTIONS;
