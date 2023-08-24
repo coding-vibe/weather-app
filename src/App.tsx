@@ -1,25 +1,29 @@
 import { useState } from 'react';
-import AdaptiveSelect from 'components/AdaptiveSelect';
+import Select from 'components/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import WeatherWidget from 'components/WeatherWidget';
-import LANGUAGE_OPTIONS from 'components/AdaptiveSelect/languageOptions';
+import LANGUAGE_OPTIONS from 'constants/languageOptions';
+import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
-import Location from 'types/location';
 import LanguageContext from 'contexts/LanguageContext';
+import Location from 'types/location';
 import * as classes from './styles';
 
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-const TEMPERATURE_UNITS_SELECT = 'unit-select';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_SELECT = 'language-select';
 const LANGUAGE_CHOICE_LABEL = 'Language choice';
 
 interface LanguageOption {
-  value: Languages;
   label: string;
+  value: Languages;
+}
+
+interface TemperatureUnitOption {
+  label: string;
+  value: TemperatureUnits;
 }
 
 function App() {
@@ -32,13 +36,11 @@ function App() {
 
   return (
     <LanguageContext.Provider value={selectedLanguage}>
-      {/* TODO: correct type */}
-      <AdaptiveSelect<LanguageOption>
+      <Select<LanguageOption>
         css={classes.languageSelect}
         value={selectedLanguage}
         setValue={onSelectLanguage}
         labelId={LANGUAGE_CHOICE_LABEL_ID}
-        id={LANGUAGE_SELECT}
         label={LANGUAGE_CHOICE_LABEL}
         options={LANGUAGE_OPTIONS}
       />
@@ -47,13 +49,13 @@ function App() {
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}
       />
-      <AdaptiveSelect
+      <Select<TemperatureUnitOption>
         css={classes.temperatureUnitsSelect}
         value={selectedTemperatureUnit}
         setValue={onSelectTemperatureUnit}
         labelId={TEMPERATURE_UNITS_LABEL_ID}
-        id={TEMPERATURE_UNITS_SELECT}
         label={TEMPERATURE_UNITS_LABEL}
+        options={TEMPERATURE_UNITS_OPTIONS}
       />
       {selectedLocation && (
         <WeatherWidget
