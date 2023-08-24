@@ -30,9 +30,6 @@ function App() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   const [selectedTemperatureUnit, onSelectTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
-  const [selectedLanguage, onSelectLanguage] = useState<Languages>(
-    Languages.ENGLISH,
-  );
 
   return (
     <LanguageContext.Provider value={selectedLanguage}>
