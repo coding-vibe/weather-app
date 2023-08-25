@@ -1,6 +1,6 @@
 enum Tabs {
-  FUTURE_FORECAST = 0,
-  HISTORICAL_FORECAST = 1,
+  FUTURE_FORECAST,
+  HISTORICAL_FORECAST,
 }
 
 export default Tabs;

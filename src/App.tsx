@@ -8,23 +8,21 @@ import TabPanel from 'components/TabPanel/TabPanel';
 import Tabs from 'constants/tabs';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<number>(0);
-  const handleChange = (_: SyntheticEvent, newValue: number) => {
+  const [activeTab, setActiveTab] = useState<Tabs>(Tabs.FUTURE_FORECAST);
+  const handleSelectTab = (_: SyntheticEvent, newValue: Tabs) => {
     setActiveTab(newValue);
   };
 
-  function a11yProps(index: number) {
-    return {
-      id: `tab-${index}`,
-      'aria-controls': `tabpanel-${index}`,
-    };
-  }
+  const a11yProps = (index: number) => ({
+    id: `tab-${index}`,
+    'aria-controls': `tabpanel-${index}`,
+  });
 
   return (
     <LanguageProvider>
       <MUITabs
         value={activeTab}
-        onChange={handleChange}
+        onChange={handleSelectTab}
         aria-label='forecast tabs'>
         <Tab
           label='Future forecast'
@@ -38,7 +36,7 @@ export default function App() {
       <TabPanel
         value={activeTab}
         index={Tabs.FUTURE_FORECAST}>
-        {activeTab === (Tabs.FUTURE_FORECAST as number) && <FutureForecast />}
+        {activeTab === Tabs.FUTURE_FORECAST && <FutureForecast />}
       </TabPanel>
       <TabPanel
         value={activeTab}
