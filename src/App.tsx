@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import Select from 'components/Select';
+import { useContext, useState } from 'react';
+import LanguageProvider from 'components/LanguageProvider';
 import LocationAutocomplete from 'components/LocationAutocomplete';
+import Select from 'components/Select';
 import WeatherWidget from 'components/WeatherWidget';
 import LANGUAGE_OPTIONS from 'constants/languageOptions';
-import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import Languages from 'constants/languages';
+import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import TemperatureUnits from 'constants/temperatureUnits';
 import LanguageContext from 'contexts/LanguageContext';
 import Location from 'types/location';
 import * as classes from './styles';
 
+const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
+const LANGUAGE_CHOICE_LABEL = 'Language choice';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
-const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language choice';
 
 interface LanguageOption {
   label: string;
@@ -27,12 +28,13 @@ interface TemperatureUnitOption {
 }
 
 function App() {
+  const { selectedLanguage, onSelectLanguage } = useContext(LanguageContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   const [selectedTemperatureUnit, onSelectTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
 
   return (
-    <LanguageContext.Provider value={selectedLanguage}>
+    <LanguageProvider>
       <Select<LanguageOption>
         css={classes.languageSelect}
         value={selectedLanguage}
@@ -60,7 +62,7 @@ function App() {
           temperatureUnit={selectedTemperatureUnit}
         />
       )}
-    </LanguageContext.Provider>
+    </LanguageProvider>
   );
 }
 
