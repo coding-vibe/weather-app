@@ -67,7 +67,7 @@ export default function App() {
       <TabPanel
         value={activeTab}
         index={1}>
-        Historical
+        Historical Forecast
       </TabPanel>
     </LanguageProvider>
   );
