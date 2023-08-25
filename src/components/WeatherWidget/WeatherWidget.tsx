@@ -44,7 +44,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const language = useContext(LanguageContext);
+  const { selectedLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -58,7 +58,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
               lat,
               lon,
               units: temperatureUnit,
-              lang: language,
+              lang: selectedLanguage,
             },
           },
         );
@@ -83,7 +83,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, temperatureUnit, language, enqueueSnackbar]);
+  }, [location, temperatureUnit, selectedLanguage, enqueueSnackbar]);
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {

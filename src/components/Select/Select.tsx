@@ -2,6 +2,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import MUISelect, { SelectChangeEvent } from '@mui/material/Select';
+import * as classes from './styles';
 
 interface OptionBase {
   label: string;
@@ -34,6 +35,7 @@ export default function Select<Option extends OptionBase>({
       <InputLabel id={labelId}>Temperature unit</InputLabel>
       <MUISelect
         labelId={labelId}
+        css={classes.select}
         value={value}
         label={label}
         onChange={handleChange}>
