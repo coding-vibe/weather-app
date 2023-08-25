@@ -1,40 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { ReactNode, SyntheticEvent, useState } from 'react';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
+import { SyntheticEvent, useState } from 'react';
+import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FutureForecast from 'components/FutureForecast';
 import LanguageProvider from 'components/LanguageProvider';
-
-interface TabPanelProps {
-  children?: ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { value, index, ...other } = props;
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`tabpanel-${index}`}
-      aria-labelledby={`tab-${index}`}
-      {...other}
-    />
-  );
-}
-
-TabPanel.defaultProps = {
-  children: null,
-};
-
-function a11yProps(index: number) {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-}
+import TabPanel from 'components/TabPanel/TabPanel';
+import Tabs from 'constants/tabs';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -42,31 +13,36 @@ export default function App() {
     setActiveTab(newValue);
   };
 
+  function a11yProps(index: number) {
+    return {
+      id: `tab-${index}`,
+      'aria-controls': `tabpanel-${index}`,
+    };
+  }
+
   return (
     <LanguageProvider>
-      <Box>
-        <Tabs
-          value={activeTab}
-          onChange={handleChange}
-          aria-label='forecast tabs'>
-          <Tab
-            label='Future forecast'
-            {...a11yProps(0)}
-          />
-          <Tab
-            label='Historical forecast'
-            {...a11yProps(1)}
-          />
-        </Tabs>
-      </Box>
+      <MUITabs
+        value={activeTab}
+        onChange={handleChange}
+        aria-label='forecast tabs'>
+        <Tab
+          label='Future forecast'
+          {...a11yProps(Tabs.FUTURE_FORECAST)}
+        />
+        <Tab
+          label='Historical forecast'
+          {...a11yProps(Tabs.HISTORICAL_FORECAST)}
+        />
+      </MUITabs>
       <TabPanel
         value={activeTab}
-        index={0}>
-        {activeTab === 0 && <FutureForecast />}
+        index={Tabs.FUTURE_FORECAST}>
+        {activeTab === (Tabs.FUTURE_FORECAST as number) && <FutureForecast />}
       </TabPanel>
       <TabPanel
         value={activeTab}
-        index={1}>
+        index={Tabs.HISTORICAL_FORECAST}>
         Historical Forecast
       </TabPanel>
     </LanguageProvider>
