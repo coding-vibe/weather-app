@@ -42,6 +42,7 @@ export default function FutureForecast() {
         options={LANGUAGE_OPTIONS}
       />
       <LocationAutocomplete
+        css={classes.locationAutocomplete}
         location={selectedLocation}
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}

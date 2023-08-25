@@ -21,12 +21,14 @@ interface Props {
   location: Location | null;
   setLocation: (value: Location) => void;
   id: string;
+  className?: string;
 }
 
 export default function LocationAutocomplete({
   location,
   setLocation,
   id,
+  className,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
@@ -105,6 +107,7 @@ export default function LocationAutocomplete({
     <Autocomplete
       disablePortal
       id={id}
+      className={className}
       css={classes.autocomplete}
       open={inputValue.length > MIN_INPUT_LEN && isOpen}
       onOpen={onOpen}
@@ -135,3 +138,7 @@ export default function LocationAutocomplete({
     />
   );
 }
+
+LocationAutocomplete.defaultProps = {
+  className: null,
+};
