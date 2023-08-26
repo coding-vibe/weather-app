@@ -7,6 +7,7 @@ import Languages from 'constants/languages';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import TemperatureUnits from 'constants/temperatureUnits';
 import LanguageContext from 'contexts/LanguageContext';
+import LanguageContextType from 'types/languageContextType';
 import Location from 'types/location';
 import * as classes from './styles';
 
@@ -27,7 +28,8 @@ interface TemperatureUnitOption {
 }
 
 export default function FutureForecast() {
-  const { selectedLanguage, onSelectLanguage } = useContext(LanguageContext);
+  const { selectedLanguage, onSelectLanguage } =
+    useContext<LanguageContextType>(LanguageContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   const [selectedTemperatureUnit, onSelectTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
@@ -42,6 +44,7 @@ export default function FutureForecast() {
         options={LANGUAGE_OPTIONS}
       />
       <LocationAutocomplete
+        css={classes.locationAutocomplete}
         location={selectedLocation}
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}

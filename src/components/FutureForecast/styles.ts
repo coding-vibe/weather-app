@@ -4,6 +4,10 @@ export const languageSelect = css`
   margin-top: 10px;
 `;
 
+export const locationAutocomplete = css`
+  margin-top: 10px;
+`;
+
 export const temperatureUnitsSelect = css`
   margin-top: 10px;
 `;

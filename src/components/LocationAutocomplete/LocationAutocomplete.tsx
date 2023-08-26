@@ -1,9 +1,9 @@
-import { SyntheticEvent, useState, useMemo, useEffect } from 'react';
+import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
 import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
@@ -21,12 +21,14 @@ interface Props {
   location: Location | null;
   setLocation: (value: Location) => void;
   id: string;
+  className?: string;
 }
 
 export default function LocationAutocomplete({
   location,
   setLocation,
   id,
+  className,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
@@ -105,6 +107,7 @@ export default function LocationAutocomplete({
     <Autocomplete
       disablePortal
       id={id}
+      className={className}
       css={classes.autocomplete}
       open={inputValue.length > MIN_INPUT_LEN && isOpen}
       onOpen={onOpen}
@@ -135,3 +138,7 @@ export default function LocationAutocomplete({
     />
   );
 }
+
+LocationAutocomplete.defaultProps = {
+  className: null,
+};
