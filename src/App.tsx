@@ -1,48 +1,40 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { SyntheticEvent, useState } from 'react';
-import MUITabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { Routes, Route } from 'react-router-dom';
 import FutureForecast from 'components/FutureForecast';
 import LanguageProvider from 'components/LanguageProvider';
+import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
+import ROUTES from 'constants/routes';
 import Tabs from 'constants/tabs';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Tabs>(Tabs.FUTURE_FORECAST);
-  const handleSelectTab = (_: SyntheticEvent, newValue: Tabs) => {
-    setActiveTab(newValue);
-  };
-
-  const a11yProps = (index: number) => ({
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  });
-
   return (
     <LanguageProvider>
-      <MUITabs
-        value={activeTab}
-        onChange={handleSelectTab}
-        aria-label='forecast tabs'>
-        <Tab
-          label='Future forecast'
-          {...a11yProps(Tabs.FUTURE_FORECAST)}
+      <Routes>
+        <Route
+          path={ROUTES.home}
+          element={<Layout />}
         />
-        <Tab
-          label='Historical forecast'
-          {...a11yProps(Tabs.HISTORICAL_FORECAST)}
+        <Route
+          path={ROUTES.future}
+          element={
+            <TabPanel
+              value={Tabs.FUTURE_FORECAST}
+              index={Tabs.FUTURE_FORECAST}>
+              <FutureForecast />
+            </TabPanel>
+          }
         />
-      </MUITabs>
-      <TabPanel
-        value={activeTab}
-        index={Tabs.FUTURE_FORECAST}>
-        {activeTab === Tabs.FUTURE_FORECAST && <FutureForecast />}
-      </TabPanel>
-      <TabPanel
-        value={activeTab}
-        index={Tabs.HISTORICAL_FORECAST}>
-        Historical Forecast
-      </TabPanel>
+        <Route
+          path={ROUTES.historical}
+          element={
+            <TabPanel
+              value={Tabs.HISTORICAL_FORECAST}
+              index={Tabs.HISTORICAL_FORECAST}>
+              Historical Forecast
+            </TabPanel>
+          }
+        />
+      </Routes>
     </LanguageProvider>
   );
 }
