@@ -59,12 +59,7 @@ export default function FutureForecast() {
         label={TEMPERATURE_UNITS_LABEL}
         options={TEMPERATURE_UNITS_OPTIONS}
       />
-      {selectedLocation && (
-        <WeatherWidget
-          location={selectedLocation}
-          temperatureUnit={selectedTemperatureUnit}
-        />
-      )}
+      {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </>
   );
 }
