@@ -3,7 +3,7 @@ import FutureForecast from 'components/FutureForecast';
 import LanguageProvider from 'components/LanguageProvider';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
-import Pathnames from 'constants/pathnames';
+import ROUTES from 'constants/routes';
 import Tabs from 'constants/tabs';
 
 export default function App() {
@@ -11,11 +11,11 @@ export default function App() {
     <LanguageProvider>
       <Routes>
         <Route
-          path={Pathnames.HOME}
+          path={ROUTES.home}
           element={<Layout />}
         />
         <Route
-          path={Pathnames.FUTURE}
+          path={ROUTES.future}
           element={
             <TabPanel
               value={Tabs.FUTURE_FORECAST}
@@ -25,7 +25,7 @@ export default function App() {
           }
         />
         <Route
-          path={Pathnames.HISTORICAL}
+          path={ROUTES.historical}
           element={
             <TabPanel
               value={Tabs.HISTORICAL_FORECAST}

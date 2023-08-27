@@ -2,7 +2,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Pathnames from 'constants/pathnames';
+import ROUTES from 'constants/routes';
 import Tabs from 'constants/tabs';
 
 function Layout() {
@@ -13,24 +13,33 @@ function Layout() {
     'aria-controls': `tabpanel-${index}`,
   });
 
+  const activeTab = () => {
+    switch (location.pathname) {
+      case ROUTES.home:
+        return Tabs.FUTURE_FORECAST;
+      case ROUTES.future:
+        return Tabs.FUTURE_FORECAST;
+      case ROUTES.historical:
+        return Tabs.HISTORICAL_FORECAST;
+      default:
+        throw new Error('Invalid route for determining active tab');
+    }
+  };
+
   return (
     <>
       <MUITabs
-        value={
-          location.pathname === (Pathnames.HISTORICAL as string)
-            ? Tabs.HISTORICAL_FORECAST
-            : Tabs.FUTURE_FORECAST
-        }
+        value={activeTab()}
         aria-label='forecast tabs'>
         <Tab
           label='Future forecast'
-          to={Pathnames.FUTURE}
+          to={ROUTES.future}
           component={Link}
           {...a11yProps(Tabs.FUTURE_FORECAST)}
         />
         <Tab
           label='Historical forecast'
-          to={Pathnames.HISTORICAL}
+          to={ROUTES.historical}
           component={Link}
           {...a11yProps(Tabs.HISTORICAL_FORECAST)}
         />
