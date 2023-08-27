@@ -29,7 +29,6 @@ export default function Select<Option extends OptionBase>({
   const handleChange = (event: SelectChangeEvent<Option['value']>) => {
     setValue(event.target.value);
   };
-
   return (
     <FormControl className={className}>
       <InputLabel id={labelId}>Temperature unit</InputLabel>

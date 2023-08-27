@@ -7,12 +7,10 @@ import Tabs from 'constants/tabs';
 
 function Layout() {
   const location = useLocation();
-
   const a11yProps = (index: number) => ({
     id: `tab-${index}`,
     'aria-controls': `tabpanel-${index}`,
   });
-
   const activeTab = () => {
     switch (location.pathname) {
       case ROUTES.home:
@@ -25,7 +23,6 @@ function Layout() {
         throw new Error('Invalid route for determining active tab');
     }
   };
-
   return (
     <>
       <MUITabs

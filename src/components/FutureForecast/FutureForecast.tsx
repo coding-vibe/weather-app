@@ -6,8 +6,8 @@ import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Languages from 'constants/languages';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import TemperatureUnits from 'constants/temperatureUnits';
-import LanguageContext from 'contexts/LanguageContext';
-import LanguageContextType from 'types/languageContextType';
+import SettingsContext from 'contexts/SettingsContext';
+import SettingsContextType from 'types/settingsContextType';
 import Location from 'types/location';
 import * as classes from './styles';
 
@@ -28,11 +28,13 @@ interface TemperatureUnitOption {
 }
 
 export default function FutureForecast() {
-  const { selectedLanguage, onSelectLanguage } =
-    useContext<LanguageContextType>(LanguageContext);
+  const {
+    selectedLanguage,
+    onSelectLanguage,
+    selectedTemperatureUnit,
+    onSelectTemperatureUnit,
+  } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const [selectedTemperatureUnit, onSelectTemperatureUnit] =
-    useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
   return (
     <>
       <Select<LanguageOption>
@@ -57,12 +59,7 @@ export default function FutureForecast() {
         label={TEMPERATURE_UNITS_LABEL}
         options={TEMPERATURE_UNITS_OPTIONS}
       />
-      {selectedLocation && (
-        <WeatherWidget
-          location={selectedLocation}
-          temperatureUnit={selectedTemperatureUnit}
-        />
-      )}
+      {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </>
   );
 }
