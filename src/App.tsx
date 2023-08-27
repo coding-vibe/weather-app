@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import FutureForecast from 'components/FutureForecast';
-import LanguageProvider from 'components/LanguageProvider';
+import LanguageProvider from 'components/SettingsProvider';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
 import ROUTES from 'constants/routes';
