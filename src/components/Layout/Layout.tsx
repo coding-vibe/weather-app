@@ -1,30 +1,26 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { SyntheticEvent } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Tabs from 'constants/tabs';
 import Pathnames from 'constants/pathnames';
+import Tabs from 'constants/tabs';
 
-interface Props {
-  activeTab: Tabs;
-  setActiveTab: (value: Tabs) => void;
-}
-
-function Layout({ activeTab, setActiveTab }: Props) {
-  const handleSelectTab = (_: SyntheticEvent, newValue: Tabs) => {
-    setActiveTab(newValue);
-  };
+function Layout() {
+  const location = useLocation();
 
   const a11yProps = (index: number) => ({
     id: `tab-${index}`,
     'aria-controls': `tabpanel-${index}`,
   });
+
   return (
     <>
       <MUITabs
-        value={activeTab}
-        onChange={handleSelectTab}
+        value={
+          location.pathname === (Pathnames.HISTORICAL as string)
+            ? Tabs.HISTORICAL_FORECAST
+            : Tabs.FUTURE_FORECAST
+        }
         aria-label='forecast tabs'>
         <Tab
           label='Future forecast'
