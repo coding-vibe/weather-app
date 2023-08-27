@@ -35,17 +35,17 @@ type Forecast = Array<[string, ForecastBody[]]>;
 
 interface Props {
   location: Location;
-  temperatureUnit: TemperatureUnits;
 }
 
 const SPINNER_SIZE = 25;
 const TIME_PERIODS_AMOUNT = 8;
 
-export default function WeatherWidget({ location, temperatureUnit }: Props) {
+export default function WeatherWidget({ location }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { selectedLanguage } = useContext<SettingsContextType>(SettingsContext);
+  const { selectedLanguage, selectedTemperatureUnit } =
+    useContext<SettingsContextType>(SettingsContext);
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -58,7 +58,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
             params: {
               lat,
               lon,
-              units: temperatureUnit,
+              units: selectedTemperatureUnit,
               lang: selectedLanguage,
             },
           },
@@ -84,7 +84,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, temperatureUnit, selectedLanguage, enqueueSnackbar]);
+  }, [location, selectedLanguage, selectedTemperatureUnit, enqueueSnackbar]);
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {
@@ -146,7 +146,7 @@ export default function WeatherWidget({ location, temperatureUnit }: Props) {
                     </Tooltip>
                     {`Temperature: ${formatTemperatureData(
                       temp,
-                      temperatureUnit,
+                      selectedTemperatureUnit,
                     )}
                     Humidity: ${humidity}%`}
                   </td>
