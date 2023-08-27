@@ -4,6 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Tabs from 'constants/tabs';
+import Pathnames from 'constants/pathnames';
 
 interface Props {
   activeTab: Tabs;
@@ -27,13 +28,13 @@ function Layout({ activeTab, setActiveTab }: Props) {
         aria-label='forecast tabs'>
         <Tab
           label='Future forecast'
-          to='/future forecast'
+          to={Pathnames.FUTURE}
           component={Link}
           {...a11yProps(Tabs.FUTURE_FORECAST)}
         />
         <Tab
           label='Historical forecast'
-          to='/historical forecast'
+          to={Pathnames.HISTORICAL}
           component={Link}
           {...a11yProps(Tabs.HISTORICAL_FORECAST)}
         />

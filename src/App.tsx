@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import FutureForecast from 'components/FutureForecast';
 import LanguageProvider from 'components/LanguageProvider';
-import Layout from 'components/Layout/Layout';
+import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
+import Pathnames from 'constants/pathnames';
 import Tabs from 'constants/tabs';
 
 export default function App() {
@@ -11,14 +12,18 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <Layout
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-
       <Routes>
         <Route
-          path='/future forecast'
+          path={Pathnames.HOME}
+          element={
+            <Layout
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
+          }
+        />
+        <Route
+          path={Pathnames.FUTURE}
           element={
             <TabPanel
               value={activeTab}
@@ -28,7 +33,7 @@ export default function App() {
           }
         />
         <Route
-          path='/historical forecast'
+          path={Pathnames.HISTORICAL}
           element={
             <TabPanel
               value={activeTab}
