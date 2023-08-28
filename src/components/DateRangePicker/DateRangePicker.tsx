@@ -20,7 +20,6 @@ export default function DataPicker() {
       : enqueueSnackbar('Start date must be less than or equal to end date', {
           variant: 'error',
         });
-
   const onChangeEndDate = (value: Date | null) =>
     startDate && value && startDate <= value
       ? setEndDate(value)
@@ -30,8 +29,6 @@ export default function DataPicker() {
             variant: 'error',
           },
         );
-
-  console.log(startDate);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
