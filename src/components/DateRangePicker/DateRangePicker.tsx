@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -10,12 +9,12 @@ export default function DataRangePicker() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         css={classes.datePicker}
-        defaultValue={dayjs('2022-04-17')}
+        // defaultValue={dayjs('2022-04-17')}
       />
       <MinimizeIcon />
       <DatePicker
         css={classes.datePicker}
-        defaultValue={dayjs('2022-04-17')}
+        // defaultValue={dayjs('2022-04-17')}
       />
     </LocalizationProvider>
   );
