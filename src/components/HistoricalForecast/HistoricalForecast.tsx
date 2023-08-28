@@ -1,5 +1,5 @@
-import DataRangePicker from 'components/DateRangePicker';
+import DateRangePicker from 'components/DateRangePicker';
 
 export default function HistoricalForecast() {
-  return <DataRangePicker />;
+  return <DateRangePicker />;
 }
