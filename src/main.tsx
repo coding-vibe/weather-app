@@ -1,8 +1,10 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
 import SettingsProvider from 'components/SettingsProvider';
@@ -16,9 +18,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <CssBaseline />
         <GlobalStyles styles={globalStyles} />
         <SnackbarProvider>
-          <SettingsProvider>
-            <App />
-          </SettingsProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SettingsProvider>
+              <App />
+            </SettingsProvider>
+          </LocalizationProvider>
         </SnackbarProvider>
       </StyledEngineProvider>
     </BrowserRouter>
