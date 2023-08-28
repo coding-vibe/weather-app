@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import FutureForecast from 'components/FutureForecast';
+import HistoricalForecast from 'components/HistoricalForecast';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
 import ROUTES from 'constants/routes';
@@ -28,7 +29,7 @@ export default function App() {
           <TabPanel
             value={Tabs.HISTORICAL_FORECAST}
             index={Tabs.HISTORICAL_FORECAST}>
-            Historical Forecast
+            <HistoricalForecast />
           </TabPanel>
         }
       />
