@@ -15,18 +15,23 @@ export default function DataPicker() {
   const [endDate, setEndDate] = useState<Date | null>(yesterday);
 
   const onChangeStartDate = (value: Date | null) =>
-    endDate && value && value < endDate
+    endDate && value && value <= endDate
       ? setStartDate(value)
-      : enqueueSnackbar('Start date must be less than end date', {
+      : enqueueSnackbar('Start date must be less than or equal to end date', {
           variant: 'error',
         });
 
   const onChangeEndDate = (value: Date | null) =>
-    startDate && value && startDate < value
+    startDate && value && startDate <= value
       ? setEndDate(value)
-      : enqueueSnackbar('End date date must be greater than start date', {
-          variant: 'error',
-        });
+      : enqueueSnackbar(
+          'End date date must be greater then or equal to start date',
+          {
+            variant: 'error',
+          },
+        );
+
+  console.log(startDate);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
