@@ -7,7 +7,6 @@ import SettingsContextType from 'types/settingsContextType';
 interface Props {
   children: ReactNode;
 }
-
 // eslint-disable-next-line react/function-component-definition
 const SettingsProvider: FC<Props> = ({ children }) => {
   const [selectedLanguage, setSelectedLanguage] = useState<Languages>(
