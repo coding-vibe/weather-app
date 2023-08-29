@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import FutureForecast from 'components/FutureForecast';
 import HistoricalForecast from 'components/HistoricalForecast';
 import Layout from 'components/Layout';
@@ -15,11 +15,10 @@ export default function App() {
         <Route
           index
           element={
-            <TabPanel
-              value={Tabs.FUTURE_FORECAST}
-              index={Tabs.FUTURE_FORECAST}>
-              <FutureForecast />
-            </TabPanel>
+            <Navigate
+              to={ROUTES.future}
+              replace
+            />
           }
         />
         <Route

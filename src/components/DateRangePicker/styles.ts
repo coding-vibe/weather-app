@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 
 export const wrap = css`
-  margin-top: 10px;
   display: flex;
   gap: 30px;
   position: relative;

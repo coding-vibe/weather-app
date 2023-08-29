@@ -4,7 +4,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { startOfYesterday } from 'date-fns';
 import * as classes from './styles';
 
-export default function DataPicker() {
+interface Props {
+  className?: string;
+}
+
+export default function DateRangePicker({ className }: Props) {
   const yesterday = startOfYesterday();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -13,7 +17,9 @@ export default function DataPicker() {
   const onChangeEndDate = (value: Date | null) => setEndDate(value);
 
   return (
-    <Box css={classes.wrap}>
+    <Box
+      className={className}
+      css={classes.wrap}>
       <DatePicker
         disableHighlightToday
         css={classes.startDatePicker}
@@ -33,3 +39,7 @@ export default function DataPicker() {
     </Box>
   );
 }
+
+DateRangePicker.defaultProps = {
+  className: null,
+};
