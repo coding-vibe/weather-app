@@ -11,28 +11,38 @@ export default function App() {
     <Routes>
       <Route
         path={ROUTES.home}
-        element={<Layout />}
-      />
-      <Route
-        path={ROUTES.future}
-        element={
-          <TabPanel
-            value={Tabs.FUTURE_FORECAST}
-            index={Tabs.FUTURE_FORECAST}>
-            <FutureForecast />
-          </TabPanel>
-        }
-      />
-      <Route
-        path={ROUTES.historical}
-        element={
-          <TabPanel
-            value={Tabs.HISTORICAL_FORECAST}
-            index={Tabs.HISTORICAL_FORECAST}>
-            <HistoricalForecast />
-          </TabPanel>
-        }
-      />
+        element={<Layout />}>
+        <Route
+          index
+          element={
+            <TabPanel
+              value={Tabs.FUTURE_FORECAST}
+              index={Tabs.FUTURE_FORECAST}>
+              <FutureForecast />
+            </TabPanel>
+          }
+        />
+        <Route
+          path={ROUTES.future}
+          element={
+            <TabPanel
+              value={Tabs.FUTURE_FORECAST}
+              index={Tabs.FUTURE_FORECAST}>
+              <FutureForecast />
+            </TabPanel>
+          }
+        />
+        <Route
+          path={ROUTES.historical}
+          element={
+            <TabPanel
+              value={Tabs.HISTORICAL_FORECAST}
+              index={Tabs.HISTORICAL_FORECAST}>
+              <HistoricalForecast />
+            </TabPanel>
+          }
+        />
+      </Route>
     </Routes>
   );
 }

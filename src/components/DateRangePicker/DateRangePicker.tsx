@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import MinimizeRoundedIcon from '@mui/icons-material/MinimizeRounded';
 import { startOfYesterday } from 'date-fns';
 import * as classes from './styles';
 
@@ -17,16 +16,15 @@ export default function DataPicker() {
     <Box css={classes.wrap}>
       <DatePicker
         disableHighlightToday
-        css={classes.datePicker}
+        css={classes.startDatePicker}
         label='Start'
         value={startDate}
         maxDate={yesterday}
         onChange={onChangeStartDate}
       />
-      <MinimizeRoundedIcon css={classes.icon} />
       <DatePicker
         disableHighlightToday
-        css={classes.datePicker}
+        css={classes.endDatePicker}
         label='End'
         value={endDate}
         maxDate={yesterday}
