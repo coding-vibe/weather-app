@@ -12,7 +12,7 @@ import Location from 'types/location';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language choice';
+const LANGUAGE_CHOICE_LABEL = 'Language';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';

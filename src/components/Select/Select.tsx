@@ -31,7 +31,7 @@ export default function Select<Option extends OptionBase>({
   };
   return (
     <FormControl className={className}>
-      <InputLabel id={labelId}>Temperature unit</InputLabel>
+      <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
         labelId={labelId}
         css={classes.select}
