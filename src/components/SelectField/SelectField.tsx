@@ -19,9 +19,12 @@ export default function SelectField<Option extends OptionBase>({
   labelId,
   label,
   options,
+  ...rest
 }: Props<Option>) {
   return (
     <Select
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
       value={value}
       setValue={onChange}
       labelId={labelId}
