@@ -1,12 +1,14 @@
 import { FieldProps } from 'formik';
 import Select from 'components/Select';
+import { FormValuesType } from 'components/HistoricalForecast/validation';
 
 interface OptionBase {
   label: string;
   value: string;
 }
 
-interface Props<Option extends OptionBase> extends FieldProps {
+interface Props<Option extends OptionBase>
+  extends FieldProps<Option['value'], FormValuesType> {
   labelId: string;
   label: string;
   options: Option[];
@@ -20,7 +22,7 @@ export default function SelectField<Option extends OptionBase>({
 }: Props<Option>) {
   return (
     <Select
-      value={value as Option['value']}
+      value={value}
       setValue={onChange}
       labelId={labelId}
       label={label}

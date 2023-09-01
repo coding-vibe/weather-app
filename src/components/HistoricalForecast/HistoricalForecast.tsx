@@ -2,37 +2,20 @@ import { useContext } from 'react';
 // import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Field, Formik, Form } from 'formik';
-import * as yup from 'yup';
 import SelectField from 'components/SelectField';
 import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Languages from 'constants/languages';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
-import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
+import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
 const LANGUAGE_CHOICE_LABEL = 'Language';
 // const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
-
-interface Validation {
-  language: Languages;
-  startDate: Date;
-  endDate: Date;
-  location: Location;
-  temperatureUnit: TemperatureUnits;
-}
-
-const VALIDATION_SCHEMA: yup.ObjectSchema<Validation> = yup.object().shape({
-  language: yup.mixed<Languages>().required('Required'),
-  startDate: yup.date().required('Required'),
-  endDate: yup.date().required('Required'),
-  location: yup.mixed<Location>().required('Required'),
-  temperatureUnit: yup.mixed<TemperatureUnits>().required('Required'),
-});
 
 interface LanguageOption {
   label: string;
@@ -49,15 +32,17 @@ export default function HistoricalForecast() {
     useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
     language: selectedLanguage,
-    startDate: Date,
-    endDate: Date,
+    startDate: new Date(),
+    endDate: new Date(),
     location: {},
     temperatureUnit: selectedTemperatureUnit,
   };
 
   return (
-    <Formik
-      initialValues={{ ...INITIAL_FORM_VALUES }}
+    <Formik<FormValuesType>
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      initialValues={{ INITIAL_FORM_VALUES }}
       validationSchema={VALIDATION_SCHEMA}
       onSubmit={(values) => {
         console.log(values);
