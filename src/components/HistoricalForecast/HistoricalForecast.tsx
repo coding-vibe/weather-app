@@ -19,7 +19,7 @@ const INITIAL_FORM_VALUES = {
   temperatureUnit: '',
 };
 
-const VALIDATION_SCHEME = yup.object().shape({
+const VALIDATION_SCHEMA = yup.object().shape({
   language: yup.string(),
   startDate: yup.date().required('Required'),
   endDate: yup.date().required('Required'),
@@ -34,7 +34,7 @@ export default function HistoricalForecast() {
     <>
       <Formik
         initialValues={{ ...INITIAL_FORM_VALUES }}
-        validationSchema={VALIDATION_SCHEME}
+        validationSchema={VALIDATION_SCHEMA}
         onSubmit={(values) => {
           console.log(values);
         }}>
