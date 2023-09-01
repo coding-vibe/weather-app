@@ -6,7 +6,7 @@ interface OptionBase {
   value: string;
 }
 
-interface SelectFieldProps<Option extends OptionBase> extends FieldProps {
+interface Props<Option extends OptionBase> extends FieldProps {
   labelId: string;
   label: string;
   options: Option[];
@@ -17,7 +17,7 @@ export default function SelectField<Option extends OptionBase>({
   labelId,
   label,
   options,
-}: SelectFieldProps<Option>) {
+}: Props<Option>) {
   return (
     <Select
       value={value as Option['value']}
