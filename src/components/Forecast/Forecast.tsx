@@ -17,7 +17,7 @@ const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
-export default function FutureForecast() {
+export default function Forecast() {
   const {
     selectedLanguage,
     onSelectLanguage,

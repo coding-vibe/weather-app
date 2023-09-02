@@ -1,5 +1,5 @@
 import { Navigate, Routes, Route } from 'react-router-dom';
-import FutureForecast from 'components/FutureForecast';
+import Forecast from 'components/Forecast';
 import HistoricalForecast from 'components/HistoricalForecast';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel/TabPanel';
@@ -16,18 +16,18 @@ export default function App() {
           index
           element={
             <Navigate
-              to={ROUTES.future}
+              to={ROUTES.forecast}
               replace
             />
           }
         />
         <Route
-          path={ROUTES.future}
+          path={ROUTES.forecast}
           element={
             <TabPanel
-              value={Tabs.FUTURE_FORECAST}
-              index={Tabs.FUTURE_FORECAST}>
-              <FutureForecast />
+              value={Tabs.FORECAST}
+              index={Tabs.FORECAST}>
+              <Forecast />
             </TabPanel>
           }
         />

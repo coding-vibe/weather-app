@@ -1,5 +1,5 @@
 enum Tabs {
-  FUTURE_FORECAST,
+  FORECAST,
   HISTORICAL_FORECAST,
 }
 
