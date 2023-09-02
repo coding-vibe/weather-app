@@ -9,7 +9,7 @@ interface Props
   extends FieldProps<Date, FormValuesType>,
     DatePickerProps<Date> {}
 
-export default function DatePicker({
+export default function DateField({
   field: { name, value },
   form: { setFieldValue },
   ...props

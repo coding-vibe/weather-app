@@ -7,7 +7,7 @@ import * as classes from './styles';
 
 interface Props<Option extends OptionBase> {
   value: Option['value'];
-  setValue: (value: Option['value']) => void;
+  setValue: (event: SelectChangeEvent<Option['value']>) => void;
   labelId: string;
   label: string;
   className?: string;
@@ -22,9 +22,6 @@ export default function Select<Option extends OptionBase>({
   className,
   options,
 }: Props<Option>) {
-  const handleChange = (event: SelectChangeEvent<Option['value']>) => {
-    setValue(event.target.value);
-  };
   return (
     <FormControl className={className}>
       <InputLabel id={labelId}>{label}</InputLabel>
@@ -33,7 +30,7 @@ export default function Select<Option extends OptionBase>({
         css={classes.select}
         value={value}
         label={label}
-        onChange={handleChange}>
+        onChange={setValue}>
         {options.map((option) => (
           <MenuItem
             key={option.label}

@@ -3,7 +3,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
 import { Field, Formik, Form } from 'formik';
 import { startOfYesterday } from 'date-fns';
-import DateRangePicker from 'components/DatePicker';
+import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
@@ -61,18 +61,22 @@ export default function HistoricalForecast() {
               </Grid>
               <Grid
                 item
-                xs={12}>
+                xs={3}>
                 <Field
                   disableHighlightToday
-                  component={DateRangePicker}
+                  component={DateField}
                   label='Start'
                   name='startDate'
                   maxDate={yesterday}
                   type='date'
                 />
+              </Grid>
+              <Grid
+                item
+                xs={3}>
                 <Field
                   disableHighlightToday
-                  component={DateRangePicker}
+                  component={DateField}
                   label='End'
                   name='endDate'
                   maxDate={yesterday}
