@@ -2,12 +2,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import MUISelect, { SelectChangeEvent } from '@mui/material/Select';
+import OptionBase from 'types/optionBase';
 import * as classes from './styles';
-
-interface OptionBase {
-  label: string;
-  value: string;
-}
 
 interface Props<Option extends OptionBase> {
   value: Option['value'];

@@ -3,12 +3,12 @@ import { useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import { Field, Formik, Form } from 'formik';
 import SelectField from 'components/SelectField';
-import LANGUAGE_OPTIONS from 'constants/languageOptions';
-import Languages from 'constants/languages';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
-import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
+import LanguageOption from 'types/languageOption';
+import LANGUAGE_OPTIONS from 'types/languageOptions';
 import SettingsContextType from 'types/settingsContextType';
+import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
@@ -16,16 +16,6 @@ const LANGUAGE_CHOICE_LABEL = 'Language';
 // const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
-
-interface LanguageOption {
-  label: string;
-  value: Languages;
-}
-
-interface TemperatureUnitOption {
-  label: string;
-  value: TemperatureUnits;
-}
 
 export default function HistoricalForecast() {
   const { selectedLanguage, selectedTemperatureUnit } =

@@ -1,3 +1,4 @@
+import { subDays } from 'date-fns';
 import * as yup from 'yup';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
@@ -8,9 +9,22 @@ const VALIDATION_SCHEMA = yup.object().shape({
     .mixed<Languages>()
     .oneOf(Object.values(Languages))
     .required('Required'),
-  startDate: yup.date().required('Required'),
-  endDate: yup.date().required('Required'),
-  location: yup.object<Location>().required('Required'),
+  startDate: yup.date().max(subDays(new Date(), 1)).required('Required'),
+  endDate: yup
+    .date()
+    .min(yup.ref('startDate'), "Shouldn't be before start date")
+    .max(subDays(new Date(), 1))
+    .required('Required'),
+  location: yup
+    .object<Location>()
+    .shape({
+      name: yup.string(),
+      lat: yup.number(),
+      lon: yup.number(),
+      country: yup.string(),
+      state: yup.string(),
+    })
+    .required('Required'),
   temperatureUnit: yup
     .mixed<TemperatureUnits>()
     .oneOf(Object.values(TemperatureUnits))
