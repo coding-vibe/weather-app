@@ -2,6 +2,7 @@ import { useContext } from 'react';
 // import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Field, Formik, Form } from 'formik';
+import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
@@ -13,7 +14,7 @@ import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
 const LANGUAGE_CHOICE_LABEL = 'Language';
-// const LOCATION_AUTOCOMPLETE = 'location-select';
+const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
@@ -54,11 +55,9 @@ export default function HistoricalForecast() {
             item
             xs={12}>
             <Field
-              component={SelectField<LanguageOption>}
-              labelId={LANGUAGE_CHOICE_LABEL_ID}
-              label={LANGUAGE_CHOICE_LABEL}
-              name='language'
-              options={LANGUAGE_OPTIONS}
+              component={LocationAutoCompleteField}
+              id={LOCATION_AUTOCOMPLETE}
+              name='location'
             />
           </Grid>
           <Grid
