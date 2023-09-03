@@ -11,13 +11,15 @@ interface Props<Option extends OptionBase>
 }
 
 export default function SelectField<Option extends OptionBase>({
-  field: { value, onChange },
+  field: { name, value, onChange },
   ...props
 }: Props<Option>) {
   return (
     <Select
       value={value}
-      setValue={onChange}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setValue={onChange(name)}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

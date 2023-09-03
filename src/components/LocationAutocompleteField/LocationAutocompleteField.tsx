@@ -9,7 +9,7 @@ interface Props extends FieldProps<Location, FormValuesType> {
 
 export default function LocationAutoCompleteField({
   field: { value },
-  form,
+  form: { setValues },
   ...props
 }: Props) {
   return (
@@ -18,7 +18,7 @@ export default function LocationAutoCompleteField({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      setLocation={form.setValues}
+      setLocation={setValues}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

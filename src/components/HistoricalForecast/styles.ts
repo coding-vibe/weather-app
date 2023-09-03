@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 
-export const wrap = css`
-  display: flex;
-  gap: 30px;
-  position: relative;
+export const location = css`
+  width: 460px;
 `;
 
-export const startDatePicker = css`
+export const startDateField = css`
   width: 200px;
 
   &::after {
@@ -14,12 +12,12 @@ export const startDatePicker = css`
     content: '-';
     font-size: 35px;
     color: #707070;
-    left: 210px;
+    left: 225px;
     top: 50%;
     transform: translateY(-50%);
   }
 `;
 
-export const endDatePicker = css`
+export const endDateField = css`
   width: 200px;
 `;

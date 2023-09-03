@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
-import { Field, Formik, Form } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { startOfYesterday } from 'date-fns';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
@@ -13,6 +13,7 @@ import LANGUAGE_OPTIONS from 'types/languageOptions';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
+import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
 const LANGUAGE_CHOICE_LABEL = 'Language';
@@ -21,8 +22,12 @@ const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 export default function HistoricalForecast() {
-  const { selectedLanguage, selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+  const {
+    selectedLanguage,
+    onSelectLanguage,
+    selectedTemperatureUnit,
+    onSelectTemperatureUnit,
+  } = useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
     language: selectedLanguage,
     startDate: null,
@@ -39,80 +44,100 @@ export default function HistoricalForecast() {
       initialValues={INITIAL_FORM_VALUES}
       validationSchema={VALIDATION_SCHEMA}
       onSubmit={(values) => {
-        console.log(values);
+        onSelectLanguage(values.language);
+        onSelectTemperatureUnit(values.temperatureUnit);
       }}>
-      {({ isSubmitting, errors }) => {
-        console.log(errors);
-        return (
-          <Form>
+      {({ isSubmitting }) => (
+        <Form>
+          <Grid
+            container
+            spacing={2}>
             <Grid
-              container
-              spacing={2}>
-              <Grid
-                item
-                xs={12}>
-                <Field
-                  component={SelectField<LanguageOption>}
-                  labelId={LANGUAGE_CHOICE_LABEL_ID}
-                  label={LANGUAGE_CHOICE_LABEL}
-                  name='language'
-                  options={LANGUAGE_OPTIONS}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={3}>
-                <Field
-                  disableHighlightToday
-                  component={DateField}
-                  label='Start'
-                  name='startDate'
-                  maxDate={yesterday}
-                  type='date'
-                />
-              </Grid>
-              <Grid
-                item
-                xs={3}>
-                <Field
-                  disableHighlightToday
-                  component={DateField}
-                  label='End'
-                  name='endDate'
-                  maxDate={yesterday}
-                  type='date'
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}>
-                <Field
-                  component={LocationAutoCompleteField}
-                  id={LOCATION_AUTOCOMPLETE}
-                  name='location'
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}>
-                <Field
-                  component={SelectField<TemperatureUnitOption>}
-                  labelId={TEMPERATURE_UNITS_LABEL_ID}
-                  label={TEMPERATURE_UNITS_LABEL}
-                  name='temperatureUnit'
-                  options={TEMPERATURE_UNITS_OPTIONS}
-                />
-              </Grid>
+              item
+              xs={12}>
+              <Field
+                component={SelectField<LanguageOption>}
+                labelId={LANGUAGE_CHOICE_LABEL_ID}
+                label={LANGUAGE_CHOICE_LABEL}
+                name='language'
+                options={LANGUAGE_OPTIONS}
+              />
+              <ErrorMessage name='language'>
+                {(msg: string) => <div>{msg}</div>}
+              </ErrorMessage>
             </Grid>
+            <Grid
+              item
+              xs={2.5}>
+              <Field
+                css={classes.startDateField}
+                disableHighlightToday
+                component={DateField}
+                label='Start'
+                name='startDate'
+                maxDate={yesterday}
+                type='date'
+              />
+              <ErrorMessage name='startDate'>
+                {(msg: string) => <div>{msg}</div>}
+              </ErrorMessage>
+            </Grid>
+            <Grid
+              item
+              xs={2.5}>
+              <Field
+                css={classes.endDateField}
+                disableHighlightToday
+                component={DateField}
+                label='End'
+                name='endDate'
+                maxDate={yesterday}
+                type='date'
+              />
+              <ErrorMessage name='endDate'>
+                {(msg: string) => <div>{msg}</div>}
+              </ErrorMessage>
+            </Grid>
+            <Grid
+              item
+              xs={12}>
+              <Field
+                css={classes.location}
+                component={LocationAutoCompleteField}
+                id={LOCATION_AUTOCOMPLETE}
+                name='location'
+              />
+              <ErrorMessage name='location'>
+                {(msg: string) => <div>{msg}</div>}
+              </ErrorMessage>
+            </Grid>
+            <Grid
+              item
+              xs={12}>
+              <Field
+                component={SelectField<TemperatureUnitOption>}
+                labelId={TEMPERATURE_UNITS_LABEL_ID}
+                label={TEMPERATURE_UNITS_LABEL}
+                name='temperatureUnit'
+                options={TEMPERATURE_UNITS_OPTIONS}
+              />
+              <ErrorMessage name='temperatureUnit'>
+                {(msg: string) => <div>{msg}</div>}
+              </ErrorMessage>
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={12}>
             <LoadingButton
               type='submit'
               loading={isSubmitting}
               variant='contained'>
               Submit
             </LoadingButton>
-          </Form>
-        );
-      }}
+          </Grid>
+        </Form>
+      )}
     </Formik>
   );
 }
