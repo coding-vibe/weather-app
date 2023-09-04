@@ -12,15 +12,19 @@ interface Props
 export default function DateField({
   field: { name, value },
   form: { setFieldValue },
+  meta,
   ...props
 }: Props) {
   return (
-    <MUIDatePicker
-      value={value}
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onChange={(newDate) => setFieldValue(name, newDate)}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
+    <>
+      <MUIDatePicker
+        value={value}
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onChange={(newDate) => setFieldValue(name, newDate)}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
+      {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
+    </>
   );
 }

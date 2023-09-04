@@ -22,7 +22,7 @@ const VALIDATION_SCHEMA = yup.object().shape({
       lat: yup.number().required('Required'),
       lon: yup.number().required('Required'),
       country: yup.string().required('Required'),
-      state: yup.string().required('Required'),
+      state: yup.string(),
     })
     .required('Required'),
   temperatureUnit: yup

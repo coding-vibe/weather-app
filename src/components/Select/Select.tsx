@@ -11,6 +11,7 @@ interface Props<Option extends OptionBase> {
   labelId: string;
   label: string;
   className?: string;
+  name?: string;
   options: Option[];
 }
 
@@ -20,12 +21,14 @@ export default function Select<Option extends OptionBase>({
   labelId,
   label,
   className,
+  name,
   options,
 }: Props<Option>) {
   return (
     <FormControl className={className}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
+        name={name}
         labelId={labelId}
         css={classes.select}
         value={value}
@@ -45,4 +48,5 @@ export default function Select<Option extends OptionBase>({
 
 Select.defaultProps = {
   className: null,
+  name: null,
 };

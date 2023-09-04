@@ -36,6 +36,11 @@ export default function HistoricalForecast() {
   };
   const yesterday = startOfYesterday();
 
+  const updateContextValues = (values: FormValuesType) => {
+    onSelectLanguage(values.language);
+    onSelectTemperatureUnit(values.temperatureUnit);
+  };
+
   return (
     <Formik<FormValuesType>
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,8 +49,8 @@ export default function HistoricalForecast() {
       initialValues={INITIAL_FORM_VALUES}
       validationSchema={VALIDATION_SCHEMA}
       onSubmit={(values) => {
-        onSelectLanguage(values.language);
-        onSelectTemperatureUnit(values.temperatureUnit);
+        updateContextValues(values);
+        console.log(values);
       }}>
       {({ isSubmitting }) => (
         <Form>
@@ -62,9 +67,6 @@ export default function HistoricalForecast() {
                 name='language'
                 options={LANGUAGE_OPTIONS}
               />
-              <ErrorMessage name='language'>
-                {(msg: string) => <div>{msg}</div>}
-              </ErrorMessage>
             </Grid>
             <Grid
               item
@@ -121,9 +123,6 @@ export default function HistoricalForecast() {
                 name='temperatureUnit'
                 options={TEMPERATURE_UNITS_OPTIONS}
               />
-              <ErrorMessage name='temperatureUnit'>
-                {(msg: string) => <div>{msg}</div>}
-              </ErrorMessage>
             </Grid>
           </Grid>
           <Grid

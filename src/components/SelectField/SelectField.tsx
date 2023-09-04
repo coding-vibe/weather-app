@@ -12,16 +12,19 @@ interface Props<Option extends OptionBase>
 
 export default function SelectField<Option extends OptionBase>({
   field: { name, value, onChange },
+  meta,
   ...props
 }: Props<Option>) {
   return (
-    <Select
-      value={value}
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      setValue={onChange(name)}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
+    <>
+      <Select
+        name={name}
+        value={value}
+        setValue={onChange}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      />
+      {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
+    </>
   );
 }
