@@ -116,16 +116,16 @@ export default function HistoricalForecast() {
                 options={TEMPERATURE_UNITS_OPTIONS}
               />
             </Grid>
-          </Grid>
-          <Grid
-            item
-            xs={12}>
-            <LoadingButton
-              type='submit'
-              loading={isSubmitting}
-              variant='contained'>
-              Submit
-            </LoadingButton>
+            <Grid
+              item
+              xs={12}>
+              <LoadingButton
+                loading={isSubmitting}
+                type='submit'
+                variant='contained'>
+                Submit
+              </LoadingButton>
+            </Grid>
           </Grid>
         </Form>
       )}
