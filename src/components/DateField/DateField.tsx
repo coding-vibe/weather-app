@@ -1,4 +1,4 @@
-import { ErrorMessage, FieldProps } from 'formik';
+import { FieldProps } from 'formik';
 import {
   DatePickerProps,
   DatePicker as MUIDatePicker,
@@ -11,21 +11,25 @@ interface Props
 
 export default function DateField({
   field: { name, value },
-  form: { setFieldValue },
+  form,
   ...props
 }: Props) {
+  const meta = form.getFieldMeta(name);
+  const hasError = meta?.touched && !!meta?.error;
+  const helperText = hasError ? meta?.error : '';
   return (
-    <>
-      <MUIDatePicker
-        value={value}
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onChange={(newDate) => setFieldValue(name, newDate)}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      />
-      <ErrorMessage name={name}>
-        {(msg: string) => <div>{msg}</div>}
-      </ErrorMessage>
-    </>
+    <MUIDatePicker
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onChange={(newDate) => form.setFieldValue(name, newDate)}
+      slotProps={{
+        textField: {
+          error: hasError,
+          helperText,
+        },
+      }}
+      value={value}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+    />
   );
 }

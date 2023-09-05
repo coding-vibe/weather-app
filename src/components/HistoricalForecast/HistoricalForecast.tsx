@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import { startOfYesterday } from 'date-fns';
+import { Formik, FormikHelpers, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
-import { Formik, Form, Field } from 'formik';
-import { startOfYesterday } from 'date-fns';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
@@ -22,24 +22,25 @@ const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 export default function HistoricalForecast() {
-  const {
-    selectedLanguage,
-    onSelectLanguage,
-    selectedTemperatureUnit,
-    onSelectTemperatureUnit,
-  } = useContext<SettingsContextType>(SettingsContext);
+  const { onSelectLanguage, onSelectTemperatureUnit } =
+    useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
-    language: selectedLanguage,
+    language: '',
     startDate: null,
     endDate: null,
     location: null,
-    temperatureUnit: selectedTemperatureUnit,
+    temperatureUnit: '',
   };
   const yesterday = startOfYesterday();
 
-  const updateContextValues = (values: FormValuesType) => {
+  const handleSubmit = (
+    values: FormValuesType,
+    { resetForm }: FormikHelpers<FormValuesType>,
+  ) => {
     onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
+    console.log(values);
+    resetForm();
   };
 
   return (
@@ -48,11 +49,8 @@ export default function HistoricalForecast() {
       // @ts-ignore
       // We ignore ts rule, because initial values should be optional, but in Formik they must exactly match the validation scheme
       initialValues={INITIAL_FORM_VALUES}
-      validationSchema={VALIDATION_SCHEMA}
-      onSubmit={(values) => {
-        updateContextValues(values);
-        console.log(values);
-      }}>
+      onSubmit={handleSubmit}
+      validationSchema={VALIDATION_SCHEMA}>
       {({ isSubmitting }) => (
         <Form>
           <Grid
@@ -63,8 +61,8 @@ export default function HistoricalForecast() {
               xs={12}>
               <Field
                 component={SelectField<LanguageOption>}
-                labelId={LANGUAGE_CHOICE_LABEL_ID}
                 label={LANGUAGE_CHOICE_LABEL}
+                labelId={LANGUAGE_CHOICE_LABEL_ID}
                 name='language'
                 options={LANGUAGE_OPTIONS}
               />
@@ -73,12 +71,12 @@ export default function HistoricalForecast() {
               item
               xs={2.5}>
               <Field
-                css={classes.startDateField}
                 disableHighlightToday
+                css={classes.startDateField}
                 component={DateField}
                 label='Start'
-                name='startDate'
                 maxDate={yesterday}
+                name='startDate'
                 type='date'
               />
             </Grid>
@@ -86,12 +84,12 @@ export default function HistoricalForecast() {
               item
               xs={2.5}>
               <Field
-                css={classes.endDateField}
                 disableHighlightToday
+                css={classes.endDateField}
                 component={DateField}
                 label='End'
-                name='endDate'
                 maxDate={yesterday}
+                name='endDate'
                 type='date'
               />
             </Grid>
@@ -116,9 +114,7 @@ export default function HistoricalForecast() {
                 options={TEMPERATURE_UNITS_OPTIONS}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}>
+            <Grid item>
               <LoadingButton
                 loading={isSubmitting}
                 type='submit'

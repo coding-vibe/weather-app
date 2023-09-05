@@ -7,27 +7,27 @@ import OptionBase from 'types/optionBase';
 import * as classes from './styles';
 
 interface Props<Option extends OptionBase> {
-  value: Option['value'];
-  setValue: (event: SelectChangeEvent<Option['value']>) => void;
-  labelId: string;
   label: string;
+  labelId: string;
+  options: Option[];
+  setValue: (event: SelectChangeEvent<Option['value']>) => void;
+  value: Option['value'];
   className?: string;
-  name?: string;
   error?: boolean;
   helperText?: string;
-  options: Option[];
+  name?: string;
 }
 
 export default function Select<Option extends OptionBase>({
-  value,
-  setValue,
-  labelId,
   label,
+  labelId,
+  options,
+  setValue,
+  value,
   className,
-  name,
   error,
   helperText,
-  options,
+  name,
 }: Props<Option>) {
   return (
     <FormControl
@@ -35,11 +35,11 @@ export default function Select<Option extends OptionBase>({
       error={error}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
-        name={name}
-        labelId={labelId}
         css={classes.select}
-        value={value}
         label={label}
+        labelId={labelId}
+        value={value}
+        name={name}
         onChange={setValue}>
         {options.map((option) => (
           <MenuItem
@@ -49,14 +49,14 @@ export default function Select<Option extends OptionBase>({
           </MenuItem>
         ))}
       </MUISelect>
-      <FormHelperText>{helperText}</FormHelperText>
+      <FormHelperText error>{helperText}</FormHelperText>
     </FormControl>
   );
 }
 
 Select.defaultProps = {
   className: null,
-  name: null,
   error: false,
   helperText: null,
+  name: null,
 };

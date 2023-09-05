@@ -1,39 +1,33 @@
-import { ErrorMessage, FieldProps } from 'formik';
+import { FieldProps } from 'formik';
+import omit from 'lodash/omit';
 import Select from 'components/Select';
 import { FormValuesType } from 'components/HistoricalForecast/validation';
 import OptionBase from 'types/optionBase';
 
 interface Props<Option extends OptionBase>
   extends FieldProps<Option['value'], FormValuesType> {
-  labelId: string;
   label: string;
-  error: boolean;
-  helperText: string;
+  labelId: string;
   options: Option[];
 }
 
 export default function SelectField<Option extends OptionBase>({
-  field: { name, value, onChange },
-  // form: {errors, touched},
+  field: { name, onChange, value },
+  form,
   ...props
 }: Props<Option>) {
+  const meta = form.getFieldMeta(name);
+  const hasError = meta?.touched && !!meta?.error;
+  const helperText = hasError ? meta?.error : '';
   return (
-    <>
-      <Select<Option>
-        name={name}
-        value={value}
-        setValue={onChange}
-        // helperText={
-        //   touched[name] &&
-        //   helperText === <div className='error'>{errors.name}</div>
-        // }
-        // error={touched[name] && !!error : false}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...props}
-      />
-      <ErrorMessage name={name}>
-        {(msg: string) => <div>{msg}</div>}
-      </ErrorMessage>
-    </>
+    <Select<Option>
+      error={hasError}
+      helperText={helperText}
+      name={name}
+      setValue={onChange}
+      value={value}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...omit(props)}
+    />
   );
 }

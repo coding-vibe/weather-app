@@ -13,15 +13,17 @@ import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
-const MIN_INPUT_LEN = 2;
 const MAX_LOCATIONS = 5;
+const MIN_INPUT_LEN = 2;
 const SPINNER_SIZE = 25;
 
 interface Props {
+  id: string;
   location: Location | null;
   setLocation: (value: Location) => void;
-  id: string;
   className?: string;
+  error?: boolean;
+  helperText?: string;
 }
 
 export default function LocationAutocomplete({
@@ -29,12 +31,14 @@ export default function LocationAutocomplete({
   setLocation,
   id,
   className,
+  error,
+  helperText,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, onInputValue] = useState<string>('');
-  const [suggestions, onSuggestions] = useState<Location[]>([]);
-  const [isOpen, onIsOpen] = useState(false);
   const [isLoading, onIsLoading] = useState(false);
+  const [isOpen, onIsOpen] = useState(false);
+  const [suggestions, onSuggestions] = useState<Location[]>([]);
 
   const fetchGeoData = useMemo(
     () =>
@@ -59,7 +63,7 @@ export default function LocationAutocomplete({
               pick(element, ['name', 'lat', 'lon', 'country', 'state']),
             );
             onSuggestions(locationData);
-          } catch (error) {
+          } catch (err) {
             enqueueSnackbar(
               'Sorry, we could not find any results that match your search.',
               { variant: 'error' },
@@ -106,23 +110,25 @@ export default function LocationAutocomplete({
   return (
     <Autocomplete
       disablePortal
-      id={id}
       className={className}
       css={classes.autocomplete}
+      id={id}
       open={inputValue.length > MIN_INPUT_LEN && isOpen}
       onOpen={onOpen}
       onClose={onClose}
+      getOptionLabel={getOptionLabel}
       options={suggestions}
       noOptionsText={!isLoading && 'No options found'}
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={location}
       onChange={onChange}
-      getOptionLabel={getOptionLabel}
       renderInput={(params) => (
         <TextField
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...params}
+          error={error}
+          helperText={helperText}
           label='Location'
           InputProps={{
             ...params.InputProps,
@@ -141,4 +147,6 @@ export default function LocationAutocomplete({
 
 LocationAutocomplete.defaultProps = {
   className: null,
+  error: false,
+  helperText: null,
 };

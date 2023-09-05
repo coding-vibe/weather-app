@@ -9,9 +9,9 @@ import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
 import LANGUAGE_OPTIONS from 'types/languageOptions';
+import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
-import Location from 'types/location';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
