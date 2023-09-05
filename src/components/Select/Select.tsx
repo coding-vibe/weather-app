@@ -1,4 +1,5 @@
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import MUISelect, { SelectChangeEvent } from '@mui/material/Select';
@@ -12,6 +13,8 @@ interface Props<Option extends OptionBase> {
   label: string;
   className?: string;
   name?: string;
+  error?: boolean;
+  helperText?: string;
   options: Option[];
 }
 
@@ -22,10 +25,14 @@ export default function Select<Option extends OptionBase>({
   label,
   className,
   name,
+  error,
+  helperText,
   options,
 }: Props<Option>) {
   return (
-    <FormControl className={className}>
+    <FormControl
+      className={className}
+      error={error}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
         name={name}
@@ -42,6 +49,7 @@ export default function Select<Option extends OptionBase>({
           </MenuItem>
         ))}
       </MUISelect>
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 }
@@ -49,4 +57,6 @@ export default function Select<Option extends OptionBase>({
 Select.defaultProps = {
   className: null,
   name: null,
+  error: false,
+  helperText: null,
 };

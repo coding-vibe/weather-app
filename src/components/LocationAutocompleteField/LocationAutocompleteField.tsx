@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
-/* eslint-disable spaced-comment */
 import { ErrorMessage, FieldProps } from 'formik';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import { FormValuesType } from 'components/HistoricalForecast/validation';
@@ -11,16 +9,18 @@ interface Props extends FieldProps<Location, FormValuesType> {
 
 export default function LocationAutoCompleteField({
   field: { name, value },
-  form: { setValues },
+  form: { setFieldValue },
   ...props
 }: Props) {
+  const setLocation = (newValue: Location) => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    setFieldValue(name, newValue);
+  };
   return (
     <>
       <LocationAutocomplete
         location={value}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        setLocation={setValues}
+        setLocation={setLocation}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />

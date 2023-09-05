@@ -7,19 +7,27 @@ interface Props<Option extends OptionBase>
   extends FieldProps<Option['value'], FormValuesType> {
   labelId: string;
   label: string;
+  error: boolean;
+  helperText: string;
   options: Option[];
 }
 
 export default function SelectField<Option extends OptionBase>({
   field: { name, value, onChange },
+  // form: {errors, touched},
   ...props
 }: Props<Option>) {
   return (
     <>
-      <Select
+      <Select<Option>
         name={name}
         value={value}
         setValue={onChange}
+        // helperText={
+        //   touched[name] &&
+        //   helperText === <div className='error'>{errors.name}</div>
+        // }
+        // error={touched[name] && !!error : false}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
