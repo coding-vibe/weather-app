@@ -1,4 +1,4 @@
-import { FieldProps } from 'formik';
+import { ErrorMessage, FieldProps } from 'formik';
 import Select from 'components/Select';
 import { FormValuesType } from 'components/HistoricalForecast/validation';
 import OptionBase from 'types/optionBase';
@@ -12,7 +12,6 @@ interface Props<Option extends OptionBase>
 
 export default function SelectField<Option extends OptionBase>({
   field: { name, value, onChange },
-  meta,
   ...props
 }: Props<Option>) {
   return (
@@ -24,7 +23,9 @@ export default function SelectField<Option extends OptionBase>({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
-      {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
+      <ErrorMessage name={name}>
+        {(msg: string) => <div>{msg}</div>}
+      </ErrorMessage>
     </>
   );
 }

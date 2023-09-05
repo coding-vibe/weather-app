@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { startOfYesterday } from 'date-fns';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
@@ -32,6 +32,7 @@ export default function HistoricalForecast() {
     language: selectedLanguage,
     startDate: null,
     endDate: null,
+    location: null,
     temperatureUnit: selectedTemperatureUnit,
   };
   const yesterday = startOfYesterday();
@@ -80,9 +81,6 @@ export default function HistoricalForecast() {
                 maxDate={yesterday}
                 type='date'
               />
-              <ErrorMessage name='startDate'>
-                {(msg: string) => <div>{msg}</div>}
-              </ErrorMessage>
             </Grid>
             <Grid
               item
@@ -96,9 +94,6 @@ export default function HistoricalForecast() {
                 maxDate={yesterday}
                 type='date'
               />
-              <ErrorMessage name='endDate'>
-                {(msg: string) => <div>{msg}</div>}
-              </ErrorMessage>
             </Grid>
             <Grid
               item
@@ -109,9 +104,6 @@ export default function HistoricalForecast() {
                 id={LOCATION_AUTOCOMPLETE}
                 name='location'
               />
-              <ErrorMessage name='location'>
-                {(msg: string) => <div>{msg}</div>}
-              </ErrorMessage>
             </Grid>
             <Grid
               item

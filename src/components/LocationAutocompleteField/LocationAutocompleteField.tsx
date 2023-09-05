@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable spaced-comment */
-import { FieldProps } from 'formik';
+import { ErrorMessage, FieldProps } from 'formik';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import { FormValuesType } from 'components/HistoricalForecast/validation';
 import Location from 'types/location';
@@ -10,9 +10,8 @@ interface Props extends FieldProps<Location, FormValuesType> {
 }
 
 export default function LocationAutoCompleteField({
-  field: { value },
+  field: { name, value },
   form: { setValues },
-  meta,
   ...props
 }: Props) {
   return (
@@ -25,7 +24,9 @@ export default function LocationAutoCompleteField({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
-      {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
+      <ErrorMessage name={name}>
+        {(msg: string) => <div>{msg}</div>}
+      </ErrorMessage>
     </>
   );
 }

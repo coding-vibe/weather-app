@@ -1,4 +1,4 @@
-import { FieldProps } from 'formik';
+import { ErrorMessage, FieldProps } from 'formik';
 import {
   DatePickerProps,
   DatePicker as MUIDatePicker,
@@ -12,7 +12,6 @@ interface Props
 export default function DateField({
   field: { name, value },
   form: { setFieldValue },
-  meta,
   ...props
 }: Props) {
   return (
@@ -24,7 +23,9 @@ export default function DateField({
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
-      {meta.touched && meta.error && <div className='error'>{meta.error}</div>}
+      <ErrorMessage name={name}>
+        {(msg: string) => <div>{msg}</div>}
+      </ErrorMessage>
     </>
   );
 }
