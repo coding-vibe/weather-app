@@ -1,6 +1,6 @@
 const ROUTES = {
   home: '/',
-  future: '/future-forecast',
+  forecast: '/forecast',
   historical: '/historical-forecast',
 };
 

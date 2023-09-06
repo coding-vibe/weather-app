@@ -14,9 +14,9 @@ function Layout() {
   const activeTab = () => {
     switch (location.pathname) {
       case ROUTES.home:
-        return Tabs.FUTURE_FORECAST;
-      case ROUTES.future:
-        return Tabs.FUTURE_FORECAST;
+        return Tabs.FORECAST;
+      case ROUTES.forecast:
+        return Tabs.FORECAST;
       case ROUTES.historical:
         return Tabs.HISTORICAL_FORECAST;
       default:
@@ -29,10 +29,10 @@ function Layout() {
         value={activeTab()}
         aria-label='forecast tabs'>
         <Tab
-          label='Future forecast'
-          to={ROUTES.future}
+          label='Forecast'
+          to={ROUTES.forecast}
           component={Link}
-          {...a11yProps(Tabs.FUTURE_FORECAST)}
+          {...a11yProps(Tabs.FORECAST)}
         />
         <Tab
           label='Historical forecast'

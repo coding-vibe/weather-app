@@ -1,43 +1,46 @@
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import MUISelect, { SelectChangeEvent } from '@mui/material/Select';
+import OptionBase from 'types/optionBase';
 import * as classes from './styles';
 
-interface OptionBase {
-  label: string;
-  value: string;
-}
-
 interface Props<Option extends OptionBase> {
-  value: Option['value'];
-  setValue: (value: Option['value']) => void;
-  labelId: string;
   label: string;
-  className?: string;
+  labelId: string;
   options: Option[];
+  setValue: (event: SelectChangeEvent<Option['value']>) => void;
+  value: Option['value'];
+  className?: string;
+  error?: boolean;
+  helperText?: string;
+  name?: string;
 }
 
 export default function Select<Option extends OptionBase>({
-  value,
-  setValue,
-  labelId,
   label,
-  className,
+  labelId,
   options,
+  setValue,
+  value,
+  className,
+  error,
+  helperText,
+  name,
 }: Props<Option>) {
-  const handleChange = (event: SelectChangeEvent<Option['value']>) => {
-    setValue(event.target.value);
-  };
   return (
-    <FormControl className={className}>
-      <InputLabel id={labelId}>Temperature unit</InputLabel>
+    <FormControl
+      className={className}
+      error={error}>
+      <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
-        labelId={labelId}
         css={classes.select}
-        value={value}
         label={label}
-        onChange={handleChange}>
+        labelId={labelId}
+        value={value}
+        name={name}
+        onChange={setValue}>
         {options.map((option) => (
           <MenuItem
             key={option.label}
@@ -46,10 +49,14 @@ export default function Select<Option extends OptionBase>({
           </MenuItem>
         ))}
       </MUISelect>
+      <FormHelperText error>{helperText}</FormHelperText>
     </FormControl>
   );
 }
 
 Select.defaultProps = {
   className: null,
+  error: false,
+  helperText: null,
+  name: null,
 };

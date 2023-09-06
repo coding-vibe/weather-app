@@ -1,33 +1,26 @@
 import { useContext, useState } from 'react';
+import { SelectChangeEvent } from '@mui/material/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
 import WeatherWidget from 'components/WeatherWidget';
-import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Languages from 'constants/languages';
-import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import TemperatureUnits from 'constants/temperatureUnits';
+import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
-import SettingsContextType from 'types/settingsContextType';
+import LanguageOption from 'types/languageOption';
+import LANGUAGE_OPTIONS from 'types/languageOptions';
 import Location from 'types/location';
+import SettingsContextType from 'types/settingsContextType';
+import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language choice';
+const LANGUAGE_CHOICE_LABEL = 'Language';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
-interface LanguageOption {
-  label: string;
-  value: Languages;
-}
-
-interface TemperatureUnitOption {
-  label: string;
-  value: TemperatureUnits;
-}
-
-export default function FutureForecast() {
+export default function Forecast() {
   const {
     selectedLanguage,
     onSelectLanguage,
@@ -40,7 +33,9 @@ export default function FutureForecast() {
       <Select<LanguageOption>
         css={classes.languageSelect}
         value={selectedLanguage}
-        setValue={onSelectLanguage}
+        setValue={(event: SelectChangeEvent) => {
+          onSelectLanguage(event.target.value as Languages);
+        }}
         labelId={LANGUAGE_CHOICE_LABEL_ID}
         label={LANGUAGE_CHOICE_LABEL}
         options={LANGUAGE_OPTIONS}
@@ -54,7 +49,9 @@ export default function FutureForecast() {
       <Select<TemperatureUnitOption>
         css={classes.temperatureUnitsSelect}
         value={selectedTemperatureUnit}
-        setValue={onSelectTemperatureUnit}
+        setValue={(event: SelectChangeEvent) => {
+          onSelectTemperatureUnit(event.target.value as TemperatureUnits);
+        }}
         labelId={TEMPERATURE_UNITS_LABEL_ID}
         label={TEMPERATURE_UNITS_LABEL}
         options={TEMPERATURE_UNITS_OPTIONS}
