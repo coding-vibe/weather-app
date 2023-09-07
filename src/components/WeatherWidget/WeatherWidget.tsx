@@ -8,24 +8,11 @@ import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
+import ForecastBody from 'types/forecastBody';
 import SettingsContextType from 'types/settingsContextType';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
-
-interface ForecastBody {
-  dt: number;
-  main: {
-    humidity: number;
-    temp: number;
-  };
-  weather: [
-    {
-      description: string;
-      icon: string;
-    },
-  ];
-}
 
 interface ForecastAPIResponse {
   list: ForecastBody[];

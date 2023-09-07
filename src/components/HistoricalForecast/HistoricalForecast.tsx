@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { startOfYesterday } from 'date-fns';
 import { Formik, FormikHelpers, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Grid from '@mui/material/Grid';
 import DateField from 'components/DateField';
+import HistoricalForecastWidget from 'components/HistoricalForecastWidget';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
@@ -22,6 +23,8 @@ const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 export default function HistoricalForecast() {
+  const [selectedFormValues, onSelectFormValues] =
+    useState<FormValuesType | null>(null);
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
@@ -39,92 +42,102 @@ export default function HistoricalForecast() {
   ) => {
     onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
-    console.log(values);
+    onSelectFormValues(values);
     resetForm();
   };
 
   return (
-    <Formik<FormValuesType>
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      // We ignore ts rule, because initial values should be optional, but in Formik they must exactly match the validation scheme
-      initialValues={INITIAL_FORM_VALUES}
-      onSubmit={handleSubmit}
-      validationSchema={VALIDATION_SCHEMA}>
-      {({ isSubmitting }) => (
-        <Form>
-          <Grid
-            container
-            spacing={2}>
+    <>
+      <Formik<FormValuesType>
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        // We ignore ts rule, because initial values should be optional, but in Formik they must exactly match the validation scheme
+        initialValues={INITIAL_FORM_VALUES}
+        onSubmit={handleSubmit}
+        validationSchema={VALIDATION_SCHEMA}>
+        {({ isSubmitting }) => (
+          <Form>
             <Grid
-              item
-              xs={12}>
-              <Field
-                component={SelectField<LanguageOption>}
-                label={LANGUAGE_CHOICE_LABEL}
-                labelId={LANGUAGE_CHOICE_LABEL_ID}
-                name='language'
-                options={LANGUAGE_OPTIONS}
-              />
+              container
+              spacing={2}>
+              <Grid
+                item
+                xs={12}>
+                <Field
+                  validateOnBlur
+                  component={SelectField<LanguageOption>}
+                  label={LANGUAGE_CHOICE_LABEL}
+                  labelId={LANGUAGE_CHOICE_LABEL_ID}
+                  name='language'
+                  options={LANGUAGE_OPTIONS}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={2.5}>
+                <Field
+                  validateOnBlur
+                  disableHighlightToday
+                  css={classes.startDateField}
+                  component={DateField}
+                  label='Start'
+                  maxDate={yesterday}
+                  name='startDate'
+                  type='date'
+                />
+              </Grid>
+              <Grid
+                item
+                xs={2.5}>
+                <Field
+                  validateOnBlur
+                  disableHighlightToday
+                  css={classes.endDateField}
+                  component={DateField}
+                  label='End'
+                  maxDate={yesterday}
+                  name='endDate'
+                  type='date'
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}>
+                <Field
+                  validateOnBlur
+                  css={classes.location}
+                  component={LocationAutoCompleteField}
+                  id={LOCATION_AUTOCOMPLETE}
+                  name='location'
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}>
+                <Field
+                  validateOnBlur
+                  component={SelectField<TemperatureUnitOption>}
+                  labelId={TEMPERATURE_UNITS_LABEL_ID}
+                  label={TEMPERATURE_UNITS_LABEL}
+                  name='temperatureUnit'
+                  options={TEMPERATURE_UNITS_OPTIONS}
+                />
+              </Grid>
+              <Grid item>
+                <LoadingButton
+                  loading={isSubmitting}
+                  type='submit'
+                  variant='contained'>
+                  Submit
+                </LoadingButton>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              xs={2.5}>
-              <Field
-                disableHighlightToday
-                css={classes.startDateField}
-                component={DateField}
-                label='Start'
-                maxDate={yesterday}
-                name='startDate'
-                type='date'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={2.5}>
-              <Field
-                disableHighlightToday
-                css={classes.endDateField}
-                component={DateField}
-                label='End'
-                maxDate={yesterday}
-                name='endDate'
-                type='date'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}>
-              <Field
-                css={classes.location}
-                component={LocationAutoCompleteField}
-                id={LOCATION_AUTOCOMPLETE}
-                name='location'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}>
-              <Field
-                component={SelectField<TemperatureUnitOption>}
-                labelId={TEMPERATURE_UNITS_LABEL_ID}
-                label={TEMPERATURE_UNITS_LABEL}
-                name='temperatureUnit'
-                options={TEMPERATURE_UNITS_OPTIONS}
-              />
-            </Grid>
-            <Grid item>
-              <LoadingButton
-                loading={isSubmitting}
-                type='submit'
-                variant='contained'>
-                Submit
-              </LoadingButton>
-            </Grid>
-          </Grid>
-        </Form>
+          </Form>
+        )}
+      </Formik>
+      {selectedFormValues && (
+        <HistoricalForecastWidget values={selectedFormValues} />
       )}
-    </Formik>
+    </>
   );
 }
