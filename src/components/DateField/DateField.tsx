@@ -3,7 +3,7 @@ import {
   DatePickerProps,
   DatePicker as MUIDatePicker,
 } from '@mui/x-date-pickers/DatePicker';
-import { FormValuesType } from 'components/HistoricalForecast/validation';
+import { FormValuesType } from 'components/HistoricalForecastForm/validation';
 
 interface Props
   extends FieldProps<Date, FormValuesType>,

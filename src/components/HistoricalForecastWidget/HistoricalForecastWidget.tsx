@@ -1,47 +1,40 @@
 import { useEffect, useState } from 'react';
 import { format, fromUnixTime } from 'date-fns';
-import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import { useSnackbar } from 'notistack';
-import { FormValuesType } from 'components/HistoricalForecast/validation';
-import TemperatureUnits from 'constants/temperatureUnits';
+import { FormValuesType } from 'components/HistoricalForecastForm/validation';
 import ForecastBody from 'types/forecastBody';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
+import formatTemperatureData from 'utils/formatTemperature';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
 
-type Forecast = Array<[string, [ForecastBody]]>;
-
 interface Props {
-  values: FormValuesType;
+  formValues: FormValuesType;
 }
 
 const SPINNER_SIZE = 25;
 
-export default function HistoricalForecastWidget({ values }: Props) {
+export default function HistoricalForecastWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [forecast, setForecast] = useState<Forecast | null>(null);
+  const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(values);
+    console.log(formValues);
     const fetchForecast = () => {
       try {
         setIsLoading(true);
         const { list } = FORECAST;
-        console.log(list);
         const forecastData = list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
-        const forecastByDate = groupBy(forecastData, (element) => {
-          const dateObject = fromUnixTime(element.dt);
-          const formattedDate = format(dateObject, `dd MMM`);
-          return formattedDate;
-        });
-        const formattedForecast = Object.entries(forecastByDate);
-        setForecast(formattedForecast);
+        console.log(forecastData);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        setForecast(forecastData);
       } catch (error) {
         enqueueSnackbar('No weather data found for this location', {
           variant: 'error',
@@ -52,31 +45,25 @@ export default function HistoricalForecastWidget({ values }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [values, enqueueSnackbar]);
+  }, [formValues, enqueueSnackbar]);
 
-  const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
-    switch (tempUnit) {
-      case TemperatureUnits.KELVIN:
-        return '\u00B0K';
-      case TemperatureUnits.CELSIUS:
-        return '\u2103';
-      case TemperatureUnits.FAHRENHEIT:
-        return '\u00B0F';
-      default:
-        throw new Error('New temperature unit found');
-    }
+  const getDate = (unixDate: number) => {
+    const dateObject = fromUnixTime(unixDate);
+    return dateObject;
   };
-  const formatTemperatureData = (temp: number, tempUnit: TemperatureUnits) =>
-    `${Math.floor(temp)}${formatTemperatureUnits(tempUnit)}`;
+  const getFormattedDate = (date: Date) => {
+    const formattedDate = format(date, 'dd MMM');
+    return formattedDate;
+  };
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
   ) : (
     <table>
       <caption>
-        {values.location &&
-          `${findCountryNameByCode(values.location.country)}, ${
-            values.location.name
+        {formValues.location &&
+          `${findCountryNameByCode(formValues.location.country)}, ${
+            formValues.location.name
           }`}
       </caption>
       <thead>
@@ -87,36 +74,35 @@ export default function HistoricalForecastWidget({ values }: Props) {
         </tr>
       </thead>
       <tbody>
-        {forecast?.map(([date, weather], index) => (
-          <tr key={index}>
-            {weather.map((weatherReport, idx) => {
-              const {
-                dt,
-                weather: [{ icon, description }],
-                main: { temp, humidity },
-              } = weatherReport;
-              const formattedDate = new Date(dt * 1000);
-              const weekDay = formattedDate.getDay();
-              console.log(weekDay);
-              return (
-                <td key={idx}>
-                  {date}
-                  <Tooltip title={description}>
-                    <img
-                      src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
-                      alt='Weather condition'
-                    />
-                  </Tooltip>
-                  {`Temperature: ${formatTemperatureData(
-                    temp,
-                    values.temperatureUnit,
-                  )}
-                    Humidity: ${humidity}%`}
-                </td>
-              );
-            })}
-          </tr>
-        ))}
+        {forecast?.map((forecastElement, index) => {
+          const {
+            dt,
+            weather: [{ icon, description }],
+            main: { temp, humidity },
+          } = forecastElement;
+          const date = getDate(dt);
+          if (index === 0) {
+            const weekDay = date.getDay();
+            console.log(weekDay);
+            const currentWeekDay = WEEK_DAYS[weekDay - 1];
+            console.log(currentWeekDay);
+          }
+          return (
+            <td key={dt}>
+              {getFormattedDate(date)}
+              <Tooltip title={description}>
+                <img
+                  src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
+                  alt='Weather condition'
+                />
+              </Tooltip>
+              {`Temperature: ${formatTemperatureData(
+                temp,
+                formValues.temperatureUnit,
+              )} Humidity: ${humidity}%`}
+            </td>
+          );
+        })}
       </tbody>
     </table>
   );

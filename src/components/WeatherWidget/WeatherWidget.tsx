@@ -6,12 +6,12 @@ import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
-import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecastBody';
 import SettingsContextType from 'types/settingsContextType';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
+import formatTemperatureData from 'utils/formatTemperature';
 import HOURS from './hours';
 
 interface ForecastAPIResponse {
@@ -56,7 +56,7 @@ export default function WeatherWidget({ location }: Props) {
         );
         const forecastByDate = groupBy(forecastData, (element) => {
           const dateObject = fromUnixTime(element.dt);
-          const formattedDate = format(dateObject, `dd-MM`);
+          const formattedDate = format(dateObject, 'dd-MM');
           return formattedDate;
         });
         const formattedForecast = Object.entries(forecastByDate);
@@ -72,21 +72,6 @@ export default function WeatherWidget({ location }: Props) {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
   }, [location, selectedLanguage, selectedTemperatureUnit, enqueueSnackbar]);
-
-  const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
-    switch (tempUnit) {
-      case TemperatureUnits.KELVIN:
-        return '\u00B0K';
-      case TemperatureUnits.CELSIUS:
-        return '\u2103';
-      case TemperatureUnits.FAHRENHEIT:
-        return '\u00B0F';
-      default:
-        throw new Error('New temperature unit found');
-    }
-  };
-  const formatTemperatureData = (temp: number, tempUnit: TemperatureUnits) =>
-    `${Math.floor(temp)}${formatTemperatureUnits(tempUnit)}`;
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
