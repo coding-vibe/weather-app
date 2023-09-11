@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { format, fromUnixTime } from 'date-fns';
+import { format } from 'date-fns';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
@@ -11,16 +11,20 @@ import formatTemperatureData from 'utils/formatTemperature';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
 
+type WeeklyForecast = Array<ForecastBody[]>;
+
 interface Props {
   formValues: FormValuesType;
 }
 
 const SPINNER_SIZE = 25;
+const WEEK_LENGTH = 7;
 
 export default function HistoricalWeatherWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const weeklyForecast: WeeklyForecast = [[]];
 
   useEffect(() => {
     console.log(formValues);
@@ -31,7 +35,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
         const forecastData = list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
-        console.log(forecastData);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         setForecast(forecastData);
@@ -43,18 +46,31 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
         setIsLoading(false);
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
   }, [formValues, enqueueSnackbar]);
 
   const getDate = (unixDate: number) => {
-    const dateObject = fromUnixTime(unixDate);
-    return dateObject;
+    const date = new Date(unixDate * 1000);
+    return date;
   };
+
   const getFormattedDate = (date: Date) => {
     const formattedDate = format(date, 'dd MMM');
     return formattedDate;
   };
+
+  forecast?.reduce((accumulator, dailyForecast) => {
+    const { dt } = dailyForecast;
+    const weekDay = getDate(dt).getDay();
+    const currentWeekDay = WEEK_DAYS[weekDay - 1];
+
+    if (currentWeekDay === 'Mon' || accumulator.length === 0) {
+      accumulator.push([dailyForecast]);
+    } else {
+      accumulator[accumulator.length - 1].push(dailyForecast);
+    }
+    return accumulator;
+  }, weeklyForecast);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -74,33 +90,40 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
         </tr>
       </thead>
       <tbody>
-        {forecast?.map((forecastElement, index) => {
-          const {
-            dt,
-            weather: [{ icon, description }],
-            main: { temp, humidity },
-          } = forecastElement;
-          const date = getDate(dt);
-          if (index === 0) {
-            const weekDay = date.getDay();
-            console.log(weekDay);
-            const currentWeekDay = WEEK_DAYS[weekDay - 1];
-            console.log(currentWeekDay);
-          }
+        {weeklyForecast.map((weeklyWeather, index) => {
+          const emptyCells = WEEK_LENGTH - weeklyWeather.length;
           return (
-            <td key={dt}>
-              {getFormattedDate(date)}
-              <Tooltip title={description}>
-                <img
-                  src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
-                  alt='Weather condition'
-                />
-              </Tooltip>
-              {`Temperature: ${formatTemperatureData(
-                temp,
-                formValues.temperatureUnit,
-              )} Humidity: ${humidity}%`}
-            </td>
+            <tr key={index}>
+              {index === 0 &&
+                Array.from({ length: emptyCells }).map((_, idx) => (
+                  // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
+                  <td key={idx}> </td>
+                ))}
+              {weeklyWeather.map((dailyWeather) => {
+                const {
+                  dt,
+                  weather: [{ icon, description }],
+                  main: { temp, humidity },
+                } = dailyWeather;
+                return (
+                  <td key={dt}>
+                    {getFormattedDate(getDate(dt))}
+                    <Tooltip title={description}>
+                      <img
+                        src={`${
+                          import.meta.env.VITE_BASE_URL
+                        }img/wn/${icon}.png`}
+                        alt='Weather condition'
+                      />
+                    </Tooltip>
+                    {`Temperature: ${formatTemperatureData(
+                      temp,
+                      formValues.temperatureUnit,
+                    )} Humidity: ${humidity}%`}
+                  </td>
+                );
+              })}
+            </tr>
           );
         })}
       </tbody>
