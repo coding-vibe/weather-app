@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tooltip from '@mui/material/Tooltip';
 import { useSnackbar } from 'notistack';
-import { FormValuesType } from 'components/HistoricalForecastForm/validation';
+import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import ForecastBody from 'types/forecastBody';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import formatTemperatureData from 'utils/formatTemperature';
@@ -17,7 +17,7 @@ interface Props {
 
 const SPINNER_SIZE = 25;
 
-export default function HistoricalForecastWidget({ formValues }: Props) {
+export default function HistoricalWeatherWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);

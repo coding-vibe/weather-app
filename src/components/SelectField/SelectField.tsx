@@ -1,7 +1,7 @@
 import { FieldProps } from 'formik';
 import omit from 'lodash/omit';
 import Select from 'components/Select';
-import { FormValuesType } from 'components/HistoricalForecastForm/validation';
+import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import OptionBase from 'types/optionBase';
 
 interface Props<Option extends OptionBase>

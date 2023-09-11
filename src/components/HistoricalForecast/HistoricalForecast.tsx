@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import HistoricalForecastForm from 'components/HistoricalForecastForm';
-import HistoricalForecastWidget from 'components/HistoricalForecastWidget';
-import { FormValuesType } from '../HistoricalForecastForm/validation';
+import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
+import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
+import { FormValuesType } from '../HistoricalWeatherForm/validation';
 
 export default function HistoricalForecast() {
   const [selectedFormValues, onSelectFormValues] =
@@ -9,9 +9,9 @@ export default function HistoricalForecast() {
 
   return (
     <>
-      <HistoricalForecastForm setFormValues={onSelectFormValues} />
+      <HistoricalWeatherForm setFormValues={onSelectFormValues} />
       {selectedFormValues && (
-        <HistoricalForecastWidget formValues={selectedFormValues} />
+        <HistoricalWeatherWidget formValues={selectedFormValues} />
       )}
     </>
   );

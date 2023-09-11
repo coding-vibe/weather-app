@@ -1,6 +1,6 @@
 import { FieldProps } from 'formik';
 import LocationAutocomplete from 'components/LocationAutocomplete';
-import { FormValuesType } from 'components/HistoricalForecastForm/validation';
+import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import Location from 'types/location';
 
 interface Props extends FieldProps<Location, FormValuesType> {

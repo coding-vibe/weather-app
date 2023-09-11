@@ -25,7 +25,7 @@ interface Props {
   setFormValues: (value: FormValuesType) => void;
 }
 
-export default function HistoricalForecastForm({ setFormValues }: Props) {
+export default function HistoricalWeatherForm({ setFormValues }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
