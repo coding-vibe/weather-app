@@ -6,7 +6,6 @@ import { FormValuesType } from '../HistoricalWeatherForm/validation';
 export default function HistoricalForecast() {
   const [selectedFormValues, onSelectFormValues] =
     useState<FormValuesType | null>(null);
-
   return (
     <>
       <HistoricalWeatherForm setFormValues={onSelectFormValues} />

@@ -1,17 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import Tooltip from '@mui/material/Tooltip';
+import { format, fromUnixTime } from 'date-fns';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
-import { format, fromUnixTime } from 'date-fns';
 import apiClient from 'api';
+import TableCell from 'components/TableCell';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecastBody';
-import SettingsContextType from 'types/settingsContextType';
 import Location from 'types/location';
+import SettingsContextType from 'types/settingsContextType';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
-import formatTemperatureData from 'utils/formatTemperature';
 import HOURS from './hours';
 
 interface ForecastAPIResponse {
@@ -100,30 +99,7 @@ export default function WeatherWidget({ location }: Props) {
                   // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
                   <td key={idx}> </td>
                 ))}
-              {weather.map((weatherReport) => {
-                const {
-                  dt,
-                  weather: [{ icon, description }],
-                  main: { temp, humidity },
-                } = weatherReport;
-                return (
-                  <td key={dt}>
-                    <Tooltip title={description}>
-                      <img
-                        src={`${
-                          import.meta.env.VITE_BASE_URL
-                        }img/wn/${icon}.png`}
-                        alt='Weather condition'
-                      />
-                    </Tooltip>
-                    {`Temperature: ${formatTemperatureData(
-                      temp,
-                      selectedTemperatureUnit,
-                    )}
-                    Humidity: ${humidity}%`}
-                  </td>
-                );
-              })}
+              <TableCell weatherReport={weather} />
             </tr>
           );
         })}

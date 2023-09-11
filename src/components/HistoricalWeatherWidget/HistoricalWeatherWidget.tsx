@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
-import Tooltip from '@mui/material/Tooltip';
 import { useSnackbar } from 'notistack';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
+import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecastBody';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
-import formatTemperatureData from 'utils/formatTemperature';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
 
@@ -27,7 +25,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
   const weeklyForecast: WeeklyForecast = [[]];
 
   useEffect(() => {
-    console.log(formValues);
     const fetchForecast = () => {
       try {
         setIsLoading(true);
@@ -53,12 +50,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     const date = new Date(unixDate * 1000);
     return date;
   };
-
-  const getFormattedDate = (date: Date) => {
-    const formattedDate = format(date, 'dd MMM');
-    return formattedDate;
-  };
-
   forecast?.reduce((accumulator, dailyForecast) => {
     const { dt } = dailyForecast;
     const weekDay = getDate(dt).getDay();
@@ -99,30 +90,7 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
                   // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
                   <td key={idx}> </td>
                 ))}
-              {weeklyWeather.map((dailyWeather) => {
-                const {
-                  dt,
-                  weather: [{ icon, description }],
-                  main: { temp, humidity },
-                } = dailyWeather;
-                return (
-                  <td key={dt}>
-                    {getFormattedDate(getDate(dt))}
-                    <Tooltip title={description}>
-                      <img
-                        src={`${
-                          import.meta.env.VITE_BASE_URL
-                        }img/wn/${icon}.png`}
-                        alt='Weather condition'
-                      />
-                    </Tooltip>
-                    {`Temperature: ${formatTemperatureData(
-                      temp,
-                      formValues.temperatureUnit,
-                    )} Humidity: ${humidity}%`}
-                  </td>
-                );
-              })}
+              <TableCell weatherReport={weeklyWeather} />
             </tr>
           );
         })}
