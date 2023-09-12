@@ -12,6 +12,8 @@ import WEEK_DAYS from './weekDays';
 
 type WeeklyForecast = Array<ForecastBody[]>;
 
+type Forecast = ForecastBody[];
+
 interface Props {
   formValues: FormValuesType;
 }
@@ -21,7 +23,7 @@ const WEEK_LENGTH = 7;
 
 export default function HistoricalWeatherWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
+  const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const weeklyForecast: WeeklyForecast = [[]];
 
@@ -98,7 +100,7 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
               {weeklyWeather.map((dailyWeather, idx) => (
                 <TableCell
                   key={idx}
-                  weatherReport={dailyWeather}
+                  weather={dailyWeather}
                   formatDate={formatDate}
                   getDate={getDate}
                 />

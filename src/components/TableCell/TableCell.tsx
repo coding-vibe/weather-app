@@ -6,13 +6,13 @@ import ForecastBody from 'types/forecastBody';
 import SettingsContextType from 'types/settingsContextType';
 
 interface TableCellProps {
-  weatherReport: ForecastBody;
+  weather: ForecastBody;
   formatDate?: (date: Date) => string;
   getDate?: (unixDate: number) => Date;
 }
 
 export default function TableCell({
-  weatherReport,
+  weather,
   formatDate,
   getDate,
 }: TableCellProps) {
@@ -22,7 +22,7 @@ export default function TableCell({
     dt,
     main: { humidity, temp },
     weather: [{ description, icon }],
-  } = weatherReport;
+  } = weather;
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {

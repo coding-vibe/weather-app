@@ -102,7 +102,7 @@ export default function WeatherWidget({ location }: Props) {
               {weather.map((hourlyWeather, idx) => (
                 <TableCell
                   key={idx}
-                  weatherReport={hourlyWeather}
+                  weather={hourlyWeather}
                 />
               ))}
             </tr>
