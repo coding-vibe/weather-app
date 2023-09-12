@@ -5,6 +5,7 @@ import { useSnackbar } from 'notistack';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecastBody';
+import { getDate, getFormattedDate } from 'utils/getFormattedDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
@@ -46,10 +47,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     fetchForecast();
   }, [formValues, enqueueSnackbar]);
 
-  const getDate = (unixDate: number) => {
-    const date = new Date(unixDate * 1000);
-    return date;
-  };
   forecast?.reduce((accumulator, dailyForecast) => {
     const { dt } = dailyForecast;
     const weekDay = getDate(dt).getDay();
@@ -62,6 +59,8 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     }
     return accumulator;
   }, weeklyForecast);
+
+  console.log(weeklyForecast);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -90,7 +89,12 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
                   // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
                   <td key={idx}> </td>
                 ))}
-              <TableCell weatherReport={weeklyWeather} />
+              {weeklyWeather.map((dailyWeather) => (
+                <TableCell
+                  weatherReport={dailyWeather}
+                  formatDate={getFormattedDate}
+                />
+              ))}
             </tr>
           );
         })}

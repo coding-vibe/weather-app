@@ -4,14 +4,24 @@ import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecastBody';
 import SettingsContextType from 'types/settingsContextType';
+import { getDate } from 'utils/getFormattedDate';
 
 interface TableCellProps {
-  weatherReport: ForecastBody[];
+  weatherReport: ForecastBody;
+  formatDate?: (date: Date) => string;
 }
 
-export default function TableCell({ weatherReport }: TableCellProps) {
+export default function TableCell({
+  weatherReport,
+  formatDate,
+}: TableCellProps) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
+  const {
+    dt,
+    main: { humidity, temp },
+    weather: [{ description, icon }],
+  } = weatherReport;
 
   const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
     switch (tempUnit) {
@@ -25,33 +35,28 @@ export default function TableCell({ weatherReport }: TableCellProps) {
         throw new Error('New temperature unit found');
     }
   };
-  const formatTemperatureData = (temp: number, tempUnit: TemperatureUnits) =>
-    `${Math.floor(temp)}${formatTemperatureUnits(tempUnit)}`;
+  const formatTemperatureData = (
+    temperature: number,
+    temperatureUnit: TemperatureUnits,
+  ) => `${Math.floor(temperature)}${formatTemperatureUnits(temperatureUnit)}`;
 
   return (
-    <>
-      {weatherReport.map((weather) => {
-        const {
-          dt,
-          weather: [{ icon, description }],
-          main: { temp, humidity },
-        } = weather;
-
-        return (
-          <td key={dt}>
-            <Tooltip title={description}>
-              <img
-                src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
-                alt='Weather condition'
-              />
-            </Tooltip>
-            {`Temperature: ${formatTemperatureData(
-              temp,
-              selectedTemperatureUnit,
-            )} Humidity: ${humidity}%`}
-          </td>
-        );
-      })}
-    </>
+    <td key={dt}>
+      {formatDate && formatDate(getDate(dt))}
+      <Tooltip title={description}>
+        <img
+          src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
+          alt='Weather condition'
+        />
+      </Tooltip>
+      {`Temperature: ${formatTemperatureData(
+        temp,
+        selectedTemperatureUnit,
+      )} Humidity: ${humidity}%`}
+    </td>
   );
 }
+
+TableCell.defaultProps = {
+  formatDate: null,
+};
