@@ -93,10 +93,11 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
               {index === 0 &&
                 Array.from({ length: emptyCells }).map((_, idx) => (
                   // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
-                  <td key={idx}> </td>
+                  <td key={idx} />
                 ))}
-              {weeklyWeather.map((dailyWeather) => (
+              {weeklyWeather.map((dailyWeather, idx) => (
                 <TableCell
+                  key={idx}
                   weatherReport={dailyWeather}
                   formatDate={formatDate}
                   getDate={getDate}
