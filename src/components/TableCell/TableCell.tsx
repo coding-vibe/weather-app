@@ -4,16 +4,17 @@ import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecastBody';
 import SettingsContextType from 'types/settingsContextType';
-import { getDate } from 'utils/getFormattedDate';
 
 interface TableCellProps {
   weatherReport: ForecastBody;
   formatDate?: (date: Date) => string;
+  getDate?: (unixDate: number) => Date;
 }
 
 export default function TableCell({
   weatherReport,
   formatDate,
+  getDate,
 }: TableCellProps) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
@@ -42,7 +43,7 @@ export default function TableCell({
 
   return (
     <td key={dt}>
-      {formatDate && formatDate(getDate(dt))}
+      {formatDate && getDate && formatDate(getDate(dt))}
       <Tooltip title={description}>
         <img
           src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
@@ -59,4 +60,5 @@ export default function TableCell({
 
 TableCell.defaultProps = {
   formatDate: null,
+  getDate: null,
 };

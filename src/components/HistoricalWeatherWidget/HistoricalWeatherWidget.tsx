@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { format } from 'date-fns';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecastBody';
-import { getDate, getFormattedDate } from 'utils/getFormattedDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
@@ -47,6 +47,14 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     fetchForecast();
   }, [formValues, enqueueSnackbar]);
 
+  const getDate = (unixDate: number) => {
+    const date = new Date(unixDate * 1000);
+    return date;
+  };
+  const formatDate = (date: Date) => {
+    const formattedDate = format(date, 'dd MMM');
+    return formattedDate;
+  };
   forecast?.reduce((accumulator, dailyForecast) => {
     const { dt } = dailyForecast;
     const weekDay = getDate(dt).getDay();
@@ -59,8 +67,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     }
     return accumulator;
   }, weeklyForecast);
-
-  console.log(weeklyForecast);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -92,7 +98,8 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
               {weeklyWeather.map((dailyWeather) => (
                 <TableCell
                   weatherReport={dailyWeather}
-                  formatDate={getFormattedDate}
+                  formatDate={formatDate}
+                  getDate={getDate}
                 />
               ))}
             </tr>
