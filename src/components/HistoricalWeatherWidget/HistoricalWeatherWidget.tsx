@@ -12,12 +12,11 @@ import WEEK_DAYS from './weekDays';
 
 type Forecast = ForecastBody[];
 
-type WeeklyForecast = Array<ForecastBody[]>;
-
 interface Props {
   formValues: FormValuesType;
 }
 
+const MONDAY = 'Mon';
 const SPINNER_SIZE = 25;
 const WEEK_LENGTH = 7;
 
@@ -25,14 +24,12 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const weeklyForecast = [[]];
 
   useEffect(() => {
     const fetchForecast = () => {
       try {
         setIsLoading(true);
-        const { list } = FORECAST;
-        const forecastData = list.map((data) =>
+        const forecastData = FORECAST.list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
         setForecast(forecastData);
@@ -55,18 +52,21 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     const formattedDate = format(date, 'dd MMM');
     return formattedDate;
   };
-  forecast?.reduce<WeeklyForecast>((accumulator, dailyForecast) => {
-    const { dt } = dailyForecast;
-    const weekDay = getDate(dt).getDay();
-    const currentWeekDay = WEEK_DAYS[weekDay - 1];
+  const weeklyForecast = forecast?.reduce<Array<ForecastBody[]>>(
+    (accumulator, dailyForecast) => {
+      const { dt } = dailyForecast;
+      const weekDay = getDate(dt).getDay();
+      const currentWeekDay = WEEK_DAYS[weekDay - 1];
 
-    if (currentWeekDay === 'Mon' || accumulator.length === 0) {
-      accumulator.push([dailyForecast]);
-    } else {
-      accumulator[accumulator.length - 1].push(dailyForecast);
-    }
-    return accumulator;
-  }, weeklyForecast);
+      if (currentWeekDay === MONDAY || accumulator.length === 0) {
+        accumulator.push([dailyForecast]);
+      } else {
+        accumulator[accumulator.length - 1].push(dailyForecast);
+      }
+      return accumulator;
+    },
+    [[]],
+  );
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -86,7 +86,7 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
         </tr>
       </thead>
       <tbody>
-        {weeklyForecast.map((weeklyWeather, index) => {
+        {weeklyForecast?.map((weeklyWeather, index) => {
           const emptyCells = WEEK_LENGTH - weeklyWeather.length;
           return (
             <tr key={index}>

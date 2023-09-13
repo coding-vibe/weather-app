@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Tooltip from '@mui/material/Tooltip';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
-import ForecastBody from 'types/forecastBody';
+import ForecastBody from 'types/forecast';
 import SettingsContextType from 'types/settingsContextType';
 
 interface TableCellProps {
