@@ -1,3 +1,5 @@
+import { ForecastAPIResponse } from 'types/forecast';
+
 const FORECAST = {
   cod: '200',
   message: 0,
@@ -24,6 +26,8 @@ const FORECAST = {
           icon: '01d',
         },
       ],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       clouds: {
         all: 7,
       },
@@ -1457,6 +1461,6 @@ const FORECAST = {
     sunrise: 1694056841,
     sunset: 1694104315,
   },
-};
+} as ForecastAPIResponse;
 
 export default FORECAST;

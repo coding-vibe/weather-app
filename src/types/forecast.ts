@@ -13,3 +13,7 @@ interface ForecastBody {
 }
 
 export default ForecastBody;
+
+export interface ForecastAPIResponse {
+  list: ForecastBody[];
+}

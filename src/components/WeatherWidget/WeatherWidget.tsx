@@ -7,15 +7,11 @@ import { useSnackbar } from 'notistack';
 import apiClient from 'api';
 import TableCell from 'components/TableCell';
 import SettingsContext from 'contexts/SettingsContext';
-import ForecastBody from 'types/forecastBody';
+import ForecastBody, { ForecastAPIResponse } from 'types/forecast';
 import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
-
-interface ForecastAPIResponse {
-  list: ForecastBody[];
-}
 
 type Forecast = Array<[string, ForecastBody[]]>;
 

@@ -5,14 +5,14 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
-import ForecastBody from 'types/forecastBody';
+import ForecastBody from 'types/forecast';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
 
-type WeeklyForecast = Array<ForecastBody[]>;
-
 type Forecast = ForecastBody[];
+
+type WeeklyForecast = Array<ForecastBody[]>;
 
 interface Props {
   formValues: FormValuesType;
@@ -25,7 +25,7 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const weeklyForecast: WeeklyForecast = [[]];
+  const weeklyForecast = [[]];
 
   useEffect(() => {
     const fetchForecast = () => {
@@ -35,8 +35,6 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
         const forecastData = list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         setForecast(forecastData);
       } catch (error) {
         enqueueSnackbar('No weather data found for this location', {
@@ -57,7 +55,7 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
     const formattedDate = format(date, 'dd MMM');
     return formattedDate;
   };
-  forecast?.reduce((accumulator, dailyForecast) => {
+  forecast?.reduce<WeeklyForecast>((accumulator, dailyForecast) => {
     const { dt } = dailyForecast;
     const weekDay = getDate(dt).getDay();
     const currentWeekDay = WEEK_DAYS[weekDay - 1];
