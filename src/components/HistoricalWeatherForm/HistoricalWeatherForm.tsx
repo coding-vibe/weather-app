@@ -22,10 +22,10 @@ const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 interface Props {
-  setFormValues: (value: FormValuesType) => void;
+  setSearchParams: (value: FormValuesType) => void;
 }
 
-export default function HistoricalWeatherForm({ setFormValues }: Props) {
+export default function HistoricalWeatherForm({ setSearchParams }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
@@ -40,7 +40,7 @@ export default function HistoricalWeatherForm({ setFormValues }: Props) {
   const handleSubmit = (values: FormValuesType) => {
     onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
-    setFormValues(values);
+    setSearchParams(values);
   };
 
   return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { format } from 'date-fns';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecast';
+import convertTimestampToDate from 'utils/formatDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import FORECAST from './forecast';
 import WEEK_DAYS from './weekDays';
@@ -13,14 +13,14 @@ import WEEK_DAYS from './weekDays';
 type Forecast = ForecastBody[];
 
 interface Props {
-  formValues: FormValuesType;
+  searchParams: FormValuesType;
 }
 
 const MONDAY = 'Mon';
 const SPINNER_SIZE = 25;
 const WEEK_LENGTH = 7;
 
-export default function HistoricalWeatherWidget({ formValues }: Props) {
+export default function HistoricalWeatherWidget({ searchParams }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,20 +42,12 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
       }
     };
     fetchForecast();
-  }, [formValues, enqueueSnackbar]);
+  }, [searchParams, enqueueSnackbar]);
 
-  const getDate = (unixDate: number) => {
-    const date = new Date(unixDate * 1000);
-    return date;
-  };
-  const formatDate = (date: Date) => {
-    const formattedDate = format(date, 'dd MMM');
-    return formattedDate;
-  };
-  const weeklyForecast = forecast?.reduce<Array<ForecastBody[]>>(
+  const weeklyForecast = forecast?.reduce<ForecastBody[][]>(
     (accumulator, dailyForecast) => {
       const { dt } = dailyForecast;
-      const weekDay = getDate(dt).getDay();
+      const weekDay = convertTimestampToDate(dt).getDay();
       const currentWeekDay = WEEK_DAYS[weekDay - 1];
 
       if (currentWeekDay === MONDAY || accumulator.length === 0) {
@@ -73,9 +65,9 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
   ) : (
     <table>
       <caption>
-        {formValues.location &&
-          `${findCountryNameByCode(formValues.location.country)}, ${
-            formValues.location.name
+        {searchParams.location &&
+          `${findCountryNameByCode(searchParams.location.country)}, ${
+            searchParams.location.name
           }`}
       </caption>
       <thead>
@@ -97,10 +89,9 @@ export default function HistoricalWeatherWidget({ formValues }: Props) {
                 ))}
               {weeklyWeather.map((dailyWeather, idx) => (
                 <TableCell
+                  displayDate
                   key={idx}
                   weather={dailyWeather}
-                  formatDate={formatDate}
-                  getDate={getDate}
                 />
               ))}
             </tr>

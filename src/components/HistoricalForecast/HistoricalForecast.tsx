@@ -4,13 +4,13 @@ import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 
 export default function HistoricalForecast() {
-  const [selectedFormValues, onSelectFormValues] =
+  const [selectedSearchParams, onSelectSearchParams] =
     useState<FormValuesType | null>(null);
   return (
     <>
-      <HistoricalWeatherForm setFormValues={onSelectFormValues} />
-      {selectedFormValues && (
-        <HistoricalWeatherWidget formValues={selectedFormValues} />
+      <HistoricalWeatherForm setSearchParams={onSelectSearchParams} />
+      {selectedSearchParams && (
+        <HistoricalWeatherWidget searchParams={selectedSearchParams} />
       )}
     </>
   );
