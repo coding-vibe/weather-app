@@ -34,7 +34,7 @@ export default function Forecast() {
     <Box css={classes.mainBox}>
       <Box css={classes.box}>
         <p css={classes.text}>
-          Choose options for 5-Day weather forecast search&nbsp;
+          Choose options for 5-day weather forecast search&nbsp;
         </p>
         <ArrowIcon />
       </Box>
