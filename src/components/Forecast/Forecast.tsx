@@ -1,4 +1,6 @@
 import { useContext, useState } from 'react';
+import ArrowIcon from '@mui/icons-material/ArrowCircleDownSharp';
+import Box from '@mui/material/Box';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
@@ -29,9 +31,14 @@ export default function Forecast() {
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
-    <>
+    <Box css={classes.mainBox}>
+      <Box css={classes.box}>
+        <p css={classes.text}>
+          Choose options for 5-Day weather forecast search&nbsp;
+        </p>
+        <ArrowIcon />
+      </Box>
       <Select<LanguageOption>
-        css={classes.languageSelect}
         value={selectedLanguage}
         setValue={(event: SelectChangeEvent) => {
           onSelectLanguage(event.target.value as Languages);
@@ -41,13 +48,11 @@ export default function Forecast() {
         options={LANGUAGE_OPTIONS}
       />
       <LocationAutocomplete
-        css={classes.locationAutocomplete}
         location={selectedLocation}
         setLocation={onSelectLocation}
         id={LOCATION_AUTOCOMPLETE}
       />
       <Select<TemperatureUnitOption>
-        css={classes.temperatureUnitsSelect}
         value={selectedTemperatureUnit}
         setValue={(event: SelectChangeEvent) => {
           onSelectTemperatureUnit(event.target.value as TemperatureUnits);
@@ -57,6 +62,6 @@ export default function Forecast() {
         options={TEMPERATURE_UNITS_OPTIONS}
       />
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
-    </>
+    </Box>
   );
 }

@@ -12,7 +12,6 @@ interface Props<Option extends OptionBase> {
   options: Option[];
   setValue: (event: SelectChangeEvent<Option['value']>) => void;
   value: Option['value'];
-  className?: string;
   error?: boolean;
   helperText?: string;
   name?: string;
@@ -24,15 +23,12 @@ export default function Select<Option extends OptionBase>({
   options,
   setValue,
   value,
-  className,
   error,
   helperText,
   name,
 }: Props<Option>) {
   return (
-    <FormControl
-      className={className}
-      error={error}>
+    <FormControl error={error}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
         css={classes.select}
@@ -55,7 +51,6 @@ export default function Select<Option extends OptionBase>({
 }
 
 Select.defaultProps = {
-  className: null,
   error: false,
   helperText: null,
   name: null,

@@ -1,10 +1,12 @@
 import { useContext } from 'react';
+import MUITableCell from '@mui/material/TableCell';
 import Tooltip from '@mui/material/Tooltip';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
 import SettingsContextType from 'types/settingsContextType';
 import convertTimestampToDate, { formatDate } from 'utils/formatDate';
+import * as classes from './styles';
 
 interface TableCellProps {
   weather: ForecastBody;
@@ -38,19 +40,25 @@ export default function TableCell({ weather, displayDate }: TableCellProps) {
   ) => `${Math.floor(temperature)}${formatTemperatureUnits(temperatureUnit)}`;
 
   return (
-    <td key={dt}>
+    <MUITableCell key={dt}>
       {displayDate && formatDate(convertTimestampToDate(dt))}
       <Tooltip title={description}>
         <img
-          src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
           alt='Weather condition'
+          css={classes.icon}
+          src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
         />
       </Tooltip>
-      {`Temperature: ${formatTemperatureData(
-        temp,
-        selectedTemperatureUnit,
-      )} Humidity: ${humidity}%`}
-    </td>
+      <p>
+        Temp:&nbsp;
+        <span css={classes.data}>
+          {formatTemperatureData(temp, selectedTemperatureUnit)}
+        </span>
+      </p>
+      <p>
+        Hum:&nbsp;<span css={classes.data}>{humidity}%</span>
+      </p>
+    </MUITableCell>
   );
 }
 
