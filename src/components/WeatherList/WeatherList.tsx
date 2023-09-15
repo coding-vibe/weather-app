@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Tooltip from '@mui/material/Tooltip';
+import ICON_BASE_URL from 'constants/iconBaseURL';
 import SettingsContext from 'contexts/SettingsContext';
 import { Forecast } from 'types/forecast';
 import Location from 'types/location';
@@ -81,9 +82,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
                       <Tooltip title={description}>
                         <img
                           alt='Weather condition'
-                          src={`${
-                            import.meta.env.VITE_BASE_URL
-                          }img/wn/${icon}.png`}
+                          src={`${ICON_BASE_URL}img/wn/${icon}.png`}
                         />
                       </Tooltip>
                       <div css={classes.data}>

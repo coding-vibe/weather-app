@@ -10,10 +10,10 @@ import * as classes from './styles';
 
 interface TableCellProps {
   weather: ForecastBody;
-  displayDate?: boolean;
+  isDateShown?: boolean;
 }
 
-export default function TableCell({ weather, displayDate }: TableCellProps) {
+export default function TableCell({ weather, isDateShown }: TableCellProps) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const {
@@ -26,7 +26,7 @@ export default function TableCell({ weather, displayDate }: TableCellProps) {
     <MUITableCell
       css={classes.tableCell}
       key={dt}>
-      {displayDate && formatDate(convertTimestampToDate(dt))}
+      {isDateShown && formatDate(convertTimestampToDate(dt))}
       <Tooltip title={description}>
         <img
           alt='Weather condition'
@@ -34,19 +34,19 @@ export default function TableCell({ weather, displayDate }: TableCellProps) {
           src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
         />
       </Tooltip>
-      <p>
+      <span>
         Temp:&nbsp;
         <span css={classes.data}>
           {formatTemperatureData(temp, selectedTemperatureUnit)}
         </span>
-      </p>
-      <p>
+      </span>
+      <span>
         Hum:&nbsp;<span css={classes.data}>{humidity}%</span>
-      </p>
+      </span>
     </MUITableCell>
   );
 }
 
 TableCell.defaultProps = {
-  displayDate: false,
+  isDateShown: false,
 };

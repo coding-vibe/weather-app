@@ -89,7 +89,7 @@ export default function HistoricalWeatherWidget({ searchParams }: Props) {
                 ))}
               {weeklyWeather.map((dailyWeather, idx) => (
                 <TableCell
-                  displayDate
+                  isDateShown
                   key={idx}
                   weather={dailyWeather}
                 />
