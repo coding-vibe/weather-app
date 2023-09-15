@@ -1,13 +1,15 @@
 import CircularProgress from '@mui/material/CircularProgress';
+import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
-import ForecastBody, { Forecast } from 'types/forecast';
+import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/formatDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import WEEK_DAYS from './weekDays';
 
 interface Props {
-  forecast: Forecast;
-  isLoading: boolean;
+  forecast: ForecastBody[];
+  loadingStatus: boolean;
+  searchParams: FormValuesType;
 }
 
 const MONDAY = 'Mon';
@@ -16,15 +18,16 @@ const WEEK_LENGTH = 7;
 
 export default function HistoricalWeatherWidget({
   forecast,
-  isLoading,
+  loadingStatus,
+  searchParams,
 }: Props) {
   const weeklyForecast = forecast?.reduce<ForecastBody[][]>(
     (accumulator, dailyForecast) => {
       const { dt } = dailyForecast;
-      const weekDay = convertTimestampToDate(dt).getDay();
-      const currentWeekDay = WEEK_DAYS[weekDay - 1];
+      const weekDayIndex = convertTimestampToDate(dt).getDay() - 1;
+      const weekDay = WEEK_DAYS[weekDayIndex];
 
-      if (currentWeekDay === MONDAY || accumulator.length === 0) {
+      if (weekDay === MONDAY) {
         accumulator.push([dailyForecast]);
       } else {
         accumulator[accumulator.length - 1].push(dailyForecast);
@@ -34,15 +37,14 @@ export default function HistoricalWeatherWidget({
     [[]],
   );
 
-  return isLoading ? (
+  return loadingStatus ? (
     <CircularProgress size={SPINNER_SIZE} />
   ) : (
     <table>
       <caption>
-        {forecast.location &&
-          `${findCountryNameByCode(searchParams.location.country)}, ${
-            searchParams.location.name
-          }`}
+        {`${findCountryNameByCode(searchParams.location.country)}, ${
+          searchParams.location.name
+        }`}
       </caption>
       <thead>
         <tr>
@@ -53,11 +55,11 @@ export default function HistoricalWeatherWidget({
       </thead>
       <tbody>
         {weeklyForecast?.map((weeklyWeather, index) => {
-          const emptyCells = WEEK_LENGTH - weeklyWeather.length;
+          const emptyCellsCount = WEEK_LENGTH - weeklyWeather.length;
           return (
             <tr key={index}>
               {index === 0 &&
-                Array.from({ length: emptyCells }).map((_, idx) => (
+                Array.from({ length: emptyCellsCount }).map((_, idx) => (
                   // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
                   <td key={idx} />
                 ))}

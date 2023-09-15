@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
-import { Forecast } from 'types/forecast';
+import ForecastBody from 'types/forecast';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import FORECAST from './forecast';
 
@@ -11,8 +11,8 @@ export default function HistoricalForecast() {
   const { enqueueSnackbar } = useSnackbar();
   const [selectedSearchParams, onSelectSearchParams] =
     useState<FormValuesType | null>(null);
-  const [forecast, setForecast] = useState<Forecast | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchForecast = () => {
@@ -36,10 +36,11 @@ export default function HistoricalForecast() {
   return (
     <>
       <HistoricalWeatherForm setSearchParams={onSelectSearchParams} />
-      {selectedSearchParams && (
+      {forecast && selectedSearchParams && (
         <HistoricalWeatherWidget
           forecast={forecast}
-          isLoading={isLoading}
+          loadingStatus={isLoading}
+          searchParams={selectedSearchParams}
         />
       )}
     </>

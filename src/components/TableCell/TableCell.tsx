@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Tooltip from '@mui/material/Tooltip';
+import ICON_BASE_URL from 'constants/iconBaseURL';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
@@ -42,7 +43,7 @@ export default function TableCell({ weather, displayDate }: TableCellProps) {
       {displayDate && formatDate(convertTimestampToDate(dt))}
       <Tooltip title={description}>
         <img
-          src={`${import.meta.env.VITE_BASE_URL}img/wn/${icon}.png`}
+          src={`${ICON_BASE_URL}img/wn/${icon}.png`}
           alt='Weather condition'
         />
       </Tooltip>

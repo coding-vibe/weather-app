@@ -25,7 +25,7 @@ const TIME_PERIODS_AMOUNT = 8;
 export default function WeatherWidget({ location }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { selectedLanguage, selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
 
@@ -86,12 +86,12 @@ export default function WeatherWidget({ location }: Props) {
       </thead>
       <tbody>
         {forecast?.map(([date, weather], index) => {
-          const emptyCells = TIME_PERIODS_AMOUNT - weather.length;
+          const emptyCellsCount = TIME_PERIODS_AMOUNT - weather.length;
           return (
             <tr key={date}>
               <td>{date}</td>
               {index === 0 &&
-                Array.from({ length: emptyCells }).map((_, idx) => (
+                Array.from({ length: emptyCellsCount }).map((_, idx) => (
                   // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
                   <td key={idx} />
                 ))}
