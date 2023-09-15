@@ -17,3 +17,5 @@ export default ForecastBody;
 export interface ForecastAPIResponse {
   list: ForecastBody[];
 }
+
+export type Forecast = Array<[string, ForecastBody[]]>;
