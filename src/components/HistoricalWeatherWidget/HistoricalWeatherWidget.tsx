@@ -2,7 +2,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecast';
-import convertTimestampToDate from 'utils/formatDate';
+import convertTimestampToDate from 'utils/convertTimestampToDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import WEEK_DAYS from './weekDays';
 
