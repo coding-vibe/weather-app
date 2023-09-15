@@ -79,6 +79,7 @@ export default function WeatherWidget({ location }: Props) {
         <WeatherList
           css={classes.weatherList}
           forecast={forecast}
+          location={location}
         />
       )}
     </Box>

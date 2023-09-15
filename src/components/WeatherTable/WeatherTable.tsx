@@ -16,13 +16,14 @@ import * as classes from './styles';
 interface Props {
   forecast: Forecast;
   location: Location;
+  className?: string;
 }
 
 const TIME_PERIODS_AMOUNT = 8;
 
-export default function WeatherTable({ forecast, location }: Props) {
+export default function WeatherTable({ forecast, location, className }: Props) {
   return (
-    <Box>
+    <Box className={className}>
       <p css={classes.tableTitle}>
         5-Day Weather Forecast for&nbsp;
         {location &&
@@ -77,3 +78,7 @@ export default function WeatherTable({ forecast, location }: Props) {
     </Box>
   );
 }
+
+WeatherTable.defaultProps = {
+  className: null,
+};

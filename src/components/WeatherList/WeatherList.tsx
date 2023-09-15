@@ -5,18 +5,23 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-// import ListSubheader from '@mui/material/ListSubheader';
+import ListSubheader from '@mui/material/ListSubheader';
 import Tooltip from '@mui/material/Tooltip';
 import SettingsContext from 'contexts/SettingsContext';
 import { Forecast } from 'types/forecast';
+import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
+import findCountryNameByCode from 'utils/findCountryNameByCode';
 import formatTemperatureData from 'utils/formatTemperature';
+import * as classes from './styles';
 
 interface Props {
   forecast: Forecast;
+  location: Location;
+  className?: string;
 }
 
-export default function WeatherList({ forecast }: Props) {
+export default function WeatherList({ forecast, location, className }: Props) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const [openItems, setOpenItems] = useState<boolean[]>(
@@ -30,14 +35,28 @@ export default function WeatherList({ forecast }: Props) {
   };
 
   return (
-    <List component='nav'>
+    <List
+      component='nav'
+      className={className}
+      css={classes.headList}
+      subheader={
+        <ListSubheader component='div'>
+          5-Day Weather Forecast for&nbsp;
+          {location &&
+            `${findCountryNameByCode(location.country)}, ${location.name}`}
+        </ListSubheader>
+      }>
       {forecast?.map(([date, weather], index) => (
-        <List component='nav'>
+        <List
+          key={date}
+          component='nav'
+          css={classes.mainList}>
           <ListItem
             key={index}
+            css={classes.mainListItem}
             onClick={() => handleClick(index)}>
-            <ListItemButton>
-              <ListItemText>{date}</ListItemText>
+            <ListItemButton css={classes.mainListItemButton}>
+              <ListItemText css={classes.mainListItemText}>{date}</ListItemText>
             </ListItemButton>
           </ListItem>
           <Collapse
@@ -56,8 +75,8 @@ export default function WeatherList({ forecast }: Props) {
                   component='div'
                   disablePadding
                   key={idx}>
-                  <ListItem>
-                    <ListItemText>
+                  <ListItem css={classes.listItem}>
+                    <ListItemText css={classes.listItemText}>
                       <p>{hour}</p>
                       <Tooltip title={description}>
                         <img
@@ -67,15 +86,20 @@ export default function WeatherList({ forecast }: Props) {
                           }img/wn/${icon}.png`}
                         />
                       </Tooltip>
-                      <p>
-                        Temp:&nbsp;
+                      <div css={classes.data}>
                         <span>
-                          {formatTemperatureData(temp, selectedTemperatureUnit)}
+                          Temp:&nbsp;
+                          <span css={classes.text}>
+                            {formatTemperatureData(
+                              temp,
+                              selectedTemperatureUnit,
+                            )}
+                          </span>
                         </span>
-                      </p>
-                      <p>
-                        Hum:&nbsp;<span>{humidity}%</span>
-                      </p>
+                        <span>
+                          Hum:&nbsp;<span css={classes.text}>{humidity}%</span>
+                        </span>
+                      </div>
                     </ListItemText>
                   </ListItem>
                 </List>
@@ -87,3 +111,7 @@ export default function WeatherList({ forecast }: Props) {
     </List>
   );
 }
+
+WeatherList.defaultProps = {
+  className: null,
+};

@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
 
 export const weatherTable = css`
-  @media (min-width: 1000px) {
+  @media (max-width: 999px) {
     display: none;
   }
 `;
 
 export const weatherList = css`
-  @media (max-width: 1000px) {
+  @media (min-width: 1000px) {
     display: none;
   }
 `;

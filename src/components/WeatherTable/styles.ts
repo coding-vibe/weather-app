@@ -5,17 +5,16 @@ export const tableTitle = css`
 
   color: #49484a;
 
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 800;
 `;
 
 export const tableContainer = css`
-  width: 1000px;
+  width: 960px;
 `;
 
 export const tableHeadCell = css`
   color: #49484a;
 
-  font-size: 16px;
   font-weight: 800;
 `;

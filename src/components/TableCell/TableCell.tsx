@@ -23,7 +23,9 @@ export default function TableCell({ weather, displayDate }: TableCellProps) {
   } = weather;
 
   return (
-    <MUITableCell key={dt}>
+    <MUITableCell
+      css={classes.tableCell}
+      key={dt}>
       {displayDate && formatDate(convertTimestampToDate(dt))}
       <Tooltip title={description}>
         <img
