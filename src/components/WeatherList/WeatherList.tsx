@@ -36,11 +36,11 @@ export default function WeatherList({ forecast, location, className }: Props) {
 
   return (
     <List
-      component='nav'
+      component='ul'
       className={className}
       css={classes.headList}
       subheader={
-        <ListSubheader component='div'>
+        <ListSubheader component='p'>
           5-Day Weather Forecast for&nbsp;
           {location &&
             `${findCountryNameByCode(location.country)}, ${location.name}`}
@@ -49,7 +49,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
       {forecast?.map(([date, weather], index) => (
         <List
           key={date}
-          component='nav'
+          component='ul'
           css={classes.mainList}>
           <ListItem
             key={index}
@@ -72,7 +72,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
               const hour = format(dt * 1000, 'hh:00 a');
               return (
                 <List
-                  component='div'
+                  component='ul'
                   disablePadding
                   key={idx}>
                   <ListItem css={classes.listItem}>

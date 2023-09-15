@@ -18,4 +18,4 @@ export interface ForecastAPIResponse {
   list: ForecastBody[];
 }
 
-export type Forecast = Array<[string, ForecastBody[]]>;
+export type Forecast = [string, ForecastBody[]][];

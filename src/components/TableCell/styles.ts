@@ -10,7 +10,6 @@ export const icon = css`
 
 export const data = css`
   color: #49484a;
-
   font-size: 14px;
   font-weight: 800;
 `;

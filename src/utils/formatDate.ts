@@ -6,7 +6,8 @@ const convertTimestampToDate = (unixDate: number): Date => {
 };
 export default convertTimestampToDate;
 
+const dateFormat = 'dd MMMM';
 export const formatDate = (date: Date): string => {
-  const formattedDate = format(date, 'dd MMMM');
+  const formattedDate = format(date, dateFormat);
   return formattedDate;
 };

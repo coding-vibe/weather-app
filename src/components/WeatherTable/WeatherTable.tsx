@@ -19,8 +19,6 @@ interface Props {
   className?: string;
 }
 
-const TIME_PERIODS_AMOUNT = 8;
-
 export default function WeatherTable({ forecast, location, className }: Props) {
   return (
     <Box className={className}>
@@ -50,7 +48,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
           </TableHead>
           <TableBody>
             {forecast?.map(([date, weather], index) => {
-              const emptyCells = TIME_PERIODS_AMOUNT - weather.length;
+              const emptyCells = HOURS.length - weather.length;
               return (
                 <TableRow
                   hover

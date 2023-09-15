@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
-import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
@@ -67,21 +66,19 @@ export default function WeatherWidget({ location }: Props) {
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
   ) : (
-    <Box>
-      {forecast && (
+    !!forecast && (
+      <>
         <WeatherTable
           css={classes.weatherTable}
           forecast={forecast}
           location={location}
         />
-      )}
-      {forecast && (
         <WeatherList
           css={classes.weatherList}
           forecast={forecast}
           location={location}
         />
-      )}
-    </Box>
+      </>
+    )
   );
 }
