@@ -60,10 +60,13 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
-    "no-unused-vars": 0,
-    "@typescript-eslint/no-unused-vars": 2,
-    "no-shadow": 0,
-    "@typescript-eslint/no-shadow": 2,
+    'no-unused-vars': 0,
+    '@typescript-eslint/no-unused-vars': 2,
+    'no-shadow': 0,
+    '@typescript-eslint/no-shadow': 2,
+    'jsx-a11y/control-has-associated-label': [2, {
+      'ignoreElements': ['td']
+    }]
   },
   settings: {
     'import/resolver': {
