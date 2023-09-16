@@ -1,16 +1,51 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import pick from 'lodash/pick';
+import { useSnackbar } from 'notistack';
+import CircularProgress from '@mui/material/CircularProgress';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
+import ForecastBody from 'types/forecast';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
+import FORECAST from './forecast';
+
+const SPINNER_SIZE = 25;
 
 export default function HistoricalForecast() {
+  const { enqueueSnackbar } = useSnackbar();
   const [selectedSearchParams, onSelectSearchParams] =
     useState<FormValuesType | null>(null);
-  return (
+  const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchForecast = () => {
+      try {
+        setIsLoading(true);
+        const forecastData = FORECAST.list.map((data) =>
+          pick(data, ['dt', 'main', 'weather']),
+        );
+        setForecast(forecastData);
+      } catch (error) {
+        enqueueSnackbar('No weather data found for this location', {
+          variant: 'error',
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchForecast();
+  }, [selectedSearchParams, enqueueSnackbar]);
+
+  return isLoading ? (
+    <CircularProgress size={SPINNER_SIZE} />
+  ) : (
     <>
       <HistoricalWeatherForm setSearchParams={onSelectSearchParams} />
-      {selectedSearchParams && (
-        <HistoricalWeatherWidget searchParams={selectedSearchParams} />
+      {forecast && selectedSearchParams && (
+        <HistoricalWeatherWidget
+          forecast={forecast}
+          searchParams={selectedSearchParams}
+        />
       )}
     </>
   );
