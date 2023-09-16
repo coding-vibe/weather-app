@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
+import CircularProgress from '@mui/material/CircularProgress';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
 import ForecastBody from 'types/forecast';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import FORECAST from './forecast';
+
+const SPINNER_SIZE = 25;
 
 export default function HistoricalForecast() {
   const { enqueueSnackbar } = useSnackbar();
@@ -33,13 +36,14 @@ export default function HistoricalForecast() {
     fetchForecast();
   }, [selectedSearchParams, enqueueSnackbar]);
 
-  return (
+  return isLoading ? (
+    <CircularProgress size={SPINNER_SIZE} />
+  ) : (
     <>
       <HistoricalWeatherForm setSearchParams={onSelectSearchParams} />
       {forecast && selectedSearchParams && (
         <HistoricalWeatherWidget
           forecast={forecast}
-          loadingStatus={isLoading}
           searchParams={selectedSearchParams}
         />
       )}

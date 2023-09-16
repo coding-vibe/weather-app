@@ -5,7 +5,8 @@ import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
 import SettingsContextType from 'types/settingsContextType';
-import convertTimestampToDate, { formatDate } from 'utils/formatDate';
+import convertTimestampToDate from 'utils/convertTimestampToDate';
+import formatDate from 'utils/formatDate';
 
 interface TableCellProps {
   weather: ForecastBody;

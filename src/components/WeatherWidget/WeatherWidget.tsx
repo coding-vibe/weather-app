@@ -95,9 +95,9 @@ export default function WeatherWidget({ location }: Props) {
                   // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
                   <td key={idx} />
                 ))}
-              {weather.map((hourlyWeather, idx) => (
+              {weather.map((hourlyWeather) => (
                 <TableCell
-                  key={idx}
+                  key={hourlyWeather.dt}
                   weather={hourlyWeather}
                 />
               ))}

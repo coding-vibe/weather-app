@@ -1,4 +1,3 @@
-import CircularProgress from '@mui/material/CircularProgress';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import TableCell from 'components/TableCell';
 import ForecastBody from 'types/forecast';
@@ -8,17 +7,14 @@ import WEEK_DAYS from './weekDays';
 
 interface Props {
   forecast: ForecastBody[];
-  loadingStatus: boolean;
   searchParams: FormValuesType;
 }
 
 const MONDAY = 'Mon';
-const SPINNER_SIZE = 25;
 const WEEK_LENGTH = 7;
 
 export default function HistoricalWeatherWidget({
   forecast,
-  loadingStatus,
   searchParams,
 }: Props) {
   const weeklyForecast = forecast?.reduce<ForecastBody[][]>(
@@ -37,9 +33,7 @@ export default function HistoricalWeatherWidget({
     [[]],
   );
 
-  return loadingStatus ? (
-    <CircularProgress size={SPINNER_SIZE} />
-  ) : (
+  return (
     <table>
       <caption>
         {`${findCountryNameByCode(searchParams.location.country)}, ${
