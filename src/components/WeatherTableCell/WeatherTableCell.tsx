@@ -2,21 +2,24 @@ import { useContext } from 'react';
 import MUITableCell from '@mui/material/TableCell';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import ICON_BASE_URL from 'constants/iconBaseURL';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
 import SettingsContextType from 'types/settingsContextType';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
 import formatDate from 'utils/formatDate';
 import formatTemperatureData from 'utils/formatTemperature';
+import generateIconURL from 'utils/generateIconURL';
 import * as classes from './styles';
 
-interface TableCellProps {
+interface WeatherTableCellProps {
   weather: ForecastBody;
   isDateShown?: boolean;
 }
 
-export default function TableCell({ weather, isDateShown }: TableCellProps) {
+export default function WeatherTableCell({
+  weather,
+  isDateShown,
+}: WeatherTableCellProps) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const {
@@ -26,13 +29,13 @@ export default function TableCell({ weather, isDateShown }: TableCellProps) {
   } = weather;
 
   return (
-    <MUITableCell key={dt}>
+    <MUITableCell>
       {isDateShown && formatDate(convertTimestampToDate(dt))}
       <Tooltip title={description}>
         <img
           alt='Weather condition'
           css={classes.icon}
-          src={`${ICON_BASE_URL}img/wn/${icon}.png`}
+          src={generateIconURL(icon)}
         />
       </Tooltip>
       <div css={classes.wrap}>
@@ -63,6 +66,6 @@ export default function TableCell({ weather, isDateShown }: TableCellProps) {
   );
 }
 
-TableCell.defaultProps = {
+WeatherTableCell.defaultProps = {
   isDateShown: false,
 };

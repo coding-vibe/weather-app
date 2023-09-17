@@ -6,12 +6,10 @@ import MUITableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-
-import TableCell from 'components/TableCell';
+import WeatherContentHeader from 'components/WeatherContentHeader';
+import WeatherTableCell from 'components/WeatherTableCell';
 import { Forecast } from 'types/forecast';
 import Location from 'types/location';
-import findCountryNameByCode from 'utils/findCountryNameByCode';
 import HOURS from './hours';
 import * as classes from './styles';
 
@@ -24,23 +22,18 @@ interface Props {
 export default function WeatherTable({ forecast, location, className }: Props) {
   return (
     <Box className={className}>
-      <Typography
-        component='p'
+      <WeatherContentHeader
+        country={location.country}
         css={classes.tableTitle}
-        variant='subtitle1'>
-        5-Day Weather Forecast for&nbsp;
-        {location &&
-          `${findCountryNameByCode(location.country)}, ${location.name}`}
-      </Typography>
+        name={location.name}
+      />
       <TableContainer
         component={Paper}
         css={classes.tableContainer}>
         <Table aria-label='5-Day Weather Forecast'>
           <TableHead>
             <TableRow>
-              <MUITableCell css={classes.tableHeadCell}>
-                Date/Hours
-              </MUITableCell>
+              <MUITableCell css={classes.tableHeadCell}>Date/Time</MUITableCell>
               {HOURS.map((hour) => (
                 <MUITableCell
                   align='center'
@@ -67,7 +60,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
                       <MUITableCell key={idx} />
                     ))}
                   {weather.map((hourlyWeather, idx) => (
-                    <TableCell
+                    <WeatherTableCell
                       key={idx}
                       weather={hourlyWeather}
                     />

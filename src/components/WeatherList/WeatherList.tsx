@@ -5,16 +5,15 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import ICON_BASE_URL from 'constants/iconBaseURL';
+import WeatherContentHeader from 'components/WeatherContentHeader';
 import SettingsContext from 'contexts/SettingsContext';
 import { Forecast } from 'types/forecast';
 import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
-import findCountryNameByCode from 'utils/findCountryNameByCode';
 import formatTemperatureData from 'utils/formatTemperature';
+import generateIconURL from 'utils/generateIconURL';
 import * as classes from './styles';
 
 interface Props {
@@ -39,20 +38,18 @@ export default function WeatherList({ forecast, location, className }: Props) {
   return (
     <List
       disablePadding
-      component='ul'
       className={className}
       css={classes.headList}
       subheader={
-        <ListSubheader component='p'>
-          5-Day Weather Forecast for&nbsp;
-          {location &&
-            `${findCountryNameByCode(location.country)}, ${location.name}`}
-        </ListSubheader>
+        <WeatherContentHeader
+          country={location.country}
+          css={classes.headListTitle}
+          name={location.name}
+        />
       }>
       {forecast?.map(([date, weather], index) => (
         <List
           disablePadding
-          component='ul'
           key={date}>
           <ListItem
             disablePadding
@@ -77,7 +74,6 @@ export default function WeatherList({ forecast, location, className }: Props) {
               return (
                 <List
                   disablePadding
-                  component='ul'
                   key={idx}>
                   <ListItem disablePadding>
                     <ListItemText css={classes.listItemText}>
@@ -85,7 +81,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
                       <Tooltip title={description}>
                         <img
                           alt='Weather condition'
-                          src={`${ICON_BASE_URL}img/wn/${icon}.png`}
+                          src={generateIconURL(icon)}
                         />
                       </Tooltip>
                       <div css={classes.data}>

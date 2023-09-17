@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { css } from '@emotion/react';
+import { Theme } from '@mui/material';
 
 export const icon = css`
   margin: 0 auto;
@@ -11,6 +10,6 @@ export const wrap = css`
   flex-direction: column;
 `;
 
-export const text = (theme: any) => css`
+export const text = (theme: Theme) => css`
   color: ${theme.palette.secondary.main};
 `;

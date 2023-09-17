@@ -1,19 +1,19 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { css } from '@emotion/react';
+import { Theme } from '@mui/material';
 
-export const weatherTable = (theme: any) => css`
+export const weatherTable = (theme: Theme) => css`
   margin: 15px;
   ${theme.breakpoints.down('md')} {
     display: none;
   }
 `;
 
-export const weatherList = (theme: any) => css`
+export const weatherList = (theme: Theme) => css`
   margin: 15px;
-  ${theme.breakpoints.up('bd')} {
+  ${theme.breakpoints.up('md')} {
     display: none;
+  }
+  ${theme.breakpoints.down('sm')} {
+    margin: 10px;
   }
 `;

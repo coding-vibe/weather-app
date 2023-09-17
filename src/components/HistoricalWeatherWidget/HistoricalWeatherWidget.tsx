@@ -1,5 +1,5 @@
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
-import TableCell from 'components/TableCell';
+import TableCell from 'components/WeatherTableCell';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
 import findCountryNameByCode from 'utils/findCountryNameByCode';

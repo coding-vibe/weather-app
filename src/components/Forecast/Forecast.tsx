@@ -31,7 +31,7 @@ export default function Forecast() {
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
-    <>
+    <div>
       <div css={classes.wrap}>
         <Typography
           component='p'
@@ -68,6 +68,6 @@ export default function Forecast() {
         options={TEMPERATURE_UNITS_OPTIONS}
       />
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
-    </>
+    </div>
   );
 }
