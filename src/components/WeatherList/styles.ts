@@ -1,49 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { css } from '@emotion/react';
 
-export const headList = css`
-  border: 1px solid #f5f5f5;
-  width: 420px;
+export const headList = (theme: any) => css`
+  border: 1px solid ${theme.palette.secondary.light};
+  width: 435px;
 
   & .MuiListSubheader-root {
-    border-bottom: 1px solid #f5f5f5;
-    color: #49484a;
-    font-size: 19px;
+    border-bottom: 1px solid ${theme.palette.secondary.light};
+    color: ${theme.palette.secondary.main};
+    font-size: 20px;
     font-weight: 800;
   }
-`;
-
-export const mainList = css`
-  padding: 10px 0px 0px 0px;
-`;
-
-export const mainListItem = css`
-  padding: 0;
-  border-bottom: 1px solid #fcfcfc;
 `;
 
 export const mainListItemButton = css`
-  padding-left: 30px;
+  padding-left: 20px;
 `;
 
-export const mainListItemText = css`
+export const mainListItemText = (theme: any) => css`
   & .MuiListItemText-primary {
-    color: #49484a;
-    font-size: 16px;
-    font-weight: 800;
+    color: ${theme.palette.secondary.main};
+    font-weight: 500;
   }
-`;
-
-export const listItem = css`
-  padding-left: 0px;
 `;
 
 export const listItemText = css`
   & .MuiListItemText-primary {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-left: 40px;
-    font-size: 14px;
+    gap: 15px;
+    padding-left: 30px;
+    font-size: 12px;
   }
 `;
 
@@ -52,7 +40,6 @@ export const data = css`
   flex-direction: column;
 `;
 
-export const text = css`
-  color: #49484a;
-  font-weight: 800;
+export const text = (theme: any) => css`
+  color: ${theme.palette.secondary.main};
 `;

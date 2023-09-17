@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import ICON_BASE_URL from 'constants/iconBaseURL';
 import SettingsContext from 'contexts/SettingsContext';
 import { Forecast } from 'types/forecast';
@@ -37,6 +38,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
 
   return (
     <List
+      disablePadding
       component='ul'
       className={className}
       css={classes.headList}
@@ -49,12 +51,13 @@ export default function WeatherList({ forecast, location, className }: Props) {
       }>
       {forecast?.map(([date, weather], index) => (
         <List
-          key={date}
+          disablePadding
           component='ul'
-          css={classes.mainList}>
+          key={date}>
           <ListItem
+            disablePadding
+            divider
             key={index}
-            css={classes.mainListItem}
             onClick={() => handleClick(index)}>
             <ListItemButton css={classes.mainListItemButton}>
               <ListItemText css={classes.mainListItemText}>{date}</ListItemText>
@@ -73,10 +76,10 @@ export default function WeatherList({ forecast, location, className }: Props) {
               const hour = format(dt * 1000, 'hh:00 a');
               return (
                 <List
-                  component='ul'
                   disablePadding
+                  component='ul'
                   key={idx}>
-                  <ListItem css={classes.listItem}>
+                  <ListItem disablePadding>
                     <ListItemText css={classes.listItemText}>
                       <p>{hour}</p>
                       <Tooltip title={description}>
@@ -88,15 +91,24 @@ export default function WeatherList({ forecast, location, className }: Props) {
                       <div css={classes.data}>
                         <span>
                           Temp:&nbsp;
-                          <span css={classes.text}>
+                          <Typography
+                            component='span'
+                            css={classes.text}
+                            variant='subtitle2'>
                             {formatTemperatureData(
                               temp,
                               selectedTemperatureUnit,
                             )}
-                          </span>
+                          </Typography>
                         </span>
                         <span>
-                          Hum:&nbsp;<span css={classes.text}>{humidity}%</span>
+                          Hum:&nbsp;
+                          <Typography
+                            component='span'
+                            css={classes.text}
+                            variant='subtitle2'>
+                            {humidity}%
+                          </Typography>
                         </span>
                       </div>
                     </ListItemText>

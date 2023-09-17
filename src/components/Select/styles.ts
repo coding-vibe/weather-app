@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
 
 export const select = css`
-  width: 420px;
+  width: 435px;
 `;

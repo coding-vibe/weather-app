@@ -21,6 +21,7 @@ interface Props {
   id: string;
   location: Location | null;
   setLocation: (value: Location) => void;
+  className?: string;
   error?: boolean;
   helperText?: string;
 }
@@ -29,6 +30,7 @@ export default function LocationAutocomplete({
   location,
   setLocation,
   id,
+  className,
   error,
   helperText,
 }: Props) {
@@ -108,6 +110,7 @@ export default function LocationAutocomplete({
   return (
     <Autocomplete
       disablePortal
+      className={className}
       css={classes.autocomplete}
       id={id}
       open={inputValue.length > MIN_INPUT_LEN && isOpen}
@@ -143,6 +146,7 @@ export default function LocationAutocomplete({
 }
 
 LocationAutocomplete.defaultProps = {
+  className: null,
   error: false,
   helperText: null,
 };

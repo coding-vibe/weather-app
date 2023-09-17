@@ -1,17 +1,15 @@
-import { css } from '@emotion/react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */ import { css } from '@emotion/react';
 
-export const tableTitle = css`
-  margin-bottom: 10px;
-  color: #49484a;
-  font-size: 21px;
-  font-weight: 800;
+export const tableTitle = (theme: any) => css`
+  margin-bottom: 15px;
+  color: ${theme.palette.secondary.main};
 `;
 
 export const tableContainer = css`
   width: 960px;
 `;
 
-export const tableHeadCell = css`
-  color: #49484a;
-  font-weight: 800;
+export const tableHeadCell = (theme: any) => css`
+  color: ${theme.palette.secondary.main};
 `;

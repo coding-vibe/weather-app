@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import CircularProgress from '@mui/material/CircularProgress';
+import pick from 'lodash/pick';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
 import ForecastBody from 'types/forecast';

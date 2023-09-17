@@ -8,6 +8,7 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
+import ThemeProvider from 'components/ThemeProvider';
 import { globalStyles } from './globalStyles';
 import App from './App';
 
@@ -15,15 +16,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <CssBaseline />
-        <GlobalStyles styles={globalStyles} />
-        <SnackbarProvider>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SettingsProvider>
-              <App />
-            </SettingsProvider>
-          </LocalizationProvider>
-        </SnackbarProvider>
+        <ThemeProvider>
+          <CssBaseline />
+          <GlobalStyles styles={globalStyles} />
+          <SnackbarProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <SettingsProvider>
+                <App />
+              </SettingsProvider>
+            </LocalizationProvider>
+          </SnackbarProvider>
+        </ThemeProvider>
       </StyledEngineProvider>
     </BrowserRouter>
   </StrictMode>,

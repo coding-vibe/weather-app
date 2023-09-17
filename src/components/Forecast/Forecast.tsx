@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import ArrowIcon from '@mui/icons-material/ArrowCircleDownSharp';
-import Box from '@mui/material/Box';
 import { SelectChangeEvent } from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
 import WeatherWidget from 'components/WeatherWidget';
@@ -31,37 +31,43 @@ export default function Forecast() {
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
-    <Box css={classes.mainBox}>
-      <Box css={classes.box}>
-        <p css={classes.text}>
+    <>
+      <div css={classes.wrap}>
+        <Typography
+          component='p'
+          css={classes.text}
+          variant='overline'>
           Choose options for 5-day weather forecast search&nbsp;
-        </p>
-        <ArrowIcon />
-      </Box>
+        </Typography>
+        <ArrowIcon css={classes.icon} />
+      </div>
       <Select<LanguageOption>
-        value={selectedLanguage}
+        css={classes.select}
         setValue={(event: SelectChangeEvent) => {
           onSelectLanguage(event.target.value as Languages);
         }}
-        labelId={LANGUAGE_CHOICE_LABEL_ID}
+        value={selectedLanguage}
         label={LANGUAGE_CHOICE_LABEL}
+        labelId={LANGUAGE_CHOICE_LABEL_ID}
         options={LANGUAGE_OPTIONS}
       />
       <LocationAutocomplete
+        css={classes.autocomplete}
+        id={LOCATION_AUTOCOMPLETE}
         location={selectedLocation}
         setLocation={onSelectLocation}
-        id={LOCATION_AUTOCOMPLETE}
       />
       <Select<TemperatureUnitOption>
-        value={selectedTemperatureUnit}
+        css={classes.select}
         setValue={(event: SelectChangeEvent) => {
           onSelectTemperatureUnit(event.target.value as TemperatureUnits);
         }}
-        labelId={TEMPERATURE_UNITS_LABEL_ID}
+        value={selectedTemperatureUnit}
         label={TEMPERATURE_UNITS_LABEL}
+        labelId={TEMPERATURE_UNITS_LABEL_ID}
         options={TEMPERATURE_UNITS_OPTIONS}
       />
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
-    </Box>
+    </>
   );
 }

@@ -6,6 +6,8 @@ import MUITableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
+
 import TableCell from 'components/TableCell';
 import { Forecast } from 'types/forecast';
 import Location from 'types/location';
@@ -22,11 +24,14 @@ interface Props {
 export default function WeatherTable({ forecast, location, className }: Props) {
   return (
     <Box className={className}>
-      <p css={classes.tableTitle}>
+      <Typography
+        component='p'
+        css={classes.tableTitle}
+        variant='subtitle1'>
         5-Day Weather Forecast for&nbsp;
         {location &&
           `${findCountryNameByCode(location.country)}, ${location.name}`}
-      </p>
+      </Typography>
       <TableContainer
         component={Paper}
         css={classes.tableContainer}>
