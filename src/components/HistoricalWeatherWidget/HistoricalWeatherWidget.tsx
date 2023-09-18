@@ -1,9 +1,10 @@
-import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
-import TableCell from 'components/WeatherTableCell';
+import HistoricalWeatherList from 'components/HistoricalWeatherList';
+import HistoricalWeatherTable from 'components/HistoricalWeatherTable';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
-import findCountryNameByCode from 'utils/findCountryNameByCode';
-import WEEK_DAYS from './weekDays';
+import WEEK_DAYS from 'utils/weekDays';
+import { FormValuesType } from '../HistoricalWeatherForm/validation';
+import * as classes from './styles';
 
 interface Props {
   forecast: ForecastBody[];
@@ -11,7 +12,6 @@ interface Props {
 }
 
 const MONDAY = 'Mon';
-const WEEK_LENGTH = 7;
 
 export default function HistoricalWeatherWidget({
   forecast,
@@ -33,41 +33,24 @@ export default function HistoricalWeatherWidget({
     [[]],
   );
 
+  const {
+    location: { country, name },
+  } = searchParams;
+
   return (
-    <table>
-      <caption>
-        {`${findCountryNameByCode(searchParams.location.country)}, ${
-          searchParams.location.name
-        }`}
-      </caption>
-      <thead>
-        <tr>
-          {WEEK_DAYS.map((day) => (
-            <th key={day}>{day}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {weeklyForecast?.map((weeklyWeather, index) => {
-          const emptyCellsCount = WEEK_LENGTH - weeklyWeather.length;
-          return (
-            <tr key={index}>
-              {index === 0 &&
-                Array.from({ length: emptyCellsCount }).map((_, idx) => (
-                  // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
-                  <td key={idx} />
-                ))}
-              {weeklyWeather.map((dailyWeather, idx) => (
-                <TableCell
-                  isDateShown
-                  key={idx}
-                  weather={dailyWeather}
-                />
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div>
+      <HistoricalWeatherTable
+        country={country}
+        css={classes.table}
+        name={name}
+        weeklyForecast={weeklyForecast}
+      />
+      <HistoricalWeatherList
+        country={country}
+        css={classes.list}
+        name={name}
+        weeklyForecast={weeklyForecast}
+      />
+    </div>
   );
 }

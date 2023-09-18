@@ -45,6 +45,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           country={location.country}
           css={classes.headListTitle}
           name={location.name}
+          text='5-Day'
         />
       }>
       {forecast?.map(([date, weather], index) => (

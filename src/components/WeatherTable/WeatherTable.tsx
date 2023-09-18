@@ -26,10 +26,9 @@ export default function WeatherTable({ forecast, location, className }: Props) {
         country={location.country}
         css={classes.tableTitle}
         name={location.name}
+        text='5-Day'
       />
-      <TableContainer
-        component={Paper}
-        css={classes.tableContainer}>
+      <TableContainer component={Paper}>
         <Table aria-label='5-Day Weather Forecast'>
           <TableHead>
             <TableRow>

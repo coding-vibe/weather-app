@@ -1,9 +1,8 @@
 import { useContext, useState } from 'react';
-import ArrowIcon from '@mui/icons-material/ArrowCircleDownSharp';
 import { SelectChangeEvent } from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
+import WeatherSearchCaption from 'components/WeatherSearchCaption';
 import WeatherWidget from 'components/WeatherWidget';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
@@ -32,15 +31,10 @@ export default function Forecast() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
     <div>
-      <div css={classes.wrap}>
-        <Typography
-          component='p'
-          css={classes.text}
-          variant='overline'>
-          Choose options for 5-day weather forecast search&nbsp;
-        </Typography>
-        <ArrowIcon css={classes.icon} />
-      </div>
+      <WeatherSearchCaption
+        css={classes.caption}
+        text='5-day weather'
+      />
       <Select<LanguageOption>
         css={classes.select}
         setValue={(event: SelectChangeEvent) => {

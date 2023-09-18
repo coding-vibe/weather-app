@@ -70,12 +70,12 @@ export default function WeatherWidget({ location }: Props) {
     !!forecast && (
       <>
         <WeatherTable
-          css={classes.weatherTable}
+          css={classes.table}
           forecast={forecast}
           location={location}
         />
         <WeatherList
-          css={classes.weatherList}
+          css={classes.list}
           forecast={forecast}
           location={location}
         />

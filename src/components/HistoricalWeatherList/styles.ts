@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
-export const headList = (theme: Theme) => css`
+export const list = (theme: Theme) => css`
   width: 435px;
   border: 1px solid ${theme.palette.secondary.light};
   ${theme.breakpoints.down('sm')} {
@@ -9,26 +9,11 @@ export const headList = (theme: Theme) => css`
   }
 `;
 
-export const headListTitle = (theme: Theme) => css`
+export const listTitle = (theme: Theme) => css`
   padding: 16px;
   border-bottom: 1px solid ${theme.palette.secondary.light};
   ${theme.breakpoints.down('sm')} {
-    padding: 8px;
     font-size: 12px;
-  }
-`;
-
-export const mainListItemButton = css`
-  padding-left: 20px;
-`;
-
-export const mainListItemText = (theme: Theme) => css`
-  & .MuiListItemText-primary {
-    color: ${theme.palette.secondary.main};
-    font-weight: 500;
-    ${theme.breakpoints.down('sm')} {
-      font-size: 10px;
-    }
   }
 `;
 
@@ -36,7 +21,7 @@ export const listItemText = (theme: Theme) => css`
   & .MuiListItemText-primary {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     padding-left: 30px;
     font-size: 12px;
     ${theme.breakpoints.down('sm')} {

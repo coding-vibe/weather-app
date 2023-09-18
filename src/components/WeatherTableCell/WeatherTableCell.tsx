@@ -30,15 +30,21 @@ export default function WeatherTableCell({
 
   return (
     <MUITableCell>
-      {isDateShown && formatDate(convertTimestampToDate(dt))}
-      <Tooltip title={description}>
-        <img
-          alt='Weather condition'
-          css={classes.icon}
-          src={generateIconURL(icon)}
-        />
-      </Tooltip>
       <div css={classes.wrap}>
+        {isDateShown && (
+          <Typography
+            component='span'
+            css={classes.date}
+            variant='overline'>
+            {formatDate(convertTimestampToDate(dt))}
+          </Typography>
+        )}
+        <Tooltip title={description}>
+          <img
+            alt='Weather condition'
+            src={generateIconURL(icon)}
+          />
+        </Tooltip>
         <Typography
           component='span'
           variant='body2'>
@@ -53,7 +59,7 @@ export default function WeatherTableCell({
         <Typography
           component='span'
           variant='body2'>
-          Hum:&nbsp;
+          Humid:&nbsp;
           <Typography
             component='span'
             css={classes.text}
