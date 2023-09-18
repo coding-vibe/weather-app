@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherTableCell from 'components/WeatherTableCell';
 import ForecastBody from 'types/forecast';
-import WEEK_DAYS from 'utils/weekDays';
+import WEEK_DAYS from 'constants/weekDays';
 import * as classes from './styles';
 
 interface Props {

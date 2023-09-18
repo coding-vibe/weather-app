@@ -2,7 +2,7 @@ import HistoricalWeatherList from 'components/HistoricalWeatherList';
 import HistoricalWeatherTable from 'components/HistoricalWeatherTable';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
-import WEEK_DAYS from 'utils/weekDays';
+import WEEK_DAYS from 'constants/weekDays';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import * as classes from './styles';
 
@@ -11,7 +11,7 @@ interface Props {
   searchParams: FormValuesType;
 }
 
-const MONDAY = 'Mon';
+const MONDAY = 'Monday';
 
 export default function HistoricalWeatherWidget({
   forecast,
