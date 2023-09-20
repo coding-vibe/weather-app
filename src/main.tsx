@@ -9,7 +9,7 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
-import THEME from 'constants/theme';
+import theme from 'constants/theme';
 import { globalStyles } from './globalStyles';
 import App from './App';
 
@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={THEME}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <GlobalStyles styles={globalStyles} />
           <SnackbarProvider>

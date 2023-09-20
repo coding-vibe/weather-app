@@ -55,10 +55,10 @@ export default function HistoricalWeatherTable({
                       // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
                       <MUITableCell key={idx} />
                     ))}
-                  {weeklyWeather.map((dailyWeather, idx) => (
+                  {weeklyWeather.map((dailyWeather) => (
                     <WeatherTableCell
                       isDateShown
-                      key={idx}
+                      key={dailyWeather.dt}
                       weather={dailyWeather}
                     />
                   ))}

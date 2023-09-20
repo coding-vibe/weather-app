@@ -1,7 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
-const THEME = createTheme({
+const theme = createTheme({
   breakpoints: {
+    // According to MUI documentation, when changing the default breakpoints' values, it is necessary to provide all of them
     values: {
       xs: 0,
       sm: 480,
@@ -13,7 +14,7 @@ const THEME = createTheme({
   palette: {
     secondary: {
       main: '#49484a',
-      light: '#E0E0E0',
+      light: '#e0e0e0',
     },
   },
   typography: {
@@ -34,4 +35,4 @@ const THEME = createTheme({
   },
 });
 
-export default THEME;
+export default theme;

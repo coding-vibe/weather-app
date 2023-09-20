@@ -25,14 +25,17 @@ interface Props {
 export default function WeatherList({ forecast, location, className }: Props) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
-  const [openItems, setOpenItems] = useState<boolean[]>(
-    Array(forecast.length).fill(true),
-  );
+  const forecastDates = new Set<string>();
+  forecast.forEach(([date]) => forecastDates.add(date));
+  const [openItems, setOpenItems] = useState<Set<string>>(forecastDates);
 
-  const handleClick = (index: number) => {
-    const newOpenItems = [...openItems];
-    newOpenItems[index] = !newOpenItems[index];
-    setOpenItems(newOpenItems);
+  const handleClick = (date: string) => {
+    if (openItems.has(date)) {
+      openItems.delete(date);
+    } else {
+      openItems.add(date);
+    }
+    setOpenItems(new Set(openItems));
   };
 
   return (
@@ -48,24 +51,24 @@ export default function WeatherList({ forecast, location, className }: Props) {
           text='5-Day'
         />
       }>
-      {forecast?.map(([date, weather], index) => (
+      {forecast?.map(([date, weather]) => (
         <List
           disablePadding
           key={date}>
           <ListItem
             disablePadding
-            divider
-            key={index}
-            onClick={() => handleClick(index)}>
+            css={classes.mainListItem}
+            key={date}
+            onClick={() => handleClick(date)}>
             <ListItemButton css={classes.mainListItemButton}>
               <ListItemText css={classes.mainListItemText}>{date}</ListItemText>
             </ListItemButton>
           </ListItem>
           <Collapse
-            in={openItems[index]}
+            in={openItems.has(date)}
             timeout='auto'
             unmountOnExit>
-            {weather.map((hourlyWeather, idx) => {
+            {weather.map((hourlyWeather) => {
               const {
                 dt,
                 main: { humidity, temp },
@@ -75,10 +78,10 @@ export default function WeatherList({ forecast, location, className }: Props) {
               return (
                 <List
                   disablePadding
-                  key={idx}>
+                  key={dt}>
                   <ListItem disablePadding>
                     <ListItemText css={classes.listItemText}>
-                      <p>{hour}</p>
+                      <span>{hour}</span>
                       <Tooltip title={description}>
                         <img
                           alt='Weather condition'

@@ -44,7 +44,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {forecast?.map(([date, weather], index) => {
+            {forecast.map(([date, weather], index) => {
               const emptyCells = HOURS.length - weather.length;
               return (
                 <TableRow
