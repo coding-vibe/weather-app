@@ -16,7 +16,8 @@ export const form = (theme: Theme) => css`
 `;
 
 export const wrap = css`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 export const startDateField = (theme: Theme) => css`
@@ -49,9 +50,6 @@ export const startDateField = (theme: Theme) => css`
       left: 103%;
       font-size: 30px;
     }
-  }
-
-  & .Mui-error::after {
   }
 `;
 
