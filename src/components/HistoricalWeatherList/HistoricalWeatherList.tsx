@@ -32,7 +32,7 @@ export default function HistoricalWeatherList({
           text='Historical'
         />
       }>
-      {weeklyForecast?.map((weeklyWeather) =>
+      {weeklyForecast.map((weeklyWeather) =>
         weeklyWeather.map((dailyWeather) => {
           const date = formatDate(convertTimestampToDate(dailyWeather.dt));
           return (

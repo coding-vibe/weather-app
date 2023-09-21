@@ -17,7 +17,7 @@ export default function HistoricalWeatherWidget({
   forecast,
   searchParams,
 }: Props) {
-  const weeklyForecast = forecast?.reduce<ForecastBody[][]>(
+  const weeklyForecast = forecast.reduce<ForecastBody[][]>(
     (accumulator, dailyForecast) => {
       const { dt } = dailyForecast;
       const weekDayIndex = convertTimestampToDate(dt).getDay() - 1;

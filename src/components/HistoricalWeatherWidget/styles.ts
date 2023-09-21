@@ -20,4 +20,8 @@ export const list = (theme: Theme) => css`
   ${theme.breakpoints.up('sm')} {
     margin: 30px 15px;
   }
+
+  ${theme.breakpoints.down('sm')} {
+    margin: 15px;
+  }
 `;

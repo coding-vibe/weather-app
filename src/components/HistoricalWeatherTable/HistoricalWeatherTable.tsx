@@ -46,7 +46,7 @@ export default function HistoricalWeatherTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {weeklyForecast?.map((weeklyWeather, index) => {
+            {weeklyForecast.map((weeklyWeather, index) => {
               const emptyCellsCount = WEEK_DAYS.length - weeklyWeather.length;
               return (
                 <TableRow key={index}>

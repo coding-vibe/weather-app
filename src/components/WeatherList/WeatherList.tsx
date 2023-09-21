@@ -18,11 +18,10 @@ interface Props {
 }
 
 export default function WeatherList({ forecast, location, className }: Props) {
-  // const { selectedTemperatureUnit } =
-  //   useContext<SettingsContextType>(SettingsContext);
-  const forecastDates = new Set<string>();
-  forecast.forEach(([date]) => forecastDates.add(date));
-  const [openItems, setOpenItems] = useState<Set<string>>(forecastDates);
+  const forecastDates = forecast.map(([date]) => date);
+  const [openItems, setOpenItems] = useState<Set<string>>(
+    new Set(forecastDates),
+  );
 
   const handleClick = (date: string) => {
     if (openItems.has(date)) {
@@ -46,7 +45,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           text='5-Day'
         />
       }>
-      {forecast?.map(([date, weather]) => (
+      {forecast.map(([date, weather]) => (
         <List
           disablePadding
           key={date}>
