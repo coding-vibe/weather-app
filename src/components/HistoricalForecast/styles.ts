@@ -13,12 +13,5 @@ export const caption = (theme: Theme) => css`
 
 export const form = (theme: Theme) => css`
   margin: 15px 0px 0px 15px;
-
-  ${theme.breakpoints.up('sm')} {
-    width: ${theme.width.desktop};
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    width: ${theme.width.mobile};
-  }
+  max-width: ${theme.width.desktop};
 `;

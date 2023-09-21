@@ -3,17 +3,17 @@ import { Theme as MuiTheme } from '@mui/material/styles';
 declare module '@mui/material/styles' {
   interface Theme {
     width: {
-      table: number;
-      desktopWidth: number;
-      mobileWidth: number;
+      table: string;
+      desktop: string;
+      mobile: string;
     };
   }
 
   interface ThemeOptions {
     width?: {
-      table?: number;
-      desktop?: number;
-      mobile?: number;
+      table?: string;
+      desktop?: string;
+      mobile?: string;
     };
   }
 }

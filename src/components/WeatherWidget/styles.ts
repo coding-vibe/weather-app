@@ -11,17 +11,17 @@ export const table = (theme: Theme) => css`
 `;
 
 export const list = (theme: Theme) => css`
+  max-width: ${theme.width.desktop};
+
   ${theme.breakpoints.up('md')} {
     display: none;
   }
 
   ${theme.breakpoints.up('sm')} {
     margin: 15px;
-    width: ${theme.width.desktop};
   }
 
   ${theme.breakpoints.down('sm')} {
     margin: 10px;
-    width: ${theme.width.mobile};
   }
 `;

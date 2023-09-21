@@ -34,9 +34,9 @@ const theme = createTheme({
     },
   },
   width: {
-    table: 1000,
-    desktop: 435,
-    mobile: 280,
+    table: '1000px',
+    desktop: '435px',
+    mobile: '280px',
   },
 });
 

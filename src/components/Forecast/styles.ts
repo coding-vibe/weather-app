@@ -2,13 +2,7 @@ import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
 export const wrap = (theme: Theme) => css`
-  ${theme.breakpoints.up('sm')} {
-    width: ${theme.width.desktop};
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    width: ${theme.width.mobile};
-  }
+  max-width: ${theme.width.desktop};
 `;
 
 export const caption = (theme: Theme) => css`
