@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { startOfYesterday } from 'date-fns';
-import { Formik, Form, Field } from 'formik';
+import { Formik, FormikConfig, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Grid from '@mui/material/Grid';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
@@ -23,9 +22,13 @@ const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 interface Props {
   setSearchParams: (value: FormValuesType) => void;
+  className?: string;
 }
 
-export default function HistoricalWeatherForm({ setSearchParams }: Props) {
+export default function HistoricalWeatherForm({
+  setSearchParams,
+  className,
+}: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const INITIAL_FORM_VALUES = {
@@ -37,10 +40,14 @@ export default function HistoricalWeatherForm({ setSearchParams }: Props) {
   };
   const yesterday = startOfYesterday();
 
-  const handleSubmit = (values: FormValuesType) => {
+  const handleSubmit: FormikConfig<FormValuesType>['onSubmit'] = (
+    values,
+    { setSubmitting },
+  ) => {
     onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
     setSearchParams(values);
+    setSubmitting(false);
   };
 
   return (
@@ -52,84 +59,60 @@ export default function HistoricalWeatherForm({ setSearchParams }: Props) {
       onSubmit={handleSubmit}
       validationSchema={VALIDATION_SCHEMA}>
       {({ isSubmitting }) => (
-        <Form>
-          <Grid
-            container
-            spacing={2}>
-            <Grid
-              item
-              xs={12}>
-              <Field
-                validateOnBlur
-                component={SelectField<LanguageOption>}
-                label={LANGUAGE_CHOICE_LABEL}
-                labelId={LANGUAGE_CHOICE_LABEL_ID}
-                name='language'
-                options={LANGUAGE_OPTIONS}
-              />
-            </Grid>
-            <Grid
-              item
-              xs={2.5}>
-              <Field
-                validateOnBlur
-                disableHighlightToday
-                css={classes.startDateField}
-                component={DateField}
-                label='Start'
-                maxDate={yesterday}
-                name='startDate'
-                type='date'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={2.5}>
-              <Field
-                validateOnBlur
-                disableHighlightToday
-                css={classes.endDateField}
-                component={DateField}
-                label='End'
-                maxDate={yesterday}
-                name='endDate'
-                type='date'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}>
-              <Field
-                validateOnBlur
-                css={classes.location}
-                component={LocationAutoCompleteField}
-                id={LOCATION_AUTOCOMPLETE}
-                name='location'
-              />
-            </Grid>
-            <Grid
-              item
-              xs={12}>
-              <Field
-                validateOnBlur
-                component={SelectField<TemperatureUnitOption>}
-                labelId={TEMPERATURE_UNITS_LABEL_ID}
-                label={TEMPERATURE_UNITS_LABEL}
-                name='temperatureUnit'
-                options={TEMPERATURE_UNITS_OPTIONS}
-              />
-            </Grid>
-            <Grid item>
-              <LoadingButton
-                loading={isSubmitting}
-                type='submit'
-                variant='contained'>
-                Submit
-              </LoadingButton>
-            </Grid>
-          </Grid>
+        <Form
+          className={className}
+          css={classes.form}>
+          <Field
+            component={SelectField<LanguageOption>}
+            label={LANGUAGE_CHOICE_LABEL}
+            labelId={LANGUAGE_CHOICE_LABEL_ID}
+            name='language'
+            options={LANGUAGE_OPTIONS}
+          />
+          <div css={classes.wrap}>
+            <Field
+              disableHighlightToday
+              css={classes.dateField}
+              component={DateField}
+              label='Start'
+              maxDate={yesterday}
+              name='startDate'
+              type='date'
+            />
+            <Field
+              disableHighlightToday
+              css={[classes.dateField, classes.endDateField]}
+              component={DateField}
+              label='End'
+              maxDate={yesterday}
+              name='endDate'
+              type='date'
+            />
+          </div>
+          <Field
+            component={LocationAutoCompleteField}
+            id={LOCATION_AUTOCOMPLETE}
+            name='location'
+          />
+          <Field
+            component={SelectField<TemperatureUnitOption>}
+            labelId={TEMPERATURE_UNITS_LABEL_ID}
+            label={TEMPERATURE_UNITS_LABEL}
+            name='temperatureUnit'
+            options={TEMPERATURE_UNITS_OPTIONS}
+          />
+          <LoadingButton
+            loading={isSubmitting}
+            type='submit'
+            variant='contained'>
+            Submit
+          </LoadingButton>
         </Form>
       )}
     </Formik>
   );
 }
+
+HistoricalWeatherForm.defaultProps = {
+  className: null,
+};

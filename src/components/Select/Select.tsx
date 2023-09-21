@@ -31,8 +31,8 @@ export default function Select<Option extends OptionBase>({
 }: Props<Option>) {
   return (
     <FormControl
-      className={className}
-      error={error}>
+      error={error}
+      className={className}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <MUISelect
         css={classes.select}
@@ -55,8 +55,11 @@ export default function Select<Option extends OptionBase>({
 }
 
 Select.defaultProps = {
-  className: null,
   error: false,
   helperText: null,
   name: null,
+};
+
+Select.defaultProps = {
+  className: null,
 };

@@ -1,23 +1,41 @@
 import { css } from '@emotion/react';
+import { Theme } from '@mui/material';
 
-export const location = css`
-  width: 460px;
+export const form = css`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding-right: 15px;
 `;
 
-export const startDateField = css`
-  width: 200px;
+export const wrap = (theme: Theme) => css`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
 
   &::after {
-    position: absolute;
     content: '-';
-    font-size: 35px;
+    padding: 0 10px;
     color: #707070;
-    left: 225px;
-    top: 50%;
-    transform: translateY(-50%);
+
+    ${theme.breakpoints.up('sm')} {
+      font-size: 35px;
+    }
+
+    ${theme.breakpoints.down('sm')} {
+      font-size: 30px;
+    }
+  }
+`;
+
+export const dateField = (theme: Theme) => css`
+  ${theme.breakpoints.down('sm')} {
+    & .MuiInputBase-input {
+      font-size: 12px;
+    }
   }
 `;
 
 export const endDateField = css`
-  width: 200px;
+  order: 1;
 `;

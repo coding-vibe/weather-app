@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
+import WeatherSearchCaption from 'components/WeatherSearchCaption';
 import WeatherWidget from 'components/WeatherWidget';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
@@ -29,34 +30,40 @@ export default function Forecast() {
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
-    <>
-      <Select<LanguageOption>
-        css={classes.languageSelect}
-        value={selectedLanguage}
-        setValue={(event: SelectChangeEvent) => {
-          onSelectLanguage(event.target.value as Languages);
-        }}
-        labelId={LANGUAGE_CHOICE_LABEL_ID}
-        label={LANGUAGE_CHOICE_LABEL}
-        options={LANGUAGE_OPTIONS}
-      />
-      <LocationAutocomplete
-        css={classes.locationAutocomplete}
-        location={selectedLocation}
-        setLocation={onSelectLocation}
-        id={LOCATION_AUTOCOMPLETE}
-      />
-      <Select<TemperatureUnitOption>
-        css={classes.temperatureUnitsSelect}
-        value={selectedTemperatureUnit}
-        setValue={(event: SelectChangeEvent) => {
-          onSelectTemperatureUnit(event.target.value as TemperatureUnits);
-        }}
-        labelId={TEMPERATURE_UNITS_LABEL_ID}
-        label={TEMPERATURE_UNITS_LABEL}
-        options={TEMPERATURE_UNITS_OPTIONS}
-      />
+    <div>
+      <div css={classes.wrap}>
+        <WeatherSearchCaption
+          css={[classes.caption, classes.entry]}
+          text='5-day'
+        />
+        <Select<LanguageOption>
+          css={classes.entry}
+          setValue={(event: SelectChangeEvent) => {
+            onSelectLanguage(event.target.value as Languages);
+          }}
+          value={selectedLanguage}
+          label={LANGUAGE_CHOICE_LABEL}
+          labelId={LANGUAGE_CHOICE_LABEL_ID}
+          options={LANGUAGE_OPTIONS}
+        />
+        <LocationAutocomplete
+          css={classes.entry}
+          id={LOCATION_AUTOCOMPLETE}
+          location={selectedLocation}
+          setLocation={onSelectLocation}
+        />
+        <Select<TemperatureUnitOption>
+          css={classes.entry}
+          setValue={(event: SelectChangeEvent) => {
+            onSelectTemperatureUnit(event.target.value as TemperatureUnits);
+          }}
+          value={selectedTemperatureUnit}
+          label={TEMPERATURE_UNITS_LABEL}
+          labelId={TEMPERATURE_UNITS_LABEL_ID}
+          options={TEMPERATURE_UNITS_OPTIONS}
+        />
+      </div>
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
-    </>
+    </div>
   );
 }

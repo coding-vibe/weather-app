@@ -1,26 +1,24 @@
 import { useState, useEffect, useContext } from 'react';
-import { format, fromUnixTime } from 'date-fns';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
-import TableCell from 'components/TableCell';
+import WeatherList from 'components/WeatherList';
+import WeatherTable from 'components/WeatherTable';
 import SettingsContext from 'contexts/SettingsContext';
-import ForecastBody, { ForecastAPIResponse } from 'types/forecast';
+import { ForecastAPIResponse, Forecast } from 'types/forecast';
 import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
-import findCountryNameByCode from 'utils/findCountryNameByCode';
-import HOURS from './hours';
-
-type Forecast = Array<[string, ForecastBody[]]>;
+import formatDate from 'utils/formatDate';
+import convertTimestampToDate from 'utils/convertTimestampToDate';
+import * as classes from './styles';
 
 interface Props {
   location: Location;
 }
 
 const SPINNER_SIZE = 25;
-const TIME_PERIODS_AMOUNT = 8;
 
 export default function WeatherWidget({ location }: Props) {
   const { enqueueSnackbar } = useSnackbar();
@@ -49,11 +47,9 @@ export default function WeatherWidget({ location }: Props) {
         const forecastData = list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
-        const forecastByDate = groupBy(forecastData, (element) => {
-          const dateObject = fromUnixTime(element.dt);
-          const formattedDate = format(dateObject, 'dd-MM');
-          return formattedDate;
-        });
+        const forecastByDate = groupBy(forecastData, ({ dt }) =>
+          formatDate(convertTimestampToDate(dt)),
+        );
         const formattedForecast = Object.entries(forecastByDate);
         setForecast(formattedForecast);
       } catch (error) {
@@ -71,40 +67,19 @@ export default function WeatherWidget({ location }: Props) {
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
   ) : (
-    <table>
-      <caption>
-        {location &&
-          `${findCountryNameByCode(location.country)}, ${location.name}`}
-      </caption>
-      <thead>
-        <tr>
-          <th>Date/Hours</th>
-          {HOURS.map((hour) => (
-            <th key={hour}>{hour}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {forecast?.map(([date, weather], index) => {
-          const emptyCellsCount = TIME_PERIODS_AMOUNT - weather.length;
-          return (
-            <tr key={date}>
-              <td>{date}</td>
-              {index === 0 &&
-                Array.from({ length: emptyCellsCount }).map((_, idx) => (
-                  // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
-                  <td key={idx} />
-                ))}
-              {weather.map((hourlyWeather) => (
-                <TableCell
-                  key={hourlyWeather.dt}
-                  weather={hourlyWeather}
-                />
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    !!forecast && (
+      <>
+        <WeatherTable
+          css={classes.table}
+          forecast={forecast}
+          location={location}
+        />
+        <WeatherList
+          css={classes.list}
+          forecast={forecast}
+          location={location}
+        />
+      </>
+    )
   );
 }
