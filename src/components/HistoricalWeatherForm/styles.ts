@@ -1,18 +1,10 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
-export const form = (theme: Theme) => css`
+export const form = css`
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  ${theme.breakpoints.up('sm')} {
-    width: 435px;
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    width: 280px;
-  }
 `;
 
 export const wrap = (theme: Theme) => css`

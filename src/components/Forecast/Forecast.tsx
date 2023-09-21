@@ -31,36 +31,38 @@ export default function Forecast() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   return (
     <div>
-      <WeatherSearchCaption
-        css={classes.caption}
-        text='5-day weather'
-      />
-      <Select<LanguageOption>
-        css={classes.select}
-        setValue={(event: SelectChangeEvent) => {
-          onSelectLanguage(event.target.value as Languages);
-        }}
-        value={selectedLanguage}
-        label={LANGUAGE_CHOICE_LABEL}
-        labelId={LANGUAGE_CHOICE_LABEL_ID}
-        options={LANGUAGE_OPTIONS}
-      />
-      <LocationAutocomplete
-        css={classes.autocomplete}
-        id={LOCATION_AUTOCOMPLETE}
-        location={selectedLocation}
-        setLocation={onSelectLocation}
-      />
-      <Select<TemperatureUnitOption>
-        css={classes.select}
-        setValue={(event: SelectChangeEvent) => {
-          onSelectTemperatureUnit(event.target.value as TemperatureUnits);
-        }}
-        value={selectedTemperatureUnit}
-        label={TEMPERATURE_UNITS_LABEL}
-        labelId={TEMPERATURE_UNITS_LABEL_ID}
-        options={TEMPERATURE_UNITS_OPTIONS}
-      />
+      <div css={classes.wrap}>
+        <WeatherSearchCaption
+          css={classes.caption}
+          text='5-day'
+        />
+        <Select<LanguageOption>
+          css={classes.select}
+          setValue={(event: SelectChangeEvent) => {
+            onSelectLanguage(event.target.value as Languages);
+          }}
+          value={selectedLanguage}
+          label={LANGUAGE_CHOICE_LABEL}
+          labelId={LANGUAGE_CHOICE_LABEL_ID}
+          options={LANGUAGE_OPTIONS}
+        />
+        <LocationAutocomplete
+          css={classes.autocomplete}
+          id={LOCATION_AUTOCOMPLETE}
+          location={selectedLocation}
+          setLocation={onSelectLocation}
+        />
+        <Select<TemperatureUnitOption>
+          css={classes.select}
+          setValue={(event: SelectChangeEvent) => {
+            onSelectTemperatureUnit(event.target.value as TemperatureUnits);
+          }}
+          value={selectedTemperatureUnit}
+          label={TEMPERATURE_UNITS_LABEL}
+          labelId={TEMPERATURE_UNITS_LABEL_ID}
+          options={TEMPERATURE_UNITS_OPTIONS}
+        />
+      </div>
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </div>
   );

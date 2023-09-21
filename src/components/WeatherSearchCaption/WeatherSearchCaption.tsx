@@ -16,7 +16,7 @@ export default function WeatherSearchCaption({ text, className }: Props) {
         component='p'
         css={classes.text}
         variant='overline'>
-        Select options for {text} forecast search&nbsp;
+        Select options for {text} weather forecast search&nbsp;
       </Typography>
       <ArrowIcon css={classes.icon} />
     </div>

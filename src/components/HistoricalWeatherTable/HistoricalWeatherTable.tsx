@@ -38,7 +38,7 @@ export default function HistoricalWeatherTable({
             <TableRow>
               {WEEK_DAYS.map((day) => (
                 <MUITableCell
-                  css={classes.day}
+                  align='center'
                   key={day}>
                   {day}
                 </MUITableCell>

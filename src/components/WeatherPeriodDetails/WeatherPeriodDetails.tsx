@@ -12,7 +12,7 @@ interface Props {
   weather: ForecastBody;
 }
 
-export default function WeatherPeriodDeatils({ weather }: Props) {
+export default function WeatherPeriodDetails({ weather }: Props) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
   const {

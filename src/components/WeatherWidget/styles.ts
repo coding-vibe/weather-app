@@ -3,6 +3,7 @@ import { Theme } from '@mui/material';
 
 export const table = (theme: Theme) => css`
   margin: 15px;
+  max-width: ${theme.width.table};
 
   ${theme.breakpoints.down('md')} {
     display: none;
@@ -16,9 +17,11 @@ export const list = (theme: Theme) => css`
 
   ${theme.breakpoints.up('sm')} {
     margin: 15px;
+    width: ${theme.width.desktop};
   }
 
   ${theme.breakpoints.down('sm')} {
     margin: 10px;
+    width: ${theme.width.mobile};
   }
 `;

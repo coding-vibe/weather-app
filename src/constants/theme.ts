@@ -25,13 +25,18 @@ const theme = createTheme({
       fontSize: 12,
     },
     overline: {
-      fontSize: 13,
+      fontSize: 12,
       fontWeight: 800,
     },
     subtitle2: {
       fontSize: 13,
       fontWeight: 500,
     },
+  },
+  width: {
+    table: 1000,
+    desktop: 435,
+    mobile: 280,
   },
 });
 

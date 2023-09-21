@@ -3,14 +3,6 @@ import { Theme } from '@mui/material';
 
 export const headList = (theme: Theme) => css`
   border: 1px solid ${theme.palette.secondary.light};
-
-  ${theme.breakpoints.up('sm')} {
-    width: 435px;
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    width: 280px;
-  }
 `;
 
 export const headListTitle = (theme: Theme) => css`
