@@ -16,6 +16,7 @@ export const caption = (theme: Theme) => css`
 `;
 
 export const select = (theme: Theme) => css`
+  width: 100%;
   ${theme.breakpoints.up('sm')} {
     margin: 15px;
   }
