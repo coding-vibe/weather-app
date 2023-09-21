@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { startOfYesterday } from 'date-fns';
-import { Formik, Form, Field } from 'formik';
+import { Formik, FormikConfig, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
@@ -40,10 +40,14 @@ export default function HistoricalWeatherForm({
   };
   const yesterday = startOfYesterday();
 
-  const handleSubmit = (values: FormValuesType) => {
+  const handleSubmit: FormikConfig<FormValuesType>['onSubmit'] = (
+    values,
+    { setSubmitting },
+  ) => {
     onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
     setSearchParams(values);
+    setSubmitting(false);
   };
 
   return (
@@ -68,7 +72,7 @@ export default function HistoricalWeatherForm({
           <div css={classes.wrap}>
             <Field
               disableHighlightToday
-              css={classes.startDateField}
+              css={classes.dateField}
               component={DateField}
               label='Start'
               maxDate={yesterday}
@@ -77,7 +81,7 @@ export default function HistoricalWeatherForm({
             />
             <Field
               disableHighlightToday
-              css={classes.endDateField}
+              css={[classes.dateField, classes.endDateField]}
               component={DateField}
               label='End'
               maxDate={yesterday}

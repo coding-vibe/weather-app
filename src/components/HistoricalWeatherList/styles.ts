@@ -21,33 +21,3 @@ export const listTitle = (theme: Theme) => css`
     font-size: 12px;
   }
 `;
-
-export const listItemText = (theme: Theme) => css`
-  & .MuiListItemText-primary {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding-left: 30px;
-
-    ${theme.breakpoints.up('sm')} {
-      font-size: 12px;
-    }
-
-    ${theme.breakpoints.down('sm')} {
-      font-size: 9px;
-    }
-  }
-`;
-
-export const data = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const text = (theme: Theme) => css`
-  color: ${theme.palette.secondary.main};
-
-  ${theme.breakpoints.down('sm')} {
-    font-size: 10px;
-  }
-`;
