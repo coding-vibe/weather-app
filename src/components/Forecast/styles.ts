@@ -3,7 +3,7 @@ import { Theme } from '@mui/material';
 
 export const wrap = (theme: Theme) => css`
   max-width: ${theme.width.desktop};
-  padding-left: 15px;
+  padding: 0 15px;
 `;
 
 export const caption = css`
