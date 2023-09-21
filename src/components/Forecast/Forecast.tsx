@@ -33,11 +33,11 @@ export default function Forecast() {
     <div>
       <div css={classes.wrap}>
         <WeatherSearchCaption
-          css={classes.caption}
+          css={[classes.caption, classes.entry]}
           text='5-day'
         />
         <Select<LanguageOption>
-          css={classes.select}
+          css={classes.entry}
           setValue={(event: SelectChangeEvent) => {
             onSelectLanguage(event.target.value as Languages);
           }}
@@ -47,13 +47,13 @@ export default function Forecast() {
           options={LANGUAGE_OPTIONS}
         />
         <LocationAutocomplete
-          css={classes.autocomplete}
+          css={classes.entry}
           id={LOCATION_AUTOCOMPLETE}
           location={selectedLocation}
           setLocation={onSelectLocation}
         />
         <Select<TemperatureUnitOption>
-          css={classes.select}
+          css={classes.entry}
           setValue={(event: SelectChangeEvent) => {
             onSelectTemperatureUnit(event.target.value as TemperatureUnits);
           }}
