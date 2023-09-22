@@ -1,13 +1,13 @@
 {
   "error": {
     "fetchGeoData": "Sorry, we could not find any results that match your search.",
-    "fetchWeatherData": "No weather data found for this location"
+    "fetchWeatherData": "No weather data found for this location."
   },
   "iconDescriptions": {
     "brokenClouds": "broken clouds",
     "clearSky": "clear sky",
     "fewClouds": "few clouds",
-    "temperature": "temp",
+    "overcastClouds": "overcast clouds",
     "scatteredClouds": "scattered clouds"
   },
   "labels": {
@@ -36,7 +36,7 @@
     "contentHeader": "Weather Forecast for",
     "historicalForecastTableCell": "Date/Time",
     "noOptions": "No options found",
-    "propForecast": "5-day",
+    "propForecast": "5-days",
     "propHistoricalForecast": "Historical",
     "searchCaption": "Select options for {{text}} weather forecast search&nbsp;"
   },

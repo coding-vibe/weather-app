@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
@@ -29,12 +30,13 @@ export default function Forecast() {
     onSelectTemperatureUnit,
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
+  const { t } = useTranslation();
   return (
     <div>
       <div css={classes.wrap}>
         <WeatherSearchCaption
           css={[classes.caption, classes.entry]}
-          text='5-day'
+          text={t('texts.propForecast')}
         />
         <Select<LanguageOption>
           css={classes.entry}

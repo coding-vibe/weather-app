@@ -1,0 +1,48 @@
+{
+  "error": {
+    "fetchGeoData": "Désolé, nous n'avons trouvé aucun résultat correspondant à votre recherche",
+    "fetchWeatherData": "Aucune donnée météorologique trouvée pour cet emplacement."
+  },
+  "iconDescriptions": {
+    "brokenClouds": "nuages brisés",
+    "clearSky": "ciel dégagé",
+    "fewClouds": "quelques nuages",
+    "overcastClouds": "nuages couverts",
+    "scatteredClouds": "nuages épars"
+  },
+  "labels": {
+    "endDayDatePicker": "Fin",
+    "forecastTab": "Prévision",
+    "historicalForecastTab": "Prévision historique",
+    "historicalWeatherTable": "Prévisions météorologiques historiques",
+    "languageSelect": "Langue",
+    "layoutTabs": "onglets de prévision",
+    "locationAutocomplete": "Emplacement",
+    "startDayDatePicker": "Début",
+    "temperatureUnitsSelectLabel": "Unité de température",
+    "weatherTable": "Prévisions météorologiques sur 5 jours"
+  },
+  "languages": {
+    "english": "Anglais",
+    "french": "Français",
+    "ukrainian": "Ukrainien"
+  },
+  "temperatureUnits": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit",
+    "kelvin": "Kelvin"
+  },
+  "texts": {
+    "contentHeader": "Prévisions météorologiques pour",
+    "historicalForecastTableCell": "Date/Heure",
+    "noOptions": "Aucune option trouvée",
+    "propForecast": "5 jours",
+    "propHistoricalForecast": "Historique",
+    "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
+  },
+  "weatherPeriodDetails": {
+    "humidity": "humid",
+    "temperature": "temp"
+  },
+  "submit": "Soumettre"
+}
