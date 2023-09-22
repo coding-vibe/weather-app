@@ -39,7 +39,7 @@ export default function WeatherPeriodDetails({ weather }: Props) {
           </Typography>
         </span>
         <span>
-          Hum:&nbsp;
+          Humid:&nbsp;
           <Typography
             component='span'
             css={classes.text}

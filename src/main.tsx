@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { SnackbarProvider } from 'notistack';
@@ -10,8 +11,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
 import theme from 'constants/theme';
-import { globalStyles } from './globalStyles';
 import App from './App';
+import i18n from './i18n';
+import { globalStyles } from './globalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -22,9 +24,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <GlobalStyles styles={globalStyles} />
           <SnackbarProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <SettingsProvider>
-                <App />
-              </SettingsProvider>
+              <I18nextProvider
+                i18n={i18n}
+                defaultNS='translation'>
+                <SettingsProvider>
+                  <App />
+                </SettingsProvider>
+              </I18nextProvider>
             </LocalizationProvider>
           </SnackbarProvider>
         </ThemeProvider>

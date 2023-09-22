@@ -17,6 +17,8 @@ interface Props {
   className?: string;
 }
 
+const DATE_FORMAT = 'HH:00';
+
 export default function WeatherList({ forecast, location, className }: Props) {
   const forecastDates = forecast.map(([date]) => date);
   const [openItems, setOpenItems] = useState<Set<string>>(
@@ -63,7 +65,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
             timeout='auto'
             unmountOnExit>
             {weather.map((hourlyWeather) => {
-              const hour = format(hourlyWeather.dt * 1000, 'hh:00 a');
+              const hour = format(hourlyWeather.dt * 1000, DATE_FORMAT);
               return (
                 <List
                   disablePadding

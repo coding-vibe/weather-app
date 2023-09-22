@@ -1,0 +1,48 @@
+{
+  "error": {
+    "fetchGeoData": "Sorry, we could not find any results that match your search.",
+    "fetchWeatherData": "No weather data found for this location"
+  },
+  "iconDescriptions": {
+    "brokenClouds": "broken clouds",
+    "clearSky": "clear sky",
+    "fewClouds": "few clouds",
+    "temperature": "temp",
+    "scatteredClouds": "scattered clouds"
+  },
+  "labels": {
+    "endDayDatePicker": "End",
+    "forecastTab": "Forecast",
+    "historicalForecastTab": "Historical forecast",
+    "historicalWeatherTable": "Historical Weather Forecast",
+    "languageSelect": "Language",
+    "layoutTabs": "forecast tabs",
+    "locationAutocomplete": "Location",
+    "startDayDatePicker": "Start",
+    "temperatureUnitsSelectLabel": "Temperature unit",
+    "weatherTable": "5-Day Weather Forecast"
+  },
+  "languages": {
+    "english": "English",
+    "french": "French",
+    "ukrainian": "Ukrainian"
+  },
+  "temperatureUnits": {
+    "celsius": "Celsius",
+    "fahrenheit": "Fahrenheit",
+    "kelvin": "Kelvin"
+  },
+  "texts": {
+    "contentHeader": "Weather Forecast for",
+    "historicalForecastTableCell": "Date/Time",
+    "noOptions": "No options found",
+    "propForecast": "5-day",
+    "propHistoricalForecast": "Historical",
+    "searchCaption": "Select options for {{text}} weather forecast search&nbsp;"
+  },
+  "weatherPeriodDetails": {
+    "humidity": "humid",
+    "temperature": "temp"
+  },
+  "submit": "Submit"
+}

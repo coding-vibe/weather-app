@@ -8,7 +8,7 @@ import SelectField from 'components/SelectField';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import LANGUAGE_OPTIONS from 'types/languageOptions';
+import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
