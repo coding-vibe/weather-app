@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -24,16 +25,17 @@ export default function HistoricalWeatherTable({
   weeklyForecast,
   className,
 }: Props) {
+  const { t } = useTranslation();
   return (
     <div className={className}>
       <WeatherContentHeader
         country={country}
         css={classes.header}
         name={name}
-        text='Historical'
+        text={t('texts.propHistoricalForecast')}
       />
       <TableContainer component={Paper}>
-        <Table aria-label='Historical Weather Forecast'>
+        <Table aria-label={t('labels.historicalWeatherTable')}>
           <TableHead>
             <TableRow>
               {WEEK_DAYS.map((day) => (
