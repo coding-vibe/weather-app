@@ -9,7 +9,8 @@
     "serve": "cd dist && serve",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.{ts,tsx,js,jsx}' --write"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.{ts,tsx,js,jsx}' --write",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -50,6 +51,7 @@
     "eslint-plugin-react": "^7.33.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "patch-package": "^8.0.0",
     "prettier": "^3.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
