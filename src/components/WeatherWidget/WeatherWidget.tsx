@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -21,11 +22,12 @@ interface Props {
 const SPINNER_SIZE = 25;
 
 export default function WeatherWidget({ location }: Props) {
+  const { selectedLanguage, selectedTemperatureUnit } =
+    useContext<SettingsContextType>(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { selectedLanguage, selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -53,7 +55,7 @@ export default function WeatherWidget({ location }: Props) {
         const formattedForecast = Object.entries(forecastByDate);
         setForecast(formattedForecast);
       } catch (error) {
-        enqueueSnackbar('No weather data found for this location', {
+        enqueueSnackbar(t('errors.fetchWeatherData'), {
           variant: 'error',
         });
       } finally {
@@ -62,7 +64,7 @@ export default function WeatherWidget({ location }: Props) {
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [location, selectedLanguage, selectedTemperatureUnit, enqueueSnackbar]);
+  }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />

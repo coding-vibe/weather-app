@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -24,6 +25,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
   const [openItems, setOpenItems] = useState<Set<string>>(
     new Set(forecastDates),
   );
+  const { t } = useTranslation();
 
   const handleClick = (date: string) => {
     if (openItems.has(date)) {
@@ -44,7 +46,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           country={location.country}
           css={classes.headListTitle}
           name={location.name}
-          text='5-Day'
+          text={t('texts.propContentHeader')}
         />
       }>
       {forecast.map(([date, weather]) => (

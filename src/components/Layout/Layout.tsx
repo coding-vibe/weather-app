@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import ROUTES from 'constants/routes';
@@ -11,6 +12,8 @@ function Layout() {
     id: `tab-${index}`,
     'aria-controls': `tabpanel-${index}`,
   });
+  const { t } = useTranslation();
+
   const activeTab = () => {
     switch (location.pathname) {
       case ROUTES.home:
@@ -27,15 +30,15 @@ function Layout() {
     <>
       <MUITabs
         value={activeTab()}
-        aria-label='forecast tabs'>
+        aria-label={t('labels.layoutTabs')}>
         <Tab
-          label='Forecast'
+          label={t('labels.forecastTab')}
           to={ROUTES.forecast}
           component={Link}
           {...a11yProps(Tabs.FORECAST)}
         />
         <Tab
-          label='Historical forecast'
+          label={t('labels.historicalForecastTab')}
           to={ROUTES.historical}
           component={Link}
           {...a11yProps(Tabs.HISTORICAL_FORECAST)}

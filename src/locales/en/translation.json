@@ -1,5 +1,5 @@
 {
-  "error": {
+  "errors": {
     "fetchGeoData": "Sorry, we could not find any results that match your search.",
     "fetchWeatherData": "No weather data found for this location."
   },
@@ -19,7 +19,7 @@
     "layoutTabs": "forecast tabs",
     "locationAutocomplete": "Location",
     "startDayDatePicker": "Start",
-    "temperatureUnitsSelectLabel": "Temperature unit",
+    "temperatureUnitsSelect": "Temperature unit",
     "weatherTable": "5-Day Weather Forecast"
   },
   "languages": {
@@ -35,14 +35,25 @@
   "texts": {
     "contentHeader": "Weather Forecast for",
     "historicalForecastTableCell": "Date/Time",
+    "iconAlt": "Weather condition",
     "noOptions": "No options found",
+    "propContentHeader": "5-Day",
     "propForecast": "5-days",
     "propHistoricalForecast": "Historical",
-    "searchCaption": "Select options for {{text}} weather forecast search&nbsp;"
+    "searchCaption": "Select options for {{text}} weather forecast search"
   },
   "weatherPeriodDetails": {
-    "humidity": "humid",
-    "temperature": "temp"
+    "humidity": "Humid",
+    "temperature": "Temp"
+  },
+  "weekDays": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   },
   "submit": "Submit"
 }

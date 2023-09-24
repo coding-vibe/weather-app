@@ -20,7 +20,7 @@ interface Resources {
       layoutTabs: string;
       locationAutocomplete: string;
       startDayDatePicker: string;
-      temperatureUnitsSelectLabel: string;
+      temperatureUnitsSelect: string;
       weatherTable: string;
     };
     languages: {

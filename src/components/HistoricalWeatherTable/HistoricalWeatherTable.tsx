@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useTranslation } from 'react-i18next';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';

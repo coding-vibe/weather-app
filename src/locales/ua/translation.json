@@ -1,5 +1,5 @@
 {
-  "error": {
+  "errors": {
     "fetchGeoData": "На жаль, ми не знайшли жодних результатів, які відповідають вашому запиту.",
     "fetchWeatherData": "Для цієї локації не знайдено жодних метеоданих."
   },
@@ -16,10 +16,10 @@
     "historicalForecastTab": "Історичний прогноз",
     "historicalWeatherTable": "Історичний прогноз погоди",
     "languageSelect": "Мова",
-    "layoutTabs": "вкладки прогнозу",
+    "layoutTabs": "Вкладки прогнозу",
     "locationAutocomplete": "Локація",
     "startDayDatePicker": "Початок",
-    "temperatureUnitsSelectLabel": "Одиниця вимірювання температури",
+    "temperatureUnitsSelect": "Одиниця вимірювання температури",
     "weatherTable": "Прогноз погоди на 5 днів"
   },
   "languages": {
@@ -35,14 +35,25 @@
   "texts": {
     "contentHeader": "Прогноз погоди для",
     "historicalForecastTableCell": "Дата/Час",
+    "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
-    "propForecast": "Прогноз на 5 днів",
-    "propHistoricalForecast": "Історичний",
-    "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди &nbsp;"
+    "propContentHeader": "5-денний",
+    "propForecast": "5-денного",
+    "propHistoricalForecast": "",
+    "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
   },
   "weatherPeriodDetails": {
-    "humidity": "Волог.",
-    "temperature": "Темп."
+    "humidity": "Волог",
+    "temperature": "Темп"
+  },
+  "weekDays": {
+    "monday": "Понеділок",
+    "tuesday": "Вівторок",
+    "wednesday": "Середа",
+    "thursday": "Четвер",
+    "friday": "П'ятниця",
+    "saturday": "Субота",
+    "sunday": "Неділя"
   },
   "submit": "Відправити"
 }

@@ -17,10 +17,8 @@ import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 export default function Forecast() {
   const {
@@ -44,7 +42,7 @@ export default function Forecast() {
             onSelectLanguage(event.target.value as Languages);
           }}
           value={selectedLanguage}
-          label={LANGUAGE_CHOICE_LABEL}
+          label={t('labels.languageSelect')}
           labelId={LANGUAGE_CHOICE_LABEL_ID}
           options={LANGUAGE_OPTIONS}
         />
@@ -60,7 +58,7 @@ export default function Forecast() {
             onSelectTemperatureUnit(event.target.value as TemperatureUnits);
           }}
           value={selectedTemperatureUnit}
-          label={TEMPERATURE_UNITS_LABEL}
+          label={t('labels.temperatureUnitsSelect')}
           labelId={TEMPERATURE_UNITS_LABEL_ID}
           options={TEMPERATURE_UNITS_OPTIONS}
         />

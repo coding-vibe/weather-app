@@ -96,7 +96,7 @@ export default function HistoricalWeatherForm({
           />
           <Field
             component={SelectField<TemperatureUnitOption>}
-            label={t('labels.temperatureUnitsSelectLabel')}
+            label={t('labels.temperatureUnitsSelect')}
             labelId={TEMPERATURE_UNITS_LABEL_ID}
             name='temperatureUnit'
             options={TEMPERATURE_UNITS_OPTIONS}
