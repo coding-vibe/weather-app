@@ -15,10 +15,13 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   );
   const [selectedTemperatureUnit, setSelectedTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
-  const onSelectLanguageCallback = useCallback((language: Languages) => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    i18n.changeLanguage(language);
-    setSelectedLanguage(language);
+  const onSelectLanguageCallback = useCallback(async (language: Languages) => {
+    try {
+      await i18n.changeLanguage(language);
+      setSelectedLanguage(language);
+    } catch (error) {
+      throw new Error('Error changing language');
+    }
   }, []);
   const onSelectTemperatureUnitCallback = useCallback(
     (temperatureUnit: TemperatureUnits) => {
@@ -29,6 +32,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const settings: SettingsContextType = {
     selectedLanguage,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSelectLanguage: onSelectLanguageCallback,
     selectedTemperatureUnit,
     onSelectTemperatureUnit: onSelectTemperatureUnitCallback,

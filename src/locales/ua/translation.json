@@ -1,7 +1,9 @@
 {
   "errors": {
     "fetchGeoData": "На жаль, ми не знайшли жодних результатів, які відповідають вашому запиту.",
-    "fetchWeatherData": "Для цієї локації не знайдено жодних метеоданих."
+    "fetchWeatherData": "Для цієї локації не знайдено жодних метеоданих.",
+    "validationRequired": "Обов'язкове поле",
+    "validationEndDateField": "Не може бути раніше початкової дати"
   },
   "iconDescriptions": {
     "brokenClouds": "рвані хмари",
@@ -11,14 +13,14 @@
     "scatteredClouds": "уривчасті хмари"
   },
   "labels": {
-    "endDayDatePicker": "Завершення",
+    "endDayDatePicker": "Кінцева дата",
     "forecastTab": "Прогноз",
     "historicalForecastTab": "Історичний прогноз",
     "historicalWeatherTable": "Історичний прогноз погоди",
     "languageSelect": "Мова",
     "layoutTabs": "Вкладки прогнозу",
     "locationAutocomplete": "Локація",
-    "startDayDatePicker": "Початок",
+    "startDayDatePicker": "Початкова дата",
     "temperatureUnitsSelect": "Одиниця вимірювання температури",
     "weatherTable": "Прогноз погоди на 5 днів"
   },
@@ -28,9 +30,9 @@
     "ukrainian": "Українська"
   },
   "temperatureUnits": {
-    "celsius": "Цельсій",
-    "fahrenheit": "Фаренгейт",
-    "kelvin": "Кельвін"
+    "celsius": "Цельсій, \u2103",
+    "fahrenheit": "Фаренгейт, \u00B0F",
+    "kelvin": "Кельвін, \u00B0K"
   },
   "texts": {
     "contentHeader": "Прогноз погоди для",

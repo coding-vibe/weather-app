@@ -1,19 +1,16 @@
 import TemperatureUnits from 'constants/temperatureUnits';
-import i18n from '../i18n';
-
-const { t } = i18n;
 
 const TEMPERATURE_UNITS_OPTIONS = [
   {
-    label: `${t('temperatureUnits.kelvin')}, \u00B0K`,
+    label: 'temperatureUnits.kelvin',
     value: TemperatureUnits.KELVIN,
   },
   {
-    label: `${t('temperatureUnits.celsius')}, \u2103`,
+    label: 'temperatureUnits.celsius',
     value: TemperatureUnits.CELSIUS,
   },
   {
-    label: `${t('temperatureUnits.fahrenheit')}, \u00B0F`,
+    label: 'temperatureUnits.fahrenheit',
     value: TemperatureUnits.FAHRENHEIT,
   },
 ];

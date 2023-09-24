@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FieldProps } from 'formik';
 import omit from 'lodash/omit';
 import Select from 'components/Select';
@@ -16,9 +17,10 @@ export default function SelectField<Option extends OptionBase>({
   form,
   ...props
 }: Props<Option>) {
+  const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
   const hasError = meta?.touched && !!meta?.error;
-  const helperText = hasError ? meta?.error : '';
+  const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   return (
     <Select<Option>
       error={hasError}

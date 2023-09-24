@@ -1,7 +1,9 @@
 {
   "errors": {
     "fetchGeoData": "Sorry, we could not find any results that match your search.",
-    "fetchWeatherData": "No weather data found for this location."
+    "fetchWeatherData": "No weather data found for this location.",
+    "validationRequired": "Required",
+    "validationEndDateField": "Shouldn't be before start date"
   },
   "iconDescriptions": {
     "brokenClouds": "broken clouds",
@@ -28,9 +30,9 @@
     "ukrainian": "Ukrainian"
   },
   "temperatureUnits": {
-    "celsius": "Celsius",
-    "fahrenheit": "Fahrenheit",
-    "kelvin": "Kelvin"
+    "celsius": "Celsius, \u2103",
+    "fahrenheit": "Fahrenheit, \u00B0F",
+    "kelvin": "Kelvin, \u00B0K"
   },
   "texts": {
     "contentHeader": "Weather Forecast for",

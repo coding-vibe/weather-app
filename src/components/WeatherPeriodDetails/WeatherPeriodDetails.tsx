@@ -23,7 +23,7 @@ export default function WeatherPeriodDetails({ weather }: Props) {
   } = weather;
   return (
     <>
-      <Tooltip title={description}>
+      <Tooltip title={t(description)}>
         <img
           alt={t('texts.iconAlt')}
           css={classes.icon}

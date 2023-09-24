@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import InputLabel from '@mui/material/InputLabel';
@@ -29,6 +30,8 @@ export default function Select<Option extends OptionBase>({
   helperText,
   name,
 }: Props<Option>) {
+  const { t } = useTranslation();
+
   return (
     <FormControl
       error={error}
@@ -45,7 +48,7 @@ export default function Select<Option extends OptionBase>({
           <MenuItem
             key={option.label}
             value={option.value}>
-            {option.label}
+            {t(option.label)}
           </MenuItem>
         ))}
       </MUISelect>
