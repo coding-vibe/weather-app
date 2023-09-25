@@ -11,7 +11,7 @@ interface Props {
   searchParams: FormValuesType;
 }
 
-const MONDAY = 'Monday';
+const MONDAY = 'weekDays.monday';
 
 export default function HistoricalWeatherWidget({
   forecast,

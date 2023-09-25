@@ -34,7 +34,7 @@ export default function Forecast() {
       <div css={classes.wrap}>
         <WeatherSearchCaption
           css={[classes.caption, classes.entry]}
-          text={t('texts.propForecast')}
+          text={t('texts.propCaptionForecast')}
         />
         <Select<LanguageOption>
           css={classes.entry}

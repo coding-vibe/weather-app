@@ -33,14 +33,14 @@ export default function HistoricalWeatherTable({
         country={country}
         css={classes.header}
         name={name}
-        text={t('texts.propHistoricalForecast')}
+        text={t('texts.propHeaderHistoricalForecast')}
       />
       <TableContainer component={Paper}>
         <Table aria-label={t('labels.historicalWeatherTable')}>
           <TableHead>
             <TableRow>
               {WEEK_DAYS.map((day) => (
-                <MUITableCell key={day}>{day}</MUITableCell>
+                <MUITableCell key={day}>{t(day)}</MUITableCell>
               ))}
             </TableRow>
           </TableHead>

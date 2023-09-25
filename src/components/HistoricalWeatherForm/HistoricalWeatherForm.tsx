@@ -8,8 +8,8 @@ import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
-import LanguageOption from 'types/languageOption';
 import LANGUAGE_OPTIONS from 'constants/languageOptions';
+import LanguageOption from 'types/languageOption';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
@@ -44,7 +44,6 @@ export default function HistoricalWeatherForm({
     values,
     { setSubmitting },
   ) => {
-    onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
     setSearchParams(values);
     setSubmitting(false);
@@ -67,6 +66,7 @@ export default function HistoricalWeatherForm({
             label={t('labels.languageSelect')}
             labelId={LANGUAGE_CHOICE_LABEL_ID}
             name='language'
+            onSelectChange={onSelectLanguage}
             options={LANGUAGE_OPTIONS}
           />
           <div css={classes.wrap}>

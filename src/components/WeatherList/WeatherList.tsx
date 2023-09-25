@@ -46,7 +46,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           country={location.country}
           css={classes.headListTitle}
           name={location.name}
-          text={t('texts.propContentHeader')}
+          text={t('texts.propHeaderForecast')}
         />
       }>
       {forecast.map(([date, weather]) => (

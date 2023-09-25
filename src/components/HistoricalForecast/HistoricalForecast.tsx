@@ -46,7 +46,7 @@ export default function HistoricalForecast() {
     <div>
       <WeatherSearchCaption
         css={classes.caption}
-        text={t('texts.propHistoricalForecast')}
+        text={t('texts.propCaptionHistoricalForecast')}
       />
       <HistoricalWeatherForm
         css={classes.form}

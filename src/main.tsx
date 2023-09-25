@@ -11,8 +11,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
 import theme from 'constants/theme';
+import i18n from 'i18n';
 import App from './App';
-import i18n from './i18n';
 import { globalStyles } from './globalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

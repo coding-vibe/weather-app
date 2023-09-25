@@ -32,7 +32,7 @@ export default function HistoricalWeatherList({
           country={country}
           css={classes.listTitle}
           name={name}
-          text={t('texts.propHistoricalForecast')}
+          text={t('texts.propHeaderHistoricalForecast')}
         />
       }>
       {weeklyForecast.map((weeklyWeather) =>
