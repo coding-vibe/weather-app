@@ -3,16 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { startOfYesterday } from 'date-fns';
 import { Formik, FormikConfig, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { SelectChangeEvent } from '@mui/material/Select';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
-import Languages from 'constants/languages';
 import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import OptionBase from 'types/optionBase';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
@@ -60,7 +57,7 @@ export default function HistoricalWeatherForm({
       initialValues={INITIAL_FORM_VALUES}
       onSubmit={handleSubmit}
       validationSchema={VALIDATION_SCHEMA}>
-      {({ handleChange, isSubmitting }) => (
+      {({ isSubmitting }) => (
         <Form
           className={className}
           css={classes.form}>
@@ -69,13 +66,7 @@ export default function HistoricalWeatherForm({
             label={t('labels.languageSelect')}
             labelId={LANGUAGE_CHOICE_LABEL_ID}
             name='language'
-            onChange={(event: SelectChangeEvent<OptionBase['value']>) => {
-              if (event) {
-                const selectedLanguage = event.target.value;
-                handleChange(selectedLanguage);
-                onSelectLanguage(selectedLanguage as Languages);
-              }
-            }}
+            onSelectLanguage={onSelectLanguage}
             options={LANGUAGE_OPTIONS}
           />
           <div css={classes.wrap}>
