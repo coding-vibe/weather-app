@@ -11,7 +11,7 @@ interface Props<Option extends OptionBase> {
   label: string;
   labelId: string;
   options: Option[];
-  setValue: (event: SelectChangeEvent<Option['value']>) => void;
+  setValue: (event: SelectChangeEvent<Option['value']> | undefined) => void;
   value: Option['value'];
   className?: string;
   error?: boolean;
