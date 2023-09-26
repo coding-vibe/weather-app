@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -17,11 +18,14 @@ interface Props {
   className?: string;
 }
 
+const DATE_FORMAT = 'HH:00';
+
 export default function WeatherList({ forecast, location, className }: Props) {
   const forecastDates = forecast.map(([date]) => date);
   const [openItems, setOpenItems] = useState<Set<string>>(
     new Set(forecastDates),
   );
+  const { t } = useTranslation();
 
   const handleClick = (date: string) => {
     if (openItems.has(date)) {
@@ -42,7 +46,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           country={location.country}
           css={classes.headListTitle}
           name={location.name}
-          text='5-Day'
+          text={t('texts.propHeaderForecast')}
         />
       }>
       {forecast.map(([date, weather]) => (
@@ -63,7 +67,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
             timeout='auto'
             unmountOnExit>
             {weather.map((hourlyWeather) => {
-              const hour = format(hourlyWeather.dt * 1000, 'hh:00 a');
+              const hour = format(hourlyWeather.dt * 1000, DATE_FORMAT);
               return (
                 <List
                   disablePadding

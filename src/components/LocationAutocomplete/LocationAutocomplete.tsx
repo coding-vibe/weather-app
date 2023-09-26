@@ -1,4 +1,5 @@
 import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@mui/material/Autocomplete';
@@ -39,6 +40,7 @@ export default function LocationAutocomplete({
   const [isLoading, onIsLoading] = useState(false);
   const [isOpen, onIsOpen] = useState(false);
   const [suggestions, onSuggestions] = useState<Location[]>([]);
+  const { t } = useTranslation();
 
   const fetchGeoData = useMemo(
     () =>
@@ -64,16 +66,13 @@ export default function LocationAutocomplete({
             );
             onSuggestions(locationData);
           } catch (err) {
-            enqueueSnackbar(
-              'Sorry, we could not find any results that match your search.',
-              { variant: 'error' },
-            );
+            enqueueSnackbar(t('errors.fetchGeoData'), { variant: 'error' });
           } finally {
             onIsLoading(false);
           }
         }
       }, DEBOUNCE_DELAY),
-    [enqueueSnackbar],
+    [enqueueSnackbar, t],
   );
 
   useEffect(() => {
@@ -118,7 +117,7 @@ export default function LocationAutocomplete({
       onClose={onClose}
       getOptionLabel={getOptionLabel}
       options={suggestions}
-      noOptionsText={!isLoading && 'No options found'}
+      noOptionsText={!isLoading && t('texts.noOptions')}
       inputValue={inputValue}
       onInputChange={onInputChange}
       value={location}
@@ -129,7 +128,7 @@ export default function LocationAutocomplete({
           {...params}
           error={error}
           helperText={helperText}
-          label='Location'
+          label={t('labels.locationAutocomplete')}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

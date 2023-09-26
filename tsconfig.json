@@ -13,6 +13,7 @@
       "components/*": ["components/*"],
       "constants/*": ["constants/*"],
       "contexts/*": ["contexts/*"],
+      "i18n/*": ["i18n/*"],
       "types/*": ["types/*"],
       "utils/*": ["utils/*"],
     },

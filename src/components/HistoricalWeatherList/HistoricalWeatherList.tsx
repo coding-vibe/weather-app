@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import List from '@mui/material/List';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherListItem from 'components/WeatherListItem';
@@ -19,6 +20,8 @@ export default function HistoricalWeatherList({
   name,
   className,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <List
       disablePadding
@@ -29,7 +32,7 @@ export default function HistoricalWeatherList({
           country={country}
           css={classes.listTitle}
           name={name}
-          text='Historical'
+          text={t('texts.propHeaderHistoricalForecast')}
         />
       }>
       {weeklyForecast.map((weeklyWeather) =>

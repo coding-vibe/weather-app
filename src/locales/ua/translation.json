@@ -1,0 +1,62 @@
+{
+  "errors": {
+    "fetchGeoData": "На жаль, ми не знайшли жодних результатів, які відповідають вашому запиту.",
+    "fetchWeatherData": "Для цієї локації не знайдено жодних метеоданих.",
+    "required": "Обов'язкове поле",
+    "endDateField": "Не може бути раніше початкової дати"
+  },
+  "iconDescriptions": {
+    "brokenClouds": "рвані хмари",
+    "clearSky": "чисте небо",
+    "fewClouds": "кілька хмар",
+    "overcastClouds": "хмарно",
+    "scatteredClouds": "уривчасті хмари"
+  },
+  "labels": {
+    "endDayDatePicker": "Кінцева дата",
+    "forecastTab": "Прогноз",
+    "historicalForecastTab": "Історичний прогноз",
+    "historicalWeatherTable": "Історичний прогноз погоди",
+    "languageSelect": "Мова",
+    "layoutTabs": "Вкладки прогнозу",
+    "locationAutocomplete": "Локація",
+    "startDayDatePicker": "Початкова дата",
+    "temperatureUnitsSelect": "Одиниця вимірювання температури",
+    "weatherTable": "Прогноз погоди на 5 днів"
+  },
+  "languages": {
+    "english": "Англійська",
+    "french": "Французька",
+    "ukrainian": "Українська"
+  },
+  "temperatureUnits": {
+    "celsius": "Цельсій, \u2103",
+    "fahrenheit": "Фаренгейт, \u00B0F",
+    "kelvin": "Кельвін, \u00B0K"
+  },
+  "texts": {
+    "contentHeader": "Прогноз погоди для",
+    "historicalForecastTableCell": "Дата/Час",
+    "iconAlt": "Погодні умови",
+    "noOptions": "Опцій не знайдено",
+    "propCaptionForecast": "5-денного",
+    "propCaptionHistoricalForecast": "Історичного",
+    "propHeaderForecast": "5-денний",
+    "propHeaderHistoricalForecast": "Історичний",
+    "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
+  },
+  "weatherPeriodDetails": {
+    "humidity": "Волог",
+    "temperature": "Темп"
+  },
+  "weekDays": {
+    "monday": "Понеділок",
+    "tuesday": "Вівторок",
+    "wednesday": "Середа",
+    "thursday": "Четвер",
+    "friday": "П'ятниця",
+    "saturday": "Субота",
+    "sunday": "Неділя"
+  },
+  "submit": "Відправити"
+}

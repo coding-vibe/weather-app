@@ -3,6 +3,7 @@ import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import SettingsContextType from 'types/settingsContextType';
+import i18n from 'i18n';
 
 interface Props {
   children: ReactNode;
@@ -14,7 +15,8 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   );
   const [selectedTemperatureUnit, setSelectedTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
-  const onSelectLanguageCallback = useCallback((language: Languages) => {
+  const onSelectLanguageCallback = useCallback(async (language: Languages) => {
+    await i18n.changeLanguage(language);
     setSelectedLanguage(language);
   }, []);
   const onSelectTemperatureUnitCallback = useCallback(
@@ -26,6 +28,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const settings: SettingsContextType = {
     selectedLanguage,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSelectLanguage: onSelectLanguageCallback,
     selectedTemperatureUnit,
     onSelectTemperatureUnit: onSelectTemperatureUnitCallback,

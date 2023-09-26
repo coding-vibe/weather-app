@@ -1,24 +1,23 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { startOfYesterday } from 'date-fns';
 import { Formik, FormikConfig, Form, Field } from 'formik';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DateField from 'components/DateField';
 import LocationAutoCompleteField from 'components/LocationAutocompleteField';
 import SelectField from 'components/SelectField';
+import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import LANGUAGE_OPTIONS from 'types/languageOptions';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 interface Props {
   setSearchParams: (value: FormValuesType) => void;
@@ -38,13 +37,13 @@ export default function HistoricalWeatherForm({
     location: null,
     temperatureUnit: '',
   };
+  const { t } = useTranslation();
   const yesterday = startOfYesterday();
 
   const handleSubmit: FormikConfig<FormValuesType>['onSubmit'] = (
     values,
     { setSubmitting },
   ) => {
-    onSelectLanguage(values.language);
     onSelectTemperatureUnit(values.temperatureUnit);
     setSearchParams(values);
     setSubmitting(false);
@@ -64,9 +63,10 @@ export default function HistoricalWeatherForm({
           css={classes.form}>
           <Field
             component={SelectField<LanguageOption>}
-            label={LANGUAGE_CHOICE_LABEL}
+            label={t('labels.languageSelect')}
             labelId={LANGUAGE_CHOICE_LABEL_ID}
             name='language'
+            setOption={onSelectLanguage}
             options={LANGUAGE_OPTIONS}
           />
           <div css={classes.wrap}>
@@ -74,7 +74,7 @@ export default function HistoricalWeatherForm({
               disableHighlightToday
               css={classes.dateField}
               component={DateField}
-              label='Start'
+              label={t('labels.startDayDatePicker')}
               maxDate={yesterday}
               name='startDate'
               type='date'
@@ -83,7 +83,7 @@ export default function HistoricalWeatherForm({
               disableHighlightToday
               css={[classes.dateField, classes.endDateField]}
               component={DateField}
-              label='End'
+              label={t('labels.endDayDatePicker')}
               maxDate={yesterday}
               name='endDate'
               type='date'
@@ -96,8 +96,8 @@ export default function HistoricalWeatherForm({
           />
           <Field
             component={SelectField<TemperatureUnitOption>}
+            label={t('labels.temperatureUnitsSelect')}
             labelId={TEMPERATURE_UNITS_LABEL_ID}
-            label={TEMPERATURE_UNITS_LABEL}
             name='temperatureUnit'
             options={TEMPERATURE_UNITS_OPTIONS}
           />
@@ -105,7 +105,7 @@ export default function HistoricalWeatherForm({
             loading={isSubmitting}
             type='submit'
             variant='contained'>
-            Submit
+            {t('submit')}
           </LoadingButton>
         </Form>
       )}

@@ -8,27 +8,27 @@ const VALIDATION_SCHEMA = yup.object().shape({
   language: yup
     .mixed<Languages>()
     .oneOf(Object.values(Languages))
-    .required('Required'),
-  startDate: yup.date().max(subDays(new Date(), 1)).required('Required'),
+    .required('errors.required'),
+  startDate: yup.date().max(subDays(new Date(), 1)).required('errors.required'),
   endDate: yup
     .date()
-    .min(yup.ref('startDate'), "Shouldn't be before start date")
+    .min(yup.ref('startDate'), 'errors.endDateField')
     .max(subDays(new Date(), 1))
-    .required('Required'),
+    .required('errors.required'),
   location: yup
     .object<Location>()
     .shape({
-      name: yup.string().required('Required'),
-      lat: yup.number().required('Required'),
-      lon: yup.number().required('Required'),
-      country: yup.string().required('Required'),
+      name: yup.string().required('errors.required'),
+      lat: yup.number().required('errors.required'),
+      lon: yup.number().required('errors.required'),
+      country: yup.string().required('errors.required'),
       state: yup.string(),
     })
-    .required('Required'),
+    .required('errors.required'),
   temperatureUnit: yup
     .mixed<TemperatureUnits>()
     .oneOf(Object.values(TemperatureUnits))
-    .required('Required'),
+    .required('errors.required'),
 });
 
 export default VALIDATION_SCHEMA;

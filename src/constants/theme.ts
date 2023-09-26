@@ -35,7 +35,7 @@ const theme = createTheme({
   },
   width: {
     table: '1000px',
-    desktop: '435px',
+    desktop: '450px',
     mobile: '280px',
   },
 });
