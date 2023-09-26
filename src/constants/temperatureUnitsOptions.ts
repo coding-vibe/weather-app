@@ -1,9 +1,18 @@
 import TemperatureUnits from 'constants/temperatureUnits';
 
 const TEMPERATURE_UNITS_OPTIONS = [
-  { label: 'Kelvin, \u00B0K', value: TemperatureUnits.KELVIN },
-  { label: 'Celsius, \u2103', value: TemperatureUnits.CELSIUS },
-  { label: 'Fahrenheit, \u00B0F', value: TemperatureUnits.FAHRENHEIT },
+  {
+    label: 'temperatureUnits.kelvin',
+    value: TemperatureUnits.KELVIN,
+  },
+  {
+    label: 'temperatureUnits.celsius',
+    value: TemperatureUnits.CELSIUS,
+  },
+  {
+    label: 'temperatureUnits.fahrenheit',
+    value: TemperatureUnits.FAHRENHEIT,
+  },
 ];
 
 export default TEMPERATURE_UNITS_OPTIONS;

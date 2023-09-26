@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FieldProps } from 'formik';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
@@ -12,9 +13,10 @@ export default function LocationAutoCompleteField({
   form,
   ...props
 }: Props) {
+  const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
   const hasError = meta?.touched && !!meta?.error;
-  const helperText = hasError ? meta?.error : '';
+  const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   const setLocation = (newValue: Location) => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     form.setFieldValue(name, newValue);

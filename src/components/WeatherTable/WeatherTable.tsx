@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -20,19 +22,23 @@ interface Props {
 }
 
 export default function WeatherTable({ forecast, location, className }: Props) {
+  const { t } = useTranslation();
+  const tableAriaLabel = t('labels.weatherTable');
   return (
     <Box className={className}>
       <WeatherContentHeader
         country={location.country}
         css={classes.tableTitle}
         name={location.name}
-        text='5-Day'
+        text={t('texts.propHeaderForecast')}
       />
       <TableContainer component={Paper}>
-        <Table aria-label='5-Day Weather Forecast'>
+        <Table aria-label={tableAriaLabel}>
           <TableHead>
             <TableRow>
-              <MUITableCell css={classes.tableHeadCell}>Date/Time</MUITableCell>
+              <MUITableCell css={classes.tableHeadCell}>
+                {t('texts.historicalForecastTableCell')}
+              </MUITableCell>
               {HOURS.map((hour) => (
                 <MUITableCell
                   align='center'

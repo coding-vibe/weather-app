@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { FieldProps } from 'formik';
 import {
   DatePickerProps,
@@ -14,9 +15,10 @@ export default function DateField({
   form,
   ...props
 }: Props) {
+  const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
   const hasError = meta?.touched && !!meta?.error;
-  const helperText = hasError ? meta?.error : '';
+  const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   return (
     <MUIDatePicker
       // eslint-disable-next-line @typescript-eslint/no-misused-promises

@@ -22,7 +22,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -60,7 +60,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01n',
         },
       ],
@@ -96,7 +96,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01n',
         },
       ],
@@ -132,7 +132,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01n',
         },
       ],
@@ -168,7 +168,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02n',
         },
       ],
@@ -204,7 +204,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02d',
         },
       ],
@@ -240,7 +240,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02d',
         },
       ],
@@ -276,7 +276,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02d',
         },
       ],
@@ -312,7 +312,7 @@ const FORECAST = {
         {
           id: 802,
           main: 'Clouds',
-          description: 'scattered clouds',
+          description: 'iconDescriptions.scatteredClouds',
           icon: '03d',
         },
       ],
@@ -348,7 +348,7 @@ const FORECAST = {
         {
           id: 802,
           main: 'Clouds',
-          description: 'scattered clouds',
+          description: 'iconDescriptions.scatteredClouds',
           icon: '03n',
         },
       ],
@@ -384,7 +384,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -420,7 +420,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -456,7 +456,7 @@ const FORECAST = {
         {
           id: 803,
           main: 'Clouds',
-          description: 'broken clouds',
+          description: 'iconDescriptions.brokenClouds',
           icon: '04n',
         },
       ],
@@ -492,7 +492,7 @@ const FORECAST = {
         {
           id: 802,
           main: 'Clouds',
-          description: 'scattered clouds',
+          description: 'iconDescriptions.scatteredClouds',
           icon: '03d',
         },
       ],
@@ -528,7 +528,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -564,7 +564,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -600,7 +600,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -636,7 +636,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01n',
         },
       ],
@@ -672,7 +672,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02n',
         },
       ],
@@ -708,7 +708,7 @@ const FORECAST = {
         {
           id: 801,
           main: 'Clouds',
-          description: 'few clouds',
+          description: 'iconDescriptions.fewClouds',
           icon: '02n',
         },
       ],
@@ -744,7 +744,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01n',
         },
       ],
@@ -780,7 +780,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -816,7 +816,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -852,7 +852,7 @@ const FORECAST = {
         {
           id: 800,
           main: 'Clear',
-          description: 'clear sky',
+          description: 'iconDescriptions.clearSky',
           icon: '01d',
         },
       ],
@@ -888,7 +888,7 @@ const FORECAST = {
         {
           id: 802,
           main: 'Clouds',
-          description: 'scattered clouds',
+          description: 'iconDescriptions.scatteredClouds',
           icon: '03d',
         },
       ],
@@ -924,7 +924,7 @@ const FORECAST = {
         {
           id: 803,
           main: 'Clouds',
-          description: 'broken clouds',
+          description: 'iconDescriptions.brokenClouds',
           icon: '04n',
         },
       ],
@@ -960,7 +960,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -996,7 +996,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1032,7 +1032,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1068,7 +1068,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],
@@ -1104,7 +1104,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],
@@ -1140,7 +1140,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],
@@ -1176,7 +1176,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],
@@ -1212,7 +1212,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1248,7 +1248,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1284,7 +1284,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1320,7 +1320,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04n',
         },
       ],
@@ -1356,7 +1356,7 @@ const FORECAST = {
         {
           id: 803,
           main: 'Clouds',
-          description: 'broken clouds',
+          description: 'iconDescriptions.brokenClouds',
           icon: '04d',
         },
       ],
@@ -1392,7 +1392,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],
@@ -1428,7 +1428,7 @@ const FORECAST = {
         {
           id: 804,
           main: 'Clouds',
-          description: 'overcast clouds',
+          description: 'iconDescriptions.overcastClouds',
           icon: '04d',
         },
       ],

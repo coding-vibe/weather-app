@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
 import CircularProgress from '@mui/material/CircularProgress';
 import pick from 'lodash/pick';
@@ -18,6 +19,7 @@ export default function HistoricalForecast() {
     useState<FormValuesType | null>(null);
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchForecast = () => {
@@ -28,7 +30,7 @@ export default function HistoricalForecast() {
         );
         setForecast(forecastData);
       } catch (error) {
-        enqueueSnackbar('No weather data found for this location', {
+        enqueueSnackbar(t('error.fetchWeatherData'), {
           variant: 'error',
         });
       } finally {
@@ -36,7 +38,7 @@ export default function HistoricalForecast() {
       }
     };
     fetchForecast();
-  }, [selectedSearchParams, enqueueSnackbar]);
+  }, [selectedSearchParams, enqueueSnackbar, t]);
 
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
@@ -44,7 +46,7 @@ export default function HistoricalForecast() {
     <div>
       <WeatherSearchCaption
         css={classes.caption}
-        text='Historical'
+        text={t('texts.propCaptionHistoricalForecast')}
       />
       <HistoricalWeatherForm
         css={classes.form}

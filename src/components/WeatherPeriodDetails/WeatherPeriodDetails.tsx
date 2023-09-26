@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import SettingsContext from 'contexts/SettingsContext';
@@ -15,22 +16,23 @@ interface Props {
 export default function WeatherPeriodDetails({ weather }: Props) {
   const { selectedTemperatureUnit } =
     useContext<SettingsContextType>(SettingsContext);
+  const { t } = useTranslation();
   const {
     main: { humidity, temp },
     weather: [{ description, icon }],
   } = weather;
   return (
     <>
-      <Tooltip title={description}>
+      <Tooltip title={t(description)}>
         <img
-          alt='Weather condition'
+          alt={t('texts.iconAlt')}
           css={classes.icon}
           src={generateIconURL(icon)}
         />
       </Tooltip>
       <div css={classes.data}>
         <span>
-          Temp:&nbsp;
+          {t('weatherPeriodDetails.temperature')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}
@@ -39,7 +41,7 @@ export default function WeatherPeriodDetails({ weather }: Props) {
           </Typography>
         </span>
         <span>
-          Hum:&nbsp;
+          {t('weatherPeriodDetails.humidity')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}

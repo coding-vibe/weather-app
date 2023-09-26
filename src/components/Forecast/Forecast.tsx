@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SelectChangeEvent } from '@mui/material/Select';
 import LocationAutocomplete from 'components/LocationAutocomplete';
 import Select from 'components/Select';
@@ -9,17 +10,15 @@ import TemperatureUnits from 'constants/temperatureUnits';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import LANGUAGE_OPTIONS from 'types/languageOptions';
+import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Location from 'types/location';
 import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
 
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LANGUAGE_CHOICE_LABEL = 'Language';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-const TEMPERATURE_UNITS_LABEL = 'Temperature unit';
 
 export default function Forecast() {
   const {
@@ -29,12 +28,13 @@ export default function Forecast() {
     onSelectTemperatureUnit,
   } = useContext<SettingsContextType>(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
+  const { t } = useTranslation();
   return (
     <div>
       <div css={classes.wrap}>
         <WeatherSearchCaption
           css={[classes.caption, classes.entry]}
-          text='5-day'
+          text={t('texts.propCaptionForecast')}
         />
         <Select<LanguageOption>
           css={classes.entry}
@@ -42,7 +42,7 @@ export default function Forecast() {
             onSelectLanguage(event.target.value as Languages);
           }}
           value={selectedLanguage}
-          label={LANGUAGE_CHOICE_LABEL}
+          label={t('labels.languageSelect')}
           labelId={LANGUAGE_CHOICE_LABEL_ID}
           options={LANGUAGE_OPTIONS}
         />
@@ -58,7 +58,7 @@ export default function Forecast() {
             onSelectTemperatureUnit(event.target.value as TemperatureUnits);
           }}
           value={selectedTemperatureUnit}
-          label={TEMPERATURE_UNITS_LABEL}
+          label={t('labels.temperatureUnitsSelect')}
           labelId={TEMPERATURE_UNITS_LABEL_ID}
           options={TEMPERATURE_UNITS_OPTIONS}
         />
