@@ -1,21 +1,14 @@
 # Weather app
 
-The "Weather app" project is a web application that provides a 5-day weather forecast with 3-hour step and historical forecast. The app is equipped with a user-friendly interface that can be seamlessly switched between multiple languages.
+The "Weather app" project is a web application that provides a 5-day weather forecast with 3-hour step and historical forecast. The app features are a responsive layout and an user-friendly interface that can be effortlessly switched between multiple languages. Translation of the location into another language isn't carried out due to the specifics of the API.
 
-[OpenWeatherMap API Documentation] ('./docs/OpenWeatherMapAPI.md')
-
-## Table of Contents
-
-1. [Project Description](#project-description)
-2. [Core Technologies](#core-technologies)
-3. [Scripts](#scripts)
-4. [Getting Started](#getting-started)
+- [OpenWeatherMap API Documentation] ('./docs/OpenWeatherMapAPI.md')
 
 ## Project Description
 
 ### Tab 1: 5-Day Weather Forecast
 
-On the first tab, users can view a 5-day weather forecast. Users have the option to select the language and units of measurement for displaying information. The application's design adapts to the screen size, with the table transforming into a list for user convenience when the screen size is reduced.
+On the first tab, users can view a 5-day weather forecast. Users have the option to select the language and units of measurement for displaying information.
 
 ### Tab 2: Historical Weather Forecast
 
@@ -46,7 +39,7 @@ The project includes the following scripts that can be executed:
 
 ## Getting Started
 
-1. Clone the repository to your local computer.
+1. Clone the repo to your local computer.
 2. Run `npm install` to install the required dependencies.
 3. To start the development mode, use the command `npm run dev`.
 4. To build the project, use the command `npm run build`.
