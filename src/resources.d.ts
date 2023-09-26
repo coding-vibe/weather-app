@@ -3,8 +3,8 @@ interface Resources {
     errors: {
     fetchGeoData: string;
     fetchWeatherData: string;
-    validationRequired: string;
-    validationEndDateField: string;
+    required: string;
+    endDateField: string;
   };
   iconDescriptions: {
     brokenClouds: string;

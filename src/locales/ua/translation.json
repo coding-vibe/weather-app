@@ -2,8 +2,8 @@
   "errors": {
     "fetchGeoData": "На жаль, ми не знайшли жодних результатів, які відповідають вашому запиту.",
     "fetchWeatherData": "Для цієї локації не знайдено жодних метеоданих.",
-    "validationRequired": "Обов'язкове поле",
-    "validationEndDateField": "Не може бути раніше початкової дати"
+    "required": "Обов'язкове поле",
+    "endDateField": "Не може бути раніше початкової дати"
   },
   "iconDescriptions": {
     "brokenClouds": "рвані хмари",

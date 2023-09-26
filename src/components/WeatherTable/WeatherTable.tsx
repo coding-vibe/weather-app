@@ -23,6 +23,7 @@ interface Props {
 
 export default function WeatherTable({ forecast, location, className }: Props) {
   const { t } = useTranslation();
+  const tableAriaLabel = t('labels.weatherTable');
   return (
     <Box className={className}>
       <WeatherContentHeader
@@ -32,7 +33,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
         text={t('texts.propHeaderForecast')}
       />
       <TableContainer component={Paper}>
-        <Table aria-label={t('texts.weatherTable')}>
+        <Table aria-label={tableAriaLabel}>
           <TableHead>
             <TableRow>
               <MUITableCell css={classes.tableHeadCell}>

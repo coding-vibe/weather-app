@@ -1,4 +1,4 @@
-const WEEK_DAYS = [
+const WEEK_DAY_TRANSLATION_KEYS = [
   'weekDays.monday',
   'weekDays.tuesday',
   'weekDays.wednesday',
@@ -8,4 +8,4 @@ const WEEK_DAYS = [
   'weekDays.sunday',
 ];
 
-export default WEEK_DAYS;
+export default WEEK_DAY_TRANSLATION_KEYS;

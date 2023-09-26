@@ -4,7 +4,6 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import omit from 'lodash/omit';
 import Select from 'components/Select';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
-import Languages from 'constants/languages';
 import OptionBase from 'types/optionBase';
 
 interface Props<Option extends OptionBase>
@@ -12,13 +11,13 @@ interface Props<Option extends OptionBase>
   label: string;
   labelId: string;
   options: Option[];
-  onSelectLanguage?: (value: Languages) => void;
+  setOption?: (value: Option['value']) => void;
 }
 
 export default function SelectField<Option extends OptionBase>({
   field: { name, value },
   form: { getFieldMeta, setFieldValue },
-  onSelectLanguage,
+  setOption,
   ...props
 }: Props<Option>) {
   const { t } = useTranslation();
@@ -26,10 +25,10 @@ export default function SelectField<Option extends OptionBase>({
   const hasError = meta?.touched && !!meta?.error;
   const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
 
-  const changeHandler = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent) => {
     const selectedOption = event.target.value;
-    if (onSelectLanguage) {
-      onSelectLanguage(selectedOption as Languages);
+    if (setOption) {
+      setOption(selectedOption);
     }
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setFieldValue(name, selectedOption);
@@ -40,7 +39,7 @@ export default function SelectField<Option extends OptionBase>({
       error={hasError}
       helperText={helperText}
       name={name}
-      setValue={changeHandler}
+      setValue={handleChange}
       value={value}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...omit(props)}
@@ -49,5 +48,5 @@ export default function SelectField<Option extends OptionBase>({
 }
 
 SelectField.defaultProps = {
-  onSelectLanguage: null,
+  setOption: null,
 };

@@ -2,8 +2,8 @@
   "errors": {
     "fetchGeoData": "Sorry, we could not find any results that match your search.",
     "fetchWeatherData": "No weather data found for this location.",
-    "validationRequired": "Required",
-    "validationEndDateField": "Shouldn't be before start date"
+    "required": "Required",
+    "endDateField": "Shouldn't be before start date"
   },
   "iconDescriptions": {
     "brokenClouds": "broken clouds",

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useTranslation } from 'react-i18next';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -10,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherTableCell from 'components/WeatherTableCell';
 import ForecastBody from 'types/forecast';
-import WEEK_DAYS from 'constants/weekDays';
+import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDayTranslationKeys';
 import * as classes from './styles';
 
 interface Props {
@@ -27,6 +26,7 @@ export default function HistoricalWeatherTable({
   className,
 }: Props) {
   const { t } = useTranslation();
+  const tableAriaLabel = t('labels.historicalWeatherTable');
   return (
     <div className={className}>
       <WeatherContentHeader
@@ -36,17 +36,18 @@ export default function HistoricalWeatherTable({
         text={t('texts.propHeaderHistoricalForecast')}
       />
       <TableContainer component={Paper}>
-        <Table aria-label={t('labels.historicalWeatherTable')}>
+        <Table aria-label={tableAriaLabel}>
           <TableHead>
             <TableRow>
-              {WEEK_DAYS.map((day) => (
+              {WEEK_DAY_TRANSLATION_KEYS.map((day) => (
                 <MUITableCell key={day}>{t(day)}</MUITableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {weeklyForecast.map((weeklyWeather, index) => {
-              const emptyCellsCount = WEEK_DAYS.length - weeklyWeather.length;
+              const emptyCellsCount =
+                WEEK_DAY_TRANSLATION_KEYS.length - weeklyWeather.length;
               return (
                 <TableRow key={index}>
                   {index === 0 &&

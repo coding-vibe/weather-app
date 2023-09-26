@@ -66,7 +66,7 @@ export default function HistoricalWeatherForm({
             label={t('labels.languageSelect')}
             labelId={LANGUAGE_CHOICE_LABEL_ID}
             name='language'
-            onSelectLanguage={onSelectLanguage}
+            setOption={onSelectLanguage}
             options={LANGUAGE_OPTIONS}
           />
           <div css={classes.wrap}>

@@ -16,12 +16,8 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   const [selectedTemperatureUnit, setSelectedTemperatureUnit] =
     useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
   const onSelectLanguageCallback = useCallback(async (language: Languages) => {
-    try {
-      await i18n.changeLanguage(language);
-      setSelectedLanguage(language);
-    } catch (error) {
-      throw new Error('Error changing language');
-    }
+    await i18n.changeLanguage(language);
+    setSelectedLanguage(language);
   }, []);
   const onSelectTemperatureUnitCallback = useCallback(
     (temperatureUnit: TemperatureUnits) => {

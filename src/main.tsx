@@ -24,9 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <GlobalStyles styles={globalStyles} />
           <SnackbarProvider>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <I18nextProvider
-                i18n={i18n}
-                defaultNS='translation'>
+              <I18nextProvider i18n={i18n}>
                 <SettingsProvider>
                   <App />
                 </SettingsProvider>

@@ -2,8 +2,8 @@
   "errors": {
     "fetchGeoData": "Désolé, nous n'avons trouvé aucun résultat correspondant à votre recherche.",
     "fetchWeatherData": "Aucune donnée météorologique trouvée pour cet emplacement.",
-    "validationRequired": "Requis",
-    "validationEndDateField": "Ne devrait pas être avant la date de début"
+    "required": "Requis",
+    "endDateField": "Ne devrait pas être avant la date de début"
   },
   "iconDescriptions": {
     "brokenClouds": "nuages brisés",
