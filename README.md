@@ -2,7 +2,7 @@
 
 The "Weather app" project is a web application that provides a 5-day weather forecast with 3-hour step and historical forecast. The app features are a responsive layout and an user-friendly interface that can be effortlessly switched between multiple languages. Translation of the location into another language isn't carried out due to the specifics of the API.
 
-- [OpenWeatherMap API Documentation]('./docs/OpenWeatherMapAPI.md')
+- [OpenWeatherMap API Documentation](./docs/OpenWeatherMapAPI.md)
 
 ## Project Description
 
