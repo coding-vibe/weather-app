@@ -2,10 +2,9 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
-    // TODO: remove eslint-recommended. Majority of these rules is overlapped by TS version like this. Clean the rules
+    // TODO: Clean the rules
     /*
      * 'no-shadow': 0,
-     * '@typescript-eslint/no-shadow': 2,
      */
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
@@ -72,16 +71,15 @@ module.exports = {
     }],
     '@typescript-eslint/no-misused-promises': [2,
       {
-        'checksVoidReturn': {
-          'arguments': false,
-          'attributes': false
-        }
+        'checksVoidReturn': false,
       }],
     'react/jsx-props-no-spreading': [2,
       {
         'html': 'enforce', 'exceptions': ['div'],
         'custom': 'ignore',
       }],
+    '@typescript-eslint/no-floating-promises': 0,
+    'newline-before-return': 2,
 },
   settings: {
     'import/resolver': {
@@ -96,7 +94,7 @@ module.exports = {
           ['components', './src/components'],
           ['constants', './src/constants'],
           ['contexts', './src/contexts'],
-          ['i18n', './src/i18n'],
+          ['locales', './src/locales'],
           ['types', './src/types'],
           ['utils', './src/utils'],
         ],

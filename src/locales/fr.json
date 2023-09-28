@@ -15,7 +15,7 @@
   "labels": {
     "endDayDatePicker": "Fin",
     "forecastTab": "Prévision",
-    "historicalForecastTab": "Prévision historique",
+    "historicalWeatherDataTab": "Données météorologiques historiques",
     "historicalWeatherTable": "Prévisions météorologiques historiques",
     "languageSelect": "Langue",
     "layoutTabs": "Onglets de prévision",
@@ -36,13 +36,13 @@
   },
   "texts": {
     "contentHeader": "Prévisions météorologiques pour",
-    "historicalForecastTableCell": "Date/Heure",
+    "historicalWeatherDataTableCell": "Date/Heure",
     "iconAlt": "Les conditions météorologiques",
     "noOptions": "Aucune option trouvée",
     "propCaptionForecast": "5 jours",
+    "propCaptionHistoricalWeatherData": "Historique",
     "propHeaderForecast": "5 jours",
-    "propCaptionHistoricalForecast": "Historique",
-    "propHeaderHistoricalForecast": "Historique",
+    "propHeaderHistoricalWeatherData": "Historique",
     "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
   },
   "weatherPeriodDetails": {

@@ -10,6 +10,7 @@ interface Props {
 
 export default function WeatherSearchCaption({ text, className }: Props) {
   const { t } = useTranslation();
+
   return (
     <div
       className={className}

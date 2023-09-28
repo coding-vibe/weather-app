@@ -20,9 +20,9 @@ export default function DateField({
   const hasError = meta?.touched && !!meta?.error;
   // TODO: @singvarr - unfuck this check
   const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
+
   return (
     <MUIDatePicker
-      // TODO: let's disable both ESLint rules globally and clear all components
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{
         textField: {

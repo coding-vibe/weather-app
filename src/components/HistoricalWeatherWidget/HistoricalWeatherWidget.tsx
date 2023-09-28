@@ -2,7 +2,7 @@ import HistoricalWeatherList from 'components/HistoricalWeatherList';
 import HistoricalWeatherTable from 'components/HistoricalWeatherTable';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
-import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDayTranslationKeys';
+import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDays';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import * as classes from './styles';
 
@@ -28,6 +28,7 @@ export default function HistoricalWeatherWidget({
       } else {
         accumulator[accumulator.length - 1].push(dailyForecast);
       }
+
       return accumulator;
     },
     [[]],

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import CircularProgress from '@mui/material/CircularProgress';
-import pick from 'lodash/pick';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
-import ForecastBody from 'types/forecast';
 import WeatherSearchCaption from 'components/WeatherSearchCaption';
+import ForecastBody from 'types/forecast';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
-import FORECAST from './forecast';
+import FIXTURE from './fixture';
 import * as classes from './styles';
 
 const SPINNER_SIZE = 25;
 
-export default function HistoricalForecast() {
+export default function HistoricalWeatherData() {
   const { enqueueSnackbar } = useSnackbar();
   const [selectedSearchParams, onSelectSearchParams] =
     useState<FormValuesType | null>(null);
@@ -26,7 +26,7 @@ export default function HistoricalForecast() {
       try {
         setIsLoading(true);
         // TODO: create a handler that resolves promise after n ms. Timeout should be passed as param. For this case pass 1000ms
-        const forecastData = FORECAST.list.map((data) =>
+        const forecastData = FIXTURE.list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
         setForecast(forecastData);
@@ -47,7 +47,7 @@ export default function HistoricalForecast() {
     <div>
       <WeatherSearchCaption
         css={classes.caption}
-        text={t('texts.propCaptionHistoricalForecast')}
+        text={t('texts.propCaptionHistoricalWeatherData')}
       />
       <HistoricalWeatherForm
         css={classes.form}

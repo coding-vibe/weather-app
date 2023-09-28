@@ -2,8 +2,6 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   breakpoints: {
-    // TODO: remove me
-    // According to MUI documentation, when changing the default breakpoints' values, it is necessary to provide all of them
     values: {
       xs: 0,
       sm: 480,

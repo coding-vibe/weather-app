@@ -23,6 +23,7 @@ interface Props {
 export default function WeatherTable({ forecast, location, className }: Props) {
   const { t } = useTranslation();
   const tableAriaLabel = t('labels.weatherTable');
+
   return (
     <Box className={className}>
       <WeatherContentHeader
@@ -36,7 +37,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
           <TableHead>
             <TableRow>
               <MUITableCell css={classes.tableHeadCell}>
-                {t('texts.historicalForecastTableCell')}
+                {t('texts.historicalWeatherDataTableCell')}
               </MUITableCell>
               {HOURS.map((hour) => (
                 <MUITableCell
@@ -51,6 +52,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
           <TableBody>
             {forecast.map(([date, weather], index) => {
               const emptyCells = HOURS.length - weather.length;
+
               return (
                 <TableRow
                   hover

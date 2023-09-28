@@ -68,6 +68,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
             unmountOnExit>
             {weather.map((hourlyWeather) => {
               const hour = format(hourlyWeather.dt * 1000, DATE_FORMAT);
+
               return (
                 <List
                   disablePadding

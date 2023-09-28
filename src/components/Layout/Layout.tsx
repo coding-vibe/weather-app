@@ -2,7 +2,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ROUTES from 'constants/routes';
+import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
 
 function Layout() {
@@ -13,41 +13,39 @@ function Layout() {
   });
   const { t } = useTranslation();
 
-  // TODO: getActiveTab
-  const activeTab = () => {
+  const getActiveTab = () => {
     switch (location.pathname) {
-      case ROUTES.home:
+      case routes.HOME:
         return Tabs.FORECAST;
-      case ROUTES.forecast:
+      case routes.FORECAST:
         return Tabs.FORECAST;
-      case ROUTES.historical:
-        return Tabs.HISTORICAL_FORECAST;
+      case routes.HISTORICAL:
+        return Tabs.HISTORICAL_WEATHER_DATA;
       default:
         throw new Error('Invalid route for determining active tab');
     }
   };
-  // TODO: add ESLint rule that requires blank line before return
+
   return (
-    // TODO: wrap in div
-    <>
+    <div>
       <MUITabs
-        value={activeTab()}
+        value={getActiveTab()}
         aria-label={t('labels.layoutTabs')}>
         <Tab
           label={t('labels.forecastTab')}
-          to={ROUTES.forecast}
+          to={routes.FORECAST}
           component={Link}
           {...a11yProps(Tabs.FORECAST)}
         />
         <Tab
-          label={t('labels.historicalForecastTab')}
-          to={ROUTES.historical}
+          label={t('labels.historicalWeatherDataTab')}
+          to={routes.HISTORICAL}
           component={Link}
-          {...a11yProps(Tabs.HISTORICAL_FORECAST)}
+          {...a11yProps(Tabs.HISTORICAL_WEATHER_DATA)}
         />
       </MUITabs>
       <Outlet />
-    </>
+    </div>
   );
 }
 

@@ -77,7 +77,6 @@ export default function LocationAutocomplete({
 
   useEffect(() => {
     if (inputValue) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       fetchGeoData(inputValue);
     }
   }, [fetchGeoData, inputValue]);
@@ -103,6 +102,7 @@ export default function LocationAutocomplete({
   const getOptionLabel = (option: Location) => {
     const state = option.state ? `${option.state} - ` : '';
     const country = findCountryNameByCode(option.country);
+
     return `${option.name} - ${state}${country}`;
   };
 

@@ -3,7 +3,7 @@ import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
 import SettingsContextType from 'types/settingsContextType';
-import i18n from 'i18n';
+import i18n from 'locales/i18n';
 
 interface Props {
   children: ReactNode;
@@ -32,6 +32,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
     selectedTemperatureUnit,
     onSelectTemperatureUnit: onSelectTemperatureUnitCallback,
   };
+
   return (
     <SettingsContext.Provider value={settings}>
       {children}

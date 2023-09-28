@@ -15,10 +15,6 @@ import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 import * as classes from './styles';
 
-const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LOCATION_AUTOCOMPLETE = 'location-select';
-const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-
 interface Props {
   setSearchParams: (value: FormValuesType) => void;
   className?: string;
@@ -64,7 +60,7 @@ export default function HistoricalWeatherForm({
           <Field
             component={SelectField<LanguageOption>}
             label={t('labels.languageSelect')}
-            labelId={LANGUAGE_CHOICE_LABEL_ID}
+            labelId='language-select'
             name='language'
             setOption={onSelectLanguage}
             options={LANGUAGE_OPTIONS}
@@ -91,13 +87,13 @@ export default function HistoricalWeatherForm({
           </div>
           <Field
             component={LocationAutoCompleteField}
-            id={LOCATION_AUTOCOMPLETE}
+            id='location-select'
             name='location'
           />
           <Field
             component={SelectField<TemperatureUnitOption>}
             label={t('labels.temperatureUnitsSelect')}
-            labelId={TEMPERATURE_UNITS_LABEL_ID}
+            labelId='temperature-unit-select'
             name='temperatureUnit'
             options={TEMPERATURE_UNITS_OPTIONS}
           />

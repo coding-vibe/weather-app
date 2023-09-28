@@ -1,29 +1,28 @@
 import { Navigate, Routes as ReactRoutes, Route } from 'react-router-dom';
 import Forecast from 'components/Forecast';
-import HistoricalForecast from 'components/HistoricalForecast';
+import HistoricalWeatherData from 'components/HistoricalWeatherData';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel';
-import ROUTES from 'constants/routes';
+import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
 
-// TODO: rename me to routes
 export default function Routes() {
   return (
     <ReactRoutes>
       <Route
-        path={ROUTES.home}
+        path={routes.HOME}
         element={<Layout />}>
         <Route
           index
           element={
             <Navigate
-              to={ROUTES.forecast}
+              to={routes.FORECAST}
               replace
             />
           }
         />
         <Route
-          path={ROUTES.forecast}
+          path={routes.FORECAST}
           element={
             <TabPanel
               value={Tabs.FORECAST}
@@ -33,22 +32,21 @@ export default function Routes() {
           }
         />
         <Route
-          path={ROUTES.historical}
+          path={routes.HISTORICAL}
           element={
             <TabPanel
-              value={Tabs.HISTORICAL_FORECAST}
-              index={Tabs.HISTORICAL_FORECAST}>
-              <HistoricalForecast />
+              value={Tabs.HISTORICAL_WEATHER_DATA}
+              index={Tabs.HISTORICAL_WEATHER_DATA}>
+              <HistoricalWeatherData />
             </TabPanel>
           }
         />
       </Route>
-      {/* TODO: make wildcard route */}
       <Route
         path='*'
         element={
           <Navigate
-            to={ROUTES.forecast}
+            to={routes.FORECAST}
             replace
           />
         }

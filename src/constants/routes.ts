@@ -1,8 +1,7 @@
-// TODO: change casing. const routes = {HOME: 'bla', FORECAST: 'foo'}
-const ROUTES = {
-  home: '/',
-  forecast: '/forecast',
-  historical: '/historical-forecast',
+const routes = {
+  HOME: '/',
+  FORECAST: '/forecast',
+  HISTORICAL: '/historical-weather-data',
 };
 
-export default ROUTES;
+export default routes;

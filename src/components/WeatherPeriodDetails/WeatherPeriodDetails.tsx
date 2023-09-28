@@ -21,6 +21,7 @@ export default function WeatherPeriodDetails({ weather }: Props) {
     main: { humidity, temp },
     weather: [{ description, icon }],
   } = weather;
+
   return (
     <>
       <Tooltip title={t(description)}>

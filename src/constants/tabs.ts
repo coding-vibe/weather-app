@@ -1,7 +1,6 @@
 enum Tabs {
   FORECAST,
-  // TODO: rename everywhere to historical weather data
-  HISTORICAL_FORECAST,
+  HISTORICAL_WEATHER_DATA,
 }
 
 export default Tabs;

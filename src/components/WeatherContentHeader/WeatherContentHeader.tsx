@@ -17,6 +17,7 @@ export default function WeatherContentHeader({
   className,
 }: Props) {
   const { t } = useTranslation();
+
   return (
     <Typography
       component='p'

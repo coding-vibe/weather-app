@@ -62,7 +62,6 @@ export default function WeatherWidget({ location }: Props) {
         setIsLoading(false);
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
   }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
 

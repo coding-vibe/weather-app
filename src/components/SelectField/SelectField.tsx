@@ -30,7 +30,6 @@ export default function SelectField<Option extends OptionBase>({
     if (setOption) {
       setOption(selectedOption);
     }
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setFieldValue(name, selectedOption);
   };
 

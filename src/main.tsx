@@ -9,12 +9,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
+import Routes from 'components/Routes';
 import SettingsProvider from 'components/SettingsProvider';
-// TODO: make me default export
 import globalStyles from 'constants/globalStyles';
 import theme from 'constants/theme';
-import i18n from 'i18n';
-import Routes from './components/Routes';
+import i18n from 'locales/i18n';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>

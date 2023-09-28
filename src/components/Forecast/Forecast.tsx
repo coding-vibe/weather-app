@@ -12,14 +12,8 @@ import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
 import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Location from 'types/location';
-import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
-
-// TODO: let's leave us directly in JSX
-const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LOCATION_AUTOCOMPLETE = 'location-select';
-const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
 
 export default function Forecast() {
   const {
@@ -27,9 +21,10 @@ export default function Forecast() {
     onSelectLanguage,
     selectedTemperatureUnit,
     onSelectTemperatureUnit,
-  } = useContext<SettingsContextType>(SettingsContext);
+  } = useContext(SettingsContext);
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
   const { t } = useTranslation();
+
   return (
     <div>
       <div css={classes.wrap}>
@@ -44,12 +39,12 @@ export default function Forecast() {
           }}
           value={selectedLanguage}
           label={t('labels.languageSelect')}
-          labelId={LANGUAGE_CHOICE_LABEL_ID}
+          labelId='language-select'
           options={LANGUAGE_OPTIONS}
         />
         <LocationAutocomplete
           css={classes.entry}
-          id={LOCATION_AUTOCOMPLETE}
+          id='location-select'
           location={selectedLocation}
           setLocation={onSelectLocation}
         />
@@ -60,12 +55,11 @@ export default function Forecast() {
           }}
           value={selectedTemperatureUnit}
           label={t('labels.temperatureUnitsSelect')}
-          labelId={TEMPERATURE_UNITS_LABEL_ID}
+          labelId='temperature-unit-select'
           options={TEMPERATURE_UNITS_OPTIONS}
         />
       </div>
-      {/* TODO: !!selectedLocation */}
-      {selectedLocation && <WeatherWidget location={selectedLocation} />}
+      {!!selectedLocation && <WeatherWidget location={selectedLocation} />}
     </div>
   );
 }

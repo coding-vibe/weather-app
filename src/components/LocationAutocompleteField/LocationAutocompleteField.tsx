@@ -18,9 +18,9 @@ export default function LocationAutoCompleteField({
   const hasError = meta?.touched && !!meta?.error;
   const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   const setLocation = (newValue: Location) => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     form.setFieldValue(name, newValue);
   };
+
   return (
     <LocationAutocomplete
       error={hasError}
