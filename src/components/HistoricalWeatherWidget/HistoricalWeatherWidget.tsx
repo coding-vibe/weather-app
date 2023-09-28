@@ -11,8 +11,7 @@ interface Props {
   searchParams: FormValuesType;
 }
 
-// TODO: use array destructuring for me
-const MONDAY = WEEK_DAY_TRANSLATION_KEYS[0];
+const [MONDAY] = WEEK_DAY_TRANSLATION_KEYS;
 
 export default function HistoricalWeatherWidget({
   forecast,

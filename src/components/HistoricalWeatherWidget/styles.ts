@@ -17,8 +17,7 @@ export const list = (theme: Theme) => css`
     display: none;
   }
 
-  /* TODO: theme.breakpoints.between('sm', 'md') */
-  ${theme.breakpoints.up('sm')} {
+  ${theme.breakpoints.between('sm', 'md')} {
     margin: 30px 15px;
   }
 
