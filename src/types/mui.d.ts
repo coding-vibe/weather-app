@@ -10,9 +10,5 @@ declare module '@mui/material/styles' {
     };
   }
 
-  interface Theme extends ThemeOptions {}
-}
-
-declare module '@emotion/react' {
-  interface Theme extends MuiTheme {}
+  interface Theme extends ThemeOptions { }
 }

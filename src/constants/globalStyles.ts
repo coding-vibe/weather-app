@@ -1,4 +1,4 @@
-export const globalStyles = {
+const globalStyles = {
   h1: { margin: 0 },
   h2: { margin: 0 },
   h3: { margin: 0 },
@@ -15,3 +15,5 @@ export const globalStyles = {
     cursor: 'pointer',
   },
 };
+
+export default globalStyles;

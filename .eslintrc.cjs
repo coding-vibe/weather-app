@@ -7,7 +7,6 @@ module.exports = {
      * 'no-shadow': 0,
      * '@typescript-eslint/no-shadow': 2,
      */
-    'eslint:recommended',
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react/recommended',
@@ -68,9 +67,10 @@ module.exports = {
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 2,
     'no-shadow': 0,
-    '@typescript-eslint/no-shadow': 2,
     'jsx-a11y/control-has-associated-label': [2, {
-      'ignoreElements': ['td']
+      'ignoreElements': ['td'],
+    '@typescript-eslint/no-misused-promises':
+      1,
     }]
   },
   settings: {

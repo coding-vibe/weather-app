@@ -23,7 +23,6 @@ export default function DateField({
   return (
     <MUIDatePicker
       // TODO: let's disable both ESLint rules globally and clear all components
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{
         textField: {
@@ -32,7 +31,6 @@ export default function DateField({
         },
       }}
       value={value}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );

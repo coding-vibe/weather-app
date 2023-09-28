@@ -10,11 +10,11 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
+// TODO: make me default export
+import globalStyles from 'constants/globalStyles';
 import theme from 'constants/theme';
 import i18n from 'i18n';
-import App from './App';
-// TODO: make me default export
-import { globalStyles } from './globalStyles';
+import Routes from './components/Routes';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -27,7 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <I18nextProvider i18n={i18n}>
                 <SettingsProvider>
-                  <App />
+                  <Routes />
                 </SettingsProvider>
               </I18nextProvider>
             </LocalizationProvider>

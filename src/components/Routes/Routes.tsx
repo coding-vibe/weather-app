@@ -1,19 +1,18 @@
-import { Navigate, Routes, Route } from 'react-router-dom';
+import { Navigate, Routes as ReactRoutes, Route } from 'react-router-dom';
 import Forecast from 'components/Forecast';
 import HistoricalForecast from 'components/HistoricalForecast';
 import Layout from 'components/Layout';
-import TabPanel from 'components/TabPanel/TabPanel';
+import TabPanel from 'components/TabPanel';
 import ROUTES from 'constants/routes';
 import Tabs from 'constants/tabs';
 
 // TODO: rename me to routes
-export default function App() {
+export default function Routes() {
   return (
-    <Routes>
+    <ReactRoutes>
       <Route
         path={ROUTES.home}
         element={<Layout />}>
-        {/* TODO: make wildcard route */}
         <Route
           index
           element={
@@ -44,6 +43,16 @@ export default function App() {
           }
         />
       </Route>
-    </Routes>
+      {/* TODO: make wildcard route */}
+      <Route
+        path='*'
+        element={
+          <Navigate
+            to={ROUTES.forecast}
+            replace
+          />
+        }
+      />
+    </ReactRoutes>
   );
 }
