@@ -18,9 +18,11 @@ export default function DateField({
   const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
   const hasError = meta?.touched && !!meta?.error;
+  // TODO: @singvarr - unfuck this check
   const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   return (
     <MUIDatePicker
+      // TODO: let's disable both ESLint rules globally and clear all components
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{

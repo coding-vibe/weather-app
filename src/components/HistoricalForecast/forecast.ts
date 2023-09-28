@@ -1,3 +1,4 @@
+// TODO: let's rename it and the file to fixture
 import { ForecastAPIResponse } from 'types/forecast';
 
 const FORECAST = {
@@ -26,6 +27,7 @@ const FORECAST = {
           icon: '01d',
         },
       ],
+      // TODO: let's removed unused properties
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       clouds: {

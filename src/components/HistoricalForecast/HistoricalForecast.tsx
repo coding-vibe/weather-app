@@ -25,6 +25,7 @@ export default function HistoricalForecast() {
     const fetchForecast = () => {
       try {
         setIsLoading(true);
+        // TODO: create a handler that resolves promise after n ms. Timeout should be passed as param. For this case pass 1000ms
         const forecastData = FORECAST.list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );

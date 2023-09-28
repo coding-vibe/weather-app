@@ -16,6 +16,7 @@ import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
 
+// TODO: let's leave us directly in JSX
 const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
 const LOCATION_AUTOCOMPLETE = 'location-select';
 const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
@@ -54,7 +55,7 @@ export default function Forecast() {
         />
         <Select<TemperatureUnitOption>
           css={classes.entry}
-          setValue={(event: SelectChangeEvent) => {
+          setValue={(event: SelectChangeEvent<TemperatureUnits>) => {
             onSelectTemperatureUnit(event.target.value as TemperatureUnits);
           }}
           value={selectedTemperatureUnit}
@@ -63,6 +64,7 @@ export default function Forecast() {
           options={TEMPERATURE_UNITS_OPTIONS}
         />
       </div>
+      {/* TODO: !!selectedLocation */}
       {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </div>
   );
