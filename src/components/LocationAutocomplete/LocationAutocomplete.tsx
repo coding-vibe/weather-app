@@ -36,9 +36,11 @@ export default function LocationAutocomplete({
   helperText,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
+  // TODO: setInputValue
   const [inputValue, onInputValue] = useState<string>('');
   const [isLoading, onIsLoading] = useState(false);
   const [isOpen, onIsOpen] = useState(false);
+  // TODO: setSuggestions
   const [suggestions, onSuggestions] = useState<Location[]>([]);
   const { t } = useTranslation();
 
@@ -48,6 +50,7 @@ export default function LocationAutocomplete({
         if (value === '' || value.length <= MIN_INPUT_LEN) {
           onSuggestions([]);
           onIsLoading(false);
+          // TODO: add return here and remove else
         } else {
           try {
             const trimmedValue = value.trim();
@@ -77,14 +80,18 @@ export default function LocationAutocomplete({
 
   useEffect(() => {
     if (inputValue) {
+      // TODO: fetchLocations
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       fetchGeoData(inputValue);
     }
   }, [fetchGeoData, inputValue]);
 
+  // TODO: pass `onOpen` and `onClose` inline in the component
   const onOpen = () => onIsOpen(true);
 
   const onClose = () => onIsOpen(false);
 
+  // TODO: handleInputChange
   const onInputChange = (_: SyntheticEvent, value: string) => {
     onInputValue(value);
   };
@@ -145,6 +152,7 @@ export default function LocationAutocomplete({
 
 LocationAutocomplete.defaultProps = {
   className: null,
+  // TODO: let's put it via single object named inputProps. Use MUI interface for description of this object
   error: false,
   helperText: null,
 };

@@ -65,6 +65,12 @@ export default function WeatherWidget({ location }: Props) {
     fetchForecast();
   }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
 
+  /*
+   * TODO: let's make it better; I don't like nested conditions here:
+   * if (loading) {
+   *  return bla-bla-blah
+   * }
+   */
   return isLoading ? (
     <CircularProgress size={SPINNER_SIZE} />
   ) : (
