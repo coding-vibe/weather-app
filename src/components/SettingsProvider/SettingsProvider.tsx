@@ -28,7 +28,6 @@ const SettingsProvider: FC<Props> = ({ children }) => {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const settings: SettingsContextType = {
     selectedLanguage,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSelectLanguage: onSelectLanguageCallback,
     selectedTemperatureUnit,
     onSelectTemperatureUnit: onSelectTemperatureUnitCallback,

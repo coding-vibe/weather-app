@@ -27,7 +27,6 @@ export default function LocationAutoCompleteField({
       helperText={helperText}
       location={value}
       setLocation={setLocation}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );

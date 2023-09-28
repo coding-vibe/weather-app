@@ -41,7 +41,6 @@ export default function SelectField<Option extends OptionBase>({
       name={name}
       setValue={handleChange}
       value={value}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...omit(props)}
     />
   );

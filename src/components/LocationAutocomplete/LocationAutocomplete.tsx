@@ -124,7 +124,6 @@ export default function LocationAutocomplete({
       onChange={onChange}
       renderInput={(params) => (
         <TextField
-          // eslint-disable-next-line react/jsx-props-no-spreading
           {...params}
           error={error}
           helperText={helperText}

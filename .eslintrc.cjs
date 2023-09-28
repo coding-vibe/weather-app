@@ -69,10 +69,20 @@ module.exports = {
     'no-shadow': 0,
     'jsx-a11y/control-has-associated-label': [2, {
       'ignoreElements': ['td'],
-    '@typescript-eslint/no-misused-promises':
-      1,
-    }]
-  },
+    }],
+    '@typescript-eslint/no-misused-promises': [2,
+      {
+        'checksVoidReturn': {
+          'arguments': false,
+          'attributes': false
+        }
+      }],
+    'react/jsx-props-no-spreading': [2,
+      {
+        'html': 'enforce', 'exceptions': ['div'],
+        'custom': 'ignore',
+      }],
+},
   settings: {
     'import/resolver': {
       typescript: {
