@@ -36,43 +36,36 @@ export default function LocationAutocomplete({
   helperText,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
-  // TODO: setInputValue
-  const [inputValue, onInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
   const [isLoading, onIsLoading] = useState(false);
   const [isOpen, onIsOpen] = useState(false);
-  // TODO: setSuggestions
-  const [suggestions, onSuggestions] = useState<Location[]>([]);
+  const [suggestions, setSuggestions] = useState<Location[]>([]);
   const { t } = useTranslation();
 
-  const fetchGeoData = useMemo(
+  const fetchLocations = useMemo(
     () =>
       debounce(async (value: string) => {
         if (value === '' || value.length <= MIN_INPUT_LEN) {
-          onSuggestions([]);
+          setSuggestions([]);
           onIsLoading(false);
-          // TODO: add return here and remove else
-        } else {
-          try {
-            const trimmedValue = value.trim();
-            onIsLoading(true);
-            const response = await apiClient.get<Location[]>(
-              '/geo/1.0/direct',
-              {
-                params: {
-                  q: trimmedValue,
-                  limit: MAX_LOCATIONS,
-                },
-              },
-            );
-            const locationData = response.data.map((element) =>
-              pick(element, ['name', 'lat', 'lon', 'country', 'state']),
-            );
-            onSuggestions(locationData);
-          } catch (err) {
-            enqueueSnackbar(t('errors.fetchGeoData'), { variant: 'error' });
-          } finally {
-            onIsLoading(false);
-          }
+        }
+        try {
+          const trimmedValue = value.trim();
+          onIsLoading(true);
+          const response = await apiClient.get<Location[]>('/geo/1.0/direct', {
+            params: {
+              q: trimmedValue,
+              limit: MAX_LOCATIONS,
+            },
+          });
+          const locationData = response.data.map((element) =>
+            pick(element, ['name', 'lat', 'lon', 'country', 'state']),
+          );
+          setSuggestions(locationData);
+        } catch (err) {
+          enqueueSnackbar(t('errors.fetchGeoData'), { variant: 'error' });
+        } finally {
+          onIsLoading(false);
         }
       }, DEBOUNCE_DELAY),
     [enqueueSnackbar, t],
@@ -80,20 +73,12 @@ export default function LocationAutocomplete({
 
   useEffect(() => {
     if (inputValue) {
-      // TODO: fetchLocations
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      fetchGeoData(inputValue);
+      fetchLocations(inputValue);
     }
-  }, [fetchGeoData, inputValue]);
+  }, [fetchLocations, inputValue]);
 
-  // TODO: pass `onOpen` and `onClose` inline in the component
-  const onOpen = () => onIsOpen(true);
-
-  const onClose = () => onIsOpen(false);
-
-  // TODO: handleInputChange
-  const onInputChange = (_: SyntheticEvent, value: string) => {
-    onInputValue(value);
+  const handleInputChange = (_: SyntheticEvent, value: string) => {
+    setInputValue(value);
   };
 
   const onChange = (
@@ -120,13 +105,13 @@ export default function LocationAutocomplete({
       css={classes.autocomplete}
       id={id}
       open={inputValue.length > MIN_INPUT_LEN && isOpen}
-      onOpen={onOpen}
-      onClose={onClose}
+      onOpen={() => onIsOpen(true)}
+      onClose={() => onIsOpen(false)}
       getOptionLabel={getOptionLabel}
       options={suggestions}
       noOptionsText={!isLoading && t('texts.noOptions')}
       inputValue={inputValue}
-      onInputChange={onInputChange}
+      onInputChange={handleInputChange}
       value={location}
       onChange={onChange}
       renderInput={(params) => (
