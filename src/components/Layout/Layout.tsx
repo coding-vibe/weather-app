@@ -14,6 +14,7 @@ function Layout() {
   });
   const { t } = useTranslation();
 
+  // TODO: getActiveTab
   const activeTab = () => {
     switch (location.pathname) {
       case ROUTES.home:
@@ -26,7 +27,9 @@ function Layout() {
         throw new Error('Invalid route for determining active tab');
     }
   };
+  // TODO: add ESLint rule that requires blank line before return
   return (
+    // TODO: wrap in div
     <>
       <MUITabs
         value={activeTab()}

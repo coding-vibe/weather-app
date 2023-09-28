@@ -1,3 +1,4 @@
+// TODO: rename the file to weekDays
 const WEEK_DAY_TRANSLATION_KEYS = [
   'weekDays.monday',
   'weekDays.tuesday',

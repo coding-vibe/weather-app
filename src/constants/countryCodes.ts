@@ -1,3 +1,4 @@
+// TODO: add TODO that it should be translated
 const COUNTRY_CODES = [
   { code: 'AD', name: 'Andorra' },
   { code: 'AE', name: 'United Arab Emirates' },

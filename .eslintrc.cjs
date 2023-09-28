@@ -2,6 +2,11 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
+    // TODO: remove eslint-recommended. Majority of these rules is overlapped by TS version like this. Clean the rules
+    /*
+     * 'no-shadow': 0,
+     * '@typescript-eslint/no-shadow': 2,
+     */
     'eslint:recommended',
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
