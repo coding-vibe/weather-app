@@ -10,7 +10,6 @@ import WeatherTable from 'components/WeatherTable';
 import SettingsContext from 'contexts/SettingsContext';
 import { ForecastAPIResponse, Forecast } from 'types/forecast';
 import Location from 'types/location';
-import SettingsContextType from 'types/settingsContextType';
 import formatDate from 'utils/formatDate';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
 import * as classes from './styles';
@@ -23,7 +22,7 @@ const SPINNER_SIZE = 25;
 
 export default function WeatherWidget({ location }: Props) {
   const { selectedLanguage, selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+    useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

@@ -10,7 +10,6 @@ import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 import * as classes from './styles';
@@ -25,7 +24,7 @@ export default function HistoricalWeatherForm({
   className,
 }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+    useContext(SettingsContext);
   const INITIAL_FORM_VALUES = {
     language: '',
     startDate: null,

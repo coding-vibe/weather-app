@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext } from 'react';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 
 const defaultValue = {
   selectedLanguage: Languages.ENGLISH,
-  onSelectLanguage: () => {},
+  onSelectLanguage: (_: Languages) => {},
   selectedTemperatureUnit: TemperatureUnits.CELSIUS,
-  onSelectTemperatureUnit: () => {},
+  onSelectTemperatureUnit: (_: TemperatureUnits) => {},
 };
 
 const SettingsContext = createContext<typeof defaultValue>(defaultValue);

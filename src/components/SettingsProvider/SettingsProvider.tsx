@@ -2,7 +2,6 @@ import { FC, ReactNode, useCallback, useState } from 'react';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
-import SettingsContextType from 'types/settingsContextType';
 import i18n from 'locales/i18n';
 
 interface Props {
@@ -26,7 +25,7 @@ const SettingsProvider: FC<Props> = ({ children }) => {
     [],
   );
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const settings: SettingsContextType = {
+  const settings = {
     selectedLanguage,
     onSelectLanguage: onSelectLanguageCallback,
     selectedTemperatureUnit,

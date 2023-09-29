@@ -4,7 +4,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
-import SettingsContextType from 'types/settingsContextType';
 import formatTemperatureData from 'utils/formatTemperature';
 import generateIconURL from 'utils/generateIconURL';
 import * as classes from './styles';
@@ -14,8 +13,7 @@ interface Props {
 }
 
 export default function WeatherPeriodDetails({ weather }: Props) {
-  const { selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+  const { selectedTemperatureUnit } = useContext(SettingsContext);
   const { t } = useTranslation();
   const {
     main: { humidity, temp },
