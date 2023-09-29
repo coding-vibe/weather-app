@@ -20,20 +20,26 @@ export default function HistoricalWeatherData() {
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
+  const DELAY = 1000;
+
+  const sleep = (delay: number) =>
+    new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, delay);
+    });
 
   useEffect(() => {
-    const fetchForecast = () => {
+    const fetchForecast = async () => {
       try {
         setIsLoading(true);
-        // TODO: create a handler that resolves promise after n ms. Timeout should be passed as param. For this case pass 1000ms
+        await sleep(DELAY);
         const forecastData = FIXTURE.list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
         setForecast(forecastData);
       } catch (error) {
-        enqueueSnackbar(t('error.fetchWeatherData'), {
-          variant: 'error',
-        });
+        enqueueSnackbar(t('error.fetchWeatherData'), { variant: 'error' });
       } finally {
         setIsLoading(false);
       }

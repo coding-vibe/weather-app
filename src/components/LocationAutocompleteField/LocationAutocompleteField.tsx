@@ -15,16 +15,19 @@ export default function LocationAutoCompleteField({
 }: Props) {
   const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
-  const hasError = meta?.touched && !!meta?.error;
+  const error = meta?.touched && !!meta?.error;
   const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
   const setLocation = (newValue: Location) => {
     form.setFieldValue(name, newValue);
   };
+  const inputProps = {
+    error,
+    helperText,
+  };
 
   return (
     <LocationAutocomplete
-      error={hasError}
-      helperText={helperText}
+      inputProps={inputProps}
       location={value}
       setLocation={setLocation}
       {...props}

@@ -133,6 +133,19 @@ const FIXTURE = {
       ],
     },
     {
+      dt: 1694898000,
+      main: {
+        temp: 15,
+        humidity: 60,
+      },
+      weather: [
+        {
+          description: 'iconDescriptions.fewClouds',
+          icon: '02d',
+        },
+      ],
+    },
+    {
       dt: 1694984400,
       main: {
         temp: 14.81,

@@ -23,8 +23,10 @@ interface Props {
   location: Location | null;
   setLocation: (value: Location) => void;
   className?: string;
-  error?: boolean;
-  helperText?: string;
+  inputProps?: {
+    error: boolean;
+    helperText: string;
+  };
 }
 
 export default function LocationAutocomplete({
@@ -32,8 +34,7 @@ export default function LocationAutocomplete({
   setLocation,
   id,
   className,
-  error,
-  helperText,
+  inputProps,
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, setInputValue] = useState<string>('');
@@ -41,6 +42,8 @@ export default function LocationAutocomplete({
   const [isOpen, onIsOpen] = useState(false);
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const { t } = useTranslation();
+  const error = inputProps ? inputProps.error : false;
+  const helperText = inputProps ? inputProps.helperText : '';
 
   const fetchLocations = useMemo(
     () =>
@@ -137,7 +140,5 @@ export default function LocationAutocomplete({
 
 LocationAutocomplete.defaultProps = {
   className: null,
-  // TODO: let's put it via single object named inputProps. Use MUI interface for description of this object
-  error: false,
-  helperText: null,
+  inputProps: null,
 };
