@@ -47,9 +47,7 @@ export default function HistoricalWeatherData() {
     fetchForecast();
   }, [selectedSearchParams, enqueueSnackbar, t]);
 
-  return isLoading ? (
-    <CircularProgress size={SPINNER_SIZE} />
-  ) : (
+  return (
     <div>
       <WeatherSearchCaption
         css={classes.caption}
@@ -59,11 +57,17 @@ export default function HistoricalWeatherData() {
         css={classes.form}
         setSearchParams={onSelectSearchParams}
       />
-      {forecast && selectedSearchParams && (
-        <HistoricalWeatherWidget
-          forecast={forecast}
-          searchParams={selectedSearchParams}
-        />
+      {isLoading && selectedSearchParams ? (
+        <CircularProgress size={SPINNER_SIZE} />
+      ) : (
+        <div>
+          {forecast && selectedSearchParams && (
+            <HistoricalWeatherWidget
+              forecast={forecast}
+              searchParams={selectedSearchParams}
+            />
+          )}
+        </div>
       )}
     </div>
   );
