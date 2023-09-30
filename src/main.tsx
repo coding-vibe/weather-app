@@ -11,7 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StyledEngineProvider } from '@mui/material/styles';
 import SettingsProvider from 'components/SettingsProvider';
 import theme from 'constants/theme';
-import i18n from 'i18n';
+import i18n from './i18n';
 import App from './App';
 import { globalStyles } from './globalStyles';
 
