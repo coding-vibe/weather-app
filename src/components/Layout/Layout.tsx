@@ -28,6 +28,8 @@ function Layout() {
   };
 
   return (
+    // TODO: limit max-width of content to 1000px. Remove this limitation from the table
+    // Center this container
     <div>
       <MUITabs
         value={getActiveTab()}

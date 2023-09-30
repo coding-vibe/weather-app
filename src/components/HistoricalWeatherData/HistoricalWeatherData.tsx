@@ -64,6 +64,7 @@ export default function HistoricalWeatherData() {
       {/* TODO: improve it like selectedSearchParams && (<>{isLoading && <Spinner/>}{forecast && <Widget />}</>)
           because `selectedSearchParams` check is too repetetive
       */}
+      {/* TODO: reuse spinner, center it and add vertical paddings */}
       {isLoading && selectedSearchParams ? (
         <CircularProgress size={SPINNER_SIZE} />
       ) : (
