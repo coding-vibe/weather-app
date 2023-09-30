@@ -36,10 +36,12 @@ module.exports = {
         ],
       },
     ],
+    // TODO: remove it
     'no-console': 0,
     'no-trailing-spaces': 2,
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
+    // TODO: do we need it? Seems react/jsx-filename-extension duplicates it
     'import/extensions': [
       2,
       {
@@ -63,6 +65,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
+    // TODO: do we need if
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 2,
     'no-shadow': 0,
@@ -73,6 +76,7 @@ module.exports = {
       {
         'checksVoidReturn': false,
       }],
+    // TODO: just disable it at all
     'react/jsx-props-no-spreading': [2,
       {
         'html': 'enforce', 'exceptions': ['div'],
@@ -98,6 +102,7 @@ module.exports = {
           ['types', './src/types'],
           ['utils', './src/utils'],
         ],
+        // TODO: fix typo :)
         extentions: ['.ts', '.tsx', '.js', '.jsx', '.json']
       }
     }
