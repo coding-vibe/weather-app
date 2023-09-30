@@ -13,8 +13,10 @@ import * as classes from './styles';
 
 const SPINNER_SIZE = 25;
 
+// TODO: HistoricalWeatherDataTab
 export default function HistoricalWeatherData() {
   const { enqueueSnackbar } = useSnackbar();
+  // TODO: selectedSearchParams -> searchParams
   const [selectedSearchParams, onSelectSearchParams] =
     useState<FormValuesType | null>(null);
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
@@ -22,6 +24,7 @@ export default function HistoricalWeatherData() {
   const { t } = useTranslation();
   const DELAY = 1000;
 
+  // TODO: move me to utils
   const sleep = (delay: number) =>
     new Promise<void>((resolve) => {
       setTimeout(() => {
@@ -55,8 +58,12 @@ export default function HistoricalWeatherData() {
       />
       <HistoricalWeatherForm
         css={classes.form}
+        // TODO: onSubmit={handleSubmitSearchParams}
         setSearchParams={onSelectSearchParams}
       />
+      {/* TODO: improve it like selectedSearchParams && (<>{isLoading && <Spinner/>}{forecast && <Widget />}</>)
+          because `selectedSearchParams` check is too repetetive
+      */}
       {isLoading && selectedSearchParams ? (
         <CircularProgress size={SPINNER_SIZE} />
       ) : (

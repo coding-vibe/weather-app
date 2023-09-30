@@ -53,6 +53,7 @@ export default function HistoricalWeatherTable({
               return (
                 <TableRow key={index}>
                   {index === 0 &&
+                    // TODO: index -> weekIndex, idx -> dayIndex
                     Array.from({ length: emptyCellsCount }).map((_, idx) => (
                       // We should leave some cells empty because user chooses historical weather data for specific dates and some days of week should be skipped
                       <MUITableCell key={idx} />

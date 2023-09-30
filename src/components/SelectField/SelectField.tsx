@@ -40,6 +40,7 @@ export default function SelectField<Option extends OptionBase>({
       name={name}
       setValue={handleChange}
       value={value}
+      // TODO: do we need it? Filter only needed props if necessary
       {...omit(props)}
     />
   );

@@ -32,9 +32,11 @@ export default function HistoricalWeatherList({
           country={country}
           css={classes.listTitle}
           name={name}
+          // TODO: make name of translation key shorter
           text={t('texts.propHeaderHistoricalWeatherData')}
         />
       }>
+      {/* TODO: weeklyForecast -> forecast */}
       {weeklyForecast.map((weeklyWeather) =>
         weeklyWeather.map((dailyWeather) => {
           const date = formatDate(convertTimestampToDate(dailyWeather.dt));

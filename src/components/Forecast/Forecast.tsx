@@ -27,6 +27,7 @@ export default function Forecast() {
 
   return (
     <div>
+      {/* TODO: extract me to component ForecastForm */}
       <div css={classes.wrap}>
         <WeatherSearchCaption
           css={[classes.caption, classes.entry]}

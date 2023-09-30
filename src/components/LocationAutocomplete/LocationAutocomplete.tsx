@@ -15,6 +15,7 @@ import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
 const MAX_LOCATIONS = 5;
+// TODO: don't shorten names - MIN_INPUT_LENGTH
 const MIN_INPUT_LEN = 2;
 const SPINNER_SIZE = 25;
 
@@ -23,6 +24,7 @@ interface Props {
   location: Location | null;
   setLocation: (value: Location) => void;
   className?: string;
+  // TODO: use interface from MUI
   inputProps?: {
     error: boolean;
     helperText: string;
@@ -38,16 +40,19 @@ export default function LocationAutocomplete({
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, setInputValue] = useState<string>('');
+  // TODO: add generics in useState
   const [isLoading, onIsLoading] = useState(false);
   const [isOpen, onIsOpen] = useState(false);
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const { t } = useTranslation();
+  // TODO: make me simpler and put in JSX both props: !!inputProps?.error and input?.helperText
   const error = inputProps ? inputProps.error : false;
   const helperText = inputProps ? inputProps.helperText : '';
 
   const fetchLocations = useMemo(
     () =>
       debounce(async (value: string) => {
+        // TODO: put me in try block
         if (value === '' || value.length <= MIN_INPUT_LEN) {
           setSuggestions([]);
           onIsLoading(false);

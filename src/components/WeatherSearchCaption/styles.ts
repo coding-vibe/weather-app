@@ -7,6 +7,7 @@ export const wrap = css`
 `;
 
 export const text = (theme: Theme) => css`
+  /* TODO: move color to wrap and remove this from here and icon. This CSS prop is inherited  */
   color: ${theme.palette.secondary.main};
 
   ${theme.breakpoints.down('sm')} {

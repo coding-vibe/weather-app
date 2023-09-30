@@ -22,6 +22,7 @@ const DATE_FORMAT = 'HH:00';
 
 export default function WeatherList({ forecast, location, className }: Props) {
   const forecastDates = forecast.map(([date]) => date);
+  // TODO: openedListItems, setOpenedListItems
   const [openItems, setOpenItems] = useState<Set<string>>(
     new Set(forecastDates),
   );

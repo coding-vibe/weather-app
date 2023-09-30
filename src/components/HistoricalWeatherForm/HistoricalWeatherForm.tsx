@@ -25,6 +25,7 @@ export default function HistoricalWeatherForm({
 }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext(SettingsContext);
+  // TODO: can be moved outside component in a separate file inside this folder
   const INITIAL_FORM_VALUES = {
     language: '',
     startDate: null,
@@ -48,7 +49,6 @@ export default function HistoricalWeatherForm({
     <Formik<FormValuesType>
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      // We ignore ts rule, because initial values should be optional, but in Formik they must exactly match the validation scheme
       initialValues={INITIAL_FORM_VALUES}
       onSubmit={handleSubmit}
       validationSchema={VALIDATION_SCHEMA}>
@@ -86,6 +86,7 @@ export default function HistoricalWeatherForm({
           </div>
           <Field
             component={LocationAutoCompleteField}
+            // TODO: location-autocomplete
             id='location-select'
             name='location'
           />

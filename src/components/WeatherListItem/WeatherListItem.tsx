@@ -14,6 +14,7 @@ export default function WeatherListItem({ weather, date, hour }: Props) {
   return (
     <ListItem disablePadding>
       <ListItemText css={classes.listItemText}>
+        {/* TODO: pass me via children */}
         {date && <p>{date}</p>}
         {hour && <span>{hour}</span>}
         <WeatherPeriodDetails weather={weather} />

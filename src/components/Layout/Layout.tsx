@@ -15,6 +15,7 @@ function Layout() {
 
   const getActiveTab = () => {
     switch (location.pathname) {
+      // TODO: remove HOME
       case routes.HOME:
         return Tabs.FORECAST;
       case routes.FORECAST:
