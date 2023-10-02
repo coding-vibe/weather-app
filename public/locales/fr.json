@@ -1,0 +1,62 @@
+{
+  "errors": {
+    "fetchGeoData": "Désolé, nous n'avons trouvé aucun résultat correspondant à votre recherche.",
+    "fetchWeatherData": "Aucune donnée météorologique trouvée pour cet emplacement.",
+    "required": "Requis",
+    "endDateField": "Ne devrait pas être avant la date de début"
+  },
+  "iconDescriptions": {
+    "brokenClouds": "nuages brisés",
+    "clearSky": "ciel dégagé",
+    "fewClouds": "quelques nuages",
+    "overcastClouds": "nuages couverts",
+    "scatteredClouds": "nuages épars"
+  },
+  "labels": {
+    "endDayDatePicker": "Fin",
+    "forecastTab": "Prévision",
+    "historicalWeatherDataTab": "Données météorologiques historiques",
+    "historicalWeatherTable": "Prévisions météorologiques historiques",
+    "languageSelect": "Langue",
+    "layoutTabs": "Onglets de prévision",
+    "locationAutocomplete": "Emplacement",
+    "startDayDatePicker": "Début",
+    "temperatureUnitsSelect": "Unité de température",
+    "weatherTable": "Prévisions météorologiques sur 5 jours"
+  },
+  "languages": {
+    "english": "Anglais",
+    "french": "Français",
+    "ukrainian": "Ukrainien"
+  },
+  "temperatureUnits": {
+    "celsius": "Celsius, \u2103",
+    "fahrenheit": "Fahrenheit, \u00B0F",
+    "kelvin": "Kelvin, \u00B0K"
+  },
+  "texts": {
+    "contentHeader": "Prévisions météorologiques pour",
+    "historicalWeatherDataTableCell": "Date/Heure",
+    "iconAlt": "Les conditions météorologiques",
+    "noOptions": "Aucune option trouvée",
+    "propCaptionForecast": "5 jours",
+    "propCaptionHistoricalWeatherData": "Historique",
+    "propHeaderForecast": "5 jours",
+    "propHeaderHistoricalWeatherData": "Historique",
+    "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
+  },
+  "weatherPeriodDetails": {
+    "humidity": "Humid",
+    "temperature": "Temp"
+  },
+  "weekDays": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "submit": "Soumettre"
+}

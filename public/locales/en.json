@@ -1,0 +1,62 @@
+{
+  "errors": {
+    "fetchGeoData": "Sorry, we could not find any results that match your search.",
+    "fetchWeatherData": "No weather data found for this location.",
+    "required": "Required",
+    "endDateField": "Shouldn't be before start date"
+  },
+  "iconDescriptions": {
+    "brokenClouds": "broken clouds",
+    "clearSky": "clear sky",
+    "fewClouds": "few clouds",
+    "overcastClouds": "overcast clouds",
+    "scatteredClouds": "scattered clouds"
+  },
+  "labels": {
+    "endDayDatePicker": "End",
+    "forecastTab": "Forecast",
+    "historicalWeatherDataTab": "Historical Weather Data",
+    "historicalWeatherTable": "Historical Weather Forecast",
+    "languageSelect": "Language",
+    "layoutTabs": "forecast tabs",
+    "locationAutocomplete": "Location",
+    "startDayDatePicker": "Start",
+    "temperatureUnitsSelect": "Temperature unit",
+    "weatherTable": "5-Day Weather Forecast"
+  },
+  "languages": {
+    "english": "English",
+    "french": "French",
+    "ukrainian": "Ukrainian"
+  },
+  "temperatureUnits": {
+    "celsius": "Celsius, \u2103",
+    "fahrenheit": "Fahrenheit, \u00B0F",
+    "kelvin": "Kelvin, \u00B0K"
+  },
+  "texts": {
+    "contentHeader": "Weather Forecast for",
+    "historicalWeatherDataTableCell": "Date/Time",
+    "iconAlt": "Weather condition",
+    "noOptions": "No options found",
+    "propCaptionForecast": "5-days",
+    "propCaptionHistoricalWeatherData": "Historical",
+    "propHeaderForecast": "5-Day",
+    "propHeaderHistoricalWeatherData": "Historical",
+    "searchCaption": "Select options for {{text}} weather forecast search"
+  },
+  "weatherPeriodDetails": {
+    "humidity": "Humid",
+    "temperature": "Temp"
+  },
+  "weekDays": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "submit": "Submit"
+}
