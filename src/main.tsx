@@ -7,7 +7,7 @@ import { SnackbarProvider } from 'notistack';
 import CssBaseline from '@mui/material/CssBaseline';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { StyledEngineProvider } from '@mui/material/styles';
-import LocalizationProviderWrap from 'components/LocalizationProviderWrap';
+import LocalizationProvider from 'components/LocalizationProvider';
 import Routes from 'components/Routes';
 import SettingsProvider from 'components/SettingsProvider';
 import globalStyles from 'constants/globalStyles';
@@ -22,13 +22,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <CssBaseline />
           <GlobalStyles styles={globalStyles} />
           <SnackbarProvider>
-            <LocalizationProviderWrap>
-              <I18nextProvider i18n={i18n}>
+            <I18nextProvider i18n={i18n}>
+              <LocalizationProvider>
                 <SettingsProvider>
                   <Routes />
                 </SettingsProvider>
-              </I18nextProvider>
-            </LocalizationProviderWrap>
+              </LocalizationProvider>
+            </I18nextProvider>
           </SnackbarProvider>
         </ThemeProvider>
       </StyledEngineProvider>
