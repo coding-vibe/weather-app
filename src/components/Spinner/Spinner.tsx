@@ -5,7 +5,7 @@ interface Props {
   className?: string;
 }
 
-const SPINNER_SIZE = 25;
+const SPINNER_SIZE = 40;
 
 export default function Spinner({ className }: Props) {
   return (

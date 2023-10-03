@@ -42,9 +42,9 @@ export default function HistoricalWeatherList({
           return (
             <WeatherListItem
               weather={dailyForecast}
-              date={date}
-              key={dailyForecast.dt}
-            />
+              key={dailyForecast.dt}>
+              <p>{date}</p>
+            </WeatherListItem>
           );
         }),
       )}

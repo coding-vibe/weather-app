@@ -1,6 +1,6 @@
 import MUITableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
-import WeatherPeriodDetails from 'components/WeatherPeriodDetails/WeatherPeriodDetails';
+import WeatherDetails from 'components/WeatherDetails/WeatherDetails';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
 import formatDate from 'utils/formatDate';
@@ -25,7 +25,7 @@ export default function WeatherTableCell({
           {formatDate(convertTimestampToDate(weather.dt))}
         </Typography>
       )}
-      <WeatherPeriodDetails weather={weather} />
+      <WeatherDetails weather={weather} />
     </MUITableCell>
   );
 }

@@ -45,7 +45,7 @@
     "propHeaderHistoricalWeather": "Історичний",
     "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
   },
-  "weatherPeriodDetails": {
+  "weatherDetails": {
     "humidity": "Волог",
     "temperature": "Темп"
   },

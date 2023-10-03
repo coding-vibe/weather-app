@@ -42,10 +42,12 @@ export default function HistoricalWeatherDataTab() {
   return (
     <div>
       <div css={classes.wrap}>
-        <WeatherSearchCaption text={t('texts.propCaptionHistoricalWeather')} />
+        <WeatherSearchCaption
+          css={classes.caption}
+          text={t('texts.propCaptionHistoricalWeather')}
+        />
         <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
       </div>
-      {/* TODO: spinner: center it and add vertical paddings */}
       {searchParams && (
         <div>
           {isLoading && (

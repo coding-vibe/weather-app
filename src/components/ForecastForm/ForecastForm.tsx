@@ -21,16 +21,16 @@ interface Props {
 
 export default function ForecastForm({ location, setLocation }: Props) {
   const {
-    selectedLanguage,
+    language,
     onSelectLanguage,
-    selectedTemperatureUnit,
+    temperatureUnit,
     onSelectTemperatureUnit,
   } = useContext(SettingsContext);
 
   return (
     <div css={classes.wrap}>
       <WeatherSearchCaption
-        css={[classes.caption, classes.entry]}
+        css={[classes.entry]}
         text={t('texts.propCaptionForecast')}
       />
       <Select<LanguageOption>
@@ -38,7 +38,7 @@ export default function ForecastForm({ location, setLocation }: Props) {
         setValue={(event: SelectChangeEvent) => {
           onSelectLanguage(event.target.value as Languages);
         }}
-        value={selectedLanguage}
+        value={language}
         label={t('labels.languageSelect')}
         labelId='language-select'
         options={LANGUAGE_OPTIONS}
@@ -54,7 +54,7 @@ export default function ForecastForm({ location, setLocation }: Props) {
         setValue={(event: SelectChangeEvent<TemperatureUnits>) => {
           onSelectTemperatureUnit(event.target.value as TemperatureUnits);
         }}
-        value={selectedTemperatureUnit}
+        value={temperatureUnit}
         label={t('labels.temperatureUnitsSelect')}
         labelId='temperature-unit-select'
         options={TEMPERATURE_UNITS_OPTIONS}

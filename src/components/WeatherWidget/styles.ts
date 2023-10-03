@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
+export const spinner = (theme: Theme) => css`
+  display: flex;
+  justify-content: center;
+  max-width: ${theme.width.desktop};
+`;
+
 export const table = (theme: Theme) => css`
   margin: 15px;
 

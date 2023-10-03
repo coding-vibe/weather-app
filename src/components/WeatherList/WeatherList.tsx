@@ -22,19 +22,18 @@ const DATE_FORMAT = 'HH:00';
 
 export default function WeatherList({ forecast, location, className }: Props) {
   const forecastDates = forecast.map(([date]) => date);
-  // TODO: openedListItems, setOpenedListItems
-  const [openItems, setOpenItems] = useState<Set<string>>(
+  const [openedListItems, setOpenedListItems] = useState<Set<string>>(
     new Set(forecastDates),
   );
   const { t } = useTranslation();
 
   const handleClick = (date: string) => {
-    if (openItems.has(date)) {
-      openItems.delete(date);
+    if (openedListItems.has(date)) {
+      openedListItems.delete(date);
     } else {
-      openItems.add(date);
+      openedListItems.add(date);
     }
-    setOpenItems(new Set(openItems));
+    setOpenedListItems(new Set(openedListItems));
   };
 
   return (
@@ -64,7 +63,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
             </ListItemButton>
           </ListItem>
           <Collapse
-            in={openItems.has(date)}
+            in={openedListItems.has(date)}
             timeout='auto'
             unmountOnExit>
             {weather.map((hourlyWeather) => {
@@ -74,10 +73,9 @@ export default function WeatherList({ forecast, location, className }: Props) {
                 <List
                   disablePadding
                   key={hourlyWeather.dt}>
-                  <WeatherListItem
-                    hour={hour}
-                    weather={hourlyWeather}
-                  />
+                  <WeatherListItem weather={hourlyWeather}>
+                    <span>{hour}</span>
+                  </WeatherListItem>
                 </List>
               );
             })}

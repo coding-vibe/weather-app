@@ -1,5 +1,5 @@
 import { Navigate, Routes as ReactRoutes, Route } from 'react-router-dom';
-import Forecast from 'components/Forecast';
+import ForecastTab from 'components/ForecastTab';
 import HistoricalWeatherDataTab from 'components/HistoricalWeatherDataTab';
 import Layout from 'components/Layout';
 import TabPanel from 'components/TabPanel';
@@ -27,8 +27,7 @@ export default function Routes() {
             <TabPanel
               value={Tabs.FORECAST}
               index={Tabs.FORECAST}>
-              {/* TODO: ForecastTab */}
-              <Forecast />
+              <ForecastTab />
             </TabPanel>
           }
         />

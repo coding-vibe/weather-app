@@ -3,7 +3,7 @@ import ForecastForm from 'components/ForecastForm';
 import WeatherWidget from 'components/WeatherWidget';
 import Location from 'types/location';
 
-export default function Forecast() {
+export default function ForecastTab() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
 
   return (

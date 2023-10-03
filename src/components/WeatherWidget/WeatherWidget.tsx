@@ -19,8 +19,7 @@ interface Props {
 }
 
 export default function WeatherWidget({ location }: Props) {
-  const { selectedLanguage, selectedTemperatureUnit } =
-    useContext(SettingsContext);
+  const { language, temperatureUnit } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -37,8 +36,8 @@ export default function WeatherWidget({ location }: Props) {
             params: {
               lat,
               lon,
-              units: selectedTemperatureUnit,
-              lang: selectedLanguage,
+              units: temperatureUnit,
+              lang: language,
             },
           },
         );
@@ -60,10 +59,14 @@ export default function WeatherWidget({ location }: Props) {
       }
     };
     fetchForecast();
-  }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
+  }, [enqueueSnackbar, location, language, temperatureUnit, t]);
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div css={classes.spinner}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (forecast) {

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
+import TextField, { TextFieldProps } from '@mui/material/TextField';
 import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
@@ -22,11 +22,7 @@ interface Props {
   location: Location | null;
   setLocation: (value: Location) => void;
   className?: string;
-  // TODO: use interface from MUI
-  inputProps?: {
-    error: boolean;
-    helperText: string;
-  };
+  inputProps?: TextFieldProps;
 }
 
 export default function LocationAutocomplete({

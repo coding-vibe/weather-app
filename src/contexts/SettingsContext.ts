@@ -3,9 +3,9 @@ import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 
 const defaultValue = {
-  selectedLanguage: Languages.ENGLISH,
+  language: Languages.ENGLISH,
   onSelectLanguage: (_: Languages) => {},
-  selectedTemperatureUnit: TemperatureUnits.CELSIUS,
+  temperatureUnit: TemperatureUnits.CELSIUS,
   onSelectTemperatureUnit: (_: TemperatureUnits) => {},
 };
 

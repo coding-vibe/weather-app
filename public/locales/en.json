@@ -45,7 +45,7 @@
     "propHeaderHistoricalWeather": "Historical",
     "searchCaption": "Select options for {{text}} weather forecast search"
   },
-  "weatherPeriodDetails": {
+  "weatherDetails": {
     "humidity": "Humid",
     "temperature": "Temp"
   },

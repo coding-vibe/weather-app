@@ -12,9 +12,8 @@ interface Props {
   weather: ForecastBody;
 }
 
-// TODO: WeatherDetails
-export default function WeatherPeriodDetails({ weather }: Props) {
-  const { selectedTemperatureUnit } = useContext(SettingsContext);
+export default function WeatherDetails({ weather }: Props) {
+  const { temperatureUnit } = useContext(SettingsContext);
   const { t } = useTranslation();
   const {
     main: { humidity, temp },
@@ -32,16 +31,16 @@ export default function WeatherPeriodDetails({ weather }: Props) {
       </Tooltip>
       <div css={classes.data}>
         <span>
-          {t('weatherPeriodDetails.temperature')}:&nbsp;
+          {t('weatherDetails.temperature')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}
             variant='subtitle2'>
-            {formatTemperatureData(temp, selectedTemperatureUnit)}
+            {formatTemperatureData(temp, temperatureUnit)}
           </Typography>
         </span>
         <span>
-          {t('weatherPeriodDetails.humidity')}:&nbsp;
+          {t('weatherDetails.humidity')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}
