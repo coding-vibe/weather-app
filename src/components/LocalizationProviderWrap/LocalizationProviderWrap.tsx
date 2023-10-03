@@ -1,4 +1,4 @@
-import { ReactNode, useContext } from 'react';
+import { ReactNode, useContext, useEffect, useState } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { enUS } from '@mui/x-date-pickers/locales/enUS';
@@ -11,8 +11,12 @@ interface Props {
   children: ReactNode;
 }
 
+type Locales = typeof enUS | typeof frFR | typeof ukUA;
+
 export default function LocalizationProviderWrap({ children }: Props) {
   const { language } = useContext(SettingsContext);
+  const [locale, setLocale] = useState<Locales>(enUS);
+
   const getLocale = (language: Languages) => {
     switch (language) {
       case 'en':
@@ -26,12 +30,15 @@ export default function LocalizationProviderWrap({ children }: Props) {
     }
   };
 
+  useEffect(() => {
+    setLocale(getLocale(language));
+  }, [language]);
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDateFns}
       localeText={
-        getLocale(language).components.MuiLocalizationProvider.defaultProps
-          .localeText
+        locale.components.MuiLocalizationProvider.defaultProps.localeText
       }>
       {children}
     </LocalizationProvider>
