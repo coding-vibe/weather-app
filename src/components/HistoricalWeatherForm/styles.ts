@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
-// TODO: remove blank line between gap and padding-right
 export const form = css`
   display: flex;
   flex-direction: column;
   gap: 15px;
-
   padding-right: 15px;
 `;
 

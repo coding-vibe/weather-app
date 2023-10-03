@@ -4,6 +4,7 @@ import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
+import * as classes from './styles';
 
 function Layout() {
   const location = useLocation();
@@ -15,9 +16,6 @@ function Layout() {
 
   const getActiveTab = () => {
     switch (location.pathname) {
-      // TODO: remove HOME
-      case routes.HOME:
-        return Tabs.FORECAST;
       case routes.FORECAST:
         return Tabs.FORECAST;
       case routes.HISTORICAL:
@@ -28,12 +26,10 @@ function Layout() {
   };
 
   return (
-    // TODO: limit max-width of content to 1000px. Remove this limitation from the table
-    // Center this container
-    <div>
+    <div css={classes.wrap}>
       <MUITabs
-        value={getActiveTab()}
-        aria-label={t('labels.layoutTabs')}>
+        aria-label={t('labels.layoutTabs')}
+        value={getActiveTab()}>
         <Tab
           label={t('labels.forecastTab')}
           to={routes.FORECAST}

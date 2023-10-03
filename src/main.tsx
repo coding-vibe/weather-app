@@ -13,7 +13,7 @@ import Routes from 'components/Routes';
 import SettingsProvider from 'components/SettingsProvider';
 import globalStyles from 'constants/globalStyles';
 import theme from 'constants/theme';
-import i18n from 'locales/i18n';
+import i18n from './i18n';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>

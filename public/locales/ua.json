@@ -40,9 +40,9 @@
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
     "propCaptionForecast": "5-денного",
-    "propCaptionHistoricalWeatherData": "Історичного",
+    "propCaptionHistoricalWeather": "Історичного",
     "propHeaderForecast": "5-денний",
-    "propHeaderHistoricalWeatherData": "Історичний",
+    "propHeaderHistoricalWeather": "Історичний",
     "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
   },
   "weatherPeriodDetails": {

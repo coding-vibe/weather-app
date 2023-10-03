@@ -11,28 +11,18 @@ import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
+import INITIAL_FORM_VALUES from './initialFormValues';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 import * as classes from './styles';
 
 interface Props {
-  setSearchParams: (value: FormValuesType) => void;
+  onSubmit: (value: FormValuesType) => void;
   className?: string;
 }
 
-export default function HistoricalWeatherForm({
-  setSearchParams,
-  className,
-}: Props) {
+export default function HistoricalWeatherForm({ onSubmit, className }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
     useContext(SettingsContext);
-  // TODO: can be moved outside component in a separate file inside this folder
-  const INITIAL_FORM_VALUES = {
-    language: '',
-    startDate: null,
-    endDate: null,
-    location: null,
-    temperatureUnit: '',
-  };
   const { t } = useTranslation();
   const yesterday = startOfYesterday();
 
@@ -41,7 +31,7 @@ export default function HistoricalWeatherForm({
     { setSubmitting },
   ) => {
     onSelectTemperatureUnit(values.temperatureUnit);
-    setSearchParams(values);
+    onSubmit(values);
     setSubmitting(false);
   };
 
@@ -86,8 +76,7 @@ export default function HistoricalWeatherForm({
           </div>
           <Field
             component={LocationAutoCompleteField}
-            // TODO: location-autocomplete
-            id='location-select'
+            id='location-autocomplete'
             name='location'
           />
           <Field

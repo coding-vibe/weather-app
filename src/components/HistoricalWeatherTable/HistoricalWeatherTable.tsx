@@ -34,7 +34,7 @@ export default function HistoricalWeatherTable({
         country={country}
         css={classes.header}
         name={name}
-        text={t('texts.propHeaderHistoricalWeatherData')}
+        text={t('texts.propHeaderHistoricalWeather')}
       />
       <TableContainer component={Paper}>
         <Table aria-label={tableAriaLabel}>
@@ -46,18 +46,19 @@ export default function HistoricalWeatherTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {weeklyForecast.map((weeklyWeather, index) => {
+            {weeklyForecast.map((weeklyWeather, weekIndex) => {
               const emptyCellsCount =
                 WEEK_DAY_TRANSLATION_KEYS.length - weeklyWeather.length;
 
               return (
-                <TableRow key={index}>
-                  {index === 0 &&
-                    // TODO: index -> weekIndex, idx -> dayIndex
-                    Array.from({ length: emptyCellsCount }).map((_, idx) => (
-                      // We should leave some cells empty because user chooses historical weather data for specific dates and some days of week should be skipped
-                      <MUITableCell key={idx} />
-                    ))}
+                <TableRow key={weekIndex}>
+                  {weekIndex === 0 &&
+                    Array.from({ length: emptyCellsCount }).map(
+                      (_, dayIndex) => (
+                        // We should leave some cells empty because user chooses historical weather data for specific dates and some days of week should be skipped
+                        <MUITableCell key={dayIndex} />
+                      ),
+                    )}
                   {weeklyWeather.map((dailyWeather) => (
                     <WeatherTableCell
                       isDateShown

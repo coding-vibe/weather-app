@@ -40,9 +40,9 @@
     "iconAlt": "Weather condition",
     "noOptions": "No options found",
     "propCaptionForecast": "5-days",
-    "propCaptionHistoricalWeatherData": "Historical",
+    "propCaptionHistoricalWeather": "Historical",
     "propHeaderForecast": "5-Day",
-    "propHeaderHistoricalWeatherData": "Historical",
+    "propHeaderHistoricalWeather": "Historical",
     "searchCaption": "Select options for {{text}} weather forecast search"
   },
   "weatherPeriodDetails": {

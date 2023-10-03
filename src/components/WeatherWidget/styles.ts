@@ -3,7 +3,6 @@ import { Theme } from '@mui/material';
 
 export const table = (theme: Theme) => css`
   margin: 15px;
-  max-width: ${theme.width.table};
 
   ${theme.breakpoints.down('md')} {
     display: none;

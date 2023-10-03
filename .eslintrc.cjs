@@ -36,12 +36,10 @@ module.exports = {
         ],
       },
     ],
-    // TODO: remove it
-    'no-console': 0,
     'no-trailing-spaces': 2,
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
-    // TODO: do we need it? Seems react/jsx-filename-extension duplicates it
+    // TODO: do we need it? Seems react/jsx-filename-extension duplicates it - Yes, we need it because this rule is used to configure which file extensions we should or shouldn't specify when importing modules. react/jsx-filename-extension defines which file extensions can contain JSX code.
     'import/extensions': [
       2,
       {
@@ -51,6 +49,7 @@ module.exports = {
           jsx: 'never',
           ts: 'never',
           tsx: 'never',
+          json: 'never'
         }
     }],
     'react-refresh/only-export-components': [
@@ -59,15 +58,15 @@ module.exports = {
     ],
     'react/no-unknown-property': [2, { ignore: ['css'] }],
     'react/react-in-jsx-scope': 0,
-    'react/jsx-filename-extension': [2, { extensions: ['.ts', '.tsx', '.js', '.jsx'] }],
+    'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/no-array-index-key': 0,
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
-    // TODO: do we need if
+    // TODO: do we need it -  Yes, because we have interfaces, types, default values where we define arguments, but don't use them
     'no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars': 2,
+    '@typescript-eslint/no-unused-vars': 0,
     'no-shadow': 0,
     'jsx-a11y/control-has-associated-label': [2, {
       'ignoreElements': ['td'],
@@ -76,12 +75,7 @@ module.exports = {
       {
         'checksVoidReturn': false,
       }],
-    // TODO: just disable it at all
-    'react/jsx-props-no-spreading': [2,
-      {
-        'html': 'enforce', 'exceptions': ['div'],
-        'custom': 'ignore',
-      }],
+    'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/no-floating-promises': 0,
     'newline-before-return': 2,
 },
@@ -102,8 +96,6 @@ module.exports = {
           ['types', './src/types'],
           ['utils', './src/utils'],
         ],
-        // TODO: fix typo :)
-        extentions: ['.ts', '.tsx', '.js', '.jsx', '.json']
       }
     }
   },

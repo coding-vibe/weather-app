@@ -3,21 +3,19 @@ import { useTranslation } from 'react-i18next';
 import Autocomplete, {
   AutocompleteChangeReason,
 } from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 import TextField from '@mui/material/TextField';
 import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
+import Spinner from 'components/Spinner';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
 
 const DEBOUNCE_DELAY = 400;
 const MAX_LOCATIONS = 5;
-// TODO: don't shorten names - MIN_INPUT_LENGTH
-const MIN_INPUT_LEN = 2;
-const SPINNER_SIZE = 25;
+const MIN_INPUT_LENGTH = 2;
 
 interface Props {
   id: string;
@@ -40,24 +38,19 @@ export default function LocationAutocomplete({
 }: Props) {
   const { enqueueSnackbar } = useSnackbar();
   const [inputValue, setInputValue] = useState<string>('');
-  // TODO: add generics in useState
-  const [isLoading, onIsLoading] = useState(false);
-  const [isOpen, onIsOpen] = useState(false);
+  const [isLoading, onIsLoading] = useState<boolean>(false);
+  const [isOpen, onIsOpen] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<Location[]>([]);
   const { t } = useTranslation();
-  // TODO: make me simpler and put in JSX both props: !!inputProps?.error and input?.helperText
-  const error = inputProps ? inputProps.error : false;
-  const helperText = inputProps ? inputProps.helperText : '';
 
   const fetchLocations = useMemo(
     () =>
       debounce(async (value: string) => {
-        // TODO: put me in try block
-        if (value === '' || value.length <= MIN_INPUT_LEN) {
-          setSuggestions([]);
-          onIsLoading(false);
-        }
         try {
+          if (value === '' || value.length <= MIN_INPUT_LENGTH) {
+            setSuggestions([]);
+            onIsLoading(false);
+          }
           const trimmedValue = value.trim();
           onIsLoading(true);
           const response = await apiClient.get<Location[]>('/geo/1.0/direct', {
@@ -112,7 +105,7 @@ export default function LocationAutocomplete({
       className={className}
       css={classes.autocomplete}
       id={id}
-      open={inputValue.length > MIN_INPUT_LEN && isOpen}
+      open={inputValue.length > MIN_INPUT_LENGTH && isOpen}
       onOpen={() => onIsOpen(true)}
       onClose={() => onIsOpen(false)}
       getOptionLabel={getOptionLabel}
@@ -125,14 +118,14 @@ export default function LocationAutocomplete({
       renderInput={(params) => (
         <TextField
           {...params}
-          error={error}
-          helperText={helperText}
+          error={!!inputProps?.error}
+          helperText={inputProps ? inputProps.helperText : ''}
           label={t('labels.locationAutocomplete')}
           InputProps={{
             ...params.InputProps,
             endAdornment: (
               <>
-                {isLoading && <CircularProgress size={SPINNER_SIZE} />}
+                {isLoading && <Spinner />}
                 {params.InputProps.endAdornment}
               </>
             ),

@@ -3,8 +3,8 @@
 ## Weather Forecast API
 
 ### API Endpoint
-<!-- TODO: fix a link -->
-- [Get 5 Day Weather Forecast with 3-hour Step](https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key})
+
+- [Get 5 Day Weather Forecast with 3-hour Step](http://api.openweathermap.org/data/2.5/forecast)
 
 #### Parameters
 
@@ -29,7 +29,7 @@
 
 ### API Endpoint
 
-- [Get Location by City Name](http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key})
+- [Coordinates by Location Name](http://api.openweathermap.org/geo/1.0/direct)
 
 #### Parameters
 

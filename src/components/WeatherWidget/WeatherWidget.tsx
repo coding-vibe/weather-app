@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
+import Spinner from 'components/Spinner';
 import WeatherList from 'components/WeatherList';
 import WeatherTable from 'components/WeatherTable';
 import SettingsContext from 'contexts/SettingsContext';
@@ -17,8 +17,6 @@ import * as classes from './styles';
 interface Props {
   location: Location;
 }
-
-const SPINNER_SIZE = 25;
 
 export default function WeatherWidget({ location }: Props) {
   const { selectedLanguage, selectedTemperatureUnit } =
@@ -65,7 +63,7 @@ export default function WeatherWidget({ location }: Props) {
   }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
 
   if (isLoading) {
-    return <CircularProgress size={SPINNER_SIZE} />;
+    return <Spinner />;
   }
 
   if (forecast) {
