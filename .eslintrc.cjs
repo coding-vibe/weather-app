@@ -39,7 +39,6 @@ module.exports = {
     'no-trailing-spaces': 2,
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
-    // TODO: do we need it? Seems react/jsx-filename-extension duplicates it - Yes, we need it because this rule is used to configure which file extensions we should or shouldn't specify when importing modules. react/jsx-filename-extension defines which file extensions can contain JSX code.
     'import/extensions': [
       2,
       {

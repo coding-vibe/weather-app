@@ -23,7 +23,6 @@ export default function DateField({
 
   return (
     <MUIDatePicker
-      // TODO: add translations for datepicker placeholder
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{
         textField: {
