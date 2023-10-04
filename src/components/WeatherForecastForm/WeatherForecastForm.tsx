@@ -28,37 +28,39 @@ export default function WeatherForecastForm({ location, setLocation }: Props) {
   } = useContext(SettingsContext);
 
   return (
-    <div css={classes.wrap}>
+    <div>
       <WeatherSearchCaption
-        css={[classes.entry]}
+        css={classes.caption}
         text={t('texts.propCaptionWeatherForecast')}
       />
-      <Select<LanguageOption>
-        css={classes.entry}
-        setValue={(event: SelectChangeEvent) => {
-          onSelectLanguage(event.target.value as Languages);
-        }}
-        value={language}
-        label={t('labels.languageSelect')}
-        labelId='language-select'
-        options={LANGUAGE_OPTIONS}
-      />
-      <LocationAutocomplete
-        css={classes.entry}
-        id='location-select'
-        location={location}
-        setLocation={setLocation}
-      />
-      <Select<TemperatureUnitOption>
-        css={classes.entry}
-        setValue={(event: SelectChangeEvent<TemperatureUnits>) => {
-          onSelectTemperatureUnit(event.target.value as TemperatureUnits);
-        }}
-        value={temperatureUnit}
-        label={t('labels.temperatureUnitsSelect')}
-        labelId='temperature-unit-select'
-        options={TEMPERATURE_UNITS_OPTIONS}
-      />
+      <div css={classes.wrap}>
+        <Select<LanguageOption>
+          css={classes.entry}
+          setValue={(event: SelectChangeEvent) => {
+            onSelectLanguage(event.target.value as Languages);
+          }}
+          value={language}
+          label={t('labels.languageSelect')}
+          labelId='language-select'
+          options={LANGUAGE_OPTIONS}
+        />
+        <LocationAutocomplete
+          css={classes.entry}
+          id='location-select'
+          location={location}
+          setLocation={setLocation}
+        />
+        <Select<TemperatureUnitOption>
+          css={classes.entry}
+          setValue={(event: SelectChangeEvent<TemperatureUnits>) => {
+            onSelectTemperatureUnit(event.target.value as TemperatureUnits);
+          }}
+          value={temperatureUnit}
+          label={t('labels.temperatureUnitsSelect')}
+          labelId='temperature-unit-select'
+          options={TEMPERATURE_UNITS_OPTIONS}
+        />
+      </div>
     </div>
   );
 }

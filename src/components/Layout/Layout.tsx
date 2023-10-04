@@ -31,7 +31,8 @@ function Layout() {
     <div css={classes.wrap}>
       <MUITabs
         aria-label={t('labels.layoutTabs')}
-        value={getActiveTab()}>
+        value={getActiveTab()}
+        variant='fullWidth'>
         <Tab
           label={t('labels.weatherForecastTab')}
           to={routes.WEATHER_FORECAST}

@@ -4,29 +4,31 @@ import { Theme } from '@mui/material';
 export const spinner = (theme: Theme) => css`
   display: flex;
   justify-content: center;
-  max-width: ${theme.width.desktop};
+  max-width: ${theme.width.table};
+`;
+
+export const wrap = (theme: Theme) => css`
+  ${theme.breakpoints.up('md')} {
+    margin: 30px 0px;
+  }
+
+  ${theme.breakpoints.between('sm', 'md')} {
+    margin: 15px 0px;
+  }
+
+  ${theme.breakpoints.down('sm')} {
+    margin: 10px 0px;
+  }
 `;
 
 export const table = (theme: Theme) => css`
-  margin: 15px;
-
   ${theme.breakpoints.down('md')} {
     display: none;
   }
 `;
 
 export const list = (theme: Theme) => css`
-  max-width: ${theme.width.desktop};
-
   ${theme.breakpoints.up('md')} {
     display: none;
-  }
-
-  ${theme.breakpoints.up('sm')} {
-    margin: 15px;
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    margin: 10px;
   }
 `;

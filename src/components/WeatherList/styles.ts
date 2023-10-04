@@ -12,7 +12,6 @@ export const headListTitle = (theme: Theme) => css`
 
   ${theme.breakpoints.down('sm')} {
     padding: 8px;
-    font-size: 12px;
   }
 `;
 

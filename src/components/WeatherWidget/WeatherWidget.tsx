@@ -71,7 +71,7 @@ export default function WeatherWidget({ location }: Props) {
 
   if (forecast) {
     return (
-      <>
+      <div css={classes.wrap}>
         <WeatherTable
           css={classes.table}
           forecast={forecast}
@@ -82,7 +82,7 @@ export default function WeatherWidget({ location }: Props) {
           forecast={forecast}
           location={location}
         />
-      </>
+      </div>
     );
   }
 }

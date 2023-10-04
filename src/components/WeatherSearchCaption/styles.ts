@@ -1,22 +1,15 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
-export const wrap = (theme: Theme) => css`
-  display: flex;
-  align-items: center;
-  color: ${theme.palette.secondary.main};
-`;
-
 export const text = (theme: Theme) => css`
-  ${theme.breakpoints.down('sm')} {
-    font-size: 9px;
+  text-align: center;
+  color: ${theme.palette.secondary.main};
+
+  ${theme.breakpoints.between('sm', 'md')} {
+    font-size: 12px;
   }
-`;
-
-export const icon = (theme: Theme) => css`
-  font-size: 22px;
 
   ${theme.breakpoints.down('sm')} {
-    display: none;
+    font-size: 10px;
   }
 `;
