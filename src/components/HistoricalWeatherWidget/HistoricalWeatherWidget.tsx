@@ -39,7 +39,7 @@ export default function HistoricalWeatherWidget({
   } = searchParams;
 
   return (
-    <div>
+    <div css={classes.wrap}>
       <HistoricalWeatherTable
         country={country}
         css={classes.table}

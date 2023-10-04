@@ -39,11 +39,11 @@
     "historicalWeatherDataTableCell": "Дата/Час",
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
-    "propCaptionWeatherForecast": "5-денного",
-    "propCaptionHistoricalWeather": "Історичного",
+    "propCaptionWeatherForecast": "5-денного пошуку прогнозу погоди",
+    "propCaptionHistoricalWeather": "Пошуку історичної погоди",
     "propHeaderWeatherForecast": "5-денний",
     "propHeaderHistoricalWeather": "Історичний",
-    "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
+    "searchCaption": "Виберіть опції для {{text}}"
   },
   "weatherDetails": {
     "humidity": "Волог",
@@ -58,5 +58,5 @@
     "saturday": "Субота",
     "sunday": "Неділя"
   },
-  "submit": "Відправити"
+  "submit": "Пошук історичної погоди"
 }

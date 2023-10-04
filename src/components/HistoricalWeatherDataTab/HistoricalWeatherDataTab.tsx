@@ -41,13 +41,11 @@ export default function HistoricalWeatherDataTab() {
 
   return (
     <div>
-      <div css={classes.wrap}>
-        <WeatherSearchCaption
-          css={classes.caption}
-          text={t('texts.propCaptionHistoricalWeather')}
-        />
-        <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
-      </div>
+      <WeatherSearchCaption
+        css={classes.caption}
+        text={t('texts.propCaptionHistoricalWeather')}
+      />
+      <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
       {searchParams && (
         <div>
           {isLoading && (

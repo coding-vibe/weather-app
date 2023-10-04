@@ -3,6 +3,7 @@ import { Theme } from '@mui/material';
 
 export const list = (theme: Theme) => css`
   border: 1px solid ${theme.palette.secondary.light};
+  border-radius: 5px;
 `;
 
 export const listTitle = (theme: Theme) => css`

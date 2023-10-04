@@ -39,11 +39,11 @@
     "historicalWeatherDataTableCell": "Date/Heure",
     "iconAlt": "Les conditions météorologiques",
     "noOptions": "Aucune option trouvée",
-    "propCaptionWeatherForecast": "5 jours",
-    "propCaptionHistoricalWeather": "Historique",
+    "propCaptionWeatherForecast": "5 jours la recherche de prévisions météorologiques",
+    "propCaptionHistoricalWeather": "la recherche météo historique",
     "propHeaderWeatherForecast": "5 jours",
     "propHeaderHistoricalWeather": "Historique",
-    "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
+    "searchCaption": "Sélectionnez les options pour {{text}}"
   },
   "weatherDetails": {
     "humidity": "Humid",
@@ -58,5 +58,5 @@
     "saturday": "Samedi",
     "sunday": "Dimanche"
   },
-  "submit": "Soumettre"
+  "submit": "Rechercher l’historique météo"
 }
