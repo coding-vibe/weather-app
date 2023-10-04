@@ -23,11 +23,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <GlobalStyles styles={globalStyles} />
           <SnackbarProvider>
             <I18nextProvider i18n={i18n}>
-              <LocalizationProvider>
-                <SettingsProvider>
+              <SettingsProvider>
+                <LocalizationProvider>
                   <Routes />
-                </SettingsProvider>
-              </LocalizationProvider>
+                </LocalizationProvider>
+              </SettingsProvider>
             </I18nextProvider>
           </SnackbarProvider>
         </ThemeProvider>

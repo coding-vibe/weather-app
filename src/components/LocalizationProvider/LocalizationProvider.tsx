@@ -16,20 +16,21 @@ interface Props {
   children: ReactNode;
 }
 
-type MUILocales = typeof enUS | typeof frFR | typeof ukUA;
+type MUILocale = typeof enUS | typeof frFR | typeof ukUA;
+type Locales = [MUILocale, DateFNSLocale];
 
 export default function LocalizationProvider({ children }: Props) {
   const { language } = useContext(SettingsContext);
-  const [localeMUI, setLocaleMUI] = useState<MUILocales>(enUS);
-  const [localeDateFNS, setLocaleDateFNS] = useState<DateFNSLocale>(en);
+  const [localeMUI, setLocaleMUI] = useState<Locales[0]>(enUS);
+  const [localeDateFNS, setLocaleDateFNS] = useState<Locales[1]>(en);
 
   const getMUILocale = (language: Languages) => {
     switch (language) {
-      case 'en':
+      case Languages.ENGLISH:
         return enUS;
-      case 'fr':
+      case Languages.FRENCH:
         return frFR;
-      case 'ua':
+      case Languages.UKRAINIAN:
         return ukUA;
       default:
         throw new Error('New language found');
@@ -38,14 +39,14 @@ export default function LocalizationProvider({ children }: Props) {
 
   const getDateFNSLocale = (language: Languages) => {
     switch (language) {
-      case 'en':
+      case Languages.ENGLISH:
         return en;
-      case 'fr':
+      case Languages.FRENCH:
         return fr;
-      case 'ua':
+      case Languages.UKRAINIAN:
         return uk;
       default:
-        throw new Error('New language found');
+        throw new Error('Not supported language');
     }
   };
 
