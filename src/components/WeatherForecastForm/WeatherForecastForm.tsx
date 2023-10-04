@@ -19,7 +19,7 @@ interface Props {
   setLocation: (value: Location) => void;
 }
 
-export default function ForecastForm({ location, setLocation }: Props) {
+export default function WeatherForecastForm({ location, setLocation }: Props) {
   const {
     language,
     onSelectLanguage,

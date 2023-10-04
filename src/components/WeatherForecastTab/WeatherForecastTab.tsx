@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import ForecastForm from 'components/ForecastForm';
+import WeatherForecastForm from 'components/WeatherForecastForm';
 import WeatherWidget from 'components/WeatherWidget';
 import Location from 'types/location';
 
-export default function ForecastTab() {
+export default function WeatherForecastTab() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
 
   return (
     <div>
-      <ForecastForm
+      <WeatherForecastForm
         location={selectedLocation}
         setLocation={onSelectLocation}
       />

@@ -14,7 +14,7 @@
   },
   "labels": {
     "endDayDatePicker": "End",
-    "forecastTab": "Forecast",
+    "weatherForecastTab": "Weather Forecast",
     "historicalWeatherDataTab": "Historical Weather Data",
     "historicalWeatherTable": "Historical Weather Forecast",
     "languageSelect": "Language",

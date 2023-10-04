@@ -1,7 +1,7 @@
 const routes = {
   HOME: '/',
-  FORECAST: '/forecast',
-  HISTORICAL: '/historical-weather-data',
+  WEATHER_FORECAST: '/weather-forecast',
+  HISTORICAL_WEATHER: '/historical-weather-data',
 };
 
 export default routes;

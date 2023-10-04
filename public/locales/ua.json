@@ -14,7 +14,7 @@
   },
   "labels": {
     "endDayDatePicker": "Кінцева дата",
-    "forecastTab": "Прогноз",
+    "weatherForecastTab": "Прогноз погоди",
     "historicalWeatherDataTab": "Історичні дані про погоду",
     "historicalWeatherTable": "Історичний прогноз погоди",
     "languageSelect": "Мова",
