@@ -30,7 +30,7 @@ export default function WeatherTable({ forecast, location, className }: Props) {
         country={location.country}
         css={classes.tableTitle}
         name={location.name}
-        text={t('texts.propHeaderForecast')}
+        text={t('texts.propHeaderWeatherForecast')}
       />
       <TableContainer component={Paper}>
         <Table aria-label={tableAriaLabel}>

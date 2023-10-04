@@ -39,9 +39,9 @@
     "historicalWeatherDataTableCell": "Дата/Час",
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
-    "propCaptionForecast": "5-денного",
+    "propCaptionWeatherForecast": "5-денного",
     "propCaptionHistoricalWeather": "Історичного",
-    "propHeaderForecast": "5-денний",
+    "propHeaderWeatherForecast": "5-денний",
     "propHeaderHistoricalWeather": "Історичний",
     "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
   },

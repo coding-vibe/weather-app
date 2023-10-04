@@ -39,9 +39,9 @@
     "historicalWeatherDataTableCell": "Date/Time",
     "iconAlt": "Weather condition",
     "noOptions": "No options found",
-    "propCaptionForecast": "5-days",
+    "propCaptionWeatherForecast": "5-days",
     "propCaptionHistoricalWeather": "Historical",
-    "propHeaderForecast": "5-Day",
+    "propHeaderWeatherForecast": "5-Day",
     "propHeaderHistoricalWeather": "Historical",
     "searchCaption": "Select options for {{text}} weather forecast search"
   },

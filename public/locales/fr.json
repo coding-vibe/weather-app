@@ -39,9 +39,9 @@
     "historicalWeatherDataTableCell": "Date/Heure",
     "iconAlt": "Les conditions météorologiques",
     "noOptions": "Aucune option trouvée",
-    "propCaptionForecast": "5 jours",
+    "propCaptionWeatherForecast": "5 jours",
     "propCaptionHistoricalWeather": "Historique",
-    "propHeaderForecast": "5 jours",
+    "propHeaderWeatherForecast": "5 jours",
     "propHeaderHistoricalWeather": "Historique",
     "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
   },
