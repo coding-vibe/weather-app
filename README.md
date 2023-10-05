@@ -38,7 +38,7 @@ The project includes the following scripts that can be executed:
 - `prettier-format`: Applies formatting using Prettier.
 
 ## Getting Started
-
+<!-- TODO: add note about .env and template for it -->
 1. Clone the repo to your local computer.
 2. Run `npm install` to install the required dependencies.
 3. To start the development mode, use the command `npm run dev`.
