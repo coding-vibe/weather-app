@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from 'react';
 // https://github.com/date-fns/date-fns/issues/1677
 // eslint-disable-next-line import/no-duplicates
-import { Locale as DateFNSLocale } from 'date-fns';
+import { Locale as DateFnsLocale } from 'date-fns';
 // eslint-disable-next-line import/no-duplicates
 import { enUS as en, fr, uk } from 'date-fns/locale';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -17,12 +17,12 @@ interface Props {
 }
 
 type MUILocale = typeof enUS | typeof frFR | typeof ukUA;
-type Locales = [MUILocale, DateFNSLocale];
+type Locales = [MUILocale, DateFnsLocale];
 
 export default function LocalizationProvider({ children }: Props) {
   const { language } = useContext(SettingsContext);
-  const [localeMUI, setLocaleMUI] = useState<Locales[0]>(enUS);
-  const [localeDateFNS, setLocaleDateFNS] = useState<Locales[1]>(en);
+  const [locales, setLocales] = useState<Locales>([enUS, en]);
+  const [muiLocale, dateFnsLocale] = locales;
 
   const getMUILocale = (language: Languages) => {
     switch (language) {
@@ -37,7 +37,7 @@ export default function LocalizationProvider({ children }: Props) {
     }
   };
 
-  const getDateFNSLocale = (language: Languages) => {
+  const getDateFnsLocale = (language: Languages) => {
     switch (language) {
       case Languages.ENGLISH:
         return en;
@@ -51,16 +51,15 @@ export default function LocalizationProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    setLocaleMUI(getMUILocale(language));
-    setLocaleDateFNS(getDateFNSLocale(language));
+    setLocales([getMUILocale(language), getDateFnsLocale(language)]);
   }, [language]);
 
   return (
     <MUILocalizationProvider
-      adapterLocale={localeDateFNS}
+      adapterLocale={dateFnsLocale}
       dateAdapter={AdapterDateFns}
       localeText={
-        localeMUI.components.MuiLocalizationProvider.defaultProps.localeText
+        muiLocale.components.MuiLocalizationProvider.defaultProps.localeText
       }>
       {children}
     </MUILocalizationProvider>
