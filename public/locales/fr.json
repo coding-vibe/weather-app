@@ -40,9 +40,9 @@
     "iconAlt": "Les conditions météorologiques",
     "noOptions": "Aucune option trouvée",
     "propCaptionWeatherForecast": "5 jours la recherche de prévisions météorologiques",
-    "propCaptionHistoricalWeather": "la recherche météo historique",
-    "propHeaderWeatherForecast": "5 jours",
-    "propHeaderHistoricalWeather": "Historique",
+    "captionHistoricalWeather": "la recherche météo historique",
+    "headerWeatherForecast": "5 jours",
+    "headerHistoricalWeather": "Historique",
     "searchCaption": "Sélectionnez les options pour {{text}}"
   },
   "weatherDetails": {

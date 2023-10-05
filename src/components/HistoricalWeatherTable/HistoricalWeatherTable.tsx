@@ -34,7 +34,7 @@ export default function HistoricalWeatherTable({
         country={country}
         css={classes.header}
         name={name}
-        text={t('texts.propHeaderHistoricalWeather')}
+        text={t('texts.headerHistoricalWeather')}
       />
       <TableContainer component={Paper}>
         <Table aria-label={tableAriaLabel}>

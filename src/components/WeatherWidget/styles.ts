@@ -4,7 +4,7 @@ import { Theme } from '@mui/material';
 export const spinner = (theme: Theme) => css`
   display: flex;
   justify-content: center;
-  max-width: ${theme.width.table};
+  max-width: ${theme.width.desktop};
 `;
 
 export const wrap = (theme: Theme) => css`

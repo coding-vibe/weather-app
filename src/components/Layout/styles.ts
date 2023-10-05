@@ -9,11 +9,11 @@ export const wrap = (theme: Theme) => css`
   border-right: 1px solid ${theme.palette.secondary.light};
 
   ${theme.breakpoints.up('md')} {
-    max-width: ${theme.width.table};
+    max-width: ${theme.width.desktop};
   }
 
   ${theme.breakpoints.between('sm', 'md')} {
-    max-width: ${theme.width.desktop};
+    max-width: ${theme.width.tablet};
   }
 
   ${theme.breakpoints.down('sm')} {

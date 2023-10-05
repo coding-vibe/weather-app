@@ -32,7 +32,7 @@ export default function HistoricalWeatherList({
           country={country}
           css={classes.listTitle}
           name={name}
-          text={t('texts.propHeaderHistoricalWeather')}
+          text={t('texts.headerHistoricalWeather')}
         />
       }>
       {weeklyForecast.map((forecast) =>
@@ -43,7 +43,7 @@ export default function HistoricalWeatherList({
             <WeatherListItem
               weather={dailyForecast}
               key={dailyForecast.dt}>
-              <p>{date}</p>
+              <span>{date}</span>
             </WeatherListItem>
           );
         }),

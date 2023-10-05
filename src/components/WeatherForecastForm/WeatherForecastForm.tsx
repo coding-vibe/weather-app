@@ -31,7 +31,7 @@ export default function WeatherForecastForm({ location, setLocation }: Props) {
     <div>
       <WeatherSearchCaption
         css={classes.caption}
-        text={t('texts.propCaptionWeatherForecast')}
+        text={t('texts.captionWeatherForecast')}
       />
       <div css={classes.wrap}>
         <Select<LanguageOption>

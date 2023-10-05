@@ -18,5 +18,5 @@ export const caption = (theme: Theme) => css`
 export const spinner = (theme: Theme) => css`
   display: flex;
   justify-content: center;
-  max-width: ${theme.width.table};
+  max-width: ${theme.width.desktop};
 `;
