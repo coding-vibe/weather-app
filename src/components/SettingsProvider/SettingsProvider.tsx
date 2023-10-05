@@ -2,6 +2,7 @@ import { ReactNode, useCallback, useState } from 'react';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
+// TODO: @singvarr - please, check paths
 import i18n from '../../i18n';
 
 interface Props {
