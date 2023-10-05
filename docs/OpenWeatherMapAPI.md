@@ -4,7 +4,7 @@
 
 ### API Endpoint
 
-- [Get 5 Day Weather Forecast with 3-hour Step](http://api.openweathermap.org/data/2.5/forecast)
+- Get 5 Day Weather Forecast with 3-hour Step: http://api.openweathermap.org/data/2.5/forecast
 
 #### Parameters
 
@@ -29,7 +29,7 @@
 
 ### API Endpoint
 
-- [Coordinates by Location Name](http://api.openweathermap.org/geo/1.0/direct)
+- Coordinates by Location Name: http://api.openweathermap.org/geo/1.0/direct
 
 #### Parameters
 

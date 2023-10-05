@@ -12,6 +12,8 @@ import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import FIXTURE from './fixture';
 import * as classes from './styles';
 
+const DELAY = 1000;
+
 export default function HistoricalWeatherDataTab() {
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams, handleSubmitSearchParams] =
@@ -19,7 +21,6 @@ export default function HistoricalWeatherDataTab() {
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
-  const DELAY = 1000;
 
   useEffect(() => {
     const fetchForecast = async () => {
