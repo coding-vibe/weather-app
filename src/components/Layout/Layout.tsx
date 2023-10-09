@@ -6,7 +6,7 @@ import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
 import * as classes from './styles';
 
-function Layout() {
+export default function Layout() {
   const location = useLocation();
   const a11yProps = (index: number) => ({
     id: `tab-${index}`,
@@ -50,5 +50,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;
