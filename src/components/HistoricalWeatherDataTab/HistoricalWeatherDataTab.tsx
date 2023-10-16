@@ -47,15 +47,16 @@ export default function HistoricalWeatherDataTab() {
         text={t('texts.captionHistoricalWeather')}
       />
       <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
-      {searchParams && (
+      {!!searchParams && (
         <div>
           {isLoading && (
             <div css={classes.spinner}>
               <Spinner />
             </div>
           )}
-          {forecast && (
+          {!!forecast && (
             <HistoricalWeatherWidget
+              css={classes.widget}
               forecast={forecast}
               searchParams={searchParams}
             />

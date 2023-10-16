@@ -77,6 +77,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     '@typescript-eslint/no-floating-promises': 0,
     'newline-before-return': 2,
+    'consistent-return': 2,
 },
   settings: {
     'import/resolver': {

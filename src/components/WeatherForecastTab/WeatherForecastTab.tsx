@@ -2,6 +2,7 @@ import { useState } from 'react';
 import WeatherForecastForm from 'components/WeatherForecastForm';
 import WeatherWidget from 'components/WeatherWidget';
 import Location from 'types/location';
+import * as classes from './styles';
 
 export default function WeatherForecastTab() {
   const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
@@ -12,7 +13,12 @@ export default function WeatherForecastTab() {
         location={selectedLocation}
         setLocation={onSelectLocation}
       />
-      {!!selectedLocation && <WeatherWidget location={selectedLocation} />}
+      {!!selectedLocation && (
+        <WeatherWidget
+          css={classes.widget}
+          location={selectedLocation}
+        />
+      )}
     </div>
   );
 }

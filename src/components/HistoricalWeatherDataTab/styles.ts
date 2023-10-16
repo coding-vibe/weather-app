@@ -20,3 +20,17 @@ export const spinner = (theme: Theme) => css`
   justify-content: center;
   max-width: ${theme.width.desktop};
 `;
+
+export const widget = (theme: Theme) => css`
+  ${theme.breakpoints.up('md')} {
+    margin: 30px 0px;
+  }
+
+  ${theme.breakpoints.between('sm', 'md')} {
+    margin: 15px 0px;
+  }
+
+  ${theme.breakpoints.down('sm')} {
+    margin: 10px 0px;
+  }
+`;

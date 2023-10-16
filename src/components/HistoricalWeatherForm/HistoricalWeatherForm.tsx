@@ -93,7 +93,7 @@ export default function HistoricalWeatherForm({ onSubmit, className }: Props) {
             loading={isSubmitting}
             type='submit'
             variant='contained'>
-            {t('submit')}
+            {t('searchHistoricalWeather')}
           </LoadingButton>
         </Form>
       )}

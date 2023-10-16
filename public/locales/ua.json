@@ -35,14 +35,13 @@
     "kelvin": "Кельвін, \u00B0K"
   },
   "texts": {
-    "contentHeader": "Прогноз погоди для",
     "historicalWeatherDataTableCell": "Дата/Час",
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
     "captionWeatherForecast": "5-денного пошуку прогнозу погоди",
     "captionHistoricalWeather": "Пошуку історичної погоди",
-    "headerWeatherForecast": "5-денний",
-    "headerHistoricalWeather": "Історичний",
+    "headerWeatherForecast": "5-денний прогноз погоди для",
+    "headerHistoricalWeather": "Історична погода для",
     "searchCaption": "Виберіть опції для {{text}}"
   },
   "weatherDetails": {
@@ -58,5 +57,5 @@
     "saturday": "Субота",
     "sunday": "Неділя"
   },
-  "submit": "Пошук історичної погоди"
+  "searchHistoricalWeather": "Пошук історичної погоди"
 }

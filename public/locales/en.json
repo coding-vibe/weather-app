@@ -35,14 +35,13 @@
     "kelvin": "Kelvin, \u00B0K"
   },
   "texts": {
-    "contentHeader": "Weather Forecast for",
     "historicalWeatherDataTableCell": "Date/Time",
     "iconAlt": "Weather condition",
     "noOptions": "No options found",
     "captionWeatherForecast": "5-days weather forecast",
     "captionHistoricalWeather": "Historical  weather",
-    "headerWeatherForecast": "5-Day",
-    "headerHistoricalWeather": "Historical",
+    "headerWeatherForecast": "5-Day Weather Forecast For",
+    "headerHistoricalWeather": "Historical Weather For",
     "searchCaption": "Select options for {{text}} search"
   },
   "weatherDetails": {
@@ -58,5 +57,5 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "submit": "Search Weather History"
+  "searchHistoricalWeather": "Search Historical Weather"
 }

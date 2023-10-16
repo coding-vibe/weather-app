@@ -9,7 +9,7 @@ export const form = css`
 
 export const selectWrap = css`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
 `;
 

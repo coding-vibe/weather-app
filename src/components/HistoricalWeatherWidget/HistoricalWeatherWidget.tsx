@@ -9,6 +9,7 @@ import * as classes from './styles';
 interface Props {
   forecast: ForecastBody[];
   searchParams: FormValuesType;
+  className?: string;
 }
 
 const [MONDAY] = WEEK_DAY_TRANSLATION_KEYS;
@@ -16,6 +17,7 @@ const [MONDAY] = WEEK_DAY_TRANSLATION_KEYS;
 export default function HistoricalWeatherWidget({
   forecast,
   searchParams,
+  className,
 }: Props) {
   const weeklyForecast = forecast.reduce<ForecastBody[][]>(
     (accumulator, dailyForecast) => {
@@ -39,8 +41,9 @@ export default function HistoricalWeatherWidget({
   } = searchParams;
 
   return (
-    <div css={classes.wrap}>
+    <div>
       <HistoricalWeatherTable
+        className={className}
         country={country}
         css={classes.table}
         name={name}
@@ -55,3 +58,7 @@ export default function HistoricalWeatherWidget({
     </div>
   );
 }
+
+HistoricalWeatherWidget.defaultProps = {
+  className: null,
+};

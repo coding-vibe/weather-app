@@ -28,12 +28,16 @@ export default function WeatherList({ forecast, location, className }: Props) {
   const { t } = useTranslation();
 
   const handleClick = (date: string) => {
-    if (openedListItems.has(date)) {
-      openedListItems.delete(date);
-    } else {
-      openedListItems.add(date);
-    }
-    setOpenedListItems(new Set(openedListItems));
+    setOpenedListItems((prevItems) => {
+      const newItems = new Set(prevItems);
+      if (newItems.has(date)) {
+        newItems.delete(date);
+      } else {
+        newItems.add(date);
+      }
+
+      return newItems;
+    });
   };
 
   return (

@@ -41,10 +41,9 @@ The project includes the following scripts that can be executed:
 
 ## Getting Started
 
-<!-- TODO: add note about .env and template for it -->
-
 1. Clone the repo to your local computer.
 2. Run `npm install` to install the required dependencies.
-3. To start the development mode, use the command `npm run dev`.
-4. To build the project, use the command `npm run build`.
-5. To launch the server for the built project, use the command `npm run serve`.
+3. Use 'env template' in the root of project for creation '.env.local' file on your local computer.
+4. To start the development mode, use the command `npm run dev`.
+5. To build the project, use the command `npm run build`.
+6. To launch the server for the built project, use the command `npm run serve`.

@@ -24,7 +24,7 @@ export default function WeatherContentHeader({
       className={className}
       css={classes.header}
       variant='overline'>
-      {text} {t('texts.contentHeader')}&nbsp;
+      {text}&nbsp;
       {`${findCountryNameByCode(country)}, ${name}`}
     </Typography>
   );
