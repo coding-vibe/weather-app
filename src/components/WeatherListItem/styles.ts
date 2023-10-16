@@ -4,9 +4,8 @@ import { Theme } from '@mui/material';
 export const listItemText = (theme: Theme) => css`
   & .MuiListItemText-primary {
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 15px;
-    padding-left: 30px;
 
     ${theme.breakpoints.up('sm')} {
       font-size: 12px;

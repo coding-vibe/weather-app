@@ -14,7 +14,7 @@
   },
   "labels": {
     "endDayDatePicker": "Кінцева дата",
-    "forecastTab": "Прогноз",
+    "weatherForecastTab": "Прогноз погоди",
     "historicalWeatherDataTab": "Історичні дані про погоду",
     "historicalWeatherTable": "Історичний прогноз погоди",
     "languageSelect": "Мова",
@@ -35,15 +35,14 @@
     "kelvin": "Кельвін, \u00B0K"
   },
   "texts": {
-    "contentHeader": "Прогноз погоди для",
     "historicalWeatherDataTableCell": "Дата/Час",
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
-    "propCaptionForecast": "5-денного",
-    "propCaptionHistoricalWeather": "Історичного",
-    "propHeaderForecast": "5-денний",
-    "propHeaderHistoricalWeather": "Історичний",
-    "searchCaption": "Виберіть опції для {{text}} пошуку прогнозу погоди"
+    "captionWeatherForecast": "5-денного пошуку прогнозу погоди",
+    "captionHistoricalWeather": "Пошуку історичної погоди",
+    "headerWeatherForecast": "5-денний прогноз погоди для",
+    "headerHistoricalWeather": "Історична погода для",
+    "searchCaption": "Виберіть опції для {{text}}"
   },
   "weatherDetails": {
     "humidity": "Волог",
@@ -58,5 +57,5 @@
     "saturday": "Субота",
     "sunday": "Неділя"
   },
-  "submit": "Відправити"
+  "searchHistoricalWeather": "Пошук історичної погоди"
 }

@@ -3,6 +3,7 @@ import { Theme } from '@mui/material';
 
 export const headList = (theme: Theme) => css`
   border: 1px solid ${theme.palette.secondary.light};
+  border-radius: 5px;
 `;
 
 export const headListTitle = (theme: Theme) => css`
@@ -12,7 +13,6 @@ export const headListTitle = (theme: Theme) => css`
 
   ${theme.breakpoints.down('sm')} {
     padding: 8px;
-    font-size: 12px;
   }
 `;
 

@@ -16,9 +16,10 @@ import * as classes from './styles';
 
 interface Props {
   location: Location;
+  className?: string;
 }
 
-export default function WeatherWidget({ location }: Props) {
+export default function WeatherWidget({ location, className }: Props) {
   const { language, temperatureUnit } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
@@ -71,7 +72,7 @@ export default function WeatherWidget({ location }: Props) {
 
   if (forecast) {
     return (
-      <>
+      <div className={className}>
         <WeatherTable
           css={classes.table}
           forecast={forecast}
@@ -82,7 +83,13 @@ export default function WeatherWidget({ location }: Props) {
           forecast={forecast}
           location={location}
         />
-      </>
+      </div>
     );
   }
+
+  return null;
 }
+
+WeatherWidget.defaultProps = {
+  className: null,
+};

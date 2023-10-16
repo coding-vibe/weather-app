@@ -14,7 +14,7 @@
   },
   "labels": {
     "endDayDatePicker": "End",
-    "forecastTab": "Forecast",
+    "weatherForecastTab": "Weather Forecast",
     "historicalWeatherDataTab": "Historical Weather Data",
     "historicalWeatherTable": "Historical Weather Forecast",
     "languageSelect": "Language",
@@ -35,15 +35,14 @@
     "kelvin": "Kelvin, \u00B0K"
   },
   "texts": {
-    "contentHeader": "Weather Forecast for",
     "historicalWeatherDataTableCell": "Date/Time",
     "iconAlt": "Weather condition",
     "noOptions": "No options found",
-    "propCaptionForecast": "5-days",
-    "propCaptionHistoricalWeather": "Historical",
-    "propHeaderForecast": "5-Day",
-    "propHeaderHistoricalWeather": "Historical",
-    "searchCaption": "Select options for {{text}} weather forecast search"
+    "captionWeatherForecast": "5-days weather forecast",
+    "captionHistoricalWeather": "Historical  weather",
+    "headerWeatherForecast": "5-Day Weather Forecast For",
+    "headerHistoricalWeather": "Historical Weather For",
+    "searchCaption": "Select options for {{text}} search"
   },
   "weatherDetails": {
     "humidity": "Humid",
@@ -58,5 +57,5 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "submit": "Submit"
+  "searchHistoricalWeather": "Search Historical Weather"
 }

@@ -1,15 +1,16 @@
 import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
-export const text = (theme: Theme) => css`
-  text-align: center;
-  color: ${theme.palette.secondary.main};
+export const widget = (theme: Theme) => css`
+  ${theme.breakpoints.up('md')} {
+    margin: 30px 0px;
+  }
 
   ${theme.breakpoints.between('sm', 'md')} {
-    font-size: 12px;
+    margin: 15px 0px;
   }
 
   ${theme.breakpoints.down('sm')} {
-    font-size: 10px;
+    margin: 10px 0px;
   }
 `;

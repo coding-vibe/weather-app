@@ -24,7 +24,7 @@ const theme = createTheme({
       fontSize: 12,
     },
     overline: {
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: 800,
     },
     subtitle2: {
@@ -33,8 +33,8 @@ const theme = createTheme({
     },
   },
   width: {
-    table: '1000px',
-    desktop: '450px',
+    desktop: '1000px',
+    tablet: '450px',
     mobile: '280px',
   },
 });

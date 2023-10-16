@@ -12,6 +12,8 @@ import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import FIXTURE from './fixture';
 import * as classes from './styles';
 
+const DELAY = 1000;
+
 export default function HistoricalWeatherDataTab() {
   const { enqueueSnackbar } = useSnackbar();
   const [searchParams, handleSubmitSearchParams] =
@@ -19,7 +21,6 @@ export default function HistoricalWeatherDataTab() {
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
-  const DELAY = 1000;
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -41,22 +42,21 @@ export default function HistoricalWeatherDataTab() {
 
   return (
     <div>
-      <div css={classes.wrap}>
-        <WeatherSearchCaption
-          css={classes.caption}
-          text={t('texts.propCaptionHistoricalWeather')}
-        />
-        <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
-      </div>
-      {searchParams && (
+      <WeatherSearchCaption
+        css={classes.caption}
+        text={t('texts.captionHistoricalWeather')}
+      />
+      <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
+      {!!searchParams && (
         <div>
           {isLoading && (
             <div css={classes.spinner}>
               <Spinner />
             </div>
           )}
-          {forecast && (
+          {!!forecast && (
             <HistoricalWeatherWidget
+              css={classes.widget}
               forecast={forecast}
               searchParams={searchParams}
             />

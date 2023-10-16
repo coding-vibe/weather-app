@@ -5,10 +5,15 @@ export const form = css`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding-right: 15px;
 `;
 
-export const wrap = (theme: Theme) => css`
+export const selectWrap = css`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 30px;
+`;
+
+export const datePickerWrap = (theme: Theme) => css`
   display: grid;
   grid-template-columns: 1fr auto 1fr;
 
@@ -37,4 +42,17 @@ export const dateField = (theme: Theme) => css`
 
 export const endDateField = css`
   order: 1;
+`;
+
+export const button = (theme: Theme) => css`
+  margin: 0 auto;
+  width: 45%;
+
+  ${theme.breakpoints.between('sm', 'md')} {
+    font-size: 10px;
+  }
+
+  ${theme.breakpoints.down('sm')} {
+    font-size: 8px;
+  }
 `;

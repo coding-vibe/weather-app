@@ -6,7 +6,7 @@ import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
 import * as classes from './styles';
 
-function Layout() {
+export default function Layout() {
   const location = useLocation();
   const a11yProps = (index: number) => ({
     id: `tab-${index}`,
@@ -16,9 +16,11 @@ function Layout() {
 
   const getActiveTab = () => {
     switch (location.pathname) {
-      case routes.FORECAST:
-        return Tabs.FORECAST;
-      case routes.HISTORICAL:
+      case routes.HOME:
+        return Tabs.WEATHER_FORECAST;
+      case routes.WEATHER_FORECAST:
+        return Tabs.WEATHER_FORECAST;
+      case routes.HISTORICAL_WEATHER:
         return Tabs.HISTORICAL_WEATHER_DATA;
       default:
         throw new Error('Invalid route for determining active tab');
@@ -29,16 +31,17 @@ function Layout() {
     <div css={classes.wrap}>
       <MUITabs
         aria-label={t('labels.layoutTabs')}
-        value={getActiveTab()}>
+        value={getActiveTab()}
+        variant='fullWidth'>
         <Tab
-          label={t('labels.forecastTab')}
-          to={routes.FORECAST}
+          label={t('labels.weatherForecastTab')}
+          to={routes.WEATHER_FORECAST}
           component={Link}
-          {...a11yProps(Tabs.FORECAST)}
+          {...a11yProps(Tabs.WEATHER_FORECAST)}
         />
         <Tab
           label={t('labels.historicalWeatherDataTab')}
-          to={routes.HISTORICAL}
+          to={routes.HISTORICAL_WEATHER}
           component={Link}
           {...a11yProps(Tabs.HISTORICAL_WEATHER_DATA)}
         />
@@ -47,5 +50,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;

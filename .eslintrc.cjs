@@ -2,17 +2,14 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   extends: [
-    // TODO: Clean the rules
-    /*
-     * 'no-shadow': 0,
-     */
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'airbnb',
     'airbnb/hooks',
-    'prettier'
+    'airbnb-typescript',
+    'prettier',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -22,81 +19,56 @@ module.exports = {
     project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react-refresh', 'prettier', 'react', 'import'],
+  plugins: ['prettier', 'react', 'import'],
   rules: {
-    'no-restricted-exports': 0,
-    'no-restricted-imports': [
-      2,
-      {
-        paths: [
-          {
-            name: 'react',
-            importNames: ['default'],
-          },
-        ],
-      },
+    'no-restricted-exports': [
+      'error',
+      { restrictDefaultExports: { defaultFrom: false } },
     ],
     'no-trailing-spaces': 2,
-    'import/prefer-default-export': 0,
-    'import/no-extraneous-dependencies': [2, { 'devDependencies': true }],
-    // TODO: do we need it? Seems react/jsx-filename-extension duplicates it - Yes, we need it because this rule is used to configure which file extensions we should or shouldn't specify when importing modules. react/jsx-filename-extension defines which file extensions can contain JSX code.
+    'import/no-extraneous-dependencies': [2, { devDependencies: true }],
     'import/extensions': [
       2,
       {
-      ignorePackages: true,
+        ignorePackages: true,
         pattern: {
           js: 'never',
           jsx: 'never',
           ts: 'never',
           tsx: 'never',
-          json: 'never'
-        }
-    }],
-    'react-refresh/only-export-components': [
-      1,
-      { allowConstantExport: true },
+          json: 'never',
+        },
+      },
     ],
     'react/no-unknown-property': [2, { ignore: ['css'] }],
-    'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
-    'react/no-array-index-key': 0,
-    '@typescript-eslint/no-empty-function': 0,
-    '@typescript-eslint/no-non-null-assertion': 0,
-    'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': 2,
-    // TODO: do we need it -  Yes, because we have interfaces, types, default values where we define arguments, but don't use them
-    'no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars': 0,
-    'no-shadow': 0,
-    'jsx-a11y/control-has-associated-label': [2, {
-      'ignoreElements': ['td'],
-    }],
-    '@typescript-eslint/no-misused-promises': [2,
+    'jsx-a11y/control-has-associated-label': [
+      2,
       {
-        'checksVoidReturn': false,
-      }],
-    'react/jsx-props-no-spreading': 0,
+        ignoreElements: ['td'],
+      },
+    ],
+    '@typescript-eslint/no-misused-promises': [2, { checksVoidReturn: false }],
+    '@typescript-eslint/no-unused-vars': 2,
+    'consistent-return': 2,
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-floating-promises': 0,
     'newline-before-return': 2,
-},
+    'import/prefer-default-export': 0,
+    'react/react-in-jsx-scope': 0,
+    'react/jsx-props-no-spreading': 0,
+  },
   settings: {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
         project: './tsconfig.json',
       },
-      alias: {
-        map: [
-          ['api', './src/api'],
-          ['assets', './src/assets'],
-          ['components', './src/components'],
-          ['constants', './src/constants'],
-          ['contexts', './src/contexts'],
-          ['locales', './src/locales'],
-          ['types', './src/types'],
-          ['utils', './src/utils'],
-        ],
-      }
-    }
+      node: {
+        moduleDirectory: ['node_modules', 'src/'],
+      },
+    },
   },
-}
+};

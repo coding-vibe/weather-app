@@ -46,15 +46,24 @@ export default function HistoricalWeatherForm({ onSubmit, className }: Props) {
         <Form
           className={className}
           css={classes.form}>
-          <Field
-            component={SelectField<LanguageOption>}
-            label={t('labels.languageSelect')}
-            labelId='language-select'
-            name='language'
-            setOption={onSelectLanguage}
-            options={LANGUAGE_OPTIONS}
-          />
-          <div css={classes.wrap}>
+          <div css={classes.selectWrap}>
+            <Field
+              component={SelectField<LanguageOption>}
+              label={t('labels.languageSelect')}
+              labelId='language-select'
+              name='language'
+              setOption={onSelectLanguage}
+              options={LANGUAGE_OPTIONS}
+            />
+            <Field
+              component={SelectField<TemperatureUnitOption>}
+              label={t('labels.temperatureUnitsSelect')}
+              labelId='temperature-unit-select'
+              name='temperatureUnit'
+              options={TEMPERATURE_UNITS_OPTIONS}
+            />
+          </div>
+          <div css={classes.datePickerWrap}>
             <Field
               disableHighlightToday
               css={classes.dateField}
@@ -79,18 +88,12 @@ export default function HistoricalWeatherForm({ onSubmit, className }: Props) {
             id='location-autocomplete'
             name='location'
           />
-          <Field
-            component={SelectField<TemperatureUnitOption>}
-            label={t('labels.temperatureUnitsSelect')}
-            labelId='temperature-unit-select'
-            name='temperatureUnit'
-            options={TEMPERATURE_UNITS_OPTIONS}
-          />
           <LoadingButton
+            css={classes.button}
             loading={isSubmitting}
             type='submit'
             variant='contained'>
-            {t('submit')}
+            {t('searchHistoricalWeather')}
           </LoadingButton>
         </Form>
       )}
