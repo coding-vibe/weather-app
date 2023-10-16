@@ -2,7 +2,6 @@ import { ReactNode, useCallback, useState } from 'react';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
-// TODO: @singvarr - please, check paths
 import i18n from '../../i18n';
 
 interface Props {
@@ -14,16 +13,17 @@ export default function SettingsProvider({ children }: Props) {
   const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnits>(
     TemperatureUnits.CELSIUS,
   );
-  const onSelectLanguage = useCallback(async (language: Languages) => {
-    await i18n.changeLanguage(language);
-    setLanguage(language);
+  const onSelectLanguage = useCallback(async (selectedLanguage: Languages) => {
+    await i18n.changeLanguage(selectedLanguage);
+    setLanguage(selectedLanguage);
   }, []);
   const onSelectTemperatureUnit = useCallback(
-    (temperatureUnit: TemperatureUnits) => {
-      setTemperatureUnit(temperatureUnit);
+    (selectedUnit: TemperatureUnits) => {
+      setTemperatureUnit(selectedUnit);
     },
     [],
   );
+
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const settings = {
     language,

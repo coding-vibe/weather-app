@@ -63,11 +63,12 @@ export default function WeatherTable({ forecast, location, className }: Props) {
                   {index === 0 &&
                     Array.from({ length: emptyCells }).map((_, idx) => (
                       // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
+                      // eslint-disable-next-line react/no-array-index-key
                       <MUITableCell key={idx} />
                     ))}
-                  {weather.map((hourlyWeather, idx) => (
+                  {weather.map((hourlyWeather) => (
                     <WeatherTableCell
-                      key={idx}
+                      key={hourlyWeather.dt}
                       weather={hourlyWeather}
                     />
                   ))}

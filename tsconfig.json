@@ -7,16 +7,6 @@
     "skipLibCheck": true,
     "types": ["vite-plugin-svgr/client"],
     "baseUrl": "src",
-    "paths": {
-      "api/*": ["api/*"],
-      "assets/*": ["assets/*"],
-      "components/*": ["components/*"],
-      "constants/*": ["constants/*"],
-      "contexts/*": ["contexts/*"],
-      "locales/*": ["locales/*"],
-      "types/*": ["types/*"],
-      "utils/*": ["utils/*"],
-    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

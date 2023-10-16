@@ -17,17 +17,15 @@ export default function DateField({
 }: Props) {
   const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
-  const hasError = meta?.touched && !!meta?.error;
-  // TODO: @singvarr - unfuck this check
-  const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
+  const error = meta?.touched && !!meta?.error ? t(meta.error) : '';
 
   return (
     <MUIDatePicker
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{
         textField: {
-          error: hasError,
-          helperText,
+          error: !!error,
+          helperText: error,
         },
       }}
       value={value}
