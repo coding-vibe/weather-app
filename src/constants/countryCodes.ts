@@ -1,3 +1,4 @@
+// TODO: Translate country codes
 const COUNTRY_CODES = [
   { code: 'AD', name: 'Andorra' },
   { code: 'AE', name: 'United Arab Emirates' },

@@ -14,8 +14,8 @@
   },
   "labels": {
     "endDayDatePicker": "Fin",
-    "forecastTab": "Prévision",
-    "historicalForecastTab": "Prévision historique",
+    "weatherForecastTab": "Prévisions météorologiques",
+    "historicalWeatherDataTab": "Données météorologiques historiques",
     "historicalWeatherTable": "Prévisions météorologiques historiques",
     "languageSelect": "Langue",
     "layoutTabs": "Onglets de prévision",
@@ -35,17 +35,16 @@
     "kelvin": "Kelvin, \u00B0K"
   },
   "texts": {
-    "contentHeader": "Prévisions météorologiques pour",
-    "historicalForecastTableCell": "Date/Heure",
+    "historicalWeatherDataTableCell": "Date/Heure",
     "iconAlt": "Les conditions météorologiques",
     "noOptions": "Aucune option trouvée",
-    "propCaptionForecast": "5 jours",
-    "propHeaderForecast": "5 jours",
-    "propCaptionHistoricalForecast": "Historique",
-    "propHeaderHistoricalForecast": "Historique",
-    "searchCaption": "Sélectionnez des options  pour {{text}} la recherche de prévisions météorologiques"
+    "propCaptionWeatherForecast": "5 jours la recherche de prévisions météorologiques",
+    "captionHistoricalWeather": "la recherche météo historique",
+    "headerWeatherForecast": "5 jours prévisions météorologiques pour",
+    "headerHistoricalWeather": "Météo historique pour",
+    "searchCaption": "Sélectionnez les options pour {{text}}"
   },
-  "weatherPeriodDetails": {
+  "weatherDetails": {
     "humidity": "Humid",
     "temperature": "Temp"
   },
@@ -58,5 +57,5 @@
     "saturday": "Samedi",
     "sunday": "Dimanche"
   },
-  "submit": "Soumettre"
+  "searchHistoricalWeather": "Recherche météo historique"
 }

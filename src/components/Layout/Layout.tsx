@@ -1,12 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import ROUTES from 'constants/routes';
+import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
+import * as classes from './styles';
 
-function Layout() {
+export default function Layout() {
   const location = useLocation();
   const a11yProps = (index: number) => ({
     id: `tab-${index}`,
@@ -14,39 +14,39 @@ function Layout() {
   });
   const { t } = useTranslation();
 
-  const activeTab = () => {
+  const getActiveTab = () => {
     switch (location.pathname) {
-      case ROUTES.home:
-        return Tabs.FORECAST;
-      case ROUTES.forecast:
-        return Tabs.FORECAST;
-      case ROUTES.historical:
-        return Tabs.HISTORICAL_FORECAST;
+      case routes.HOME:
+        return Tabs.WEATHER_FORECAST;
+      case routes.WEATHER_FORECAST:
+        return Tabs.WEATHER_FORECAST;
+      case routes.HISTORICAL_WEATHER:
+        return Tabs.HISTORICAL_WEATHER_DATA;
       default:
         throw new Error('Invalid route for determining active tab');
     }
   };
+
   return (
-    <>
+    <div css={classes.wrap}>
       <MUITabs
-        value={activeTab()}
-        aria-label={t('labels.layoutTabs')}>
+        aria-label={t('labels.layoutTabs')}
+        value={getActiveTab()}
+        variant='fullWidth'>
         <Tab
-          label={t('labels.forecastTab')}
-          to={ROUTES.forecast}
+          label={t('labels.weatherForecastTab')}
+          to={routes.WEATHER_FORECAST}
           component={Link}
-          {...a11yProps(Tabs.FORECAST)}
+          {...a11yProps(Tabs.WEATHER_FORECAST)}
         />
         <Tab
-          label={t('labels.historicalForecastTab')}
-          to={ROUTES.historical}
+          label={t('labels.historicalWeatherDataTab')}
+          to={routes.HISTORICAL_WEATHER}
           component={Link}
-          {...a11yProps(Tabs.HISTORICAL_FORECAST)}
+          {...a11yProps(Tabs.HISTORICAL_WEATHER_DATA)}
         />
       </MUITabs>
       <Outlet />
-    </>
+    </div>
   );
 }
-
-export default Layout;

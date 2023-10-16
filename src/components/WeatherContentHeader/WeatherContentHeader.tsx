@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import Typography from '@mui/material/Typography';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
@@ -16,14 +15,13 @@ export default function WeatherContentHeader({
   text,
   className,
 }: Props) {
-  const { t } = useTranslation();
   return (
     <Typography
       component='p'
       className={className}
       css={classes.header}
       variant='overline'>
-      {text} {t('texts.contentHeader')}&nbsp;
+      {text}&nbsp;
       {`${findCountryNameByCode(country)}, ${name}`}
     </Typography>
   );

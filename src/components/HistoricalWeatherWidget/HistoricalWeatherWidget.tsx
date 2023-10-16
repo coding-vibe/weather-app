@@ -2,20 +2,22 @@ import HistoricalWeatherList from 'components/HistoricalWeatherList';
 import HistoricalWeatherTable from 'components/HistoricalWeatherTable';
 import ForecastBody from 'types/forecast';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
-import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDayTranslationKeys';
+import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDays';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
 import * as classes from './styles';
 
 interface Props {
   forecast: ForecastBody[];
   searchParams: FormValuesType;
+  className?: string;
 }
 
-const MONDAY = WEEK_DAY_TRANSLATION_KEYS[0];
+const [MONDAY] = WEEK_DAY_TRANSLATION_KEYS;
 
 export default function HistoricalWeatherWidget({
   forecast,
   searchParams,
+  className,
 }: Props) {
   const weeklyForecast = forecast.reduce<ForecastBody[][]>(
     (accumulator, dailyForecast) => {
@@ -28,6 +30,7 @@ export default function HistoricalWeatherWidget({
       } else {
         accumulator[accumulator.length - 1].push(dailyForecast);
       }
+
       return accumulator;
     },
     [[]],
@@ -40,6 +43,7 @@ export default function HistoricalWeatherWidget({
   return (
     <div>
       <HistoricalWeatherTable
+        className={className}
         country={country}
         css={classes.table}
         name={name}
@@ -54,3 +58,7 @@ export default function HistoricalWeatherWidget({
     </div>
   );
 }
+
+HistoricalWeatherWidget.defaultProps = {
+  className: null,
+};

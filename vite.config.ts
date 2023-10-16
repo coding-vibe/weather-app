@@ -12,7 +12,7 @@ export default defineConfig({
       components: '/src/components',
       constants: '/src/constants',
       contexts: '/src/contexts',
-      i18n: '/src/i18n',
+      locales: '/src/locales',
       types: '/src/types',
       utils: '/src/utils',
     },

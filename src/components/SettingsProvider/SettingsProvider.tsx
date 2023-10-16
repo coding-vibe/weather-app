@@ -1,43 +1,40 @@
-import { FC, ReactNode, useCallback, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import SettingsContext from 'contexts/SettingsContext';
-import SettingsContextType from 'types/settingsContextType';
-import i18n from 'i18n';
+import i18n from '../../i18n';
 
 interface Props {
   children: ReactNode;
 }
-// eslint-disable-next-line react/function-component-definition
-const SettingsProvider: FC<Props> = ({ children }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState<Languages>(
-    Languages.ENGLISH,
+
+export default function SettingsProvider({ children }: Props) {
+  const [language, setLanguage] = useState<Languages>(Languages.ENGLISH);
+  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnits>(
+    TemperatureUnits.CELSIUS,
   );
-  const [selectedTemperatureUnit, setSelectedTemperatureUnit] =
-    useState<TemperatureUnits>(TemperatureUnits.CELSIUS);
-  const onSelectLanguageCallback = useCallback(async (language: Languages) => {
-    await i18n.changeLanguage(language);
-    setSelectedLanguage(language);
+  const onSelectLanguage = useCallback(async (selectedLanguage: Languages) => {
+    await i18n.changeLanguage(selectedLanguage);
+    setLanguage(selectedLanguage);
   }, []);
-  const onSelectTemperatureUnitCallback = useCallback(
-    (temperatureUnit: TemperatureUnits) => {
-      setSelectedTemperatureUnit(temperatureUnit);
+  const onSelectTemperatureUnit = useCallback(
+    (selectedUnit: TemperatureUnits) => {
+      setTemperatureUnit(selectedUnit);
     },
     [],
   );
+
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const settings: SettingsContextType = {
-    selectedLanguage,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    onSelectLanguage: onSelectLanguageCallback,
-    selectedTemperatureUnit,
-    onSelectTemperatureUnit: onSelectTemperatureUnitCallback,
+  const settings = {
+    language,
+    onSelectLanguage,
+    temperatureUnit,
+    onSelectTemperatureUnit,
   };
+
   return (
     <SettingsContext.Provider value={settings}>
       {children}
     </SettingsContext.Provider>
   );
-};
-
-export default SettingsProvider;
+}

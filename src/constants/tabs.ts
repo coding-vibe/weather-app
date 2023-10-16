@@ -1,6 +1,6 @@
 enum Tabs {
-  FORECAST,
-  HISTORICAL_FORECAST,
+  WEATHER_FORECAST,
+  HISTORICAL_WEATHER_DATA,
 }
 
 export default Tabs;

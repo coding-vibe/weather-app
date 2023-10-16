@@ -1,62 +1,67 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSnackbar } from 'notistack';
-import CircularProgress from '@mui/material/CircularProgress';
 import pick from 'lodash/pick';
+import { useSnackbar } from 'notistack';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
-import ForecastBody from 'types/forecast';
+import Spinner from 'components/Spinner';
 import WeatherSearchCaption from 'components/WeatherSearchCaption';
+import ForecastBody from 'types/forecast';
+import sleep from 'utils/sleep';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
-import FORECAST from './forecast';
+import FIXTURE from './fixture';
 import * as classes from './styles';
 
-const SPINNER_SIZE = 25;
+const DELAY = 1000;
 
-export default function HistoricalForecast() {
+export default function HistoricalWeatherDataTab() {
   const { enqueueSnackbar } = useSnackbar();
-  const [selectedSearchParams, onSelectSearchParams] =
+  const [searchParams, handleSubmitSearchParams] =
     useState<FormValuesType | null>(null);
   const [forecast, setForecast] = useState<ForecastBody[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { t } = useTranslation();
 
   useEffect(() => {
-    const fetchForecast = () => {
+    const fetchForecast = async () => {
       try {
         setIsLoading(true);
-        const forecastData = FORECAST.list.map((data) =>
+        await sleep(DELAY);
+        const forecastData = FIXTURE.list.map((data) =>
           pick(data, ['dt', 'main', 'weather']),
         );
         setForecast(forecastData);
       } catch (error) {
-        enqueueSnackbar(t('error.fetchWeatherData'), {
-          variant: 'error',
-        });
+        enqueueSnackbar(t('error.fetchWeatherData'), { variant: 'error' });
       } finally {
         setIsLoading(false);
       }
     };
     fetchForecast();
-  }, [selectedSearchParams, enqueueSnackbar, t]);
+  }, [searchParams, enqueueSnackbar, t]);
 
-  return isLoading ? (
-    <CircularProgress size={SPINNER_SIZE} />
-  ) : (
+  return (
     <div>
       <WeatherSearchCaption
         css={classes.caption}
-        text={t('texts.propCaptionHistoricalForecast')}
+        text={t('texts.captionHistoricalWeather')}
       />
-      <HistoricalWeatherForm
-        css={classes.form}
-        setSearchParams={onSelectSearchParams}
-      />
-      {forecast && selectedSearchParams && (
-        <HistoricalWeatherWidget
-          forecast={forecast}
-          searchParams={selectedSearchParams}
-        />
+      <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
+      {!!searchParams && (
+        <div>
+          {isLoading && (
+            <div css={classes.spinner}>
+              <Spinner />
+            </div>
+          )}
+          {!!forecast && (
+            <HistoricalWeatherWidget
+              css={classes.widget}
+              forecast={forecast}
+              searchParams={searchParams}
+            />
+          )}
+        </div>
       )}
     </div>
   );

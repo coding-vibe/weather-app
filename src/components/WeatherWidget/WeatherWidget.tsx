@@ -2,28 +2,25 @@ import { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import groupBy from 'lodash/groupBy';
 import pick from 'lodash/pick';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
+import Spinner from 'components/Spinner';
 import WeatherList from 'components/WeatherList';
 import WeatherTable from 'components/WeatherTable';
 import SettingsContext from 'contexts/SettingsContext';
 import { ForecastAPIResponse, Forecast } from 'types/forecast';
 import Location from 'types/location';
-import SettingsContextType from 'types/settingsContextType';
 import formatDate from 'utils/formatDate';
 import convertTimestampToDate from 'utils/convertTimestampToDate';
 import * as classes from './styles';
 
 interface Props {
   location: Location;
+  className?: string;
 }
 
-const SPINNER_SIZE = 25;
-
-export default function WeatherWidget({ location }: Props) {
-  const { selectedLanguage, selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+export default function WeatherWidget({ location, className }: Props) {
+  const { language, temperatureUnit } = useContext(SettingsContext);
   const { enqueueSnackbar } = useSnackbar();
   const [forecast, setForecast] = useState<Forecast | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -40,8 +37,8 @@ export default function WeatherWidget({ location }: Props) {
             params: {
               lat,
               lon,
-              units: selectedTemperatureUnit,
-              lang: selectedLanguage,
+              units: temperatureUnit,
+              lang: language,
             },
           },
         );
@@ -62,15 +59,20 @@ export default function WeatherWidget({ location }: Props) {
         setIsLoading(false);
       }
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchForecast();
-  }, [enqueueSnackbar, location, selectedLanguage, selectedTemperatureUnit, t]);
+  }, [enqueueSnackbar, location, language, temperatureUnit, t]);
 
-  return isLoading ? (
-    <CircularProgress size={SPINNER_SIZE} />
-  ) : (
-    !!forecast && (
-      <>
+  if (isLoading) {
+    return (
+      <div css={classes.spinner}>
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (forecast) {
+    return (
+      <div className={className}>
         <WeatherTable
           css={classes.table}
           forecast={forecast}
@@ -81,7 +83,13 @@ export default function WeatherWidget({ location }: Props) {
           forecast={forecast}
           location={location}
         />
-      </>
-    )
-  );
+      </div>
+    );
+  }
+
+  return null;
 }
+
+WeatherWidget.defaultProps = {
+  className: null,
+};

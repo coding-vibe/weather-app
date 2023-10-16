@@ -4,7 +4,6 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
-import SettingsContextType from 'types/settingsContextType';
 import formatTemperatureData from 'utils/formatTemperature';
 import generateIconURL from 'utils/generateIconURL';
 import * as classes from './styles';
@@ -13,14 +12,14 @@ interface Props {
   weather: ForecastBody;
 }
 
-export default function WeatherPeriodDetails({ weather }: Props) {
-  const { selectedTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
+export default function WeatherDetails({ weather }: Props) {
+  const { temperatureUnit } = useContext(SettingsContext);
   const { t } = useTranslation();
   const {
     main: { humidity, temp },
     weather: [{ description, icon }],
   } = weather;
+
   return (
     <>
       <Tooltip title={t(description)}>
@@ -32,16 +31,16 @@ export default function WeatherPeriodDetails({ weather }: Props) {
       </Tooltip>
       <div css={classes.data}>
         <span>
-          {t('weatherPeriodDetails.temperature')}:&nbsp;
+          {t('weatherDetails.temperature')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}
             variant='subtitle2'>
-            {formatTemperatureData(temp, selectedTemperatureUnit)}
+            {formatTemperatureData(temp, temperatureUnit)}
           </Typography>
         </span>
         <span>
-          {t('weatherPeriodDetails.humidity')}:&nbsp;
+          {t('weatherDetails.humidity')}:&nbsp;
           <Typography
             component='span'
             css={classes.text}

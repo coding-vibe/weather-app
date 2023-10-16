@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { FieldProps } from 'formik';
 import { SelectChangeEvent } from '@mui/material/Select';
-import omit from 'lodash/omit';
 import Select from 'components/Select';
 import { FormValuesType } from 'components/HistoricalWeatherForm/validation';
 import OptionBase from 'types/optionBase';
@@ -17,8 +16,10 @@ interface Props<Option extends OptionBase>
 export default function SelectField<Option extends OptionBase>({
   field: { name, value },
   form: { getFieldMeta, setFieldValue },
+  label,
+  labelId,
+  options,
   setOption,
-  ...props
 }: Props<Option>) {
   const { t } = useTranslation();
   const meta = getFieldMeta(name);
@@ -30,7 +31,6 @@ export default function SelectField<Option extends OptionBase>({
     if (setOption) {
       setOption(selectedOption);
     }
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setFieldValue(name, selectedOption);
   };
 
@@ -38,11 +38,12 @@ export default function SelectField<Option extends OptionBase>({
     <Select<Option>
       error={hasError}
       helperText={helperText}
+      label={label}
+      labelId={labelId}
       name={name}
+      options={options}
       setValue={handleChange}
       value={value}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...omit(props)}
     />
   );
 }

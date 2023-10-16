@@ -10,33 +10,19 @@ import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
+import INITIAL_FORM_VALUES from './initialFormValues';
 import VALIDATION_SCHEMA, { FormValuesType } from './validation';
 import * as classes from './styles';
 
-const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LOCATION_AUTOCOMPLETE = 'location-select';
-const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
-
 interface Props {
-  setSearchParams: (value: FormValuesType) => void;
+  onSubmit: (value: FormValuesType) => void;
   className?: string;
 }
 
-export default function HistoricalWeatherForm({
-  setSearchParams,
-  className,
-}: Props) {
+export default function HistoricalWeatherForm({ onSubmit, className }: Props) {
   const { onSelectLanguage, onSelectTemperatureUnit } =
-    useContext<SettingsContextType>(SettingsContext);
-  const INITIAL_FORM_VALUES = {
-    language: '',
-    startDate: null,
-    endDate: null,
-    location: null,
-    temperatureUnit: '',
-  };
+    useContext(SettingsContext);
   const { t } = useTranslation();
   const yesterday = startOfYesterday();
 
@@ -45,7 +31,7 @@ export default function HistoricalWeatherForm({
     { setSubmitting },
   ) => {
     onSelectTemperatureUnit(values.temperatureUnit);
-    setSearchParams(values);
+    onSubmit(values);
     setSubmitting(false);
   };
 
@@ -53,7 +39,6 @@ export default function HistoricalWeatherForm({
     <Formik<FormValuesType>
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      // We ignore ts rule, because initial values should be optional, but in Formik they must exactly match the validation scheme
       initialValues={INITIAL_FORM_VALUES}
       onSubmit={handleSubmit}
       validationSchema={VALIDATION_SCHEMA}>
@@ -61,15 +46,24 @@ export default function HistoricalWeatherForm({
         <Form
           className={className}
           css={classes.form}>
-          <Field
-            component={SelectField<LanguageOption>}
-            label={t('labels.languageSelect')}
-            labelId={LANGUAGE_CHOICE_LABEL_ID}
-            name='language'
-            setOption={onSelectLanguage}
-            options={LANGUAGE_OPTIONS}
-          />
-          <div css={classes.wrap}>
+          <div css={classes.selectWrap}>
+            <Field
+              component={SelectField<LanguageOption>}
+              label={t('labels.languageSelect')}
+              labelId='language-select'
+              name='language'
+              setOption={onSelectLanguage}
+              options={LANGUAGE_OPTIONS}
+            />
+            <Field
+              component={SelectField<TemperatureUnitOption>}
+              label={t('labels.temperatureUnitsSelect')}
+              labelId='temperature-unit-select'
+              name='temperatureUnit'
+              options={TEMPERATURE_UNITS_OPTIONS}
+            />
+          </div>
+          <div css={classes.datePickerWrap}>
             <Field
               disableHighlightToday
               css={classes.dateField}
@@ -91,21 +85,15 @@ export default function HistoricalWeatherForm({
           </div>
           <Field
             component={LocationAutoCompleteField}
-            id={LOCATION_AUTOCOMPLETE}
+            id='location-autocomplete'
             name='location'
           />
-          <Field
-            component={SelectField<TemperatureUnitOption>}
-            label={t('labels.temperatureUnitsSelect')}
-            labelId={TEMPERATURE_UNITS_LABEL_ID}
-            name='temperatureUnit'
-            options={TEMPERATURE_UNITS_OPTIONS}
-          />
           <LoadingButton
+            css={classes.button}
             loading={isSubmitting}
             type='submit'
             variant='contained'>
-            {t('submit')}
+            {t('searchHistoricalWeather')}
           </LoadingButton>
         </Form>
       )}

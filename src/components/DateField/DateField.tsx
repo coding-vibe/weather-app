@@ -17,20 +17,18 @@ export default function DateField({
 }: Props) {
   const { t } = useTranslation();
   const meta = form.getFieldMeta(name);
-  const hasError = meta?.touched && !!meta?.error;
-  const helperText = meta?.touched && !!meta?.error ? t(meta?.error) : '';
+  const error = meta?.touched && !!meta?.error ? t(meta.error) : '';
+
   return (
     <MUIDatePicker
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onChange={(newDate) => form.setFieldValue(name, newDate)}
       slotProps={{
         textField: {
-          error: hasError,
-          helperText,
+          error: !!error,
+          helperText: error,
         },
       }}
       value={value}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );

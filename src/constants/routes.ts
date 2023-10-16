@@ -1,7 +1,7 @@
-const ROUTES = {
-  home: '/',
-  forecast: '/forecast',
-  historical: '/historical-forecast',
+const routes = {
+  HOME: '/',
+  WEATHER_FORECAST: '/weather-forecast',
+  HISTORICAL_WEATHER: '/historical-weather-data',
 };
 
-export default ROUTES;
+export default routes;

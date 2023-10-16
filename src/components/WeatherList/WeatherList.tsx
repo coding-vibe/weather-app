@@ -22,18 +22,22 @@ const DATE_FORMAT = 'HH:00';
 
 export default function WeatherList({ forecast, location, className }: Props) {
   const forecastDates = forecast.map(([date]) => date);
-  const [openItems, setOpenItems] = useState<Set<string>>(
+  const [openedListItems, setOpenedListItems] = useState<Set<string>>(
     new Set(forecastDates),
   );
   const { t } = useTranslation();
 
   const handleClick = (date: string) => {
-    if (openItems.has(date)) {
-      openItems.delete(date);
-    } else {
-      openItems.add(date);
-    }
-    setOpenItems(new Set(openItems));
+    setOpenedListItems((prevItems) => {
+      const newItems = new Set(prevItems);
+      if (newItems.has(date)) {
+        newItems.delete(date);
+      } else {
+        newItems.add(date);
+      }
+
+      return newItems;
+    });
   };
 
   return (
@@ -46,7 +50,7 @@ export default function WeatherList({ forecast, location, className }: Props) {
           country={location.country}
           css={classes.headListTitle}
           name={location.name}
-          text={t('texts.propHeaderForecast')}
+          text={t('texts.headerWeatherForecast')}
         />
       }>
       {forecast.map(([date, weather]) => (
@@ -63,19 +67,19 @@ export default function WeatherList({ forecast, location, className }: Props) {
             </ListItemButton>
           </ListItem>
           <Collapse
-            in={openItems.has(date)}
+            in={openedListItems.has(date)}
             timeout='auto'
             unmountOnExit>
             {weather.map((hourlyWeather) => {
               const hour = format(hourlyWeather.dt * 1000, DATE_FORMAT);
+
               return (
                 <List
                   disablePadding
                   key={hourlyWeather.dt}>
-                  <WeatherListItem
-                    hour={hour}
-                    weather={hourlyWeather}
-                  />
+                  <WeatherListItem weather={hourlyWeather}>
+                    <span>{hour}</span>
+                  </WeatherListItem>
                 </List>
               );
             })}

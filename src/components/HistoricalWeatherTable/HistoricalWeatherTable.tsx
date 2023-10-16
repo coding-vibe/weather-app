@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherTableCell from 'components/WeatherTableCell';
 import ForecastBody from 'types/forecast';
-import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDayTranslationKeys';
+import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDays';
 import * as classes from './styles';
 
 interface Props {
@@ -27,13 +27,14 @@ export default function HistoricalWeatherTable({
 }: Props) {
   const { t } = useTranslation();
   const tableAriaLabel = t('labels.historicalWeatherTable');
+
   return (
     <div className={className}>
       <WeatherContentHeader
         country={country}
         css={classes.header}
         name={name}
-        text={t('texts.propHeaderHistoricalForecast')}
+        text={t('texts.headerHistoricalWeather')}
       />
       <TableContainer component={Paper}>
         <Table aria-label={tableAriaLabel}>
@@ -45,16 +46,21 @@ export default function HistoricalWeatherTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {weeklyForecast.map((weeklyWeather, index) => {
+            {weeklyForecast.map((weeklyWeather, weekIndex) => {
               const emptyCellsCount =
                 WEEK_DAY_TRANSLATION_KEYS.length - weeklyWeather.length;
+
               return (
-                <TableRow key={index}>
-                  {index === 0 &&
-                    Array.from({ length: emptyCellsCount }).map((_, idx) => (
-                      // We should leave some cells empty because user chooses historical forecast for specific dates and some days of week should be skipped
-                      <MUITableCell key={idx} />
-                    ))}
+                // eslint-disable-next-line react/no-array-index-key
+                <TableRow key={weekIndex}>
+                  {weekIndex === 0 &&
+                    Array.from({ length: emptyCellsCount }).map(
+                      (_, dayIndex) => (
+                        // We should leave some cells empty because user chooses historical weather data for specific dates and some days of week should be skipped
+                        // eslint-disable-next-line react/no-array-index-key
+                        <MUITableCell key={dayIndex} />
+                      ),
+                    )}
                   {weeklyWeather.map((dailyWeather) => (
                     <WeatherTableCell
                       isDateShown

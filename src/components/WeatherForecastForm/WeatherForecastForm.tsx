@@ -1,69 +1,66 @@
-import { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { SelectChangeEvent } from '@mui/material/Select';
+import { useContext } from 'react';
+import { SelectChangeEvent } from '@mui/material';
+import { t } from 'i18next';
 import LocationAutocomplete from 'components/LocationAutocomplete';
-import Select from 'components/Select';
 import WeatherSearchCaption from 'components/WeatherSearchCaption';
-import WeatherWidget from 'components/WeatherWidget';
+import Select from 'components/Select';
+import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Languages from 'constants/languages';
 import TemperatureUnits from 'constants/temperatureUnits';
 import TEMPERATURE_UNITS_OPTIONS from 'constants/temperatureUnitsOptions';
 import SettingsContext from 'contexts/SettingsContext';
 import LanguageOption from 'types/languageOption';
-import LANGUAGE_OPTIONS from 'constants/languageOptions';
 import Location from 'types/location';
-import SettingsContextType from 'types/settingsContextType';
 import TemperatureUnitOption from 'types/temperatureUnitOption';
 import * as classes from './styles';
 
-const LANGUAGE_CHOICE_LABEL_ID = 'language-label';
-const LOCATION_AUTOCOMPLETE = 'location-select';
-const TEMPERATURE_UNITS_LABEL_ID = 'unit-label';
+interface Props {
+  location: Location | null;
+  setLocation: (value: Location) => void;
+}
 
-export default function Forecast() {
+export default function WeatherForecastForm({ location, setLocation }: Props) {
   const {
-    selectedLanguage,
+    language,
     onSelectLanguage,
-    selectedTemperatureUnit,
+    temperatureUnit,
     onSelectTemperatureUnit,
-  } = useContext<SettingsContextType>(SettingsContext);
-  const [selectedLocation, onSelectLocation] = useState<Location | null>(null);
-  const { t } = useTranslation();
+  } = useContext(SettingsContext);
+
   return (
     <div>
+      <WeatherSearchCaption
+        css={classes.caption}
+        text={t('texts.captionWeatherForecast')}
+      />
       <div css={classes.wrap}>
-        <WeatherSearchCaption
-          css={[classes.caption, classes.entry]}
-          text={t('texts.propCaptionForecast')}
-        />
         <Select<LanguageOption>
           css={classes.entry}
           setValue={(event: SelectChangeEvent) => {
             onSelectLanguage(event.target.value as Languages);
           }}
-          value={selectedLanguage}
+          value={language}
           label={t('labels.languageSelect')}
-          labelId={LANGUAGE_CHOICE_LABEL_ID}
+          labelId='language-select'
           options={LANGUAGE_OPTIONS}
         />
         <LocationAutocomplete
           css={classes.entry}
-          id={LOCATION_AUTOCOMPLETE}
-          location={selectedLocation}
-          setLocation={onSelectLocation}
+          id='location-select'
+          location={location}
+          setLocation={setLocation}
         />
         <Select<TemperatureUnitOption>
           css={classes.entry}
-          setValue={(event: SelectChangeEvent) => {
+          setValue={(event: SelectChangeEvent<TemperatureUnits>) => {
             onSelectTemperatureUnit(event.target.value as TemperatureUnits);
           }}
-          value={selectedTemperatureUnit}
+          value={temperatureUnit}
           label={t('labels.temperatureUnitsSelect')}
-          labelId={TEMPERATURE_UNITS_LABEL_ID}
+          labelId='temperature-unit-select'
           options={TEMPERATURE_UNITS_OPTIONS}
         />
       </div>
-      {selectedLocation && <WeatherWidget location={selectedLocation} />}
     </div>
   );
 }

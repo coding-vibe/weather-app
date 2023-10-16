@@ -32,18 +32,19 @@ export default function HistoricalWeatherList({
           country={country}
           css={classes.listTitle}
           name={name}
-          text={t('texts.propHeaderHistoricalForecast')}
+          text={t('texts.headerHistoricalWeather')}
         />
       }>
-      {weeklyForecast.map((weeklyWeather) =>
-        weeklyWeather.map((dailyWeather) => {
-          const date = formatDate(convertTimestampToDate(dailyWeather.dt));
+      {weeklyForecast.map((forecast) =>
+        forecast.map((dailyForecast) => {
+          const date = formatDate(convertTimestampToDate(dailyForecast.dt));
+
           return (
             <WeatherListItem
-              weather={dailyWeather}
-              date={date}
-              key={dailyWeather.dt}
-            />
+              weather={dailyForecast}
+              key={dailyForecast.dt}>
+              <span>{date}</span>
+            </WeatherListItem>
           );
         }),
       )}
