@@ -24,8 +24,8 @@ export default function LocalizationProvider({ children }: Props) {
   const [locales, setLocales] = useState<Locales>([enUS, en]);
   const [muiLocale, dateFnsLocale] = locales;
 
-  const getMUILocale = (language: Languages) => {
-    switch (language) {
+  const getMUILocale = (lang: Languages) => {
+    switch (lang) {
       case Languages.ENGLISH:
         return enUS;
       case Languages.FRENCH:
@@ -37,8 +37,8 @@ export default function LocalizationProvider({ children }: Props) {
     }
   };
 
-  const getDateFnsLocale = (language: Languages) => {
-    switch (language) {
+  const getDateFnsLocale = (lang: Languages) => {
+    switch (lang) {
       case Languages.ENGLISH:
         return en;
       case Languages.FRENCH:
