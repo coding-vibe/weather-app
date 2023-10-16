@@ -4,7 +4,7 @@ import { Theme } from '@mui/material';
 export const wrap = (theme: Theme) => css`
   margin: 0 auto;
   padding: 0px 15px;
-  min-height: 100vh;
+  min-height: 115vh;
   border-left: 1px solid ${theme.palette.secondary.light};
   border-right: 1px solid ${theme.palette.secondary.light};
 
