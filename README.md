@@ -18,11 +18,13 @@ On the second tab, users can view historical weather forecasts with almost simil
 
 The project was developed using the following core technologies:
 
+- Axios
+- Formik
+- i18next
+- Material-UI (MUI)
 - React
 - React Router DOM
 - TypeScript
-- Formik
-- Material-UI (MUI)
 - Node v20.3.1
 - npm v9.6.7
 
@@ -38,7 +40,9 @@ The project includes the following scripts that can be executed:
 - `prettier-format`: Applies formatting using Prettier.
 
 ## Getting Started
+
 <!-- TODO: add note about .env and template for it -->
+
 1. Clone the repo to your local computer.
 2. Run `npm install` to install the required dependencies.
 3. To start the development mode, use the command `npm run dev`.
