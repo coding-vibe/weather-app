@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
 export const wrap = (theme: Theme) => css`
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 0px 15px;
-  min-height: 115vh;
+  padding: 0px 15px 15px;
   border-left: 1px solid ${theme.palette.secondary.light};
   border-right: 1px solid ${theme.palette.secondary.light};
 
