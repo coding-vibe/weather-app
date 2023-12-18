@@ -23,6 +23,7 @@ jobs:
         run: |
           echo "VITE_API_URL=${{ env.VITE_API_URL }}" >> .env
           echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env
+          echo "VITE_ASSETS_BASE_URL=${{ secrets.VITE_ASSETS_BASE_URL }}" >> .env
       - name: Fix permissions
         run: |
           chmod -c -R +rX 'dist/' | while read line; do
