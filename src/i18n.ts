@@ -8,7 +8,7 @@ i18n
   .use(Backend)
   .init({
     backend: {
-      loadPath: './locales/{{lng}}.json',
+      loadPath: '/locales/{{lng}}.json',
     },
     lng: Languages.ENGLISH,
     fallbackLng: Languages.ENGLISH,
