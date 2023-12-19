@@ -20,8 +20,8 @@ jobs:
       - name: Build the app
         run: npm run build
         env:
-          VITE_API_URL: ${{ var.VITE_API_URL }}
-          VITE_ASSETS_BASE_URL: ${{ var.VITE_ASSETS_BASE_URL }}
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_ASSETS_BASE_URL: ${{ vars.VITE_ASSETS_BASE_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
       - name: Fix permissions
         run: |
