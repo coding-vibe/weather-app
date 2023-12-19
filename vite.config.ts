@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr';
 import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
-  base: './',
+  base: '/weather-app/',
   plugins: [react(), svgr(), eslint()],
   resolve: {
     alias: {
