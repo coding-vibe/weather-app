@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import { SnackbarProvider } from 'notistack';
@@ -16,7 +16,7 @@ import i18n from './i18n';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -32,6 +32,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           </SnackbarProvider>
         </ThemeProvider>
       </StyledEngineProvider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
