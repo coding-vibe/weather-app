@@ -4,11 +4,11 @@ import Autocomplete, {
   AutocompleteChangeReason,
 } from '@mui/material/Autocomplete';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
 import debounce from 'lodash/debounce';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
 import apiClient from 'api';
-import Spinner from 'components/Spinner';
 import Location from 'types/location';
 import findCountryNameByCode from 'utils/findCountryNameByCode';
 import * as classes from './styles';
@@ -16,6 +16,7 @@ import * as classes from './styles';
 const DEBOUNCE_DELAY = 400;
 const MAX_LOCATIONS = 5;
 const MIN_INPUT_LENGTH = 2;
+const SPINNER_SIZE_PX = 20;
 
 interface Props {
   id: string;
@@ -121,7 +122,7 @@ export default function LocationAutocomplete({
             ...params.InputProps,
             endAdornment: (
               <>
-                {isLoading && <Spinner />}
+                {isLoading && <CircularProgress size={SPINNER_SIZE_PX} />}
                 {params.InputProps.endAdornment}
               </>
             ),

@@ -17,11 +17,10 @@
     "weatherForecastTab": "Прогноз погоди",
     "historicalWeatherDataTab": "Історичні дані про погоду",
     "historicalWeatherTable": "Історичний прогноз погоди",
-    "languageSelect": "Мова",
     "layoutTabs": "Вкладки прогнозу",
-    "locationAutocomplete": "Локація",
+    "locationAutocomplete": "Введіть ваше місто",
     "startDayDatePicker": "Початкова дата",
-    "temperatureUnitsSelect": "Одиниця вимірювання температури",
+    "temperatureUnitsSelect": "Одиниця вимірювання",
     "weatherTable": "Прогноз погоди на 5 днів"
   },
   "languages": {
@@ -39,14 +38,10 @@
     "iconAlt": "Погодні умови",
     "noOptions": "Опцій не знайдено",
     "captionWeatherForecast": "5-денного пошуку прогнозу погоди",
-    "captionHistoricalWeather": "Пошуку історичної погоди",
-    "headerWeatherForecast": "5-денний прогноз погоди для",
+    "captionHistoricalWeather": "пошуку історичної погоди",
+    "headerWeatherForecast": "Результати пошуку для",
     "headerHistoricalWeather": "Історична погода для",
     "searchCaption": "Виберіть опції для {{text}}"
-  },
-  "weatherDetails": {
-    "humidity": "Волог",
-    "temperature": "Темп"
   },
   "weekDays": {
     "monday": "Понеділок",
@@ -57,5 +52,5 @@
     "saturday": "Субота",
     "sunday": "Неділя"
   },
-  "searchHistoricalWeather": "Пошук історичної погоди"
+  "searchHistoricalWeather": "Пошук"
 }

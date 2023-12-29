@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import Tooltip from '@mui/material/Tooltip';
 import SettingsContext from 'contexts/SettingsContext';
 import ForecastBody from 'types/forecast';
 import formatTemperatureData from 'utils/formatTemperature';
 import generateIconURL from 'utils/generateIconURL';
+import { ReactComponent as DropIcon } from 'assets/drop.svg';
 import * as classes from './styles';
 
 interface Props {
@@ -30,23 +31,14 @@ export default function WeatherDetails({ weather }: Props) {
         />
       </Tooltip>
       <div css={classes.data}>
-        <span>
-          {t('weatherDetails.temperature')}:&nbsp;
-          <Typography
-            component='span'
-            css={classes.text}
-            variant='subtitle2'>
-            {formatTemperatureData(temp, temperatureUnit)}
-          </Typography>
-        </span>
-        <span>
-          {t('weatherDetails.humidity')}:&nbsp;
-          <Typography
-            component='span'
-            css={classes.text}
-            variant='subtitle2'>
-            {humidity}%
-          </Typography>
+        <Typography
+          variant='h2'
+          component='span'>
+          {formatTemperatureData(temp, temperatureUnit)}
+        </Typography>
+        <span css={classes.humidity}>
+          <DropIcon css={classes.dropIcon} />
+          <span>{humidity}%</span>
         </span>
       </div>
     </>

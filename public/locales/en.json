@@ -17,11 +17,10 @@
     "weatherForecastTab": "Weather Forecast",
     "historicalWeatherDataTab": "Historical Weather Data",
     "historicalWeatherTable": "Historical Weather Forecast",
-    "languageSelect": "Language",
     "layoutTabs": "forecast tabs",
-    "locationAutocomplete": "Location",
+    "locationAutocomplete": "Enter your city",
     "startDayDatePicker": "Start",
-    "temperatureUnitsSelect": "Temperature unit",
+    "temperatureUnitsSelect": "Units",
     "weatherTable": "5-Day Weather Forecast"
   },
   "languages": {
@@ -39,14 +38,10 @@
     "iconAlt": "Weather condition",
     "noOptions": "No options found",
     "captionWeatherForecast": "5-days weather forecast",
-    "captionHistoricalWeather": "Historical  weather",
-    "headerWeatherForecast": "5-Day Weather Forecast For",
+    "captionHistoricalWeather": "historical weather",
+    "headerWeatherForecast": "Search Results for",
     "headerHistoricalWeather": "Historical Weather For",
     "searchCaption": "Select options for {{text}} search"
-  },
-  "weatherDetails": {
-    "humidity": "Humid",
-    "temperature": "Temp"
   },
   "weekDays": {
     "monday": "Monday",
@@ -57,5 +52,5 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
-  "searchHistoricalWeather": "Search Historical Weather"
+  "searchHistoricalWeather": "Search"
 }

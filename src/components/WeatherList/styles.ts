@@ -12,7 +12,7 @@ export const headListTitle = (theme: Theme) => css`
   }
 
   ${theme.breakpoints.down('sm')} {
-    padding: 8px;
+    padding: 8px 20px 8px 16px;
   }
 `;
 
@@ -24,13 +24,11 @@ export const mainListItem = (theme: Theme) => css`
   border-top: 1px solid ${theme.palette.secondary.light};
 `;
 
-export const mainListItemText = (theme: Theme) => css`
-  & .MuiListItemText-primary {
-    color: ${theme.palette.secondary.main};
-    font-weight: 500;
+export const chevron = (theme: Theme) => css`
+  transition: transform ${theme.transitions.easing.easeOut}
+    ${theme.transitions.duration.standard}ms;
+`;
 
-    ${theme.breakpoints.down('sm')} {
-      font-size: 10px;
-    }
-  }
+export const expandedChevron = css`
+  transform: rotate(180deg);
 `;
