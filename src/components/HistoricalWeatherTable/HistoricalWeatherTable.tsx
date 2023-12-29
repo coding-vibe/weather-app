@@ -6,22 +6,17 @@ import MUITableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import WeatherContentHeader from 'components/WeatherContentHeader';
+import Typography from '@mui/material/Typography';
 import WeatherTableCell from 'components/WeatherTableCell';
 import ForecastBody from 'types/forecast';
 import WEEK_DAY_TRANSLATION_KEYS from 'constants/weekDays';
-import * as classes from './styles';
 
 interface Props {
-  country: string;
-  name: string;
   weeklyForecast: ForecastBody[][];
   className?: string;
 }
 
 export default function HistoricalWeatherTable({
-  country,
-  name,
   weeklyForecast,
   className,
 }: Props) {
@@ -30,29 +25,33 @@ export default function HistoricalWeatherTable({
 
   return (
     <div className={className}>
-      <WeatherContentHeader
-        country={country}
-        css={classes.header}
-        name={name}
-        text={t('texts.headerHistoricalWeather')}
-      />
       <TableContainer component={Paper}>
         <Table aria-label={tableAriaLabel}>
           <TableHead>
             <TableRow>
               {WEEK_DAY_TRANSLATION_KEYS.map((day) => (
-                <MUITableCell key={day}>{t(day)}</MUITableCell>
+                <MUITableCell
+                  key={day}
+                  align='center'>
+                  <Typography
+                    variant='h2'
+                    component='span'>
+                    {t(day)}
+                  </Typography>
+                </MUITableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {weeklyForecast.map((weeklyWeather, weekIndex) => {
+            {weeklyForecast.map((weeklyWeather, weekIndex, arr) => {
               const emptyCellsCount =
                 WEEK_DAY_TRANSLATION_KEYS.length - weeklyWeather.length;
 
               return (
-                // eslint-disable-next-line react/no-array-index-key
-                <TableRow key={weekIndex}>
+                <TableRow
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={weekIndex}
+                  hover>
                   {weekIndex === 0 &&
                     Array.from({ length: emptyCellsCount }).map(
                       (_, dayIndex) => (
@@ -68,6 +67,12 @@ export default function HistoricalWeatherTable({
                       weather={dailyWeather}
                     />
                   ))}
+                  {weekIndex === arr.length - 1 &&
+                    emptyCellsCount > 0 &&
+                    Array.from({ length: emptyCellsCount }).map((_, idx) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <MUITableCell key={idx} />
+                    ))}
                 </TableRow>
               );
             })}

@@ -13,9 +13,9 @@ export default function WeatherSearchCaption({ text, className }: Props) {
   return (
     <div className={className}>
       <Typography
-        component='p'
         css={classes.text}
-        variant='overline'>
+        variant='h2'
+        sx={{ mb: 3.5 }}>
         {t('texts.searchCaption', { text })}&nbsp;
       </Typography>
     </div>

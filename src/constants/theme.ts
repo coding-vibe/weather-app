@@ -16,26 +16,35 @@ const theme = createTheme({
       light: '#e0e0e0',
     },
   },
-  typography: {
-    body1: {
-      fontSize: 14,
-    },
-    body2: {
-      fontSize: 12,
-    },
-    overline: {
-      fontSize: 14,
-      fontWeight: 800,
-    },
-    subtitle2: {
-      fontSize: 13,
-      fontWeight: 500,
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        h2: ({ theme: customizedTheme }) => ({
+          fontSize: 16,
+          lineHeight: 1.4,
+          fontWeight: 700,
+          color: customizedTheme.palette.secondary.main,
+        }),
+        body1: {
+          fontSize: 14,
+        },
+        body2: {
+          fontSize: 12,
+        },
+        overline: {
+          fontSize: 14,
+          fontWeight: 800,
+        },
+        subtitle2: {
+          fontSize: 13,
+          fontWeight: 500,
+        },
+      },
     },
   },
   width: {
     desktop: '1000px',
-    tablet: '450px',
-    mobile: '280px',
+    tablet: '600px',
   },
 });
 

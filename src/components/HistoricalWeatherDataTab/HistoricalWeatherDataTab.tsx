@@ -24,17 +24,20 @@ export default function HistoricalWeatherDataTab() {
 
   useEffect(() => {
     const fetchForecast = async () => {
-      try {
-        setIsLoading(true);
-        await sleep(DELAY);
-        const forecastData = FIXTURE.list.map((data) =>
-          pick(data, ['dt', 'main', 'weather']),
-        );
-        setForecast(forecastData);
-      } catch (error) {
-        enqueueSnackbar(t('error.fetchWeatherData'), { variant: 'error' });
-      } finally {
-        setIsLoading(false);
+      if (searchParams) {
+        try {
+          setForecast(null);
+          setIsLoading(true);
+          await sleep(DELAY);
+          const forecastData = FIXTURE.list.map((data) =>
+            pick(data, ['dt', 'main', 'weather']),
+          );
+          setForecast(forecastData);
+        } catch (error) {
+          enqueueSnackbar(t('error.fetchWeatherData'), { variant: 'error' });
+        } finally {
+          setIsLoading(false);
+        }
       }
     };
     fetchForecast();
@@ -54,11 +57,10 @@ export default function HistoricalWeatherDataTab() {
               <Spinner />
             </div>
           )}
-          {!!forecast && (
+          {!!forecast && !isLoading && (
             <HistoricalWeatherWidget
               css={classes.widget}
               forecast={forecast}
-              searchParams={searchParams}
             />
           )}
         </div>

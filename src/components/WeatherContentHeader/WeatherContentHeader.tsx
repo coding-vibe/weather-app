@@ -18,11 +18,11 @@ export default function WeatherContentHeader({
   return (
     <Typography
       component='p'
+      variant='h2'
       className={className}
-      css={classes.header}
-      variant='overline'>
+      css={classes.heading}>
       {text}&nbsp;
-      {`${findCountryNameByCode(country)}, ${name}`}
+      {`${name}, ${findCountryNameByCode(country)}`}
     </Typography>
   );
 }

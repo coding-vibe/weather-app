@@ -7,6 +7,7 @@ import MUITableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherTableCell from 'components/WeatherTableCell';
 import { Forecast } from 'types/forecast';
@@ -36,31 +37,32 @@ export default function WeatherTable({ forecast, location, className }: Props) {
         <Table aria-label={tableAriaLabel}>
           <TableHead>
             <TableRow>
-              <MUITableCell css={classes.tableHeadCell}>
-                {t('texts.historicalWeatherDataTableCell')}
+              <MUITableCell align='center'>
+                <Typography variant='h2'>
+                  {t('texts.historicalWeatherDataTableCell')}
+                </Typography>
               </MUITableCell>
               {HOURS.map((hour) => (
                 <MUITableCell
                   align='center'
-                  css={classes.tableHeadCell}
                   key={hour}>
-                  {hour}
+                  <Typography variant='h2'>{hour}</Typography>
                 </MUITableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {forecast.map(([date, weather], index) => {
+            {forecast.map(([date, weather], rowIndex, arr) => {
               const emptyCells = HOURS.length - weather.length;
 
               return (
                 <TableRow
                   hover
                   key={date}>
-                  <MUITableCell css={classes.tableHeadCell}>
-                    {date}
+                  <MUITableCell align='center'>
+                    <Typography variant='h2'>{date}</Typography>
                   </MUITableCell>
-                  {index === 0 &&
+                  {rowIndex === 0 &&
                     Array.from({ length: emptyCells }).map((_, idx) => (
                       // We should leave some cells empty because the weather API doesn't provide data for the past hours of the current day. Also, some cells at the end of the table are empty because data is only provided for the next 5 days
                       // eslint-disable-next-line react/no-array-index-key
@@ -72,6 +74,12 @@ export default function WeatherTable({ forecast, location, className }: Props) {
                       weather={hourlyWeather}
                     />
                   ))}
+                  {rowIndex === arr.length - 1 &&
+                    emptyCells > 0 &&
+                    Array.from({ length: emptyCells }).map((_, idx) => (
+                      // eslint-disable-next-line react/no-array-index-key
+                      <MUITableCell key={idx} />
+                    ))}
                 </TableRow>
               );
             })}

@@ -16,6 +16,12 @@ const formatTemperatureUnits = (tempUnit: TemperatureUnits) => {
 const formatTemperatureData = (
   temperature: number,
   temperatureUnit: TemperatureUnits,
-) => `${Math.floor(temperature)}${formatTemperatureUnits(temperatureUnit)}`;
+) => {
+  const formattedTemperature = `${Math.floor(
+    temperature,
+  )}${formatTemperatureUnits(temperatureUnit)}`;
+
+  return temperature > 0 ? `+${formattedTemperature}` : formattedTemperature;
+};
 
 export default formatTemperatureData;

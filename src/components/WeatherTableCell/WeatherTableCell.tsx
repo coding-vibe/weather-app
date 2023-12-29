@@ -16,7 +16,7 @@ export default function WeatherTableCell({
   isDateShown,
 }: WeatherTableCellProps) {
   return (
-    <MUITableCell>
+    <MUITableCell align='center'>
       {isDateShown && (
         <Typography
           component='span'

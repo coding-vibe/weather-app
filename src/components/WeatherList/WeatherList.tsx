@@ -6,6 +6,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import WeatherContentHeader from 'components/WeatherContentHeader';
 import WeatherListItem from 'components/WeatherListItem';
 import { Forecast } from 'types/forecast';
@@ -63,7 +65,15 @@ export default function WeatherList({ forecast, location, className }: Props) {
             key={date}
             onClick={() => handleClick(date)}>
             <ListItemButton css={classes.mainListItemButton}>
-              <ListItemText css={classes.mainListItemText}>{date}</ListItemText>
+              <ListItemText>
+                <Typography variant='h2'>{date}</Typography>
+              </ListItemText>
+              <KeyboardArrowDownIcon
+                css={[
+                  classes.chevron,
+                  openedListItems.has(date) && classes.expandedChevron,
+                ]}
+              />
             </ListItemButton>
           </ListItem>
           <Collapse
@@ -78,7 +88,11 @@ export default function WeatherList({ forecast, location, className }: Props) {
                   disablePadding
                   key={hourlyWeather.dt}>
                   <WeatherListItem weather={hourlyWeather}>
-                    <span>{hour}</span>
+                    <Typography
+                      variant='h2'
+                      component='span'>
+                      {hour}
+                    </Typography>
                   </WeatherListItem>
                 </List>
               );

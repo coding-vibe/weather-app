@@ -4,6 +4,7 @@ import MUITabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import routes from 'constants/routes';
 import Tabs from 'constants/tabs';
+import Settings from 'components/Settings';
 import * as classes from './styles';
 
 export default function Layout() {
@@ -29,6 +30,7 @@ export default function Layout() {
 
   return (
     <div css={classes.wrap}>
+      <Settings css={classes.settings} />
       <MUITabs
         aria-label={t('labels.layoutTabs')}
         value={getActiveTab()}

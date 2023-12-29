@@ -4,9 +4,7 @@ import { Theme } from '@mui/material';
 export const wrap = (theme: Theme) => css`
   min-height: 100vh;
   margin: 0 auto;
-  padding: 0px 15px 15px;
-  border-left: 1px solid ${theme.palette.secondary.light};
-  border-right: 1px solid ${theme.palette.secondary.light};
+  padding: 15px;
 
   ${theme.breakpoints.up('md')} {
     max-width: ${theme.width.desktop};
@@ -14,10 +12,6 @@ export const wrap = (theme: Theme) => css`
 
   ${theme.breakpoints.between('sm', 'md')} {
     max-width: ${theme.width.tablet};
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    max-width: ${theme.width.mobile};
   }
 
   & .MuiTab-root {
@@ -29,4 +23,8 @@ export const wrap = (theme: Theme) => css`
       font-size: 10px;
     }
   }
+`;
+
+export const settings = css`
+  margin: 0 auto 10px 0;
 `;

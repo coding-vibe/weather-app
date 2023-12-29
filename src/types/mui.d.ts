@@ -5,7 +5,6 @@ declare module '@mui/material/styles' {
     width: {
       desktop: string;
       tablet: string;
-      mobile: string;
     };
   }
 
