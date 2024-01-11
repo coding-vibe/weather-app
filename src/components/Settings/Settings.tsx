@@ -29,14 +29,12 @@ export default function Settings({ className }: Props) {
     <div
       className={className}
       css={classes.container}>
-      <ToggleButtonGroup
-        onChange={(_, newLanguage) =>
-          onSelectLanguage(newLanguage as Languages)
-        }
-        exclusive
-        value={selectedLanguage}>
+      <ToggleButtonGroup value={selectedLanguage}>
         {Object.values(Languages).map((language) => (
           <ToggleButton
+            onClick={() => {
+              onSelectLanguage(language);
+            }}
             key={language}
             value={language}>
             {language}
