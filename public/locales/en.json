@@ -41,7 +41,8 @@
     "captionHistoricalWeather": "historical weather",
     "headerWeatherForecast": "Search Results for",
     "headerHistoricalWeather": "Historical Weather For",
-    "searchCaption": "Select options for {{text}} search"
+    "searchWeatherForecastCaption": "Select options for 5-days weather forecast search",
+    "searchHistoricalWeatherCaption": "Select options for historical weather search"
   },
   "weekDays": {
     "monday": "Monday",

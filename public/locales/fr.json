@@ -41,7 +41,8 @@
     "captionHistoricalWeather": "la recherche météo historique",
     "headerWeatherForecast": "Résultats de recherche pour",
     "headerHistoricalWeather": "Météo historique pour",
-    "searchCaption": "Sélectionnez les options pour {{text}}"
+    "searchWeatherForecastCaption": "Sélectionnez les options pour 5 jours la recherche de prévisions météorologiques",
+    "searchHistoricalWeatherCaption": "Sélectionnez les options pour la recherche météo historique"
   },
   "weekDays": {
     "monday": "Lundi",

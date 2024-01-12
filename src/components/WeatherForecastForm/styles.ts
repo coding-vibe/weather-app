@@ -8,20 +8,6 @@ export const wrap = (theme: Theme) => css`
   }
 `;
 
-export const caption = (theme: Theme) => css`
-  ${theme.breakpoints.up('sm')} {
-    margin: 30px 0px;
-  }
-
-  ${theme.breakpoints.between('sm', 'md')} {
-    margin: 15px 0px;
-  }
-
-  ${theme.breakpoints.down('sm')} {
-    margin: 10px 0px;
-  }
-`;
-
 export const entry = (theme: Theme) => css`
   width: 100%;
 

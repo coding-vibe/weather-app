@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { Theme } from '@mui/material';
 
 export const caption = (theme: Theme) => css`
+  text-align: center;
+
   ${theme.breakpoints.up('sm')} {
     margin: 30px 0px;
   }
