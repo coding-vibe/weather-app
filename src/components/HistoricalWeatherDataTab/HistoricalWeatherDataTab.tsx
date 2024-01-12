@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import pick from 'lodash/pick';
 import { useSnackbar } from 'notistack';
+import Typography from '@mui/material/Typography';
 import HistoricalWeatherForm from 'components/HistoricalWeatherForm';
 import HistoricalWeatherWidget from 'components/HistoricalWeatherWidget';
 import Spinner from 'components/Spinner';
-import WeatherSearchCaption from 'components/WeatherSearchCaption';
 import ForecastBody from 'types/forecast';
 import sleep from 'utils/sleep';
 import { FormValuesType } from '../HistoricalWeatherForm/validation';
@@ -45,10 +45,11 @@ export default function HistoricalWeatherDataTab() {
 
   return (
     <div>
-      <WeatherSearchCaption
+      <Typography
         css={classes.caption}
-        text={t('texts.captionHistoricalWeather')}
-      />
+        variant='h2'>
+        {t('texts.searchHistoricalWeatherCaption')}&nbsp;
+      </Typography>
       <HistoricalWeatherForm onSubmit={handleSubmitSearchParams} />
       {!!searchParams && (
         <div>

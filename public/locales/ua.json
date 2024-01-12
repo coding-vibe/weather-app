@@ -41,7 +41,8 @@
     "captionHistoricalWeather": "пошуку історичної погоди",
     "headerWeatherForecast": "Результати пошуку для",
     "headerHistoricalWeather": "Історична погода для",
-    "searchCaption": "Виберіть опції для {{text}}"
+    "searchWeatherForecastCaption": "Виберіть опції для 5-денного пошуку прогнозу погоди",
+    "searchHistoricalWeatherCaption": "Виберіть опції для пошуку історичної погоди"
   },
   "weekDays": {
     "monday": "Понеділок",
